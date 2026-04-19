@@ -11,7 +11,7 @@
 
 # Name of website
 title: Simon Dusek
-description: Financial Data Analyst | Python * SQL * Power BI
+description: Aspiring Data Analyst | Finance Background | Python, SQL, Power BI
 
 # URL
 url: "https://simondusek.github.io"
@@ -84,7 +84,7 @@ social-network-links:
 
 # If you want your website to generate an RSS feed, provide a description
 # The URL for the feed will be https://<your_website>/feed.xml
-rss-description: This website is a virtual proof that I'm awesome
+rss-description: Portfolio projects and insights from my data analytics journey
 
 ###########################
 # --- General options --- #
