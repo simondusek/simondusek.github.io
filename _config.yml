@@ -10,10 +10,14 @@
 ############################
 
 # Name of website
-title: My website
+title: Simon Dusek
+description: Financial Data Analyst | Python * SQL * Power BI
+
+# URL
+url: "https://simondusek.github.io"
 
 # Your name to show in the footer
-author: Some Person
+author: Simon Dusek
 
 ###############################################
 # --- List of links in the navigation bar --- #
@@ -50,17 +54,15 @@ round-avatar: true
 # You can change the order that they show up on the page by changing the order here.
 # Uncomment the links you want to show and add your information to each one.
 social-network-links:
-  email: "someone@example.com"
+  email: "dusek.simon@email.cz"
   rss: true  # remove this line if you don't want to show an RSS link at the bottom
-  facebook: deanattali
-  github: daattali
-  twitter: daattali
+  github: https://github.com/simondusek
   patreon: DeanAttali
   youtube: "@daattali"
-  whatsapp: 15551212
+#  whatsapp: "+420 723 426 950"
 #  medium: yourname
 #  reddit: yourname or r/yoursubreddit
-#  linkedin: daattali
+  linkedin: "linkedin.com/in/šimon-dušek"
 #  xing: yourname
 #  stackoverflow: "3943160/daattali"
 #  snapchat: deanat78
