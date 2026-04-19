@@ -56,13 +56,13 @@ round-avatar: true
 social-network-links:
   email: "dusek.simon@email.cz"
   rss: true  # remove this line if you don't want to show an RSS link at the bottom
-  github: https://github.com/simondusek
-  patreon: DeanAttali
-  youtube: "@daattali"
+  github: simondusek
+#  patreon: DeanAttali
+#  youtube: "@daattali"
 #  whatsapp: "+420 723 426 950"
 #  medium: yourname
 #  reddit: yourname or r/yoursubreddit
-  linkedin: "linkedin.com/in/šimon-dušek"
+  linkedin: "in/šimon-dušek"
 #  xing: yourname
 #  stackoverflow: "3943160/daattali"
 #  snapchat: deanat78
@@ -104,7 +104,7 @@ share-links-active:
 
 # How to display the link to your website in the footer
 # Remove this if you don't want a link in the footer
-url-pretty: "MyWebsite.com"
+url-pretty: "simondusek.github.io"
 
 # Add the website title to the title of every page
 title-on-all-pages: true
@@ -262,7 +262,7 @@ date_format: "%B %-d, %Y"
 #################################################################################
 
 # Output options (more information on Jekyll's site)
-timezone: "America/Toronto"
+timezone: "Europe/Prague"
 markdown: kramdown
 highlighter: rouge
 permalink: /:year-:month-:day-:title/
