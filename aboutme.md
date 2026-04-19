@@ -1,16 +1,12 @@
 ---
-layout: page
 title: About me
-subtitle: Why you'd want to go on a date with me
+subtitle: Data Analyst in progress
 ---
 
-My name is Inigo Montoya. I have the following qualities:
+I am an analytically focused person with experience in financial and process environments, where I worked with large volumes of data, ensured its consistency and participated in system changes.
+I am currently focusing on development in the field of data analytics and programming, mainly in SQL, Python and Power BI tools. I am interested in working with data in a BI and reporting environment, where I can further develop the ability to understand data, translate business requirements into data solutions and contribute to data-driven decision-making. My goal is to grow in the field of data analytics in the long term and build a strong foundation in working with data, systems and business processes. 
+My dream is to be close to where big things are happening and gain the knowledge to become a top data master and build a technological future driven by AI.
 
-- I rock a great mustache
-- I'm extremely loyal to my family
+I am looking for a **Data Analyst**, **Data Engineer** or **Data Scientist** entry level position.
 
-What else do you need?
-
-### My story
-
-To be honest, I'm having some trouble remembering right now, so why don't you just watch [my movie](https://en.wikipedia.org/wiki/The_Princess_Bride_%28film%29) and it will answer **all** your questions.
+[LinkedIn](https://linkedin.com/in/simon-dusek) | [GitHub](https://github.com/simondusek)
