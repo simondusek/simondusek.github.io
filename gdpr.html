@@ -1,0 +1,480 @@
+---
+layout: null
+permalink: /gdpr/
+---
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zásady zpracování osobních údajů — Tech & Biz Essence</title>
+    <meta name="description"
+        content="Zásady zpracování osobních údajů (GDPR) pro newsletter Tech & Biz Essence od Ing. Šimona Duška.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="https://simondusek.com/gdpr">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #111118;
+            --bg-tertiary: #16161f;
+            --bg-card: #1a1a25;
+            --surface-border: rgba(255, 255, 255, 0.06);
+            --surface-border-hover: rgba(255, 255, 255, 0.12);
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b8;
+            --text-tertiary: #6b6b80;
+            --accent: #6366f1;
+            --accent-hover: #818cf8;
+            --accent-glow: rgba(99, 102, 241, 0.25);
+            --accent-subtle: rgba(99, 102, 241, 0.1);
+            --neon: #10b981;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: var(--accent-hover);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--neon);
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: white;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        /* Background */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-gradient-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-gradient-orb.orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1), transparent 70%);
+            top: -200px;
+            right: -100px;
+        }
+
+        /* Nav */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1rem 0;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--surface-border);
+        }
+
+        .nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            text-decoration: none;
+        }
+
+        .nav-brand-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, var(--accent), var(--neon));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        .nav-back {
+            padding: 0.55rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            background: var(--bg-tertiary);
+            border: 1px solid var(--surface-border);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .nav-back:hover {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border-color: var(--surface-border-hover);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Content */
+        .gdpr-page {
+            padding-top: 7rem;
+            padding-bottom: 5rem;
+        }
+
+        .gdpr-card {
+            max-width: 740px;
+            margin: 0 auto;
+            padding: clamp(2rem, 5vw, 3.5rem);
+            background: var(--bg-secondary);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gdpr-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--neon));
+        }
+
+        .gdpr-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.9rem;
+            border-radius: 100px;
+            background: var(--accent-subtle);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--accent-hover);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .gdpr-card h1 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+            margin-bottom: 2.5rem;
+        }
+
+        .gdpr-section {
+            margin-bottom: 2.25rem;
+        }
+
+        .gdpr-section:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .gdpr-section h2 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .gdpr-section h2 .section-num {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--accent-hover);
+            background: var(--accent-subtle);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            letter-spacing: 0.05em;
+            flex-shrink: 0;
+        }
+
+        .gdpr-section p {
+            font-size: 0.92rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .gdpr-section p strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .gdpr-email {
+            font-family: var(--font-mono);
+            font-size: 0.88rem;
+            color: var(--accent-hover);
+            background: var(--accent-subtle);
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        /* Divider */
+        .gdpr-divider {
+            height: 1px;
+            background: var(--surface-border);
+            margin: 2.5rem 0;
+        }
+
+        /* Back link */
+        .gdpr-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2.5rem;
+            padding: 0.7rem 1.4rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            background: var(--bg-tertiary);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-sm);
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .gdpr-back:hover {
+            color: var(--text-primary);
+            background: var(--bg-card);
+            border-color: var(--surface-border-hover);
+            transform: translateX(-2px);
+        }
+
+        /* Footer */
+        .site-footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--surface-border);
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-left {
+            font-size: 0.82rem;
+            color: var(--text-tertiary);
+        }
+
+        .footer-left strong {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-links a {
+            font-size: 0.82rem;
+            color: var(--text-tertiary);
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="bg-gradient-orb orb-1" aria-hidden="true"></div>
+
+    <!-- NAV -->
+    <nav class="nav" role="navigation" aria-label="Navigace">
+        <div class="container">
+            <a href="/" class="nav-brand">
+                <div class="nav-brand-icon" aria-hidden="true">T</div>
+                <span>Tech & Biz Essence</span>
+            </a>
+            <a href="/" class="nav-back">← Zpět na hlavní stránku</a>
+        </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <main class="gdpr-page">
+        <div class="container">
+            <div class="gdpr-card reveal">
+
+                <div class="gdpr-badge">GDPR · Ochrana údajů</div>
+                <h1>Zásady zpracování osobních údajů</h1>
+
+                <div class="gdpr-section">
+                    <h2><span class="section-num">01</span> Správce osobních údajů</h2>
+                    <p>Správcem osobních údajů je <strong>Ing. Šimon Dušek</strong>, kontakt: <a
+                            href="mailto:dusek.simon@icloud.com" class="gdpr-email">dusek.simon@icloud.com</a> (dále jen
+                        „Správce").</p>
+                </div>
+
+                <div class="gdpr-section">
+                    <h2><span class="section-num">02</span> Jaké údaje zpracovávám a proč?</h2>
+                    <p>Zpracovávám pouze vaše identifikační údaje (e-mailovou adresu, případně jméno), které mi
+                        dobrovolně poskytnete při přihlášení k&nbsp;odběru newsletteru. Údaje zpracovávám výhradně za
+                        účelem zasílání autorského týdenního newsletteru z&nbsp;oblasti technologií a&nbsp;AI.</p>
+                </div>
+
+                <div class="gdpr-section">
+                    <h2><span class="section-num">03</span> Právní základ</h2>
+                    <p>Právním základem pro zpracování je váš udělený souhlas (stisknutím tlačítka v&nbsp;potvrzovacím
+                        e-mailu – <strong>Double Opt-In</strong>) v&nbsp;souladu s&nbsp;čl.&nbsp;6 odst.&nbsp;1
+                        písm.&nbsp;a) GDPR.</p>
+                </div>
+
+                <div class="gdpr-section">
+                    <h2><span class="section-num">04</span> Kdo má k údajům přístup?</h2>
+                    <p>Vaše údaje jsou v&nbsp;bezpečí. Pro rozesílku využívám zpracovatele <strong>Ecomail.cz
+                            s.r.o.</strong> (česká e-mailová platforma splňující přísné standardy GDPR). Údaje nikdy
+                        nepředávám ani neprodávám třetím stranám.</p>
+                </div>
+
+                <div class="gdpr-section">
+                    <h2><span class="section-num">05</span> Vaše práva</h2>
+                    <p>Souhlas můžete kdykoliv bezplatně odvolat kliknutím na odkaz <strong>„Odhlásit se
+                            z&nbsp;odběru"</strong>, který se nachází v&nbsp;patičce každého odeslaného e-mailu, nebo
+                        zasláním zprávy na <a href="mailto:dusek.simon@icloud.com"
+                            class="gdpr-email">dusek.simon@icloud.com</a>. Máte právo na přístup k&nbsp;údajům, jejich
+                        opravu či výmaz.</p>
+                </div>
+
+                <div class="gdpr-divider"></div>
+
+                <a href="/" class="gdpr-back">← Zpět na hlavní stránku</a>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">© 2025 <strong>Tech & Biz Essence</strong> · Ing. Šimon Dušek</div>
+                <div class="footer-links">
+                    <a href="/">Hlavní stránka</a>
+                    <a href="https://simondusek.com" target="_blank" rel="noopener">simondusek.com</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => observer.observe(el));
+    </script>
+
+</body>
+
+</html>
