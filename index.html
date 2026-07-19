@@ -125,6 +125,7 @@ layout: null
             filter: blur(120px);
             pointer-events: none;
             z-index: 0;
+            will-change: transform;
         }
         .bg-gradient-orb.orb-1 {
             width: 600px;
@@ -729,6 +730,7 @@ layout: null
             transform: translateY(30px);
             transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
                         transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
         }
         .reveal.visible {
             opacity: 1;
@@ -768,6 +770,21 @@ layout: null
         /* ==========================================================================
            RESPONSIVE REFINEMENTS
            ========================================================================== */
+        @media (max-width: 768px) {
+            /* Mobile Performance Optimizations */
+            .bg-gradient-orb {
+                display: none; /* Disable expensive blur on mobile */
+            }
+            .nav.scrolled {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: rgba(10, 10, 15, 0.98); /* Solid background instead of blur */
+            }
+            .bg-grid {
+                opacity: 0.5; /* Reduce grid complexity slightly */
+            }
+        }
+
         @media (max-width: 480px) {
             .hero-sources {
                 flex-direction: column;
@@ -832,7 +849,7 @@ layout: null
                 <div class="reveal">
                     <div class="hero-badge">
                         <span class="hero-badge-dot" aria-hidden="true"></span>
-                        Každé pondělí v 9:00 ve Vašem inboxu
+                        Každé pondělí v 9:00 ve vašem inboxu
                     </div>
                 </div>
 
@@ -893,7 +910,7 @@ layout: null
                 <div class="conversion-card reveal">
 
                     <h2>Chcete držet krok s AI a&nbsp;nemáte desítky hodin na veškerý nový obsah?</h2>
-                    <p class="subtitle">Nechte filtrování na mně. Dostanete jen to, co stojí za Váš čas — s&nbsp;konkrétními kroky pro Vaše oddělení nebo byznys.</p>
+                    <p class="subtitle">Nechte filtrování na mně. Dostanete jen to, co stojí za váš čas — s&nbsp;konkrétními kroky pro váš byznys.</p>
 
                     <!-- ECOMAIL FORMULÁŘ -->
                     <form action="YOUR_ECOMAIL_FORM_ACTION_URL" method="post" target="_blank" class="newsletter-form" id="newsletter-form">
@@ -902,7 +919,7 @@ layout: null
                             <input
                                 type="email"
                                 name="email"
-                                placeholder="Zadejte Váš e-mail..."
+                                placeholder="Zadejte váš pracovní e-mail..."
                                 required
                                 autocomplete="email"
                                 class="newsletter-input"
@@ -943,7 +960,7 @@ layout: null
                         <div class="section-label">O autorovi</div>
                         <h2>Šimon Dušek</h2>
                         <p>
-                            Jako finanční účetní a&nbsp;vývojář&nbsp;softwaru filtruji světový obsah skrze vlastní AI agenty. Extrahuji z&nbsp;něj čistou esenci a&nbsp;okamžitě aplikovatelné kroky. To, co pomáhá mně v&nbsp;byznysu, posílám dál vám.
+                            Jako finanční manažer a&nbsp;vývojář v&nbsp;Pythonu filtruji světový obsah skrze vlastní AI agenty. Extrahuji z&nbsp;něj čistou esenci a&nbsp;okamžitě aplikovatelné kroky. To, co pomáhá mně v&nbsp;byznysu, posílám dál vám.
                         </p>
                     </div>
 
