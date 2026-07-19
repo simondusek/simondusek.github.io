@@ -12,6 +12,9 @@ layout: null
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://simondusek.com/newsletter">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+
     <!-- Open Graph -->
     <meta property="og:title" content="Tech & Biz Essence — Týdenní B2B technologický digest">
     <meta property="og:description" content="Kurátorovaný digest světových technologických přednášek a studií. Bez vaty, zaměřený na tvrdá data a byznys efektivitu.">
@@ -829,13 +832,13 @@ layout: null
                 <div class="reveal">
                     <div class="hero-badge">
                         <span class="hero-badge-dot" aria-hidden="true"></span>
-                        Každé pondělí v 9:00 ve Vašem inboxu
+                        Každé pondělí v 9:00 ve vašem inboxu
                     </div>
                 </div>
 
-                <h1 class="reveal">
-                    Udržíte krok s technologiemi,
-                    <span class="text-gradient">i když nemáte 30 hodin týdně nazbyt.</span>
+                <h1 class="reveal" id="hero-headline">
+                    Svět technologií se mění příliš rychle na to, abyste
+                    <span class="text-gradient">ztráceli čas vatou.</span>
                 </h1>
 
                 <p class="hero-subtitle reveal">
@@ -1027,6 +1030,21 @@ layout: null
          JAVASCRIPT
          ====================================================================== -->
     <script>
+        // Dynamic Headline Rotation (A/B Testing)
+        const headlines = [
+            'Udržíte krok s technologiemi, i když nemáte <span class="text-gradient">30 hodin týdně nazbyt.</span>',
+            'Technologický vlak už neuteče. <span class="text-gradient">Zastavte permanentní FOMO.</span>',
+            'Hodiny světových přednášek přetavené do <span class="text-gradient">10 minut nekompromisního čtení.</span>',
+            'Všechny zásadní tech inovace. <span class="text-gradient">Bez informačního šumu a balastu.</span>',
+            'AI a tech se mění vteřinu po vteřině. <span class="text-gradient">Buďte u zdroje bez ztráty času.</span>'
+        ];
+        
+        const heroHeadline = document.getElementById('hero-headline');
+        if (heroHeadline) {
+            const randomIndex = Math.floor(Math.random() * headlines.length);
+            heroHeadline.innerHTML = headlines[randomIndex];
+        }
+
         // Navbar scroll effect
         const nav = document.getElementById('main-nav');
         let lastScroll = 0;
