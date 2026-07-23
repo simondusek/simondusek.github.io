@@ -1,13 +1,175 @@
----
-layout: default
-title: 404 - Page not found
-permalink: /404.html
----
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404: Nenalezeno | Tech & Biz Essence</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-<div class="text-center">
-  <h1>Whoops, this page doesn't exist.</h1>
-  <h1>Move along. (404 error)</h1>
-  <br/>
+        body {
+            background-color: #0a0a0f;
+            color: #c4c4d4;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
 
-  <img src="{{ 'assets/img/404-southpark.jpg' | relative_url }}" alt="Not found" />
-</div>
+        .card {
+            background-color: #111118;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 48px 36px;
+            max-width: 520px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .code-badge {
+            display: inline-block;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+            font-weight: 800;
+            font-size: 14px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            letter-spacing: 0.05em;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #f0f0f5;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+        }
+
+        .brand-badge {
+            background: linear-gradient(135deg, #6366f1, #10b981);
+            color: #ffffff;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            color: #a0a0b8;
+            font-size: 15px;
+            margin-bottom: 28px;
+        }
+
+        .info-box {
+            background-color: #161622;
+            border-left: 3px solid #818cf8;
+            padding: 16px;
+            border-radius: 0 10px 10px 0;
+            text-align: left;
+            margin-bottom: 32px;
+            font-size: 14px;
+        }
+
+        .info-box strong {
+            color: #ffffff;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            flex-direction: column;
+        }
+
+        .btn {
+            display: inline-block;
+            width: 100%;
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 15px;
+            padding: 14px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.25);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: #161622;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #c4c4d4;
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: #1c1c2b;
+            color: #ffffff;
+            box-shadow: none;
+        }
+
+        .footer-text {
+            margin-top: 24px;
+            font-size: 12px;
+            color: #525266;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="code-badge">ERROR 404</div>
+
+        <div class="brand">
+            <span class="brand-badge">✨</span>
+            <span>Tech & Biz Essence</span>
+        </div>
+
+        <h1>Tato stránka neexistuje</h1>
+        <p>Vypadá to, že jste narazili na překlep v adrese, nebo byla tato stránka přesunuta v rámci optimalizace.</p>
+
+        <div class="info-box">
+            🔍 <strong>Kde jste se to ocitli?</strong><br>
+            Tady nic není, ale hlavní obsah, newsletter a články jsou plně k dispozici na domovské stránce.
+        </div>
+
+        <div class="btn-group">
+            <a href="https://simondusek.com" class="btn">Zpět na hlavní web</a>
+            <a href="javascript:history.back()" class="btn btn-secondary">Vrátit se o krok zpět</a>
+        </div>
+
+        <div class="footer-text">
+            © Ing. Šimon Dušek • simondusek.com
+        </div>
+    </div>
+
+</body>
+</html>
