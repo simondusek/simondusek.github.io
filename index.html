@@ -913,9 +913,10 @@ layout: null
                     <p class="subtitle">Nechte filtrování na mně. Dostanete jen to, co stojí za Váš čas - s&nbsp;konkrétními kroky pro Vaše oddělení nebo podnikání.</p>
 
                     <!-- ECOMAIL FORMULÁŘ -->
-                    <form action="https://simondusek.ecomailapp.cz/public/subscribe/1/43c2cd496486bcc27217c3e790fb4088" method="post" class="newsletter-form" id="newsletter-form">
+                    <<form action="https://simondusek.ecomailapp.cz/public/subscribe/1/43c2cd496486bcc27217c3e790fb4088" method="post" class="newsletter-form">
 
                         <div class="newsletter-form-row">
+                            <!-- DŮLEŽITÉ: name="email" -->
                             <input
                                 type="email"
                                 name="email"
@@ -923,24 +924,22 @@ layout: null
                                 required
                                 autocomplete="email"
                                 class="newsletter-input"
-                                id="email-input"
                             >
-                            <button type="submit" class="newsletter-btn" id="submit-btn">Chci taky držet krok</button>
+                            <button type="submit" class="newsletter-btn">Chci taky držet krok</button>
                         </div>
-
+                    
                         <!-- GDPR SOUHLAS -->
                         <div class="newsletter-consent-container">
-                            <label for="gdpr-consent" class="newsletter-label">
-                                <input type="checkbox" id="gdpr-consent" name="consent" required class="newsletter-checkbox">
+                            <label class="newsletter-label">
+                                <input type="checkbox" name="consent" required class="newsletter-checkbox">
                                 <span>
                                     Souhlasím se zasíláním newsletteru a zpracováním e-mailu podle
                                     <a href="https://simondusek.com/gdpr" target="_blank" rel="noopener">Zásad ochrany osobních údajů</a>.
                                 </span>
                             </label>
                         </div>
-
+                    
                     </form>
-
                     <p class="newsletter-legal">
                         <span aria-hidden="true">🔒</span>
                         Stoprocentní transparentnost. Odběr můžete kdykoliv zrušit jedním kliknutím.
