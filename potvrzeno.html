@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Odběr potvrzen | Tech & Biz Essence</title>
+    <title>Odběr potvrzen | simondusek.com</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -12,8 +15,8 @@
         }
 
         body {
-            background-color: #0a0a0f;
-            color: #c4c4d4;
+            background-color: #f5f5f7;
+            color: #424245;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             display: flex;
             justify-content: center;
@@ -21,128 +24,152 @@
             min-height: 100vh;
             padding: 20px;
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
         .card {
-            background-color: #111118;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
+            background-color: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 24px;
             padding: 48px 36px;
-            max-width: 520px;
+            max-width: 500px;
             width: 100%;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.04);
         }
 
         .icon-wrapper {
             width: 64px;
             height: 64px;
             background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
+            border: 1px solid rgba(16, 185, 129, 0.2);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 24px auto;
+            margin: 0 auto 20px auto;
             font-size: 28px;
         }
 
         .brand {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            font-weight: 700;
-            color: #f0f0f5;
-            margin-bottom: 16px;
-            letter-spacing: -0.01em;
+            gap: 10px;
+            margin-bottom: 24px;
+            text-align: left;
         }
 
         .brand-badge {
             background: linear-gradient(135deg, #6366f1, #10b981);
             color: #ffffff;
-            width: 24px;
-            height: 24px;
-            border-radius: 6px;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1d1d1f;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .brand-subtitle {
+            font-size: 11px;
+            color: #86868b;
+            font-weight: 500;
         }
 
         h1 {
             font-size: 26px;
             font-weight: 800;
-            color: #ffffff;
+            color: #1d1d1f;
             margin-bottom: 12px;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.03em;
+            line-height: 1.25;
         }
 
         p {
-            color: #a0a0b8;
+            color: #424245;
             font-size: 15px;
             margin-bottom: 28px;
+            line-height: 1.65;
         }
 
         .info-box {
-            background-color: #161622;
+            background-color: #f5f5f7;
             border-left: 3px solid #6366f1;
-            padding: 16px;
-            border-radius: 0 10px 10px 0;
+            padding: 18px 20px;
+            border-radius: 0 12px 12px 0;
             text-align: left;
             margin-bottom: 32px;
             font-size: 14px;
+            color: #424245;
         }
 
         .info-box strong {
-            color: #ffffff;
+            color: #1d1d1f;
         }
 
         .btn {
             display: inline-block;
             width: 100%;
-            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            background: #6366f1;
             color: #ffffff;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 15px;
-            padding: 14px 24px;
-            border-radius: 10px;
+            padding: 16px 28px;
+            border-radius: 100px;
             text-decoration: none;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.25);
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.25);
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+            transform: translateY(-1px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.35);
         }
 
         .footer-text {
-            margin-top: 24px;
+            margin-top: 28px;
             font-size: 12px;
-            color: #525266;
+            color: #86868b;
         }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <div class="icon-wrapper">🎉</div>
+        <div class="icon-wrapper">✨</div>
 
         <div class="brand">
-            <span class="brand-badge">✨</span>
-            <span>Tech & Biz Essence</span>
+            <span class="brand-badge">✦</span>
+            <div class="brand-text">
+                <span class="brand-name">simondusek.com</span>
+                <span class="brand-subtitle">Digest & Deep Dive</span>
+            </div>
         </div>
 
         <h1>Skvělé, máte hotovo!</h1>
-        <p>Vaše e-mailová adresa byla úspěšně potvrzena a jste oficiálně v klubu.</p>
+        <p>Vaše e-mailová adresa byla úspěšně potvrzena. Váš odběr je oficiálně aktivní.</p>
 
         <div class="info-box">
             📬 <strong>Co bude následovat?</strong><br>
-            Nové vydání přistane ve vaší schránce vždy v momentě, kdy dám dohromady pořádnou porci esence bez zbytečné omáčky. První e-mail už je možná na cestě!
+            Vaše první dávka ušetřeného času je na cestě. Sledujte svou příchozí poštu – brzy přistane čerstvý <strong>Digest</strong> nebo hloubkový <strong>Deep Dive</strong>.
         </div>
 
-        <a href="https://simondusek.com" class="btn">Zpět na hlavní web</a>
+        <a href="https://simondusek.com" class="btn">Zpět na simondusek.com →</a>
 
         <div class="footer-text">
             © Ing. Šimon Dušek • simondusek.com
