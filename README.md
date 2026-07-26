@@ -1,24 +1,44 @@
-# ⚡ simondusek.com — Automated B2B Newsletter Engine
+# ✦ simondusek.com
 
-> **Pravidelná dávka technologické esence a B2B analytiky bez balastu a šumu.**
+> **Osobní platforma pro kurátorství technologických trendů, B2B analytiku a automatizovanou distribuci obsahu.**
 
-Tento repozitář obsahuje kompletní zdrojový kód pro osobní web **[simondusek.com](https://simondusek.com)** a **automatizovaný Python/AI konvertor**, který transformuje surové RSS feedy a přpisy světových přednášek (Stanford, MIT, Y Combinator) do responzivních HTML newsletterů pro Ecomail.
+Tento repozitář obsahuje zdrojové kódy pro osobní webové stránky **[simondusek.com](https://simondusek.com)** a navazující šablony pro odesílání e-mailových publikací.
 
 ---
 
-## 🎯 Architektura & Dva formáty
+## 📰 O projektu & Dva formáty
 
-Projekt zajišťuje sběr, zpracování, kurátorství a generování e-mailových kampaní rozdělených do dvou doplňujících se formátů:
+Projekt slouží k filtraci globálního technologického šumu a k doručování strukturovaného obsahu bez vaty a balastu. Veškeré publikace vycházejí pod osobní značkou **simondusek.com** ve dvou doplňujících se formátech:
 
-1. **Digest | simondusek.com** *(2×–3× týdně)*  
-   * Rychlý 3minutový přehled klíčových událostí z AI, financí a české scény.  
-   * Filtrováno přes chytré RSS AI agenty, vysvětlený žargon v závorce a vyhodnocený dopad `Why It Matters`.
+1. **Digest | simondusek.com** *(2× až 3× týdně)*  
+   * Rychlé 3minutové přečtení klíčových událostí z AI, financí a české scény.  
+   * Filtrováno skrze interní RSS pipeline, s přirozeně vysvětleným žargonem v závorce a vyhodnoceným dopadem *Why It Matters*.
+
 2. **Deep Dive | simondusek.com** *(1× za 1–2 týdny)*  
-   * Prémiová analytická esence z přednášek a vědeckých studií.  
-   * Finanční a controllingový pohled na AI (Unit Economics, CapEx, OpEx) s konkrétním srovnáním *PŘED vs. PO* pro firmy.
+   * Hloubkové analytické rozbory přednášek a vědeckých studií (Stanford, MIT, Y Combinator).  
+   * Finanční a controllingový pohled na AI (Unit Economics, CapEx, OpEx) s konkrétním vyhodnocením exekutivních dopadů pro firmy.
 
 ---
 
-## 🛠️ Součásti projektu a struktura
+## 🛠️ Použité technologie & Vizuální styl
 
-Repozitář kombinuje statický web na GitHub Pages s lokálním CLI nástrojem v Pythonu:
+* **Frontend:** Responsive HTML5, Modern CSS variables, Apple-inspired Glassmorphic UI, Inter & JetBrains Mono typografie.
+* **Architecture:** GitHub Pages, Ecomail API Integration (Double Opt-In workflow).
+* **Content Engine:** Interní Python pipeline využívající LLM pro analytické zpracování a syntézu dat.
+
+---
+
+## 👤 Autor
+
+**Ing. Šimon Dušek**  
+*Finanční účetní & Python vývojář*
+
+* **Web:** [simondusek.com](https://simondusek.com)
+* **LinkedIn:** [linkedin.com/in/simondusek](https://www.linkedin.com/in/simondusek)
+
+---
+
+## 📄 Licence & Autorská práva
+
+© 2026 **Ing. Šimon Dušek**. Všechna práva vyhrazena.  
+*Obsah, textové podklady a šablony jsou autorským dílem.*
