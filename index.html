@@ -251,6 +251,9 @@
             .nav-links {
                 display: flex;
             }
+            .hide-mobile-navbar {
+                display: none;
+            }
         }
         
         .nav-link {
@@ -802,7 +805,7 @@
                 <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Přepnout světlý/tmavý režim">
                     <span class="theme-icon" id="theme-icon">🌙</span>
                 </button>
-                <a href="#subscribe" class="nav-cta">Odebírat zdarma</a>
+                <a href="#subscribe" class="nav-cta">Odebírat <span class="hide-mobile-navbar">zdarma</span></a>
             </div>
         </div>
     </nav>
