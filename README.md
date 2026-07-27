@@ -1,4 +1,4 @@
-# ✦ simondusek.com
+# ⌘ simondusek.com
 
 > **Osobní platforma pro kurátorství technologických trendů, B2B analytiku a automatizovanou distribuci obsahu.**
 
