@@ -209,6 +209,11 @@
             background: var(--glass-hover);
             border-color: var(--border-hover);
             color: var(--text-primary);
+            transform: translateX(-2px);
+        }
+
+        .nav-back-icon {
+            display: none;
         }
 
         @media (max-width: 520px) {
@@ -353,6 +358,11 @@
             font-size: 0.875rem;
             color: var(--text-tertiary);
         }
+
+        .footer-left strong {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
         
         .footer-links a {
             font-size: 0.875rem;
@@ -363,6 +373,13 @@
         
         .footer-links a:hover {
             color: var(--text-primary);
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
         }
 
         .reveal {
@@ -394,6 +411,7 @@
                     <span class="theme-icon" id="theme-icon">🌙</span>
                 </button>
                 <a href="/" class="nav-back">
+                    <span class="nav-back-text">← Zpět na hlavní stránku</span>
                     <span class="nav-back-icon">← Domů</span>
                 </a>
             </div>
@@ -403,9 +421,9 @@
     <!-- HEADER -->
     <header class="archive-header">
         <div class="container">
-            <div class="archive-badge">⚡ Archiv Vydání</div>
-            <h1>Digest Blog</h1>
-            <p>Pravidelná dávka technologické esence a B2B analytiky bez balastu a šumu.</p>
+            <div class="archive-badge">⚡ Předchozí Vydání</div>
+            <h1>Digest Archiv</h1>
+            <p>Každé vydání bezplatného denního newsletteru Digest, archivované a zdarma ke čtení.</p>
         </div>
     </header>
 
@@ -467,7 +485,7 @@
 
         function updateThemeIcon(theme) {
             if (themeIcon) {
-                themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+                themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
             }
         }
 
