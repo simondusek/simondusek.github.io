@@ -251,8 +251,17 @@
             .nav-links {
                 display: flex;
             }
-            .hide-mobile-navbar {
-                display: none;
+        }
+
+        /* Ušetříme místo na mobilních zařízeních */
+        @media (max-width: 639px) {
+            .nav-cta {
+                padding: 0.5rem 0.9rem; /* Zjemníme padding pro úzké displeje */
+                font-size: 0.825rem;    /* Mírně zmenšíme písmo, aby hezky sedělo vedle ikony */
+            }
+
+            .hide-mobile-cta {
+                display: none;          /* Skryje slovo "zdarma" pod 640 px */
             }
         }
         
@@ -805,7 +814,7 @@
                 <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Přepnout světlý/tmavý režim">
                     <span class="theme-icon" id="theme-icon">🌙</span>
                 </button>
-                <a href="#subscribe" class="nav-cta">Odebírat <span class="hide-mobile-navbar">zdarma</span></a>
+                <a href="#subscribe" class="nav-cta">Odebírat <span class="hide-mobile-cta">zdarma</span></a>
             </div>
         </div>
     </nav>
