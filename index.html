@@ -347,10 +347,10 @@
             flex-direction: column;
             gap: 0.75rem;
             width: 100%;
-            padding: 1rem 1.25rem;
+            padding: 0.85rem; /* Zmenšený padding pro mobil */
             background: var(--glass);
             border: 1px solid var(--border);
-            border-radius: var(--radius-pill);
+            border-radius: 20px; /* Na mobilu čistý moderní obdélník s jemným rohem */
             backdrop-filter: blur(24px) saturate(180%);
             -webkit-backdrop-filter: blur(24px) saturate(180%);
             transition: all 0.3s ease;
@@ -366,20 +366,32 @@
         @media (min-width: 640px) {
             .hero-form-row {
                 flex-direction: row;
+                padding: 0.5rem 0.5rem 0.5rem 1.25rem; /* Pro desktop: levý padding tlustý, ostatní tenké */
+                border-radius: var(--radius-pill); /* Návrat k plné pilulce na desktopu */
+                align-items: center;
             }
         }
         
         .hero-input {
             flex: 1;
-            padding: 0.9rem 1.2rem;
+            padding: 0.85rem 1.1rem;
             font-family: var(--font-sans);
             font-size: 0.95rem;
             border: 1px solid var(--border);
-            border-radius: var(--radius-pill);
+            border-radius: 12px; /* Na mobilu jemné rohy */
             color: var(--text-primary);
             background: var(--glass);
             transition: all 0.25s ease;
             width: 100%;
+        }
+
+        @media (min-width: 640px) {
+            .hero-input {
+                border: none; /* Na desktopu nepotřebuje vnitřní border, tvoří ho vnější pilulka */
+                border-radius: 0;
+                background: transparent;
+                padding: 0.5rem 0.8rem;
+            }
         }
         
         .hero-input::placeholder {
@@ -392,16 +404,22 @@
             background: var(--glass-hover);
             box-shadow: 0 0 0 3px var(--accent-glow);
         }
+
+        @media (min-width: 640px) {
+            .hero-input:focus {
+                box-shadow: none; /* Na desktopu svítí vnější pilulka skrze :focus-within */
+            }
+        }
         
         .hero-btn {
-            padding: 0.9rem 1.8rem;
+            padding: 0.85rem 1.6rem;
             font-family: var(--font-sans);
             font-size: 0.95rem;
             font-weight: 600;
             color: white;
             background: var(--accent);
             border: none;
-            border-radius: var(--radius-pill);
+            border-radius: 12px; /* Na mobilu jemné rohy tlačítka */
             cursor: pointer;
             transition: all 0.25s ease;
             white-space: nowrap;
@@ -411,6 +429,7 @@
         @media (min-width: 640px) {
             .hero-btn {
                 width: auto;
+                border-radius: var(--radius-pill); /* Na desktopu zakulacené tlačítko uvnitř pilulky */
             }
         }
         
