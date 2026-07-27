@@ -3,8 +3,17 @@ layout: null
 permalink: /gdpr/
 ---
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="cs" data-theme="dark">
 <head>
+    <script>
+        (function() {
+            try {
+                var saved = localStorage.getItem('theme');
+                var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {}
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zásady ochrany údajů — simondusek.com</title>
@@ -23,31 +32,41 @@ permalink: /gdpr/
 
     <style>
         /* ==========================================================================
-           DESIGN TOKENS - ULTRA-CLEAN (Matching index.html)
+           DESIGN TOKENS - ULTRA-CLEAN
            ========================================================================== */
         :root {
-            --bg-primary: #f8f8f9;
-            --glass: rgba(255, 255, 255, 0.6);
-            --glass-hover: rgba(255, 255, 255, 0.8);
-            --border: rgba(0, 0, 0, 0.08);
-            --border-hover: rgba(0, 0, 0, 0.12);
-            --text-primary: #1a1a2e;
-            --text-secondary: #404060;
-            --text-tertiary: #606075;
+            --bg-primary: #050508;
+            --glass: rgba(255, 255, 255, 0.02);
+            --glass-hover: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.12);
+            --text-primary: #ffffff;
+            --text-secondary: #9595a5;
+            --text-tertiary: #656575;
             --accent: #6366f1;
             --accent-hover: #818cf8;
-            --accent-glow: rgba(99, 102, 241, 0.2);
             --neon: #10b981;
-            --neon-glow: rgba(16, 185, 129, 0.4);
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            --section-gap: clamp(8rem, 15vh, 12rem);
+            --section-gap: clamp(6rem, 12vh, 10rem);
             --radius-pill: 100px;
             --radius-card: 20px;
+            --orb-opacity: 1;
+            --nav-bg-scrolled: rgba(5, 5, 8, 0.85);
         }
 
-        /* ==========================================================================
-           RESET & BASE
-           ========================================================================== */
+        html[data-theme="light"] {
+            --bg-primary: #f6f6f9;
+            --glass: rgba(10, 10, 20, 0.03);
+            --glass-hover: rgba(10, 10, 20, 0.05);
+            --border: rgba(10, 10, 20, 0.09);
+            --border-hover: rgba(10, 10, 20, 0.14);
+            --text-primary: #0a0a12;
+            --text-secondary: #55555f;
+            --text-tertiary: #85858f;
+            --orb-opacity: 0.4;
+            --nav-bg-scrolled: rgba(246, 246, 249, 0.85);
+        }
+
         *, *::before, *::after {
             margin: 0;
             padding: 0;
@@ -57,7 +76,6 @@ permalink: /gdpr/
         html {
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         body {
@@ -67,23 +85,23 @@ permalink: /gdpr/
             line-height: 1.65;
             overflow-x: hidden;
             min-height: 100vh;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* ==========================================================================
-           FLOATING GRADIENT ORBS
-           ========================================================================== */
         .floating-orb {
             position: fixed;
             border-radius: 50%;
             filter: blur(100px);
             pointer-events: none;
             z-index: 0;
+            opacity: var(--orb-opacity);
+            transition: opacity 0.4s ease;
         }
         
         .floating-orb.orb-1 {
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.15), transparent 70%);
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.08), transparent 70%);
             top: -200px;
             right: -200px;
         }
@@ -91,48 +109,42 @@ permalink: /gdpr/
         .floating-orb.orb-2 {
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.12), transparent 70%);
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.06), transparent 70%);
             bottom: -100px;
             left: -200px;
         }
 
-        /* ==========================================================================
-           LAYOUT
-           ========================================================================== */
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 0 clamp(2rem, 6vw, 4rem);
+            padding: 0 clamp(1.25rem, 5vw, 4rem);
             position: relative;
             z-index: 1;
         }
 
-        /* ==========================================================================
-           NAVIGATION
-           ========================================================================== */
+        /* NAVIGATION - Shared Header */
         .nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 100;
-            padding: 1.5rem 0;
+            padding: 1.25rem 0;
             transition: all 0.3s ease;
-            background: rgba(248, 248, 249, 0.95);
-            backdrop-filter: blur(24px) saturate(180%);
-            -webkit-backdrop-filter: blur(24px) saturate(180%);
-            border-bottom: 1px solid var(--border);
         }
         
         .nav.scrolled {
-            background: rgba(248, 248, 249, 0.98);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            background: var(--nav-bg-scrolled);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border-bottom: 1px solid var(--border);
         }
         
         .nav .container {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 0.5rem;
         }
         
         .nav-brand {
@@ -156,6 +168,7 @@ permalink: /gdpr/
             font-size: 1rem;
             font-weight: 800;
             color: white;
+            flex-shrink: 0;
         }
         
         .nav-brand-name {
@@ -163,9 +176,15 @@ permalink: /gdpr/
             font-size: 1rem;
         }
         
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        
         .nav-back {
-            padding: 0.6rem 1.4rem;
-            font-size: 0.875rem;
+            padding: 0.55rem 1.1rem;
+            font-size: 0.85rem;
             font-weight: 600;
             border-radius: var(--radius-pill);
             background: var(--glass);
@@ -184,30 +203,60 @@ permalink: /gdpr/
             transform: translateX(-2px);
         }
 
-        /* ==========================================================================
-           GDPR CONTENT
-           ========================================================================== */
+        .nav-back-icon {
+            display: none;
+        }
+
+        @media (max-width: 520px) {
+            .nav-back-text {
+                display: none;
+            }
+            .nav-back-icon {
+                display: inline;
+            }
+            .nav-back {
+                padding: 0.55rem 0.85rem;
+            }
+        }
+
+        .theme-toggle {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.25s ease;
+            flex-shrink: 0;
+        }
+        
+        .theme-toggle:hover {
+            border-color: var(--border-hover);
+            background: var(--glass-hover);
+            transform: translateY(-1px);
+        }
+
+        /* GDPR CONTENT */
         .gdpr-page {
-            padding-top: clamp(9rem, 20vh, 14rem);
+            padding-top: clamp(7.5rem, 16vh, 11rem);
             padding-bottom: var(--section-gap);
         }
         
         .gdpr-card {
             max-width: 740px;
             margin: 0 auto;
-            padding: clamp(2.5rem, 5vw, 3.5rem);
-            background: white;
+            padding: clamp(2rem, 5vw, 3.5rem);
+            background: var(--glass);
             border: 1px solid var(--border);
             border-radius: var(--radius-card);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
             position: relative;
             transition: all 0.3s ease;
-        }
-        
-        .gdpr-card:hover {
-            border-color: var(--border-hover);
-            background: var(--glass);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
         }
         
         .gdpr-card::before {
@@ -233,7 +282,7 @@ permalink: /gdpr/
             font-weight: 600;
             letter-spacing: 0.06em;
             text-transform: uppercase;
-            color: var(--accent);
+            color: var(--accent-hover);
             margin-bottom: 1.5rem;
         }
         
@@ -247,10 +296,6 @@ permalink: /gdpr/
         
         .gdpr-section {
             margin-bottom: 2.25rem;
-        }
-        
-        .gdpr-section:last-of-type {
-            margin-bottom: 0;
         }
         
         .gdpr-section h2 {
@@ -267,7 +312,7 @@ permalink: /gdpr/
         .gdpr-section h2 .section-num {
             font-size: 0.72rem;
             font-weight: 500;
-            color: var(--accent);
+            color: var(--accent-hover);
             background: rgba(99, 102, 241, 0.1);
             padding: 0.2rem 0.5rem;
             border-radius: 4px;
@@ -288,7 +333,7 @@ permalink: /gdpr/
         
         .gdpr-email {
             font-size: 0.88rem;
-            color: var(--accent);
+            color: var(--accent-hover);
             text-decoration: underline;
             text-underline-offset: 2px;
         }
@@ -307,7 +352,6 @@ permalink: /gdpr/
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            margin-top: 2rem;
             padding: 0.75rem 1.6rem;
             font-size: 0.9rem;
             font-weight: 600;
@@ -325,9 +369,7 @@ permalink: /gdpr/
             transform: translateX(-2px);
         }
 
-        /* ==========================================================================
-           FOOTER
-           ========================================================================== */
+        /* FOOTER */
         .site-footer {
             padding: 3rem 0;
             border-top: 1px solid var(--border);
@@ -351,21 +393,17 @@ permalink: /gdpr/
             font-weight: 600;
         }
         
-        .footer-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-        
         .footer-links a {
             font-size: 0.875rem;
             color: var(--text-tertiary);
             transition: color 0.2s ease;
+            text-decoration: none;
         }
         
         .footer-links a:hover {
-            color: var(--accent);
+            color: var(--text-primary);
         }
-        
+
         @media (max-width: 480px) {
             .footer-content {
                 flex-direction: column;
@@ -373,51 +411,41 @@ permalink: /gdpr/
             }
         }
 
-        /* ==========================================================================
-           ANIMATIONS
-           ========================================================================== */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
                         transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
         }
         
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* ==========================================================================
-           SELECTION & FOCUS
-           ========================================================================== */
-        ::selection {
-            background: var(--accent);
-            color: white;
-        }
-        
-        :focus-visible {
-            outline: 2px solid var(--accent);
-            outline-offset: 2px;
-        }
     </style>
 </head>
 
 <body>
 
-    <!-- Floating Gradient Orbs -->
     <div class="floating-orb orb-1" aria-hidden="true"></div>
     <div class="floating-orb orb-2" aria-hidden="true"></div>
 
     <!-- NAVIGATION -->
     <nav class="nav" id="main-nav" role="navigation" aria-label="Navigace">
         <div class="container">
-            <a href="/index.html" class="nav-brand">
-                <div class="nav-brand-icon" aria-hidden="true">⌘</div>
+            <a href="/" class="nav-brand">
+                <div class="nav-brand-icon" aria-hidden="true">✦</div>
                 <span class="nav-brand-name">simondusek.com</span>
             </a>
-            <a href="/index.html" class="nav-back">← Zpět na hlavní stránku</a>
+            <div class="nav-right">
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Přepnout světlý/tmavý režim">
+                    <span class="theme-icon" id="theme-icon">🌙</span>
+                </button>
+                <a href="/" class="nav-back">
+                    <span class="nav-back-text">← Zpět na hlavní stránku</span>
+                    <span class="nav-back-icon">← Domů</span>
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -432,7 +460,7 @@ permalink: /gdpr/
                 <div class="gdpr-section">
                     <h2><span class="section-num">01</span> Správce osobních údajů</h2>
                     <p>Správcem osobních údajů je <strong>Ing. Šimon Dušek</strong>, kontakt: 
-                        <a href="mailto:dusek.simon@icloud.com" class="gdpr-email">dusek.simon@icloud.com</a> (dále jen "Správce").</p>
+                        <a href="mailto:simon@simondusek.com" class="gdpr-email">simon@simondusek.com</a>.</p>
                 </div>
 
                 <div class="gdpr-section">
@@ -459,13 +487,13 @@ permalink: /gdpr/
                     <h2><span class="section-num">05</span> Vaše práva</h2>
                     <p>Souhlas můžete kdykoliv bezplatně odvolat kliknutím na odkaz <strong>„Odhlásit se z odběru"</strong>, 
                         který se nachází v patičce každého odeslaného e-mailu, nebo zasláním zprávy na 
-                        <a href="vymaz@simondusek.com" class="gdpr-email">gdpr@simondusek.com</a>. 
+                        <a href="mailto:simon@simondusek.com" class="gdpr-email">simon@simondusek.com</a>. 
                         Máte právo na přístup k údajům, jejich opravu či výmaz.</p>
                 </div>
 
                 <div class="gdpr-divider"></div>
 
-                <a href="index.html" class="gdpr-back">← Zpět na hlavní stránku</a>
+                <a href="/" class="gdpr-back">← Zpět na hlavní stránku</a>
 
             </div>
         </div>
@@ -477,18 +505,42 @@ permalink: /gdpr/
             <div class="footer-content">
                 <div class="footer-left">© 2026 <strong>simondusek.com</strong> · Ing. Šimon Dušek</div>
                 <div class="footer-links">
-                    <a href="/index.html">Hlavní stránka</a>
+                    <a href="/">Hlavní stránka</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Navbar scroll effect
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlEl = document.documentElement;
+
+        function updateThemeIcon(theme) {
+            if (themeIcon) {
+                themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+            }
+        }
+
+        updateThemeIcon(htmlEl.getAttribute('data-theme') || 'dark');
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const current = htmlEl.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+                const next = current === 'dark' ? 'light' : 'dark';
+                htmlEl.setAttribute('data-theme', next);
+                try {
+                    localStorage.setItem('theme', next);
+                } catch (e) {}
+                updateThemeIcon(next);
+            });
+        }
+
+        // Navbar scroll
         const nav = document.getElementById('main-nav');
         window.addEventListener('scroll', () => {
-            const currentScroll = window.scrollY;
-            if (currentScroll > 40) {
+            if (window.scrollY > 40) {
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');
@@ -504,10 +556,7 @@ permalink: /gdpr/
                     revealObserver.unobserve(entry.target);
                 }
             });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -40px 0px'
-        });
+        }, { threshold: 0.1 });
 
         revealElements.forEach(el => revealObserver.observe(el));
     </script>
