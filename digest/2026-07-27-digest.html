@@ -36,79 +36,43 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-<style>
+    <style>
         /* ==========================================================================
-           DESIGN TOKENS - ULTRA-CLEAN REDESIGN
+           DESIGN TOKENS - ULTRA-CLEAN
            ========================================================================== */
         :root {
-            /* Core palette - Ultra Dark (default theme) */
             --bg-primary: #050508;
-            
-            /* Glass surfaces - Ultra minimal */
             --glass: rgba(255, 255, 255, 0.02);
             --glass-hover: rgba(255, 255, 255, 0.04);
-            
-            /* Borders - Ultra thin glowing */
             --border: rgba(255, 255, 255, 0.08);
             --border-hover: rgba(255, 255, 255, 0.12);
-            
-            /* Text */
             --text-primary: #ffffff;
             --text-secondary: #9595a5;
             --text-tertiary: #656575;
-            --text-inverse: #050508;
-            
-            /* Accent — electric indigo */
             --accent: #007AFF;
             --accent-hover: #0066cc;
-            --accent-glow: #0066f166;
-            
-            /* Neon green */
             --neon: #10b981;
-            --neon-glow: rgba(16, 185, 129, 0.4);
-            
-            /* Typography */
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            
-            /* Spacing - Massive */
-            --section-gap: clamp(8rem, 15vh, 12rem);
-            
-            /* Radius - Pill style */
+            --section-gap: clamp(6rem, 12vh, 10rem);
             --radius-pill: 100px;
             --radius-card: 20px;
-            
-            /* Orb opacity - dimmed further in light mode */
             --orb-opacity: 1;
             --nav-bg-scrolled: rgba(5, 5, 8, 0.85);
         }
-        
-        /* ==========================================================================
-           LIGHT THEME OVERRIDES
-           ========================================================================== */
+
         html[data-theme="light"] {
             --bg-primary: #f6f6f9;
-            
             --glass: rgba(10, 10, 20, 0.03);
             --glass-hover: rgba(10, 10, 20, 0.05);
-            
             --border: rgba(10, 10, 20, 0.09);
             --border-hover: rgba(10, 10, 20, 0.14);
-            
             --text-primary: #0a0a12;
             --text-secondary: #55555f;
             --text-tertiary: #85858f;
-            --text-inverse: #ffffff;
-            
-            --accent-glow: rgba(99, 102, 241, 0.22);
-            --neon-glow: rgba(16, 185, 129, 0.22);
-            
             --orb-opacity: 0.4;
             --nav-bg-scrolled: rgba(246, 246, 249, 0.85);
         }
 
-        /* ==========================================================================
-           RESET & BASE
-           ========================================================================== */
         *, *::before, *::after {
             margin: 0;
             padding: 0;
@@ -118,7 +82,6 @@
         html {
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         body {
@@ -131,16 +94,12 @@
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* ==========================================================================
-           FLOATING GRADIENT ORBS - Subtle depth
-           ========================================================================== */
         .floating-orb {
             position: fixed;
             border-radius: 50%;
             filter: blur(100px);
             pointer-events: none;
             z-index: 0;
-            will-change: transform;
             opacity: var(--orb-opacity);
             transition: opacity 0.4s ease;
         }
@@ -161,42 +120,37 @@
             left: -200px;
         }
 
-        /* ==========================================================================
-           LAYOUT
-           ========================================================================== */
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 0 clamp(2rem, 6vw, 4rem);
+            padding: 0 clamp(1.25rem, 5vw, 4rem);
             position: relative;
             z-index: 1;
         }
 
-        /* ==========================================================================
-           NAVIGATION - Minimal
-           ========================================================================== */
+        /* NAVIGATION - Shared Header */
         .nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 100;
-            padding: 1.5rem 0;
-            border-bottom: 1px solid transparent;
-            transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease, padding 0.3s ease;
+            padding: 1.25rem 0;
+            transition: all 0.3s ease;
         }
         
         .nav.scrolled {
             background: var(--nav-bg-scrolled);
             backdrop-filter: blur(24px) saturate(180%);
             -webkit-backdrop-filter: blur(24px) saturate(180%);
-            border-bottom-color: var(--border);
+            border-bottom: 1px solid var(--border);
         }
         
         .nav .container {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 0.5rem;
         }
         
         .nav-brand {
@@ -206,6 +160,7 @@
             font-weight: 600;
             color: var(--text-primary);
             letter-spacing: -0.02em;
+            text-decoration: none;
         }
         
         .nav-brand-icon {
@@ -219,6 +174,7 @@
             font-size: 1rem;
             font-weight: 800;
             color: white;
+            flex-shrink: 0;
         }
         
         .nav-brand-name {
@@ -226,68 +182,49 @@
             font-size: 1rem;
         }
         
-        .nav-cta {
-            padding: 0.6rem 1.4rem;
-            font-size: 0.875rem;
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        
+        .nav-back {
+            padding: 0.55rem 1.1rem;
+            font-size: 0.85rem;
             font-weight: 600;
             border-radius: var(--radius-pill);
-            background: var(--accent);
-            color: white;
-            border: none;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
             cursor: pointer;
             transition: all 0.25s ease;
             text-decoration: none;
             white-space: nowrap;
         }
         
-        .nav-cta:hover {
-            background: var(--accent-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 8px 32px var(--accent-glow);
-        }
-        
-        .nav-links {
-            display: none;
-            align-items: center;
-            gap: 2rem;
-        }
-        
-        @media (min-width: 768px) {
-            .nav-links {
-                display: flex;
-            }
-        }
-
-        /* Ušetříme místo na mobilních zařízeních */
-        @media (max-width: 520px) {
-            .nav-cta {
-                padding: 0.5rem 0.9rem; /* Zjemníme padding pro úzké displeje */
-                font-size: 0.825rem;    /* Mírně zmenšíme písmo, aby hezky sedělo vedle ikony */
-            }
-
-            .hide-mobile-cta {
-                display: none;          /* Skryje slovo "zdarma" pod 520 px */
-            }
-        }
-        
-        .nav-link {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-        
-        .nav-link:hover {
+        .nav-back:hover {
+            background: var(--glass-hover);
+            border-color: var(--border-hover);
             color: var(--text-primary);
+            transform: translateX(-2px);
         }
-        
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+
+        .nav-back-icon {
+            display: none;
         }
-        
+
+        @media (max-width: 520px) {
+            .nav-back-text {
+                display: none;
+            }
+            .nav-back-icon {
+                display: inline;
+            }
+            .nav-back {
+                padding: 0.55rem 0.85rem;
+            }
+        }
+
         .theme-toggle {
             width: 38px;
             height: 38px;
@@ -309,322 +246,25 @@
             transform: translateY(-1px);
         }
 
-        /* ==========================================================================
-           HERO SECTION - Monolithic
-           ========================================================================== */
-        .hero {
-            padding-top: clamp(9rem, 20vh, 14rem);
-            padding-bottom: var(--section-gap);
-            text-align: center;
-            position: relative;
-        }
-        
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            font-weight: 800;
-            line-height: 1.05;
-            letter-spacing: -0.04em;
-            color: var(--text-primary);
-            margin-bottom: 2rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .hero h1 .text-gradient {
-            background: linear-gradient(135deg, var(--accent), var(--neon));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .hero-subtitle {
-            font-size: clamp(1.1rem, 2.2vw, 1.4rem);
-            line-height: 1.6;
-            color: var(--text-secondary);
-            margin-bottom: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        /* Hero form wrapper - plain layout, no card styling */
-        .hero-form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.1rem;
-            max-width: 520px;
-            margin: 0 auto;
-        }
-        
-        /* Glass Pill-Box - email + button only */
-        .hero-form-row {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            width: 100%;
-            padding: 0.85rem; /* Zmenšený padding pro mobil */
-            background: var(--glass);
-            border: 1px solid var(--border);
-            border-radius: 20px; /* Na mobilu čistý moderní obdélník s jemným rohem */
-            backdrop-filter: blur(24px) saturate(180%);
-            -webkit-backdrop-filter: blur(24px) saturate(180%);
-            transition: all 0.3s ease;
-        }
-        
-        .hero-form-row:hover,
-        .hero-form-row:focus-within {
-            border-color: var(--border-hover);
-            background: var(--glass-hover);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-        }
-        
-        @media (min-width: 640px) {
-            .hero-form-row {
-                flex-direction: row;
-                padding: 0.5rem 0.5rem 0.5rem 1.25rem; /* Pro desktop: levý padding tlustý, ostatní tenké */
-                border-radius: var(--radius-pill); /* Návrat k plné pilulce na desktopu */
-                align-items: center;
-            }
-        }
-        
-        .hero-input {
-            flex: 1;
-            padding: 0.85rem 1.1rem;
-            font-family: var(--font-sans);
-            font-size: 0.95rem;
-            border: 1px solid var(--border);
-            border-radius: 12px; /* Na mobilu jemné rohy */
-            color: var(--text-primary);
-            background: var(--glass);
-            transition: all 0.25s ease;
-            width: 100%;
-        }
-
-        @media (min-width: 640px) {
-            .hero-input {
-                border: none; /* Na desktopu nepotřebuje vnitřní border, tvoří ho vnější pilulka */
-                border-radius: 0;
-                background: transparent;
-                padding: 0.5rem 0.8rem;
-            }
-        }
-        
-        .hero-input::placeholder {
-            color: var(--text-tertiary);
-        }
-        
-        .hero-input:focus {
-            outline: none;
-            border-color: var(--accent);
-            background: var(--glass-hover);
-            box-shadow: 0 0 0 3px var(--accent-glow);
-        }
-
-        @media (min-width: 640px) {
-            .hero-input:focus {
-                box-shadow: none; /* Na desktopu svítí vnější pilulka skrze :focus-within */
-            }
-        }
-        
-        .hero-btn {
-            padding: 0.85rem 1.6rem;
-            font-family: var(--font-sans);
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: white;
-            background: var(--accent);
-            border: none;
-            border-radius: 12px; /* Na mobilu jemné rohy tlačítka */
-            cursor: pointer;
-            transition: all 0.25s ease;
-            white-space: nowrap;
-            width: 100%;
-        }
-        
-        @media (min-width: 640px) {
-            .hero-btn {
-                width: auto;
-                border-radius: var(--radius-pill); /* Na desktopu zakulacené tlačítko uvnitř pilulky */
-            }
-        }
-        
-        .hero-btn:hover {
-            background: var(--accent-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 8px 32px var(--accent-glow);
-        }
-        
-        .hero-consent {
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            gap: 0.6rem;
-            font-size: 0.78rem;
-            color: var(--text-tertiary);
-            text-align: left;
-            cursor: pointer;
-            width: 100%;
-        }
-        
-        .hero-checkbox {
-            margin-top: 2px;
-            width: 15px;
-            height: 15px;
-            flex-shrink: 0;
-            cursor: pointer;
-            accent-color: var(--accent);
-        }
-        
-        .hero-consent a {
-            color: var(--text-secondary);
-            text-decoration: underline;
-            text-underline-offset: 2px;
-        }
-        
-        .hero-consent a:hover {
-            color: var(--accent-hover);
-        }
-        
-        /* Honeypot - hidden from real users, catches bots */
-        .honeypot {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            opacity: 0;
-            pointer-events: none;
-            left: -9999px;
-        }
-
-        /* ==========================================================================
-           BENTO GRID - Two Clean Tiles
-           ========================================================================== */
-        .bento-section {
+        /* DIGEST CONTENT */
+        .digest-page {
+            padding-top: clamp(7.5rem, 16vh, 11rem);
             padding-bottom: var(--section-gap);
         }
         
-        .bento-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            max-width: 900px;
+        .digest-card {
+            max-width: 740px;
             margin: 0 auto;
-        }
-        
-        @media (min-width: 768px) {
-            .bento-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 2.5rem;
-            }
-        }
-        
-        .bento-tile {
-            padding: 2.25rem;
+            padding: clamp(2rem, 5vw, 3.5rem);
             background: var(--glass);
-            /*border: 1px solid var(--border);*/
             border-radius: var(--radius-card);
             backdrop-filter: blur(24px) saturate(180%);
             -webkit-backdrop-filter: blur(24px) saturate(180%);
-            transition: all 0.3s ease;
-            text-align: left;
-        }
-        
-        .bento-tile:hover {
-            border-color: var(--border-hover);
-            background: var(--glass-hover);
-            transform: translateY(-4px);
-            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.2);
-        }
-        
-        .bento-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.4rem 0.9rem;
-            border-radius: 100px;
-            font-size: 0.72rem;
-            font-weight: 600;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            margin-bottom: 1.25rem;
-        }
-        
-        .bento-badge.digest {
-            background: rgba(99, 102, 241, 0.1);
-            /*border: 1px solid rgba(99, 102, 241, 0.2);*/
-            color: var(--accent-hover);
-        }
-        
-        .bento-badge.deep-dive {
-            background: rgba(16, 185, 129, 0.1);
-            /*border: 1px solid rgba(16, 185, 129, 0.2);*/
-            color: var(--neon);
-        }
-        
-        .bento-tile h3 {
-            font-size: clamp(1.3rem, 2.4vw, 1.7rem);
-            font-weight: 700;
-            line-height: 1.15;
-            letter-spacing: -0.02em;
-            margin-bottom: 1rem;
-        }
-        
-        .bento-tile p {
-            font-size: 0.95rem;
-            line-height: 1.65;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-        
-        .bento-tile ul {
-            list-style: none;
-        }
-        
-        .bento-tile li {
-            font-size: 0.88rem;
-            line-height: 1.7;
-            color: var(--text-tertiary);
-            margin-bottom: 0.5rem;
-            padding-left: 1.25rem;
-            position: relative;
-        }
-        
-        .bento-tile li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: var(--text-tertiary);
-        }
-
-        /* ==========================================================================
-           AUTOR SECTION - Single Clean Card
-           ========================================================================== */
-        .autor-section {
-            padding-bottom: var(--section-gap);
-        }
-        
-        .autor-card {
-            max-width: 680px;
-            margin: 0 auto;
-            padding: clamp(2.5rem, 5vw, 3.5rem);
-            background: var(--glass);
-            /*border: 1px solid var(--border);*/
-            border-radius: var(--radius-card);
-            backdrop-filter: blur(24px) saturate(180%);
-            -webkit-backdrop-filter: blur(24px) saturate(180%);
-            text-align: center;
             position: relative;
             transition: all 0.3s ease;
         }
         
-        .autor-card:hover {
-            border-color: var(--border-hover);
-            background: var(--glass-hover);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-        }
-        
-        /*.autor-card::before {
+        .digest-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -632,69 +272,119 @@
             transform: translateX(-50%);
             width: 80px;
             height: 2px;
-            background: linear-gradient(90deg, var(--accent), var(--neon));
-        }*/
+        }
         
-        .autor-card h2 {
+        .digest-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.9rem;
+            border-radius: 100px;
+            background: #007bff30;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--accent-hover);
+            margin-bottom: 1.5rem;
+        }
+        
+        .digest-card h1 {
             font-size: clamp(1.8rem, 3.2vw, 2.4rem);
             font-weight: 700;
+            line-height: 1.15;
             letter-spacing: -0.02em;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
         }
         
-        .autor-card .subtitle {
-            font-size: 1rem;
+        .digest-meta {
+            font-size: 0.95rem;
             color: var(--text-secondary);
             margin-bottom: 2rem;
-            font-weight: 400;
         }
         
-        .autor-card p {
-            font-size: 1.05rem;
+        .digest-content {
+            font-size: 1rem;
             line-height: 1.8;
             color: var(--text-secondary);
-            max-width: 520px;
-            margin: 0 auto 2.5rem;
         }
         
-        .autor-card p strong {
+        .digest-content h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+            margin: 2rem 0 1rem;
+            color: var(--text-primary);
+        }
+        
+        .digest-content h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+            margin: 1.75rem 0 0.75rem;
+            color: var(--text-primary);
+        }
+        
+        .digest-content p {
+            margin-bottom: 1.25rem;
+        }
+        
+        .digest-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .digest-content strong {
             color: var(--text-primary);
             font-weight: 600;
         }
         
-        .autor-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
+        .digest-content a {
+            color: var(--accent-hover);
+            text-decoration: underline;
+            text-underline-offset: 2px;
         }
         
-        @media (min-width: 640px) {
-            .autor-stats {
-                grid-template-columns: repeat(4, 1fr);
-            }
+        .digest-content a:hover {
+            color: var(--neon);
         }
         
-        .autor-stat-label {
-            font-size: 0.7rem;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--text-tertiary);
-            margin-bottom: 0.35rem;
+        .digest-content ul,
+        .digest-content ol {
+            margin: 1.25rem 0;
+            padding-left: 1.5rem;
         }
         
-        .autor-stat-value {
-            font-size: 0.88rem;
+        .digest-content li {
+            margin-bottom: 0.6rem;
+            line-height: 1.7;
+        }
+        
+        .digest-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.6rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: var(--text-primary);
-            line-height: 1.4;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-pill);
+            transition: all 0.25s ease;
+            text-decoration: none;
+            margin-top: 2.5rem;
+        }
+        
+        .digest-back:hover {
+            background: var(--glass-hover);
+            border-color: var(--border-hover);
+            transform: translateX(-2px);
         }
 
-        /* ==========================================================================
-           FOOTER
-           ========================================================================== */
+        /* FOOTER */
         .site-footer {
             padding: 3rem 0;
             border-top: 1px solid var(--border);
@@ -718,222 +408,48 @@
             font-weight: 600;
         }
         
-        .footer-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-        
         .footer-links a {
             font-size: 0.875rem;
             color: var(--text-tertiary);
             transition: color 0.2s ease;
+            text-decoration: none;
         }
         
         .footer-links a:hover {
             color: var(--text-primary);
         }
 
-        /* ==========================================================================
-           ANIMATIONS
-           ========================================================================== */
+        @media (max-width: 480px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
         .reveal {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
                         transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
         }
         
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        
-        .reveal-stagger > .reveal {
-            transition-delay: calc(var(--i, 0) * 0.1s);
-        }
-
-        /* ==========================================================================
-           RESPONSIVE
-           ========================================================================== */
-        @media (max-width: 768px) {
-            .bento-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .autor-stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero-form-row {
-                flex-direction: column;
-            }
-            
-            .hero-btn {
-                width: 100%;
-            }
-        }
-        
-        /* ==========================================================================
-           SELECTION & FOCUS
-           ========================================================================== */
-        ::selection {
-            background: var(--accent);
-            color: white;
-        }
-        
-        :focus-visible {
-            outline: 2px solid var(--accent);
-            outline-offset: 2px;
-        }
     </style>
 
-    /* Custom styles for article layout */
-    <style>
-        .article-header {
-            padding-top: clamp(7.5rem, 16vh, 11rem);
-            padding-bottom: 3rem;
-            text-align: center;
-        }
-
-        .article-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.4rem 0.9rem;
-            border-radius: 100px;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            font-size: 0.72rem;
-            font-weight: 600;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: var(--accent-hover);
-            margin-bottom: 1.25rem;
-        }
-
-        .article-header h1 {
-            font-size: clamp(2.2rem, 5vw, 3.8rem);
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-        }
-
-        .article-meta {
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            color: var(--text-secondary);
-            max-width: 580px;
-            margin: 0 auto;
-        }
-
-        .article-section {
-            padding-bottom: var(--section-gap);
-        }
-
-        .article-container {
-            max-width: 768px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .article-content {
-            padding: 2rem;
-            background: var(--glass);
-            border-radius: var(--radius-card);
-            backdrop-filter: blur(24px) saturate(180%);
-            -webkit-backdrop-filter: blur(24px) saturate(180%);
-            border: 1px solid var(--border);
-        }
-
-        /* Fix inline styles from newsletter content */
-        .article-content h2 {
-            font-size: 2rem;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            color: var(--text-primary);
-        }
-
-        .article-content h3 {
-            font-size: 1.35rem;
-            font-weight: 700;
-            line-height: 1.3;
-            letter-spacing: -0.02em;
-            margin: 2rem 0 1rem 0;
-            color: var(--text-primary);
-        }
-
-        .article-content p {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 1.25rem;
-        }
-
-        .article-content ul {
-            margin: 0 0 1.5rem 0;
-            padding-left: 1.5rem;
-        }
-
-        .article-content li {
-            margin-bottom: 0.75rem;
-            font-size: 1rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        .article-content a {
-            color: var(--accent-hover);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .article-content a:hover {
-            text-decoration: underline;
-        }
-
-        .article-content strong {
-            font-weight: 600;
-        }
-
-        .article-content hr {
-            border: none;
-            border-top: 1px solid var(--border);
-            margin: 2rem 0;
-        }
-
-        /* Style for why-box from newsletter */
-        .why-box {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-card);
-            padding: 1.25rem;
-            margin: 1.5rem 0;
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            line-height: 1.65;
-        }
-    </style>
 </head>
 <body>
 
     <div class="floating-orb orb-1" aria-hidden="true"></div>
+    <div class="floating-orb orb-2" aria-hidden="true"></div>
 
-    <!-- NAVIGATION - Reuse from digest.html -->
+    <!-- NAVIGATION -->
     <nav class="nav" id="main-nav" role="navigation" aria-label="Navigace">
         <div class="container">
             <a href="/" class="nav-brand">
-                <div class="nav-brand-icon" aria-hidden="true">⌘</div>
+                <div class="nav-brand-icon" aria-hidden="true">✦</div>
                 <span class="nav-brand-name">simondusek.com</span>
             </a>
             <div class="nav-right">
@@ -948,21 +464,22 @@
         </div>
     </nav>
 
-    <!-- HEADER -->
-    <header class="article-header">
+    <!-- CONTENT -->
+    <main class="digest-page">
         <div class="container">
-            <div class="article-badge">📰 Digest</div>
-            <h1>Digest</h1>
-            <p class="article-meta">Vydáno: 27. 07. 2026</p>
-        </div>
-    </header>
-
-    <!-- ARTICLE CONTENT -->
-    <main class="article-section">
-        <div class="article-container">
-            <article class="article-content reveal">
-                <h2>🚀 Hlavní události v Techu &amp; AI</h2><h3>🔓 <a href="https://arstechnica.com/tech-policy/2026/07/5th-circuit-blocks-texas-law-requiring-websites-to-filter-harmful-speech/">Varování: Vaše sdílené chaty a Artifacts z Claude se mohly objevit na Googlu</a></h3><p><strong>Vaše soukromé konverzace s umělou inteligencí možná právě teď visí volně na vyhledávači Google.</strong></p><ul><li><strong>Nespočet chatů</strong> a <strong>Artifacts</strong> (interaktivní miniaplikace a dokumenty tvořené uživateli) z nástroje Claude byl o víkendu veřejně dohledatelný na <strong>Googlu</strong>.</li><li>Uživatelé Redditu zjistili, že po zadání příkazů jako „site:claude.ai/share“ vyhledávač zobrazí <strong>rozsáhlý seznam</strong> těchto sdílených konverzací.</li></ul><div class="why-box"><p>Pokud přes AI sdílíte jakákoliv citlivá data či firemní kód, myslete na to, že se mohou stát <strong>veřejně přístupnými</strong> pro kohokoliv na internetu.</p></div><p><em>(Zdroj: Ars Technica)</em></p><h3>🤖 <a href="https://www.cnbc.com/2026/07/27/crypto-stocks-rally-thanks-to-rotation-from-ai-infrastructure-bitcoin-miners-lag.html">Moonshot AI vydává otevřené váhy Kimi K3 a infrastrukturu po otřesu v závodě o pokročilé modely</a></h3><p><strong>Čínský model téměř dohání špičkový GPT-5.6 Sol, ale v klíčových oblastech má vážné mezery.</strong></p><ul><li>Čínský startup <strong>Moonshot AI</strong> zveřejnil váhy modelu <strong>Kimi K3</strong> (matematické parametry definující chování AI) a zpřístupnil část své infrastruktury jako <strong>open source</strong> (volně dostupný kód).</li><li>Ačkoliv v běžných testech dosahuje úrovně špičkových západních modelů, <strong>nezávislé testy</strong> odhalily výrazné slabiny v <strong>kyberbezpečnosti</strong> a <strong>matematice</strong>.</li></ul><div class="why-box"><p>Čínští vývojáři extrémně rychle dotahují <strong>západní špičku</strong>, což může brzy přinést výkonné <strong>AI modely zdarma</strong> pro každého.</p></div><p><em>(Zdroj: CNBC Technology)</em></p><h3>🎮 <a href="https://www.digitaltrends.com/movies/youtube-premium-is-becoming-a-streaming-bundle-by-adding-peacock/">Obří výpadek Xboxu zablokoval dokonce i hry na fyzických discích</a></h3><p><strong>Koupili jste si hru na disku? Ani to vás při nedělním výpadku služeb Xboxu nezachránilo.</strong></p><ul><li>Rozsáhlý <strong>výpadek Xboxu</strong>, který začal v neděli večer, nezpůsobil problémy jen digitálním hrám, ale <strong>zablokoval spuštění</strong> i her z <strong>fyzických disků</strong>.</li><li><strong>Stavová stránka Xboxu</strong> potvrdila výpadek v neděli kolem 23:00 ET, přičemž hráčům <strong>zcela znemožnila</strong> hraní.</li></ul><div class="why-box"><p>Incident jasně ukazoval rizika moderních <strong>herních konzolí</strong>, které vyžadují <strong>online ověření</strong> i u her, jež fyzicky vlastníte.</p></div><p><em>(Zdroj: Digital Trends)</em></p><h3>🛡️ <a href="https://www.engadget.com/2224488/ios26-6-macos26-6-and-the-rest-are-out-addressing-security-fixes/">Microsoft spouští AI kyberbezpečnostní model a agentní obranou platformu pro snížení firemních nákladů</a></h3><p><strong>Microsoft zahájil novou éru v kyberbezpečnosti a sází na neuvěřitelně levnou umělou inteligenci.</strong></p><ul><li><strong>Microsoft</strong> představil svůj první vlastní <strong>kyberbezpečnostní AI model</strong> a komplexní <strong>agentní obranou platformu</strong> (systém autonomně reagující na hrozby).</li><li>Firma tvrdí, že <strong>budoucnost AI</strong> nezávisí na <strong>největším modelu</strong>, ale na tom <strong>nejlevnějším</strong>, což má podnikům výrazně snížit náklady na zabezpečení.</li></ul><div class="why-box"><p>Pro firmy to představuje příležitost zavést <strong>pokročilé zabezpečení</strong> za zlomkovou cenu díky <strong>efektivnějším AI agentům</strong>.</p></div><p><em>(Zdroj: Engadget.com)</em></p><hr><h2>📈 Burza &amp; Finance</h2><h3>📈 <a href="https://gizmodo.com/youtube-premium-is-bringing-peacocks-old-school-content-to-its-platform-2000791437">Kryptoakcie rostou díky rotaci kapitálu z AI infrastruktury; těžaři bitcoinu zaostávají</a></h3><p><strong>Zatímco AI giganti odepisují miliardy, kryptoakcie zažívají nečekaný a prudký růst.</strong></p><ul><li><strong>Kryptoakcie</strong> patřily v pondělí k <strong>největším skokanům</strong>, i když širší trh odepisoval a <strong>kapitál odtékal</strong> z čipových a <strong>AI firem</strong>.</li><li>Naopak <strong>těžaři bitcoinu</strong> v tomto růstovém trendu <strong>zaostávali</strong> za zbytkem kryptoměnového sektoru.</li></ul><div class="why-box"><p>Investoři začínají <strong>přelévat zisky</strong> z předražených <strong>AI akcií</strong> do jiných alternativních trhů.</p></div><p><em>(Zdroj: Gizmodo.com)</em></p><h3>📉 <a href="https://www.sgieurope.com/e-commerce/decathlon-germany-launches-wero-payment-on-its-website/122397.article">Velkoobchodní ceny v červnu nečekaně klesly o 0,3 % díky prudkému zlevnění benzínu</a></h3><p><strong>Inflační tlaky polevují a ceny u výrobců nečekaně padají dolů.</strong></p><ul><li><strong>Velkoobchodní ceny</strong> v červnu klesly o <strong>0,3 %</strong>, k čemuž přispěly především <strong>nižší náklady na energie</strong>.</li><li>Pokles byl způsoben i zlevněním <strong>ropy</strong>, ke kterému došlo díky <strong>dočasnému zklidnění</strong> napětí mezi <strong>USA a Íránem</strong>.</li></ul><div class="why-box"><p>Pokles velkoobchodních cen je dobrou zprávou, protože naznačuje <strong>mírnění inflace</strong>, což se časem propíše do <strong>nižších cen</strong> v obchodech.</p></div><p><em>(Zdroj: Hacker News)</em></p><h3>🏛️ <a href="https://openai.com/index/endava-frontiers">Sam Altman se tento týden setká s Trumpovou administrativou a senátory. Zde je, co jim chce říct</a></h3><p><strong>Šéf OpenAI míří do Washingtonu, aby předvedl chystanou generaci AI a obhájil její bezpečnost.</strong></p><ul><li><strong>Sam Altman</strong> v tomto týdnu předvede zástupcům vlády <strong>schopnosti nadcházející rodiny</strong> AI modelů od společnosti <strong>OpenAI</strong>.</li><li>Během jednání bude odpovídat na otázky týkající se <strong>kybernetické bezpečnosti</strong> a <strong>open-weight modelů</strong> (AI modelů s volně přístupnými parametry).</li></ul><div class="why-box"><p>Tato jednání mohou zásadně ovlivnit <strong>budoucí regulace AI</strong> i bezpečnostní pravidla pro vývojáře a <strong>podnikatelské prostředí</strong>.</p></div><p><em>(Zdroj: OpenAI News)</em></p><h3>🍏 <a href="https://techcrunch.com/2026/07/27/psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google/">Apple si po historickém výkonu bere zpět titul nejhodnotnější firmy světa</a></h3><p><strong>Apple se vrací na samotný vrchol světového byznysu díky masivnímu růstu svých akcií.</strong></p><ul><li>Akcie společnosti <strong>Apple</strong> dosahují svého <strong>nejlepšího měsíčního výkonu</strong> za více než <strong>dvě desetiletí</strong> v porovnání s indexem <strong>Nasdaq-100</strong> (akciový index 100 největších nefinančních firem).</li><li>Díky této <strong>historické sérii</strong> růstu se Apple opět stal <strong>nejhodnotnější firmou</strong> na světě.</li></ul><div class="why-box"><p>Apple potvrzuje svou <strong>mimořádnou stabilitu</strong>, což signalizuje investorům bezpečný přístav v turbulentním <strong>technologickém sektoru</strong>.</p></div><p><em>(Zdroj: TechCrunch)</em></p><hr><h2>🇨🇿 Z české kotliny</h2><h3>🚗 <a href="https://the-decoder.com/moonshot-ai-releases-kimi-k3-open-weights-and-infrastructure-after-shaking-up-the-frontier-model-race/">Přepis auta bude probíhat online. Vláda schválila digitalizaci registru vozidel, značky si lidé vyzvednou i v boxech</a></h3><p><strong>Konec stání ve frontách na úřadech. Převod auta vyřídíte kompletně z domova.</strong></p><ul><li>Vláda schválila novelu zákona, která umožní <strong>přepis automobilů online</strong> přes <strong>Portál dopravy</strong> bez nutnosti osobní návštěvy úřadu.</li><li>Součástí digitalizace bude i možnost <strong>vyzvednutí registračních značek</strong> v samoobslužných <strong>boxech</strong> nebo vyřízení dalších úkonů z domova.</li></ul><div class="why-box"><p>Pro běžné řidiče i podnikatele to znamená <strong>obrovskou úsporu času</strong> a konec zbytečné administrativy při <strong>nákupu či prodeji auta</strong>.</p></div><p><em>(Zdroj: The Decoder)</em></p><h3>📊 <a href="https://www.theverge.com/games/971545/xbox-outage-disc-physical-games">Levnější ropa žene i pražskou burzu. Na začátku týdne rostly akcie CSG a Komerční banky</a></h3><p><strong>Pražská burza zažívá skvělý začátek týdne díky zklidnění geopolitického napětí.</strong></p><ul><li><strong>Index pražské burzy PX</strong> posílil o <strong>1,2 procenta</strong> na hodnotu <strong>2686,26 bodu</strong>, k čemuž přispěla pauza v konfliktu mezi <strong>USA a Íránem</strong>.</li><li>Nejvýraznější růst zaznamenaly akcie <strong>Czechoslovak Group (CSG)</strong> a <strong>Komerční banky</strong>, podpořené klesající cenou <strong>ropy</strong>.</li></ul><div class="why-box"><p>Zklidnění napětí na trhu s ropou pomáhá <strong>českému akciovému trhu</strong> a stabilizuje celkovou <strong>domácí ekonomiku</strong>.</p></div><p><em>(Zdroj: The Verge)</em></p><hr>
-            </article>
+            <div class="digest-card reveal">
+                <div class="digest-badge">📰 Digest</div>
+                <h1>Digest</h1>
+                <p class="digest-meta">Vydáno: 27. 07. 2026</p>
+                
+                <div class="digest-content">
+                    <h2>🚀 Hlavní události v Techu &amp; AI</h2><h3>🔓 <a href="https://arstechnica.com/tech-policy/2026/07/5th-circuit-blocks-texas-law-requiring-websites-to-filter-harmful-speech/">Varování: Vaše sdílené chaty a Artifacts z Claude se mohly objevit na Googlu</a></h3><p><strong>Vaše soukromé konverzace s umělou inteligencí možná právě teď visí volně na vyhledávači Google.</strong></p><ul><li><strong>Nespočet chatů</strong> a <strong>Artifacts</strong> (interaktivní miniaplikace a dokumenty tvořené uživateli) z nástroje Claude byl o víkendu veřejně dohledatelný na <strong>Googlu</strong>.</li><li>Uživatelé Redditu zjistili, že po zadání příkazů jako „site:claude.ai/share“ vyhledávač zobrazí <strong>rozsáhlý seznam</strong> těchto sdílených konverzací.</li></ul><div class="why-box"><p>Pokud přes AI sdílíte jakákoliv citlivá data či firemní kód, myslete na to, že se mohou stát <strong>veřejně přístupnými</strong> pro kohokoliv na internetu.</p></div><p><em>(Zdroj: Ars Technica)</em></p><h3>🤖 <a href="https://www.cnbc.com/2026/07/27/crypto-stocks-rally-thanks-to-rotation-from-ai-infrastructure-bitcoin-miners-lag.html">Moonshot AI vydává otevřené váhy Kimi K3 a infrastrukturu po otřesu v závodě o pokročilé modely</a></h3><p><strong>Čínský model téměř dohání špičkový GPT-5.6 Sol, ale v klíčových oblastech má vážné mezery.</strong></p><ul><li>Čínský startup <strong>Moonshot AI</strong> zveřejnil váhy modelu <strong>Kimi K3</strong> (matematické parametry definující chování AI) a zpřístupnil část své infrastruktury jako <strong>open source</strong> (volně dostupný kód).</li><li>Ačkoliv v běžných testech dosahuje úrovně špičkových západních modelů, <strong>nezávislé testy</strong> odhalily výrazné slabiny v <strong>kyberbezpečnosti</strong> a <strong>matematice</strong>.</li></ul><div class="why-box"><p>Čínští vývojáři extrémně rychle dotahují <strong>západní špičku</strong>, což může brzy přinést výkonné <strong>AI modely zdarma</strong> pro každého.</p></div><p><em>(Zdroj: CNBC Technology)</em></p><h3>🎮 <a href="https://www.digitaltrends.com/movies/youtube-premium-is-becoming-a-streaming-bundle-by-adding-peacock/">Obří výpadek Xboxu zablokoval dokonce i hry na fyzických discích</a></h3><p><strong>Koupili jste si hru na disku? Ani to vás při nedělním výpadku služeb Xboxu nezachránilo.</strong></p><ul><li>Rozsáhlý <strong>výpadek Xboxu</strong>, který začal v neděli večer, nezpůsobil problémy jen digitálním hrám, ale <strong>zablokoval spuštění</strong> i her z <strong>fyzických disků</strong>.</li><li><strong>Stavová stránka Xboxu</strong> potvrdila výpadek v neděli kolem 23:00 ET, přičemž hráčům <strong>zcela znemožnila</strong> hraní.</li></ul><div class="why-box"><p>Incident jasně ukazoval rizika moderních <strong>herních konzolí</strong>, které vyžadují <strong>online ověření</strong> i u her, jež fyzicky vlastníte.</p></div><p><em>(Zdroj: Digital Trends)</em></p><h3>🛡️ <a href="https://www.engadget.com/2224488/ios26-6-macos26-6-and-the-rest-are-out-addressing-security-fixes/">Microsoft spouští AI kyberbezpečnostní model a agentní obranou platformu pro snížení firemních nákladů</a></h3><p><strong>Microsoft zahájil novou éru v kyberbezpečnosti a sází na neuvěřitelně levnou umělou inteligenci.</strong></p><ul><li><strong>Microsoft</strong> představil svůj první vlastní <strong>kyberbezpečnostní AI model</strong> a komplexní <strong>agentní obranou platformu</strong> (systém autonomně reagující na hrozby).</li><li>Firma tvrdí, že <strong>budoucnost AI</strong> nezávisí na <strong>největším modelu</strong>, ale na tom <strong>nejlevnějším</strong>, což má podnikům výrazně snížit náklady na zabezpečení.</li></ul><div class="why-box"><p>Pro firmy to představuje příležitost zavést <strong>pokročilé zabezpečení</strong> za zlomkovou cenu díky <strong>efektivnějším AI agentům</strong>.</p></div><p><em>(Zdroj: Engadget.com)</em></p><hr><h2>📈 Burza &amp; Finance</h2><h3>📈 <a href="https://gizmodo.com/youtube-premium-is-bringing-peacocks-old-school-content-to-its-platform-2000791437">Kryptoakcie rostou díky rotaci kapitálu z AI infrastruktury; těžaři bitcoinu zaostávají</a></h3><p><strong>Zatímco AI giganti odepisují miliardy, kryptoakcie zažívají nečekaný a prudký růst.</strong></p><ul><li><strong>Kryptoakcie</strong> patřily v pondělí k <strong>největším skokanům</strong>, i když širší trh odepisoval a <strong>kapitál odtékal</strong> z čipových a <strong>AI firem</strong>.</li><li>Naopak <strong>těžaři bitcoinu</strong> v tomto růstovém trendu <strong>zaostávali</strong> za zbytkem kryptoměnového sektoru.</li></ul><div class="why-box"><p>Investoři začínají <strong>přelévat zisky</strong> z předražených <strong>AI akcií</strong> do jiných alternativních trhů.</p></div><p><em>(Zdroj: Gizmodo.com)</em></p><h3>📉 <a href="https://www.sgieurope.com/e-commerce/decathlon-germany-launches-wero-payment-on-its-website/122397.article">Velkoobchodní ceny v červnu nečekaně klesly o 0,3 % díky prudkému zlevnění benzínu</a></h3><p><strong>Inflační tlaky polevují a ceny u výrobců nečekaně padají dolů.</strong></p><ul><li><strong>Velkoobchodní ceny</strong> v červnu klesly o <strong>0,3 %</strong>, k čemuž přispěly především <strong>nižší náklady na energie</strong>.</li><li>Pokles byl způsoben i zlevněním <strong>ropy</strong>, ke kterému došlo díky <strong>dočasnému zklidnění</strong> napětí mezi <strong>USA a Íránem</strong>.</li></ul><div class="why-box"><p>Pokles velkoobchodních cen je dobrou zprávou, protože naznačuje <strong>mírnění inflace</strong>, což se časem propíše do <strong>nižších cen</strong> v obchodech.</p></div><p><em>(Zdroj: Hacker News)</em></p><h3>🏛️ <a href="https://openai.com/index/endava-frontiers">Sam Altman se tento týden setká s Trumpovou administrativou a senátory. Zde je, co jim chce říct</a></h3><p><strong>Šéf OpenAI míří do Washingtonu, aby předvedl chystanou generaci AI a obhájil její bezpečnost.</strong></p><ul><li><strong>Sam Altman</strong> v tomto týdnu předvede zástupcům vlády <strong>schopnosti nadcházející rodiny</strong> AI modelů od společnosti <strong>OpenAI</strong>.</li><li>Během jednání bude odpovídat na otázky týkající se <strong>kybernetické bezpečnosti</strong> a <strong>open-weight modelů</strong> (AI modelů s volně přístupnými parametry).</li></ul><div class="why-box"><p>Tato jednání mohou zásadně ovlivnit <strong>budoucí regulace AI</strong> i bezpečnostní pravidla pro vývojáře a <strong>podnikatelské prostředí</strong>.</p></div><p><em>(Zdroj: OpenAI News)</em></p><h3>🍏 <a href="https://techcrunch.com/2026/07/27/psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google/">Apple si po historickém výkonu bere zpět titul nejhodnotnější firmy světa</a></h3><p><strong>Apple se vrací na samotný vrchol světového byznysu díky masivnímu růstu svých akcií.</strong></p><ul><li>Akcie společnosti <strong>Apple</strong> dosahují svého <strong>nejlepšího měsíčního výkonu</strong> za více než <strong>dvě desetiletí</strong> v porovnání s indexem <strong>Nasdaq-100</strong> (akciový index 100 největších nefinančních firem).</li><li>Díky této <strong>historické sérii</strong> růstu se Apple opět stal <strong>nejhodnotnější firmou</strong> na světě.</li></ul><div class="why-box"><p>Apple potvrzuje svou <strong>mimořádnou stabilitu</strong>, což signalizuje investorům bezpečný přístav v turbulentním <strong>technologickém sektoru</strong>.</p></div><p><em>(Zdroj: TechCrunch)</em></p><hr><h2>🇨🇿 Z české kotliny</h2><h3>🚗 <a href="https://the-decoder.com/moonshot-ai-releases-kimi-k3-open-weights-and-infrastructure-after-shaking-up-the-frontier-model-race/">Přepis auta bude probíhat online. Vláda schválila digitalizaci registru vozidel, značky si lidé vyzvednou i v boxech</a></h3><p><strong>Konec stání ve frontách na úřadech. Převod auta vyřídíte kompletně z domova.</strong></p><ul><li>Vláda schválila novelu zákona, která umožní <strong>přepis automobilů online</strong> přes <strong>Portál dopravy</strong> bez nutnosti osobní návštěvy úřadu.</li><li>Součástí digitalizace bude i možnost <strong>vyzvednutí registračních značek</strong> v samoobslužných <strong>boxech</strong> nebo vyřízení dalších úkonů z domova.</li></ul><div class="why-box"><p>Pro běžné řidiče i podnikatele to znamená <strong>obrovskou úsporu času</strong> a konec zbytečné administrativy při <strong>nákupu či prodeji auta</strong>.</p></div><p><em>(Zdroj: The Decoder)</em></p><h3>📊 <a href="https://www.theverge.com/games/971545/xbox-outage-disc-physical-games">Levnější ropa žene i pražskou burzu. Na začátku týdne rostly akcie CSG a Komerční banky</a></h3><p><strong>Pražská burza zažívá skvělý začátek týdne díky zklidnění geopolitického napětí.</strong></p><ul><li><strong>Index pražské burzy PX</strong> posílil o <strong>1,2 procenta</strong> na hodnotu <strong>2686,26 bodu</strong>, k čemuž přispěla pauza v konfliktu mezi <strong>USA a Íránem</strong>.</li><li>Nejvýraznější růst zaznamenaly akcie <strong>Czechoslovak Group (CSG)</strong> a <strong>Komerční banky</strong>, podpořené klesající cenou <strong>ropy</strong>.</li></ul><div class="why-box"><p>Zklidnění napětí na trhu s ropou pomáhá <strong>českému akciovému trhu</strong> a stabilizuje celkovou <strong>domácí ekonomiku</strong>.</p></div><p><em>(Zdroj: The Verge)</em></p><hr>
+                </div>
+                
+                <a href="/digest" class="digest-back">
+                    ← Zpět do archivu
+                </a>
+            </div>
         </div>
     </main>
 
