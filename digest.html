@@ -102,6 +102,14 @@
             top: -200px;
             right: -200px;
         }
+        
+        .floating-orb.orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.06), transparent 70%);
+            bottom: -100px;
+            left: -200px;
+        }
 
         .container {
             max-width: 1100px;
@@ -398,6 +406,7 @@
 <body>
 
     <div class="floating-orb orb-1" aria-hidden="true"></div>
+    <div class="floating-orb orb-2" aria-hidden="true"></div>
 
     <!-- NAVIGATION -->
     <nav class="nav" id="main-nav" role="navigation" aria-label="Navigace">
@@ -431,12 +440,21 @@
     <main class="posts-section">
         <div class="container">
             <div class="posts-grid">
-
-                <!-- 
-                  LSM / JEKYLL AUTOMATED LOOP 
-                  Až propojíš s Jekyllem, skript sem automaticky vysází příspěvky ze složky _posts/
-                -->
                 {% for post in site.posts %}
+                <a href="/digest/2026-07-28-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">Digest</span>
+                            <time>28. 07. 2026</time>
+                        </div>
+                        <h2>Digest</h2>
+                        <p>🚀 Hlavní události v Techu &amp; AI 💳 X Money dnes v USA zahajuje provoz Elon Musk spouští vlastní finanční platformu a chce změnit placení od základu Služba X Money představuje klíčový krok v plánu Elona Muska proměnit platformu X ve všestrannou aplikaci...</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
                 <a href="{{ post.url }}" class="post-card reveal">
                     <div>
                         <div class="post-meta">
@@ -450,17 +468,7 @@
                         Číst vydání →
                     </div>
                 </a>
-                {% else %}
-                
-                <!-- DUMMY UKÁZKOVÁ KARTA (Zobrazuje se, pokud ještě nemáš žádné _posts soubory) -->
-                <div class="post-card reveal" style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem;">
-                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">📬</div>
-                    <h2 style="margin-bottom: 0.5rem;">Archiv se připravuje</h2>
-                    <p style="margin-bottom: 0;">První veřejná vydání z Python pipeline přistanou na tomto místě již brzy.</p>
-                </div>
-                
                 {% endfor %}
-
             </div>
         </div>
     </main>
