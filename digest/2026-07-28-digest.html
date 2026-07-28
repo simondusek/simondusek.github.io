@@ -161,6 +161,8 @@
             color: var(--text-primary);
             letter-spacing: -0.02em;
             text-decoration: none;
+            min-width: 0;
+            flex-shrink: 1;
         }
         
         .nav-brand-icon {
@@ -180,12 +182,27 @@
         .nav-brand-name {
             font-weight: 700;
             font-size: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        @media (max-width: 400px) {
+            .nav-brand-name {
+                font-size: 0.95rem;
+            }
         }
         
         .nav-right {
             display: flex;
             align-items: center;
             gap: 0.6rem;
+        }
+
+        @media (max-width: 600px) {
+            .nav-right {
+                gap: 0.4rem;
+            }
         }
         
         .nav-back {
@@ -238,6 +255,14 @@
             font-size: 1rem;
             transition: all 0.25s ease;
             flex-shrink: 0;
+        }
+        
+        @media (max-width: 600px) {
+            .theme-toggle {
+                width: 34px;
+                height: 34px;
+                font-size: 0.9rem;
+            }
         }
         
         .theme-toggle:hover {
@@ -436,6 +461,16 @@
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+        
+        /* Mobile performance: Force visibility on mobile to avoid IntersectionObserver issues */
+        @media (max-width: 767px) {
+            .digest-card.reveal,
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
         }
     </style>
 

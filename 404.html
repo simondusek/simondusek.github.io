@@ -160,6 +160,7 @@ permalink: /404.html
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 0.5rem;
         }
         
         .nav-brand {
@@ -170,6 +171,8 @@ permalink: /404.html
             color: var(--text-primary);
             letter-spacing: -0.02em;
             text-decoration: none;
+            min-width: 0;
+            flex-shrink: 1;
         }
         
         .nav-brand-icon {
@@ -188,6 +191,27 @@ permalink: /404.html
         .nav-brand-name {
             font-weight: 700;
             font-size: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        @media (max-width: 400px) {
+            .nav-brand-name {
+                font-size: 0.95rem;
+            }
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        @media (max-width: 600px) {
+            .nav-right {
+                gap: 0.4rem;
+            }
         }
         
         .nav-back {
@@ -231,6 +255,18 @@ permalink: /404.html
             border-color: var(--border-hover);
             background: var(--glass-hover);
             transform: translateY(-1px);
+        }
+        
+        @media (max-width: 600px) {
+            .mobile-menu-toggle {
+                width: 34px;
+                height: 34px;
+            }
+            
+            .mobile-menu-toggle span {
+                width: 16.2px;
+                height: 1.8px;
+            }
         }
         
         .mobile-menu-toggle span {
@@ -527,11 +563,12 @@ permalink: /404.html
             transform: translateY(0);
         }
         
-        /* Mobile performance: Shorter animation duration */
+        /* Mobile performance: Force visibility on mobile to avoid IntersectionObserver issues */
         @media (max-width: 767px) {
             .reveal {
-                transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                            transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
             }
         }
 
