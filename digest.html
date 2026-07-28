@@ -118,7 +118,7 @@
             z-index: 1;
         }
 
-        /* NAVIGATION */
+        /* NAVIGATION - Shared Header */
         .nav {
             position: fixed;
             top: 0;
@@ -178,26 +178,6 @@
             gap: 0.6rem;
         }
         
-        .theme-toggle {
-            width: 38px;
-            height: 38px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: var(--glass);
-            border: 1px solid var(--border);
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.25s ease;
-            flex-shrink: 0;
-        }
-        
-        .theme-toggle:hover {
-            border-color: var(--border-hover);
-            background: var(--glass-hover);
-        }
-
         .nav-back {
             padding: 0.55rem 1.1rem;
             font-size: 0.85rem;
@@ -224,9 +204,36 @@
         }
 
         @media (max-width: 520px) {
-            .nav-back-text { display: none; }
-            .nav-back-icon { display: inline; }
-            .nav-back { padding: 0.55rem 0.85rem; }
+            .nav-back-text {
+                display: none;
+            }
+            .nav-back-icon {
+                display: inline;
+            }
+            .nav-back {
+                padding: 0.55rem 0.85rem;
+            }
+        }
+
+        .theme-toggle {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.25s ease;
+            flex-shrink: 0;
+        }
+        
+        .theme-toggle:hover {
+            border-color: var(--border-hover);
+            background: var(--glass-hover);
+            transform: translateY(-1px);
         }
 
         /* HEADER SECTION */
@@ -347,6 +354,33 @@
             gap: 0.4rem;
         }
 
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.6;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .empty-state p {
+            font-size: 1rem;
+            line-height: 1.6;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
         /* FOOTER */
         .site-footer {
             padding: 3rem 0;
@@ -365,7 +399,7 @@
             font-size: 0.875rem;
             color: var(--text-tertiary);
         }
-
+        
         .footer-left strong {
             color: var(--text-secondary);
             font-weight: 600;
@@ -411,7 +445,7 @@
     <nav class="nav" id="main-nav" role="navigation" aria-label="Navigace">
         <div class="container">
             <a href="/" class="nav-brand">
-                <div class="nav-brand-icon" aria-hidden="true">⌘</div>
+                <div class="nav-brand-icon" aria-hidden="true">✦</div>
                 <span class="nav-brand-name">simondusek.com</span>
             </a>
             <div class="nav-right">
@@ -429,9 +463,9 @@
     <!-- HEADER -->
     <header class="archive-header">
         <div class="container">
-            <div class="archive-badge">⚡ Předchozí Vydání</div>
+            <div class="archive-badge">📰 Archiv</div>
             <h1>Digest Archiv</h1>
-            <p>Každé vydání bezplatného newsletteru Digest, přehledně archivované a dostupné ke čtení.</p>
+            <p>Každé vydání newsletteru Digest, přehledně archivované a dostupné ke čtení.</p>
         </div>
     </header>
 
@@ -439,21 +473,7 @@
     <main class="posts-section">
         <div class="container">
             <div class="posts-grid" id="posts-container">
-                {% for post in site.posts %}
-                <a href="{{ post.url }}" class="post-card reveal">
-                    <div>
-                        <div class="post-meta">
-                            <span class="post-issue">{{ post.issue | default: "Digest" }}</span>
-                            <time>{{ post.date | date: "%d. %m. %Y" }}</time>
-                        </div>
-                        <h2>{{ post.title }}</h2>
-                        <p>{{ post.excerpt | strip_html | truncatewords: 22 }}</p>
-                    </div>
-                    <div class="post-footer">
-                        Číst vydání →
-                    </div>
-                </a>
-                {% endfor %}
+                <!-- Příspěvky budou dynamicky vloženy JavaScriptem -->
             </div>
         </div>
     </main>
@@ -497,7 +517,6 @@
         }
 
         // Scroll reveal
-        const revealElements = document.querySelectorAll('.reveal');
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -507,35 +526,166 @@
             });
         }, { threshold: 0.1 });
 
-        revealElements.forEach(el => revealObserver.observe(el));
-
-        // Dynamické načtení rejstříku příspěvků (pokud běží jako statické HTML)
+        // Načtení a zobrazování příspěvků
         document.addEventListener('DOMContentLoaded', () => {
             const container = document.getElementById('posts-container');
-            // Pokud je kontejner prázdný (Jekyll/Liquid nevypořádal smyčku), načteme ze souboru /digest/posts.json
-            if (container && container.children.length === 0) {
-                fetch('/digest/posts.json')
-                    .then(res => res.json())
-                    .then(posts => {
-                        container.innerHTML = posts.map(post => `
-                            <a href="${post.url}" class="post-card reveal visible">
-                                <div>
-                                    <div class="post-meta">
-                                        <span class="post-issue">${post.type || 'Digest'}</span>
-                                        <time>${post.date}</time>
-                                    </div>
-                                    <h2>${post.title}</h2>
-                                    <p>${post.excerpt}</p>
-                                </div>
-                                <div class="post-footer">
-                                    Číst vydání →
-                                </div>
-                            </a>
-                        `).join('');
-                    })
-                    .catch(err => console.log('Statický výpis připraven.'));
+            
+            // Funkce pro generování ikony typu
+            function getTypeIcon(type) {
+                const typeMap = {
+                    'Digest': '⚡',
+                    'Deep Dive': '🎯'
+                };
+                return typeMap[type] || '📰';
             }
+
+            // Funkce pro formátování data
+            function formatDate(dateStr) {
+                if (!dateStr) return '';
+                
+                // Pokud je již ve formátu "DD. MM. YYYY"
+                if (/^\d{1,2}\. \d{1,2}\. \d{4}$/.test(dateStr)) {
+                    return dateStr;
+                }
+                
+                // Pokud je ve formátu ISO (YYYY-MM-DD)
+                if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+                    const [year, month, day] = dateStr.split('-');
+                    return `${parseInt(day)}. ${parseInt(month)}. ${year}`;
+                }
+                
+                // Pokud je datum v jiném formátu
+                try {
+                    const date = new Date(dateStr);
+                    if (!isNaN(date.getTime())) {
+                        return date.toLocaleDateString('cs-CZ', {
+                            day: 'numeric',
+                            month: 'numeric',
+                            year: 'numeric'
+                        });
+                    }
+                } catch (e) {}
+                
+                return dateStr;
+            }
+
+            // Funkce pro vytvoření karty příspěvku
+            function createPostCard(post) {
+                const icon = getTypeIcon(post.type);
+                const date = formatDate(post.date);
+                const title = post.title || 'Bez názvu';
+                const excerpt = post.excerpt || '';
+                const url = post.url || '#';
+                
+                const card = document.createElement('a');
+                card.href = url;
+                card.className = 'post-card reveal';
+                card.innerHTML = `
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">${icon} ${post.type || 'Digest'}</span>
+                            <time>${date}</time>
+                        </div>
+                        <h2>${title}</h2>
+                        <p>${excerpt}</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                `;
+                return card;
+            }
+
+            // Funkce pro vytvoření empty state
+            function createEmptyState() {
+                const emptyState = document.createElement('div');
+                emptyState.className = 'empty-state';
+                emptyState.innerHTML = `
+                    <div class="empty-state-icon">📭</div>
+                    <h3>Zatím žádná vydání</h3>
+                    <p>Zatím nebyly publikovány žádné archivní příspěvky. První vydání je na cestě!</p>
+                `;
+                return emptyState;
+            }
+
+            // Zkusí načíst posts.json z více možných cest
+            const postsJsonPaths = [
+                '/digest/posts.json',
+                '/web/digest/posts.json',
+                'digest/posts.json',
+                '../digest/posts.json'
+            ];
+
+            // Funkce pro načtení dat
+            async function loadPosts() {
+                for (const path of postsJsonPaths) {
+                    try {
+                        const response = await fetch(path);
+                        if (response.ok) {
+                            return await response.json();
+                        }
+                    } catch (e) {
+                        // Zkusíme další cestu
+                    }
+                }
+                return null;
+            }
+
+            // Hlavní logika načítání
+            async function initializePosts() {
+                try {
+                    const posts = await loadPosts();
+                    
+                    if (posts && Array.isArray(posts) && posts.length > 0) {
+                        // Vygenerujeme karty pro všechny příspěvky
+                        posts.forEach(post => {
+                            const card = createPostCard(post);
+                            container.appendChild(card);
+                        });
+                        
+                        // Nastavíme IntersectionObserver pro nové elementy
+                        setTimeout(() => {
+                            const revealElements = document.querySelectorAll('.reveal');
+                            revealElements.forEach(el => revealObserver.observe(el));
+                        }, 100);
+                    } else {
+                        // Zobrazíme empty state
+                        const emptyState = createEmptyState();
+                        container.appendChild(emptyState);
+                        
+                        // Nastavíme IntersectionObserver pro empty state
+                        setTimeout(() => {
+                            const revealElements = document.querySelectorAll('.reveal');
+                            revealElements.forEach(el => revealObserver.observe(el));
+                        }, 100);
+                    }
+                } catch (error) {
+                    console.error('Chyba při načítání příspěvků:', error);
+                    
+                    // Zobrazíme empty state při chybě
+                    const emptyState = createEmptyState();
+                    container.appendChild(emptyState);
+                    
+                    setTimeout(() => {
+                        const revealElements = document.querySelectorAll('.reveal');
+                        revealElements.forEach(el => revealObserver.observe(el));
+                    }, 100);
+                }
+            }
+
+            // Spustíme načítání
+            initializePosts();
         });
+
+        // Nav scroll effect
+        const nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 40) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        }, { passive: true });
     </script>
 
 </body>
