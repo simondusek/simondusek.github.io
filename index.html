@@ -137,8 +137,28 @@
             pointer-events: none;
             z-index: 0;
             will-change: transform;
+            transform: translateZ(0);
             opacity: var(--orb-opacity);
             transition: opacity 0.4s ease;
+        }
+        
+        /* Mobile performance: Reduce blur on orbs */
+        @media (max-width: 767px) {
+            .floating-orb {
+                filter: blur(40px);
+            }
+            .floating-orb.orb-1 {
+                width: 400px;
+                height: 400px;
+                top: -100px;
+                right: -100px;
+            }
+            .floating-orb.orb-2 {
+                width: 350px;
+                height: 350px;
+                bottom: -50px;
+                left: -150px;
+            }
         }
         
         .floating-orb.orb-1 {
@@ -187,6 +207,14 @@
             backdrop-filter: blur(24px) saturate(180%);
             -webkit-backdrop-filter: blur(24px) saturate(180%);
             border-bottom-color: var(--border);
+        }
+        
+        /* Mobile performance: Reduce backdrop blur on nav */
+        @media (max-width: 767px) {
+            .nav.scrolled {
+                backdrop-filter: blur(12px) saturate(180%);
+                -webkit-backdrop-filter: blur(12px) saturate(180%);
+            }
         }
         
         .nav .container {
@@ -251,6 +279,144 @@
         @media (min-width: 768px) {
             .nav-links {
                 display: flex;
+            }
+        }
+        
+        /* Mobile Menu Button - Burger */
+        .mobile-menu-toggle {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 38px;
+            height: 38px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: all 0.25s ease;
+        }
+        
+        .mobile-menu-toggle:hover {
+            border-color: var(--border-hover);
+            background: var(--glass-hover);
+            transform: translateY(-1px);
+        }
+        
+        .mobile-menu-toggle span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+        
+        .mobile-menu-toggle span:nth-child(1) { margin-bottom: 4px; }
+        .mobile-menu-toggle span:nth-child(3) { margin-top: 4px; }
+        
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(4px, 4px);
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(4px, -4px);
+        }
+        
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(5, 5, 8, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 199;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .mobile-menu-content {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            margin: 0 clamp(1.5rem, 5vw, 3rem);
+            padding: 1.5rem;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            z-index: 200;
+            will-change: transform, opacity;
+        }
+        
+        .mobile-menu-overlay.active .mobile-menu-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .mobile-menu-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.85rem 1.25rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+        
+        .mobile-menu-link:hover {
+            color: var(--text-primary);
+            background: var(--glass-hover);
+        }
+        
+        .mobile-menu-link .icon {
+            font-size: 1.1rem;
+            width: 24px;
+            text-align: center;
+        }
+        
+        /* Show mobile menu toggle on mobile */
+        @media (max-width: 767px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            .nav-links {
+                display: none !important;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .mobile-menu-toggle {
+                display: none;
             }
         }
 
@@ -367,6 +533,15 @@
             backdrop-filter: blur(24px) saturate(180%);
             -webkit-backdrop-filter: blur(24px) saturate(180%);
             transition: all 0.3s ease;
+            will-change: transform, opacity;
+        }
+        
+        /* Mobile performance: Reduce backdrop blur on cards */
+        @media (max-width: 767px) {
+            .hero-form-row {
+                backdrop-filter: blur(12px) saturate(180%);
+                -webkit-backdrop-filter: blur(12px) saturate(180%);
+            }
         }
         
         .hero-form-row:hover,
@@ -524,6 +699,15 @@
             -webkit-backdrop-filter: blur(24px) saturate(180%);
             transition: all 0.3s ease;
             text-align: left;
+            will-change: transform, opacity;
+        }
+        
+        /* Mobile performance: Reduce backdrop blur on bento tiles */
+        @media (max-width: 767px) {
+            .bento-tile {
+                backdrop-filter: blur(12px) saturate(180%);
+                -webkit-backdrop-filter: blur(12px) saturate(180%);
+            }
         }
         
         .bento-tile:hover {
@@ -612,6 +796,15 @@
             text-align: center;
             position: relative;
             transition: all 0.3s ease;
+            will-change: transform, opacity;
+        }
+        
+        /* Mobile performance: Reduce backdrop blur on autor card */
+        @media (max-width: 767px) {
+            .autor-card {
+                backdrop-filter: blur(12px) saturate(180%);
+                -webkit-backdrop-filter: blur(12px) saturate(180%);
+            }
         }
         
         .autor-card:hover {
@@ -740,6 +933,14 @@
             will-change: opacity, transform;
         }
         
+        /* Mobile performance: Shorter animation duration */
+        @media (max-width: 767px) {
+            .reveal {
+                transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                            transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+        }
+        
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
@@ -812,6 +1013,11 @@
                 <a href="#about" class="nav-link">O mně</a>
             </div>
             <div class="nav-right">
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="mobile-menu-content">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
                 <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Přepnout světlý/tmavý režim">
                     <span class="theme-icon" id="theme-icon">🌙</span>
                 </button>
@@ -819,6 +1025,26 @@
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay" role="navigation" aria-label="Mobilní navigace">
+        <div class="mobile-menu-content" id="mobile-menu-content">
+            <div class="mobile-menu-links">
+                <a href="https://simondusek.com/digest" class="mobile-menu-link">
+                    <span class="icon">⚡</span>
+                    Digest Archiv
+                </a>
+                <a href="#deep-dive" class="mobile-menu-link">
+                    <span class="icon">🎯</span>
+                    Formáty
+                </a>
+                <a href="#about" class="mobile-menu-link">
+                    <span class="icon">👤</span>
+                    O mně
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- ======================================================================
          HERO SECTION - Monolithic
@@ -975,6 +1201,50 @@
                 updateThemeIcon(next);
             });
         }
+
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+        const mobileMenuContent = document.getElementById('mobile-menu-content');
+
+        function toggleMobileMenu() {
+            const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+            mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+            mobileMenuOverlay.classList.toggle('active');
+            document.body.style.overflow = isExpanded ? '' : 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            mobileMenuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+        }
+
+        if (mobileMenuOverlay) {
+            mobileMenuOverlay.addEventListener('click', (e) => {
+                if (e.target === mobileMenuOverlay) {
+                    closeMobileMenu();
+                }
+            });
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-menu-link').forEach(link => {
+            link.addEventListener('click', () => {
+                closeMobileMenu();
+            });
+        });
+
+        // Close mobile menu on window resize (if screen becomes desktop size)
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                closeMobileMenu();
+            }
+        });
 
         // Dynamic Headline Rotation
         const headlines = [
