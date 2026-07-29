@@ -915,6 +915,29 @@
                 '../deep-dive/posts.json'
             ];
 
+            // Funkce pro převedení data na Date objekt pro třídění
+            function parseDate(dateStr) {
+                if (!dateStr) return new Date(0);
+                
+                // Pokud je ve formátu "DD. MM. YYYY"
+                if (/^\d{1,2}\. \d{1,2}\. \d{4}$/.test(dateStr)) {
+                    const [day, month, year] = dateStr.split('. ').map(Number);
+                    return new Date(year, month - 1, day);
+                }
+                
+                // Pokud je ve formátu ISO (YYYY-MM-DD)
+                if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+                    return new Date(dateStr);
+                }
+                
+                // Pokus o generické parsování
+                try {
+                    return new Date(dateStr);
+                } catch (e) {
+                    return new Date(0);
+                }
+            }
+
             // Funkce pro načtení dat
             async function loadPosts() {
                 for (const path of postsJsonPaths) {
@@ -933,9 +956,16 @@
             // Hlavní logika načítání
             async function initializePosts() {
                 try {
-                    const posts = await loadPosts();
+                    let posts = await loadPosts();
                     
                     if (posts && Array.isArray(posts) && posts.length > 0) {
+                        // Seřadíme příspěvky podle data (nejnovější první)
+                        posts.sort((a, b) => {
+                            const dateA = parseDate(a.date);
+                            const dateB = parseDate(b.date);
+                            return dateB - dateA; // Sestupně: nejnovější první
+                        });
+                        
                         // Vygenerujeme karty pro všechny příspěvky
                         posts.forEach(post => {
                             const card = createPostCard(post);
