@@ -634,6 +634,7 @@
         @media (min-width: 640px) {
             .hero-input:focus {
                 box-shadow: none; /* Na desktopu svítí vnější pilulka skrze :focus-within */
+                background: transparent;
             }
         }
         
@@ -1036,6 +1037,25 @@
         :focus-visible {
             outline: 2px solid var(--accent);
             outline-offset: 2px;
+        }
+
+        /* Zrušení ošklivého autofill obdélníku z prohlížeče */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus, 
+        input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px #0F0F0F inset !important; /* Vynutí tvou barvu pozadí */
+            -webkit-text-fill-color: var(--text-primary) !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
+        /* Pro světelný režim */
+        html[data-theme="light"] input:-webkit-autofill,
+        html[data-theme="light"] input:-webkit-autofill:hover, 
+        html[data-theme="light"] input:-webkit-autofill:focus, 
+        html[data-theme="light"] input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px #f0f0f0 inset !important;
+            -webkit-text-fill-color: var(--text-primary) !important;
         }
     </style>
 </head>
