@@ -38,10 +38,10 @@
            ========================================================================== */
         :root {
             /* Core palette - Ultra Dark (default theme) */
-            --bg-primary: #050508;
+            --bg-primary: #0F0F0F;
             
             /* Glass surfaces - Ultra minimal */
-            --glass: rgba(255, 255, 255, 0.02);
+            --glass: rgba(255, 255, 255, 0.04);
             --glass-hover: rgba(255, 255, 255, 0.04);
             
             /* Borders - Ultra thin glowing */
@@ -82,10 +82,10 @@
            LIGHT THEME OVERRIDES
            ========================================================================== */
         html[data-theme="light"] {
-            --bg-primary: #f6f6f9;
+            --bg-primary: #f0f0f0;
             
-            --glass: rgba(10, 10, 20, 0.03);
-            --glass-hover: rgba(10, 10, 20, 0.05);
+            --glass: rgba(10, 10, 20, 0.04);
+            --glass-hover: rgba(10, 10, 20, 0.04);
             
             --border: rgba(10, 10, 20, 0.09);
             --border-hover: rgba(10, 10, 20, 0.14);
@@ -731,13 +731,17 @@
         .bento-tile {
             padding: 2.25rem;
             background: var(--glass);
-            /*border: 1px solid var(--border);*/
+            border: 1px solid var(--border);
             border-radius: var(--radius-card);
             backdrop-filter: blur(24px) saturate(180%);
             -webkit-backdrop-filter: blur(24px) saturate(180%);
             transition: all 0.3s ease;
             text-align: left;
             will-change: transform, opacity;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
         }
         
         /* Mobile performance: Reduce backdrop blur on bento tiles */
@@ -755,6 +759,16 @@
             box-shadow: 0 16px 50px rgba(0, 0, 0, 0.2);
         }
         
+        .bento-footer {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-hover);
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        
         .bento-badge {
             display: inline-flex;
             align-items: center;
@@ -766,17 +780,19 @@
             letter-spacing: 0.06em;
             text-transform: uppercase;
             margin-bottom: 1.25rem;
+            width: fit-content;
+            align-self: flex-start;
         }
         
         .bento-badge.digest {
             background: rgba(99, 102, 241, 0.1);
-            /*border: 1px solid rgba(99, 102, 241, 0.2);*/
+            border: 1px solid rgba(99, 102, 241, 0.2);
             color: var(--accent-hover);
         }
         
         .bento-badge.deep-dive {
             background: rgba(16, 185, 129, 0.1);
-            /*border: 1px solid rgba(16, 185, 129, 0.2);*/
+            border: 1px solid rgba(16, 185, 129, 0.2);
             color: var(--neon);
         }
         
@@ -827,13 +843,11 @@
             margin: 0 auto;
             padding: clamp(2.5rem, 5vw, 3.5rem);
             background: var(--glass);
-            /*border: 1px solid var(--border);*/
             border-radius: var(--radius-card);
             backdrop-filter: blur(24px) saturate(180%);
             -webkit-backdrop-filter: blur(24px) saturate(180%);
             text-align: center;
             position: relative;
-            transition: all 0.3s ease;
             will-change: transform, opacity;
         }
         
@@ -843,12 +857,6 @@
                 backdrop-filter: blur(12px) saturate(180%);
                 -webkit-backdrop-filter: blur(12px) saturate(180%);
             }
-        }
-        
-        .autor-card:hover {
-            border-color: var(--border-hover);
-            background: var(--glass-hover);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
         }
         
         /*.autor-card::before {
@@ -1048,7 +1056,7 @@
             </div>
             <div class="nav-links">
                 <a href="https://simondusek.com/digest" class="nav-link">Digest Archiv</a>
-                <a href="#deep-dive" class="nav-link">Formáty</a>
+                <a href="#deep-dive" class="nav-link">Deep Dive Blog</a>
                 <a href="#about" class="nav-link">O mně</a>
             </div>
             <div class="nav-right">
@@ -1132,7 +1140,7 @@
         <section class="bento-section">
             <div class="container">
                 <div class="bento-grid reveal-stagger">
-                    <div class="bento-tile reveal" id="digest" style="--i: 0;">
+                    <a href="/digest" class="bento-tile reveal" id="digest" style="--i: 0;">
                         <div class="bento-badge digest">⚡ DAILY</div>
                         <h3>Digest</h3>
                         <p>
@@ -1143,9 +1151,10 @@
                             <li>Nejlepší způsob jak redukovat FOMO</li>
                             <li>Osobní kurátorství z efektivní RSS AI pipeline</li>
                         </ul>
-                    </div>
+                        <div class="bento-footer">Procházet archiv →</div>
+                    </a>
                     
-                    <div class="bento-tile reveal" id="deep-dive" style="--i: 1;">
+                    <a href="/deep-dive" class="bento-tile reveal" id="deep-dive" style="--i: 1;">
                         <div class="bento-badge deep-dive">🎯 WEEKLY</div>
                         <h3>Deep Dive</h3>
                         <p>
@@ -1156,7 +1165,8 @@
                             <li>Autorský B2B a finanční pohled</li>
                             <li>Konkrétní tipy a kroky pro podnikání</li>
                         </ul>
-                    </div>
+                        <div class="bento-footer">Procházet blog →</div>
+                    </a>
                 </div>
             </div>
         </section>

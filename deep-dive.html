@@ -12,10 +12,10 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digest Archiv | simondusek.com</title>
-    <meta name="description" content="Kompletní archiv odeslaných vydání technologického a B2B newsletteru Digest od Šimona Duška.">
+    <title>Deep Dive Blog | simondusek.com</title>
+    <meta name="description" content="Hloubkové B2B analýzy, technologické vhledy a mentální modely archivované pro čtenáře.">
     <meta name="author" content="Ing. Šimon Dušek">
-    <link rel="canonical" href="https://simondusek.com/digest">
+    <link rel="canonical" href="https://simondusek.com/deep-dive">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png">
@@ -450,13 +450,13 @@
             gap: 0.5rem;
             padding: 0.4rem 0.9rem;
             border-radius: 100px;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.2);
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
             font-size: 0.72rem;
             font-weight: 600;
             letter-spacing: 0.06em;
             text-transform: uppercase;
-            color: var(--accent-hover);
+            color: var(--neon);
             margin-bottom: 1.25rem;
         }
 
@@ -534,7 +534,7 @@
 
         .post-issue {
             font-weight: 700;
-            color: var(--accent-hover);
+            color: var(--neon);
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
@@ -558,7 +558,7 @@
         .post-footer {
             font-size: 0.85rem;
             font-weight: 600;
-            color: var(--accent-hover);
+            color: var(--neon);
             display: flex;
             align-items: center;
             gap: 0.4rem;
@@ -648,7 +648,6 @@
         
         /* Mobile performance: Force visibility on mobile to avoid IntersectionObserver issues */
         @media (max-width: 767px) {
-            .digest-card.reveal,
             .reveal {
                 opacity: 1 !important;
                 transform: none !important;
@@ -694,26 +693,28 @@
                     <span class="icon">🏠</span>
                     Hlavní stránka
                 </a>
-                <a href="https://simondusek.com/digest" class="mobile-menu-link">
+                <a href="/digest" class="mobile-menu-link">
                     <span class="icon">⚡</span>
                     Digest Archiv
                 </a>
-                <a href="https://simondusek.com/gdpr" class="mobile-menu-link">
+                <a href="/deep-dive" class="mobile-menu-link">
+                    <span class="icon">🎯</span>
+                    Deep Dive Blog
+                </a>
+                <a href="/gdpr" class="mobile-menu-link">
                     <span class="icon">🔒</span>
                     Zásady ochrany údajů
                 </a>
             </div>
         </div>
     </div>
-        </div>
-    </nav>
 
     <!-- HEADER -->
     <header class="archive-header">
         <div class="container">
-            <div class="archive-badge">📰 Archiv</div>
-            <h1>Digest Archiv</h1>
-            <p>Každé vydání newsletteru Digest, přehledně archivované a dostupné ke čtení.</p>
+            <div class="archive-badge">🎯 Deep Dive Blog</div>
+            <h1>Deep Dive Blog</h1>
+            <p>Hloubkové B2B analýzy, technologické vhledy a mentální modely archivované pro čtenáře.</p>
         </div>
     </header>
 
@@ -881,14 +882,14 @@
                 card.innerHTML = `
                     <div>
                         <div class="post-meta">
-                            <span class="post-issue">${icon} ${post.type || 'Digest'}</span>
+                            <span class="post-issue">${icon} ${post.type || 'Deep Dive'}</span>
                             <time>${date}</time>
                         </div>
                         <h2>${title}</h2>
                         <p>${excerpt}</p>
                     </div>
                     <div class="post-footer">
-                        Číst vydání →
+                        Číst článek →
                     </div>
                 `;
                 return card;
@@ -899,19 +900,19 @@
                 const emptyState = document.createElement('div');
                 emptyState.className = 'empty-state';
                 emptyState.innerHTML = `
-                    <div class="empty-state-icon">📭</div>
-                    <h3>Zatím žádná vydání</h3>
-                    <p>Zatím nebyly publikovány žádné archivní příspěvky. První vydání je na cestě!</p>
+                    <div class="empty-state-icon">🎯</div>
+                    <h3>Zatím žádné hloubkové analýzy</h3>
+                    <p>Zatím nebyly publikovány žádné Deep Dive články. První analýza je na cestě!</p>
                 `;
                 return emptyState;
             }
 
             // Zkusí načíst posts.json z více možných cest
             const postsJsonPaths = [
-                '/digest/posts.json',
-                '/web/digest/posts.json',
-                'digest/posts.json',
-                '../digest/posts.json'
+                '/deep-dive/posts.json',
+                '/web/deep-dive/posts.json',
+                'deep-dive/posts.json',
+                '../deep-dive/posts.json'
             ];
 
             // Funkce pro načtení dat
