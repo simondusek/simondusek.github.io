@@ -31,20 +31,18 @@
     <meta property="og:title" content="Digest — simondusek.com">
     <meta property="og:description" content="🚀 Hlavní události v Techu & AI 💳 Revolut se spojil s OpenAI a nabízí ChatGPT Go v rámci svých předplatných Získejte bezplatný přístup k prémiové AI přímo v aplikaci Vašich financí Fintechový gigant Revolut uzavřel nové partnerství se společností OpenAI...">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://simondusek.com/digest/2026-07-30-digest.html">
-    <meta property="og:image" content="https://simondusek.com/digest/og-image-2026-07-30-digest.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://simondusek.com/digest/2026-07-28-digest.html">
     <meta property="og:site_name" content="simondusek.com">
     <meta property="og:locale" content="cs_CZ">
-    <meta property="article:published_time" content="2026-07-30T00:00:00+00:00">
+    <meta property="article:published_time" content="2026-07-28T00:00:00+00:00">
     <meta property="article:author" content="Šimon Dušek">
-
-    <!-- Twitter Card -->
+    <meta property="og:image" content="https://simondusek.com/og-image-2026-07-30-digest.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@DusekSimon">
     <meta name="twitter:creator" content="@DusekSimon">
-    <meta name="twitter:image" content="https://simondusek.com/og-image.png">
+    <meta name="twitter:image" content="https://simondusek.com/og-image-2026-07-30-digest.png">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png">
@@ -156,22 +154,25 @@
             z-index: 1;
         }
 
-        /* NAVIGATION - Shared Header */
+        /* ==========================================================================
+           NAVIGATION - Minimal
+           ========================================================================== */
         .nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 100;
-            padding: 1.25rem 0;
-            transition: all 0.3s ease;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid transparent;
+            transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease, padding 0.3s ease;
         }
         
         .nav.scrolled {
             background: var(--nav-bg-scrolled);
             backdrop-filter: blur(24px) saturate(180%);
             -webkit-backdrop-filter: blur(24px) saturate(180%);
-            border-bottom: 1px solid var(--border);
+            border-bottom-color: var(--border);
         }
         
         /* Mobile performance: Replace backdrop blur with solid background */
@@ -224,10 +225,46 @@
             text-overflow: ellipsis;
         }
         
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+        
+        .nav-link {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+        
+        @media (max-width: 400px) {
+            .nav-brand-name {
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .nav-right {
+                gap: 0.4rem;
+            }
+        }
+        
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.75rem;
         }
         
         .nav-back {
@@ -476,30 +513,6 @@
         @media (min-width: 768px) {
             .mobile-menu-toggle {
                 display: none;
-            }
-        }
-
-        /* Ušetříme místo na mobilních zařízeních */
-        @media (max-width: 520px) {
-            .nav-cta {
-                padding: 0.5rem 0.9rem;
-                font-size: 0.825rem;
-            }
-
-            .hide-mobile-cta {
-                display: none;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .nav-brand-name {
-                font-size: 0.95rem;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .nav-right {
-                gap: 0.4rem;
             }
         }
 
@@ -787,9 +800,9 @@
                 <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Přepnout světlý/tmavý režim">
                     <span class="theme-icon" id="theme-icon">🌙</span>
                 </button>
-                <a href="/digest" class="nav-back">
-                    <span class="nav-back-text">← Zpět do archivu</span>
-                    <span class="nav-back-icon">← Zpět</span>
+                <a href="/" class="nav-back">
+                    <span class="nav-back-text">← Zpět na hlavní stránku</span>
+                    <span class="nav-back-icon">← Domů</span>
                 </a>
             </div>
         </div>

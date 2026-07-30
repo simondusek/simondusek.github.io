@@ -151,22 +151,25 @@
             z-index: 1;
         }
 
-        /* NAVIGATION - Shared Header */
+        /* ==========================================================================
+           NAVIGATION - Minimal
+           ========================================================================== */
         .nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 100;
-            padding: 1.25rem 0;
-            transition: all 0.3s ease;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid transparent;
+            transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease, padding 0.3s ease;
         }
         
         .nav.scrolled {
             background: var(--nav-bg-scrolled);
             backdrop-filter: blur(24px) saturate(180%);
             -webkit-backdrop-filter: blur(24px) saturate(180%);
-            border-bottom: 1px solid var(--border);
+            border-bottom-color: var(--border);
         }
         
         /* Mobile performance: Replace backdrop blur with solid background */
@@ -219,16 +222,46 @@
             text-overflow: ellipsis;
         }
         
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+        
+        .nav-link {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+        
         @media (max-width: 400px) {
             .nav-brand-name {
                 font-size: 0.95rem;
             }
         }
         
+        @media (max-width: 600px) {
+            .nav-right {
+                gap: 0.4rem;
+            }
+        }
+        
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.75rem;
         }
 
         @media (max-width: 600px) {
@@ -305,7 +338,7 @@
         
         /* Mobile Menu Button - Burger */
         .mobile-menu-toggle {
-            display: none;
+            display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
@@ -438,6 +471,9 @@
         @media (max-width: 767px) {
             .mobile-menu-toggle {
                 display: flex;
+            }
+            .nav-links {
+                display: none !important;
             }
         }
         
@@ -668,12 +704,17 @@
     <div class="floating-orb orb-2" aria-hidden="true"></div>
 
     <!-- NAVIGATION -->
-    <nav class="nav" id="main-nav" role="navigation" aria-label="Navigace">
+    <nav class="nav" id="main-nav" role="navigation" aria-label="Hlavní navigace">
         <div class="container">
             <a href="/" class="nav-brand">
                 <div class="nav-brand-icon" aria-hidden="true">⌘</div>
                 <span class="nav-brand-name">simondusek.com</span>
             </a>
+            <div class="nav-links">
+                <a href="/digest" class="nav-link">Digest Archiv</a>
+                <a href="/deep-dive" class="nav-link">Deep Dive Blog</a>
+                <a href="/#about" class="nav-link">O mně</a>
+            </div>
             <div class="nav-right">
                 <button class="mobile-menu-toggle" id="mobile-menu-toggle" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="mobile-menu-content">
                     <span></span>
@@ -695,17 +736,17 @@
     <div class="mobile-menu-overlay" id="mobile-menu-overlay" role="navigation" aria-label="Mobilní navigace">
         <div class="mobile-menu-content" id="mobile-menu-content">
             <div class="mobile-menu-links">
-                <a href="/" class="mobile-menu-link">
-                    <span class="icon">🏠</span>
-                    Hlavní stránka
-                </a>
-                <a href="https://simondusek.com/digest" class="mobile-menu-link">
+                <a href="/digest" class="mobile-menu-link">
                     <span class="icon">⚡</span>
                     Digest Archiv
                 </a>
-                <a href="https://simondusek.com/gdpr" class="mobile-menu-link">
-                    <span class="icon">🔒</span>
-                    Zásady ochrany údajů
+                <a href="/deep-dive" class="mobile-menu-link">
+                    <span class="icon">🎯</span>
+                    Deep Dive Blog
+                </a>
+                <a href="/#about" class="mobile-menu-link">
+                    <span class="icon">👤</span>
+                    O mně
                 </a>
             </div>
         </div>
