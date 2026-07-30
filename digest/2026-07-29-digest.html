@@ -2,14 +2,21 @@
 <html lang="cs" data-theme="dark">
 <head>
     <script>
+        // Bezpečný přístup k localStorage
+        function getSafeStorage(key) {
+            try {
+                return localStorage.getItem(key);
+            } catch (e) {
+                return null;
+            }
+        }
+        
         (function() {
             try {
-                var saved = localStorage.getItem('theme');
+                var saved = getSafeStorage('theme');
                 var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
                 document.documentElement.setAttribute('data-theme', theme);
             } catch (e) {}
-            // Mark JavaScript as enabled for CSS fallback
-            document.documentElement.classList.add('js-enabled');
        })();
     </script>
     <meta charset="UTF-8">
@@ -442,22 +449,25 @@
             }
         }
 
-        /* Fallback pro in-app prohlížeče a starší renderery (X.com WKWebView, atd.) */
+        /* Fallback pro in-app prohlížeče a starší renderery */
         .reveal {
-            opacity: 1;
-            transform: none;
+            opacity: 1 !important;
+            transform: none !important;
         }
         
-        /* Zpětně zapneme animaci POUZE v případě, že je JavaScript aktivní */
-        .js-enabled .reveal:not(.visible) {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        /* Zpětně zapneme animaci POUZE v případě, že je prohlížeč plně podporuje a JS je aktivní */
+        @supports (opacity: 1) {
+            .js-enabled .reveal:not(.visible) {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                            transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            }
         }
         
         .reveal.visible {
-            opacity: 1;
+            opacity: 1 !important;
+            transform: none !important;
             transform: translateY(0);
         }
     </style>
@@ -565,6 +575,23 @@
             } else {
                 nav.classList.remove('scrolled');
             }
+        });
+    </script>
+    
+    <!-- Záchranný skript pro X.com / LinkedIn In-App prohlížeče -->
+    <script>
+        // Záchranný skript pro In-App prohlížeče
+        document.addEventListener('DOMContentLoaded', function() {
+            // Okamžitě přidáme třídu js-enabled
+            document.body.classList.add('js-enabled');
+            
+            // Pojistka: Za 300ms natvrdo zviditelníme všechny .reveal prvky, pokud se nespustil IntersectionObserver
+            setTimeout(function() {
+                var reveals = document.querySelectorAll('.reveal');
+                reveals.forEach(function(el) {
+                    el.classList.add('visible');
+                });
+            }, 300);
         });
     </script>
 
