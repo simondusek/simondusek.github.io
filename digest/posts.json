@@ -1,10 +1,10 @@
 [
   {
     "title": "Digest",
-    "date": "28. 07. 2026",
+    "date": "30. 07. 2026",
     "type": "Digest",
-    "url": "/digest/2026-07-28-digest.html",
-    "excerpt": "🚀 Hlavní události v Techu &amp; AI 💳 X Money dnes v USA zahajuje provoz Elon Musk spouští vlastní finanční platformu a chce změnit placení od základu Služba X Money představuje klíčový krok v plánu Elona Muska proměnit platformu X ve všestrannou aplikaci..."
+    "url": "/digest/2026-07-30-digest.html",
+    "excerpt": "🚀 Hlavní události v Techu &amp; AI 💳 Revolut se spojil s OpenAI a nabízí ChatGPT Go v rámci svých předplatných Získejte bezplatný přístup k prémiové AI přímo v aplikaci Vašich financí Fintechový gigant Revolut uzavřel nové partnerství se společností OpenAI..."
   },
   {
     "title": "Digest",
@@ -12,5 +12,12 @@
     "type": "Digest",
     "url": "/digest/2026-07-29-digest.html",
     "excerpt": "🚀 Hlavní události v Techu &amp; AI 🛡️ Anthropic tvrdí, že jeho model Mythos odhalil zranitelnosti v kryptografických algoritmech zabezpečujících internet AI našla kritické zranitelnosti v klíčovém zabezpečení internetu za pouhých 60 hodin Model Claude Mythos Preview od společnosti Anthropic odhalil slabiny v klíčových kryptografických algoritmech..."
+  },
+  {
+    "title": "Digest",
+    "date": "28. 07. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-07-28-digest.html",
+    "excerpt": "🚀 Hlavní události v Techu &amp; AI 💳 X Money dnes v USA zahajuje provoz Elon Musk spouští vlastní finanční platformu a chce změnit placení od základu Služba X Money představuje klíčový krok v plánu Elona Muska proměnit platformu X ve všestrannou aplikaci..."
   }
 ]

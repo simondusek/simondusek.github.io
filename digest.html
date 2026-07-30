@@ -127,22 +127,10 @@
             left: -200px;
         }
         
-        /* Mobile performance: Reduce blur on orbs */
+        /* Mobile performance: Disable floating orbs completely on mobile */
         @media (max-width: 767px) {
             .floating-orb {
-                filter: blur(40px);
-            }
-            .floating-orb.orb-1 {
-                width: 400px;
-                height: 400px;
-                top: -100px;
-                right: -100px;
-            }
-            .floating-orb.orb-2 {
-                width: 350px;
-                height: 350px;
-                bottom: -50px;
-                left: -150px;
+                display: none;
             }
         }
 
@@ -172,11 +160,12 @@
             border-bottom: 1px solid var(--border);
         }
         
-        /* Mobile performance: Reduce backdrop blur on nav */
+        /* Mobile performance: Replace backdrop blur with solid background */
         @media (max-width: 767px) {
             .nav.scrolled {
-                backdrop-filter: blur(12px) saturate(180%);
-                -webkit-backdrop-filter: blur(12px) saturate(180%);
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: var(--nav-bg-scrolled);
             }
         }
         
@@ -371,9 +360,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(5, 5, 8, 0.95);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
             z-index: 199;
             opacity: 0;
             visibility: hidden;
@@ -390,9 +378,7 @@
             top: 70px;
             left: 0;
             right: 0;
-            background: var(--glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: var(--bg-primary);
             border: 1px solid var(--border);
             border-radius: var(--radius-card);
             margin: 0 clamp(1.5rem, 5vw, 3rem);
@@ -523,11 +509,12 @@
             will-change: transform, opacity;
         }
         
-        /* Mobile performance: Reduce backdrop blur on cards */
+        /* Mobile performance: Replace backdrop blur with solid background */
         @media (max-width: 767px) {
             .post-card {
-                backdrop-filter: blur(12px) saturate(180%);
-                -webkit-backdrop-filter: blur(12px) saturate(180%);
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: var(--bg-primary);
             }
         }
 
@@ -669,6 +656,209 @@
                 transform: none !important;
                 transition: none !important;
             }
+        }
+        
+        /* ==========================================================================
+           FLOATING CTA WIDGET - Apple Glass Style
+           ========================================================================== */
+        .cta-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            will-change: transform;
+        }
+        
+        .cta-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, var(--accent), var(--neon));
+            border: none;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 122, 255, 0.3);
+            will-change: transform, box-shadow;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0, 122, 255, 0.4);
+        }
+        
+        .cta-button.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .cta-button.active {
+            display: none;
+        }
+        
+        .cta-panel {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            padding: 1.5rem;
+            max-width: 320px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity;
+        }
+        
+        .cta-panel.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        
+        .cta-panel h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+        
+        .cta-panel p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .cta-input {
+            padding: 0.75rem 1rem;
+            font-size: 0.95rem;
+            font-family: var(--font-sans);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            outline: none;
+            transition: all 0.25s ease;
+            will-change: border-color, box-shadow;
+        }
+        
+        .cta-input::placeholder {
+            color: var(--text-tertiary);
+        }
+        
+        .cta-input:focus {
+            border-color: var(--accent-hover);
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.15);
+        }
+        
+        /* Mobile performance: Replace backdrop blur with solid background */
+        @media (max-width: 767px) {
+            .cta-panel {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: var(--bg-primary);
+            }
+            
+            .cta-widget {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+            
+            .cta-panel {
+                width: calc(100vw - 20px);
+                max-width: none;
+                margin: 0 auto;
+            }
+        }
+        
+        .cta-close {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+            padding: 0;
+            line-height: 1;
+        }
+        
+        .cta-close:hover {
+            color: var(--text-primary);
+            background: var(--glass-hover);
+        }
+        
+        .cta-submit {
+            padding: 0.75rem 1.25rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, var(--accent), var(--neon));
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            will-change: transform, box-shadow;
+        }
+        
+        .cta-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(0, 122, 255, 0.3);
+        }
+        
+        .cta-success {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .cta-success.visible {
+            display: flex;
+        }
+        
+        .cta-success-icon {
+            font-size: 2rem;
+            color: var(--neon);
+        }
+        
+        .cta-success-text {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            font-weight: 500;
         }
     </style>
 </head>
@@ -1029,7 +1219,98 @@
                 nav.classList.remove('scrolled');
             }
         }, { passive: true });
+        
+        // Floating CTA Widget
+        const ctaButton = document.getElementById('cta-button');
+        const ctaPanel = document.getElementById('cta-panel');
+        const ctaClose = document.getElementById('cta-close');
+        const ctaForm = document.getElementById('cta-form');
+        const ctaSuccess = document.getElementById('cta-success');
+        const ctaEmailInput = document.getElementById('cta-email');
+        
+        // Show CTA button after scrolling 150px
+        let ctaShown = false;
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 150 && !ctaShown) {
+                if (ctaButton) ctaButton.classList.add('visible');
+                ctaShown = true;
+            }
+        }, { passive: true });
+        
+        // Toggle CTA panel
+        function toggleCTA() {
+            if (ctaButton) ctaButton.classList.toggle('active');
+            if (ctaPanel) ctaPanel.classList.toggle('visible');
+            if (ctaPanel && ctaPanel.classList.contains('visible') && ctaEmailInput) {
+                ctaEmailInput.focus();
+            }
+        }
+        
+        // Close CTA panel
+        function closeCTA() {
+            if (ctaButton) ctaButton.classList.remove('active');
+            if (ctaPanel) ctaPanel.classList.remove('visible');
+        }
+        
+        // Form submission
+        function handleCTASubmit(e) {
+            e.preventDefault();
+            const email = ctaEmailInput ? ctaEmailInput.value.trim() : '';
+            if (email) {
+                if (ctaForm) ctaForm.style.display = 'none';
+                if (ctaSuccess) ctaSuccess.classList.add('visible');
+                
+                // Reset after 3 seconds
+                setTimeout(() => {
+                    if (ctaSuccess) ctaSuccess.classList.remove('visible');
+                    if (ctaForm) ctaForm.style.display = 'flex';
+                    if (ctaEmailInput) ctaEmailInput.value = '';
+                    closeCTA();
+                    ctaShown = false;
+                }, 3000);
+            }
+        }
+        
+        // Event listeners
+        if (ctaButton) ctaButton.addEventListener('click', toggleCTA);
+        if (ctaClose) ctaClose.addEventListener('click', closeCTA);
+        if (ctaForm) ctaForm.addEventListener('submit', handleCTASubmit);
+        
+        // Close on outside click
+        document.addEventListener('click', (e) => {
+            if (ctaPanel && !ctaPanel.contains(e.target) && ctaButton && !ctaButton.contains(e.target)) {
+                closeCTA();
+            }
+        });
     </script>
+
+    <!-- Floating CTA Widget -->
+    <div class="cta-widget">
+        <button id="cta-button" class="cta-button" type="button" aria-label="Odebírat Digest">
+            <span>⚡</span>
+            <span>Odebírat Digest</span>
+        </button>
+        <div id="cta-panel" class="cta-panel">
+            <button id="cta-close" class="cta-close" type="button" aria-label="Zavřít">✕</button>
+            <h4>Získejte 30+ hodin esence v 3 minutách</h4>
+            <p>Přihlaste se k odběru a dostávejte nejdůležitější novinky ze světa technologií přímo do své schránky.</p>
+            <form id="cta-form" class="cta-form">
+                <input 
+                    id="cta-email" 
+                    class="cta-input" 
+                    type="email" 
+                    placeholder="Váš e-mail" 
+                    required
+                    autocomplete="email"
+                >
+                <button type="submit" class="cta-submit">Chci odběr</button>
+            </form>
+            <div id="cta-success" class="cta-success">
+                <div class="cta-success-icon">✓</div>
+                <div class="cta-success-text">Děkujeme za příhlášení!</div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

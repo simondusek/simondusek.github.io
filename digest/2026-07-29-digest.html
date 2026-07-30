@@ -151,6 +151,15 @@
             border-bottom: 1px solid var(--border);
         }
         
+        /* Mobile performance: Replace backdrop blur with solid background */
+        @media (max-width: 767px) {
+            .nav.scrolled {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: var(--nav-bg-scrolled);
+            }
+        }
+        
         .nav .container {
             display: flex;
             align-items: center;

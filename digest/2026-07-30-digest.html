@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="cs" data-theme="dark">
+<head>
+    <script>
+        (function() {
+            try {
+                var saved = localStorage.getItem('theme');
+                var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {}
+       })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digest — simondusek.com</title>
+    <meta name="description" content="🚀 Hlavní události v Techu & AI 💳 Revolut se spojil s OpenAI a nabízí ChatGPT Go v rámci svých předplatných Získejte bezplatný přístup k prémiové AI přímo v aplikaci Vašich financí Fintechový gigant Revolut uzavřel nové partnerství se společností OpenAI...">
+    <meta name="author" content="Šimon Dušek">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://simondusek.com/digest/2026-07-30-digest.html">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Digest — simondusek.com">
+    <meta property="og:description" content="🚀 Hlavní události v Techu & AI 💳 Revolut se spojil s OpenAI a nabízí ChatGPT Go v rámci svých předplatných Získejte bezplatný přístup k prémiové AI přímo v aplikaci Vašich financí Fintechový gigant Revolut uzavřel nové partnerství se společností OpenAI...">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://simondusek.com/digest/2026-07-30-digest.html">
+    <meta property="og:image" content="https://simondusek.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="simondusek.com">
+    <meta property="og:locale" content="cs_CZ">
+    <meta property="article:published_time" content="2026-07-30T00:00:00+00:00">
+    <meta property="article:author" content="Šimon Dušek">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@DusekSimon">
+    <meta name="twitter:creator" content="@DusekSimon">
+    <meta name="twitter:image" content="https://simondusek.com/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           DESIGN TOKENS - ULTRA-CLEAN
+           ========================================================================== */
+        :root {
+            --bg-primary: #050508;
+            --glass: rgba(255, 255, 255, 0.02);
+            --glass-hover: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.12);
+            --text-primary: #ffffff;
+            --text-secondary: #9595a5;
+            --text-tertiary: #656575;
+            --accent: #007AFF;
+            --accent-hover: #0066cc;
+            --neon: #10b981;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --section-gap: clamp(6rem, 12vh, 10rem);
+            --radius-pill: 100px;
+            --radius-card: 20px;
+            --orb-opacity: 1;
+            --nav-bg-scrolled: rgba(5, 5, 8, 0.85);
+        }
+
+        html[data-theme="light"] {
+            --bg-primary: #f6f6f9;
+            --glass: rgba(10, 10, 20, 0.03);
+            --glass-hover: rgba(10, 10, 20, 0.05);
+            --border: rgba(10, 10, 20, 0.09);
+            --border-hover: rgba(10, 10, 20, 0.14);
+            --text-primary: #0a0a12;
+            --text-secondary: #55555f;
+            --text-tertiary: #85858f;
+            --orb-opacity: 0.4;
+            --nav-bg-scrolled: rgba(246, 246, 249, 0.85);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.65;
+            overflow-x: hidden;
+            min-height: 100vh;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .floating-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: var(--orb-opacity);
+            transition: opacity 0.4s ease;
+            will-change: transform;
+        }
+        
+        .floating-orb.orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.08), transparent 70%);
+            top: -200px;
+            right: -200px;
+        }
+        
+        .floating-orb.orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.06), transparent 70%);
+            bottom: -100px;
+            left: -200px;
+        }
+        
+        /* Mobile performance: Disable floating orbs completely on mobile */
+        @media (max-width: 767px) {
+            .floating-orb {
+                display: none;
+            }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 clamp(1.25rem, 5vw, 4rem);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* NAVIGATION - Shared Header */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.25rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .nav.scrolled {
+            background: var(--nav-bg-scrolled);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        /* Mobile performance: Replace backdrop blur with solid background */
+        @media (max-width: 767px) {
+            .nav.scrolled {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: var(--nav-bg-scrolled);
+            }
+        }
+        
+        .nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+        
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            text-decoration: none;
+        }
+        
+        .nav-brand-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent), var(--neon));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 800;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .nav-brand-name {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        
+        .nav-back {
+            padding: 0.55rem 1.1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: var(--radius-pill);
+            background: var(--glass);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        
+        .nav-back:hover {
+            background: var(--glass-hover);
+            border-color: var(--border-hover);
+            color: var(--text-primary);
+            transform: translateX(-2px);
+        }
+
+        .nav-back-icon {
+            display: none;
+        }
+
+        @media (max-width: 520px) {
+            .nav-back-text {
+                display: none;
+            }
+            .nav-back-icon {
+                display: inline;
+            }
+            .nav-back {
+                padding: 0.55rem 0.85rem;
+            }
+        }
+
+        .theme-toggle {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.25s ease;
+            flex-shrink: 0;
+        }
+        
+        .theme-toggle:hover {
+            border-color: var(--border-hover);
+            background: var(--glass-hover);
+            transform: translateY(-1px);
+        }
+
+        /* DIGEST CONTENT */
+        .digest-page {
+            padding-top: clamp(7.5rem, 16vh, 11rem);
+            padding-bottom: var(--section-gap);
+        }
+        
+        .digest-card {
+            max-width: 740px;
+            margin: 0 auto;
+            padding: clamp(2rem, 5vw, 3.5rem);
+            background: var(--glass);
+            border-radius: var(--radius-card);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            position: relative;
+            transition: all 0.3s ease;
+            will-change: transform;
+        }
+        
+        /* Mobile performance: Replace backdrop blur with solid background */
+        @media (max-width: 767px) {
+            .digest-card {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: var(--bg-primary);
+                border: 1px solid var(--border);
+            }
+        }
+        
+        .digest-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+        }
+        
+        .digest-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.9rem;
+            border-radius: 100px;
+            background: #007bff30;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--accent-hover);
+            margin-bottom: 1.5rem;
+        }
+        
+        .digest-card h1 {
+            font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+        
+        .digest-meta {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .digest-content {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+        
+        .digest-content h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+            margin: 2rem 0 1rem;
+            color: var(--text-primary);
+        }
+        
+        .digest-content h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+            margin: 1.75rem 0 0.75rem;
+            color: var(--text-primary);
+        }
+        
+        .digest-content p {
+            margin-bottom: 1.25rem;
+        }
+        
+        .digest-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .digest-content strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .digest-content a {
+            color: var(--accent-hover);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        
+        .digest-content a:hover {
+            color: var(--neon);
+        }
+        
+        .digest-content ul,
+        .digest-content ol {
+            margin: 1.25rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .digest-content li {
+            margin-bottom: 0.6rem;
+            line-height: 1.7;
+        }
+        
+        .digest-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.6rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-pill);
+            transition: all 0.25s ease;
+            text-decoration: none;
+            margin-top: 2.5rem;
+        }
+        
+        .digest-back:hover {
+            background: var(--glass-hover);
+            border-color: var(--border-hover);
+            transform: translateX(-2px);
+        }
+
+        /* FOOTER */
+        .site-footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .footer-left {
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+        }
+        
+        .footer-left strong {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        
+        .footer-links a {
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+            transition: color 0.2s ease;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* ==========================================================================
+           FLOATING CTA WIDGET - Apple Glass Style
+           ========================================================================== */
+        .cta-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            will-change: transform;
+        }
+        
+        .cta-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, var(--accent), var(--neon));
+            border: none;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 122, 255, 0.3);
+            will-change: transform, box-shadow;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0, 122, 255, 0.4);
+        }
+        
+        .cta-button.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .cta-button.active {
+            display: none;
+        }
+        
+        .cta-panel {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            padding: 1.5rem;
+            max-width: 320px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity;
+        }
+        
+        .cta-panel.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        
+        .cta-panel h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+        
+        .cta-panel p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .cta-input {
+            padding: 0.75rem 1rem;
+            font-size: 0.95rem;
+            font-family: var(--font-sans);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            outline: none;
+            transition: all 0.25s ease;
+            will-change: border-color, box-shadow;
+        }
+        
+        .cta-input::placeholder {
+            color: var(--text-tertiary);
+        }
+        
+        .cta-input:focus {
+            border-color: var(--accent-hover);
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.15);
+        }
+        
+        /* Mobile performance: Replace backdrop blur with solid background */
+        @media (max-width: 767px) {
+            .cta-panel {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: var(--bg-primary);
+            }
+            
+            .cta-widget {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+            
+            .cta-panel {
+                width: calc(100vw - 20px);
+                max-width: none;
+                margin: 0 auto;
+            }
+        }
+        
+        .cta-close {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+            padding: 0;
+            line-height: 1;
+        }
+        
+        .cta-close:hover {
+            color: var(--text-primary);
+            background: var(--glass-hover);
+        }
+        
+        .cta-submit {
+            padding: 0.75rem 1.25rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, var(--accent), var(--neon));
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            will-change: transform, box-shadow;
+        }
+        
+        .cta-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(0, 122, 255, 0.3);
+        }
+        
+        .cta-success {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .cta-success.visible {
+            display: flex;
+        }
+        
+        .cta-success-icon {
+            font-size: 2rem;
+            color: var(--neon);
+        }
+        
+        .cta-success-text {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="floating-orb orb-1" aria-hidden="true"></div>
+    <div class="floating-orb orb-2" aria-hidden="true"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="nav" id="main-nav" role="navigation" aria-label="Navigace">
+        <div class="container">
+            <a href="/" class="nav-brand">
+                <div class="nav-brand-icon" aria-hidden="true">⌘</div>
+                <span class="nav-brand-name">simondusek.com</span>
+            </a>
+            <div class="nav-right">
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Přepnout světlý/tmavý režim">
+                    <span class="theme-icon" id="theme-icon">🌙</span>
+                </button>
+                <a href="/digest" class="nav-back">
+                    <span class="nav-back-text">← Zpět do archivu</span>
+                    <span class="nav-back-icon">← Zpět</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <main class="digest-page">
+        <div class="container">
+            <div class="digest-card reveal">
+                <div class="digest-badge">📰 Digest</div>
+                <h1>Digest</h1>
+                <p class="digest-meta">Vydáno: 30. 07. 2026</p>
+                
+                <div class="digest-content">
+                    <h2>🚀 Hlavní události v Techu &amp; AI</h2><h3>💳 <a href="https://thenextweb.com/news/revolut-openai-free-chatgpt-go">Revolut se spojil s OpenAI a nabízí ChatGPT Go v rámci svých předplatných</a></h3><p><strong>Získejte bezplatný přístup k prémiové AI přímo v aplikaci Vašich financí.</strong></p><ul><li>Fintechový gigant <strong>Revolut</strong> uzavřel nové partnerství se společností OpenAI. Díky této spolupráci nabídne svým zákazníkům <strong>bezplatný přístup</strong> k pokročilému rozhraní ChatGPT.</li><li>Společnost uvádí, že celosvětově obsluhuje již více než <strong>75 milionů uživatelů</strong>. V rámci subscription plánů získají klienti přístup k <strong>ChatGPT Go</strong> (lehčí verze AI modelu) na dobu od tří měsíců až po jeden rok.</li></ul><div class="why-box"><p>Pro běžného uživatele jde o skvělou příležitost vyzkoušet si <strong>placené funkce AI</strong> bez nutnosti platit samostatné předplatné. Integrace finančních služeb s umělou inteligencí ukazuje, jak se z běžných bankovních aplikací stávají multifunkční platformy. Pokud již Revolut používáte, zkontrolujte si v aplikaci nárok na tuto výhodu. Do budoucna lze očekávat stále těsnější propojení <strong>správy financí</strong> a osobních AI asistentů.</p></div><p>Zdroj: The Next Web</p><h3>🚀 <a href="https://www.theverge.com/tech/972927/microsoft-copilot-super-app-confirmed">Microsoft potvrzuje, že Copilot superaplikace dorazí ještě letos</a></h3><p><strong>Jedna jediná aplikace sloučí chat, kódování i autonomní AI agenty.</strong></p><ul><li>Společnost <strong>Microsoft</strong> intenzivně pracuje na nové AI aplikaci typu super app. Tato novinka v sobě kombinuje konverzační schopnosti Copilotu, <strong>psaní kódu</strong> i autonomní agentní funkce (schopnost AI samostatně plnit úkoly).</li><li>Generální ředitel Satya Nadella během konference k hospodářským výsledkům potvrdil brzké spuštění. Aplikace se ještě během <strong>letošního roku</strong> rozšíří mezi běžné spotřebitele i do <strong>firemního prostředí</strong>.</li></ul><div class="why-box"><p>Pro vývojáře, manažery i běžné uživatele to znamená konec přepínání mezi desítkami různých AI nástrojů. Sloučení asistenta do jednoho rozhraní může výrazně <strong>zvýšit produktivitu</strong> a zjednodušit každodenní práci. Dbejte na to, jaké pravomoci novým agentům ve svých zařízeních udělíte. Příchod superaplikace naznačuje, že <strong>integrovaná AI</strong> bude brzy standardním ovládacím prvkem operačních systémů.</p></div><p>Zdroj: The Verge</p><h3>🚗 <a href="https://venturebeat.com/technology/at-waymo-an-ai-project-isnt-ready-until-its-evals-are-not-when-the-model-performs-well">Ve Waymo není AI projekt připraven, dokud neprojde evaly – samotný výkon nestačí</a></h3><p><strong>Proč skvělý výkon AI modelu nestačí pro nasazení do reálného světa.</strong></p><ul><li>Společnost <strong>Waymo</strong>, vyrůstající pod hlavičkou Alphabetu (mateřská společnost Googlu), čelí při nasazování AI mimořádně vysokému riziku. Jejich modely negenerují pouhý text, ale přímo <strong>řídí autonomní vozidla</strong> v reálném provozu.</li><li>Auta musí bezpečně reagovat na lidské řidiče i nepředvídatelné situace v ulicích. Vývojáři proto projekt nepovažují za hotový ve chvíli, kdy model dobře funguje, ale až když projde přísnými <strong>evaly</strong> (metriky pro ověřování bezpečnosti AI).</li></ul><div class="why-box"><p>Tento přístup je klíčovou lekcí pro jakoukoliv firmu nebo vývojáře nasazující AI do praxe. Samotná působivost modelu nestačí, pokud chybí důkladné <strong>testování spolehlivosti</strong> v krizových scénářích. Pro čtenáře to znamená vyšší bezpečnost na silnicích s autonomními vozy. Do budoucna se přísné <strong>metriky hodnocení</strong> stanou standardem nejen v dopravě, ale i ve zdravotnictví a financích.</p></div><p>Zdroj: Venture Beat</p><h3>🧪 <a href="https://the-decoder.com/openai-claims-gpt-5-6-sol-beats-opus-5-on-arc-agi-3-with-its-latest-api-and-two-additional-settings/">OpenAI tvrdí, že GPT-5.6 Sol poráží Opus 5 v benchmarku ARC-AGI-3 díky novému API</a></h3><p><strong>Souboj o trůn umělé inteligence se přesouvá k novým rozhraním a nastavením.</strong></p><ul><li>Společnost <strong>OpenAI</strong> reaguje na rekord konkurenčního modelu Anthropic v testu <strong>ARC-AGI-3</strong> (benchmark měřící obecný úsudek AI). Tvrdí, že jejich <strong>GPT-5.6 Sol</strong> dosáhl úspěšnosti <strong>38,3 %</strong>.</li><li>Tohoto výsledku však model dosáhl pouze s využitím <strong>vlastních funkčních prvků API</strong> (rozhraní pro propojení aplikací). V oficiálním testovacím prostředí skončil s výsledkem pouhých <strong>7,8 %</strong>, což autoři testu přisuzují zastaralému nastavení.</li></ul><div class="why-box"><p>Sledování benchmarků může být zavádějící, protože <strong>výsledky AI</strong> zásadně závisí na způsobu jejich připojení a konfiguraci. Pro vývojáře a manažery z toho plyne, že správný výběr API může dramaticky změnit <strong>efektivitu modelu</strong>. Běžný čtenář by měl brát marketingová tvrzení AI firem s rezervou. Souboj o nejlepší model se nyní přesouvá od pouhé velikosti sítě k <strong>optimalizaci výpočetního prostředí</strong>.</p></div><p>Zdroj: The Decoder</p><hr><h2>📈 Burza &amp; Finance</h2><h3>📈 <a href="https://www.cnbc.com/2026/07/30/microsoft-msft-meta-stock-today-earnings.html">Meta propadla o téměř 9 %, Microsoft vzrostl o 8 %, jak investice do AI štěpí Big Tech</a></h3><p><strong>Výsledky hospodaření ukázaly, komu se sázka na AI vyplácí a komu přináší ztráty.</strong></p><ul><li>Akcie společnosti <strong>Microsoft</strong> vzrostly o 8 % díky silnému růstu cloudové platformy <strong>Azure</strong> a služby Copilot. Naopak akcie společnosti <strong>Meta</strong> oslabily o téměř 9 %.</li><li>Důvodem poklesu Mety bylo nesplnění očekávaných tržeb a prudký propad <strong>volného peněžního toku</strong>. Tento vývoj ukazuje výrazné <strong>rozdělení trhu</strong> v sektoru velkých technologických firem.</li></ul><div class="why-box"><p>Pro investory i sledovatele trhu jde o jasný signál, že <strong>masivní investice do AI</strong> musí generovat reálné příjmy. Zatímco Microsoftu se daří AI monetizovat přes firemní klientelu, Meta čelí tlaku na vysoké výdaje bez okamžitého zisku. Pro Vaše portfolia to znamená potřebu pečlivěji rozlišovat mezi jednotlivými <strong>tech giganty</strong>. Lze očekávat zvýšenou opatrnost trhu vůči firmám s příliš vysokými <strong>kapitálovými výdaji</strong>.</p></div><p>Zdroj: CNBC Top News</p><h3>⚽ <a href="https://www.marketwatch.com/story/the-world-cup-winners-wore-adidas-shirts-but-the-companys-investors-are-still-crying-foul-2224d39a?mod=mw_rss_topstories">Vítězové Světového poháru nosili dresy Adidas, ale investoři firmy přesto pláčou</a></h3><p><strong>Sportovní úspěch nestačil k odvrácení propadu akcií po vysokých výdajích.</strong></p><ul><li>Akcie oděvního gigantu <strong>Adidas</strong> zaznamenaly skokový <strong>pokles o 17 %</strong>. Tento propad přišel i přes vysokou zviditelněnost značky na světovém šampionátu.</li><li>Hlavní příčinou nespokojenosti investorů bylo oznámení o <strong>30% nárůstu výdajů</strong> na marketing. Firma sice získala pozornost fanoušků, ale za cenu výrazného <strong>snížení ziskovosti</strong>.</li></ul><div class="why-box"><p>Tento případ ukazuje, že <strong>marketingové úspěchy</strong> nemusí automaticky znamenat finanční zdraví firmy. Pro drobné investory je to připomínka, že sledování hospodářských výsledků je důležitější než vnější obraz značky. Pokud vlastníte akcie retailových či sportovních značek, sledujte jejich <strong>efektivitu nákladů</strong>. Tlak na růst marží bude v letošním roce u spotřebního zboží <strong>klíčovým faktorem</strong>.</p></div><p>Zdroj: MarketWatch</p><h3>🏠 <a href="https://www.marketwatch.com/bulletins/redirect/go?g=8dae2f47-4441-4955-8058-b85d1d192d44&amp;mod=mw_rss_bulletins">Generace Z zůstává téměř každý víkend doma, protože chodit ven se podle nich nevyplatí</a></h3><p><strong>Mladá generace mění spotřebitelské návyky a šetří peníze zrušením nočního života.</strong></p><ul><li>Příslušníci <strong>Generace Z</strong> stále častěji tráví víkendové dny v pohodlí domova. Hlavním důvodem je <strong>vysoká cena</strong> zábavy a služeb ve městech.</li><li>Podle jejich vyjádření jim vycházky do společnosti <strong>nestojí za utracené peníze</strong>. Tento trend přímo ovlivňuje <strong>pohostinství a kulturu</strong>.</li></ul><div class="why-box"><p>Pro podnikatele v gastronomii a zábavním průmyslu jde o varovný signál a nutnost <strong>přehodnotit cenovou politiku</strong>. Změna chování mladých lidí má dopad na celou ekonomiku služeb. Lidé raději investují do digitálního obsahu nebo domácích aktivit. Pokud plánujete podnikání zaměřené na mladou generaci, zaměřte se na <strong>dostupný zážitek</strong> s vysokou přidanou hodnotou.</p></div><p>Zdroj: MarketWatch Bulletins</p><h3>🏛️ <a href="https://www.economist.com/finance-and-economics/2026/07/30/high-government-debt-makes-a-common-european-safe-asset-unlikely">Vysoký státní dluh snižuje pravděpodobnost vzniku společného evropského bezpečného aktiva</a></h3><p><strong>Státní zadlužení blokuje vznik klíčového finančního nástroje pro stabilizaci EU.</strong></p><ul><li>Rostoucí <strong>státní dluhy</strong> členských zemí komplikují dohodu v rámci Evropské unie. Vytvoření společného <strong>bezpečného aktiva</strong> (evropský dluhopis se zárukou všech členů) je v současnosti nepravděpodobné.</li><li>Rozdílná úroveň zadlužení prohlubuje <strong>ekonomické rozdíly</strong> mezi jednotlivými státy. To omezuje možnosti <strong>finanční integrace</strong> evropského trhu.</li></ul><div class="why-box"><p>Absence jednoho garantovaného dluhopisu udržuje <strong>rozdílné úrokové sazby</strong> v různých zemích EU. Pro běžné občany a investory to znamená přetrvávající rizika spojená s dluhovou krizí některých států. Tento stav také omezuje schopnost Evropy <strong>financovat velké projekty</strong> typu infrastruktura či obrana. Sledujte vývoj dluhové politiky, neboť ovlivňuje <strong>stabilitu měny euro</strong> a úroky z úvěrů.</p></div><p>Zdroj: The Economist</p><hr><h2>🇨🇿 Z české kotliny</h2><h3>💻 <a href="https://cc.cz/aplikace-za-vikend-problem-o-par-mesicu-pozdeji-jak-se-ve-svete-vibe-codingu-zmeni-role-programatoru/">Aplikace za víkend, problém o pár měsíců později. Jak se ve světě vibe codingu změní role programátorů</a></h3><p><strong>Rychlý vývoj pomocí AI přináší skryté dluhy, které prověří roli vývojářů.</strong></p><ul><li>Šéf studia MeguMethod Vratislav Zima popisuje <strong>zásadní posun</strong> ve vývoji softwaru za poslední roky. Vývojáři stále více využívají <strong>vibe coding</strong> (vývoj aplikací pomocí AI bez hluboké znalosti kódu).</li><li>Rychle vytvořené aplikace sice vzniknou za jediný víkend, ale v horizontu několika měsíců narážejí na <strong>technické problémy</strong> (technologický a vědomostní dluh). Role programátora se tak mění z písaře kódu na <strong>architekta a revizora</strong>.</li></ul><div class="why-box"><p>Pro začínající vývojáře i manažery je to jasná výzva: AI dokáže vytvořit prototyp, ale nezajistí <strong>dlouhodobou udržitelnost</strong>. Pokud stavíte projekt na AI kódu, počítejte s nutností budoucí odborné kontroly. Dovednost správně strukturovat systém a <strong>odstraňovat chyby</strong> bude ceněna více než samotný zápis syntaxe. Nezapomínejte, že <strong>rychlost na startu</strong> nezaručuje úspěch v cíli.</p></div><p>Zdroj: CzechCrunch</p><h3>🎓 <a href="https://vtm.zive.cz/clanky/mazany-profesor-nachytal-studenty-pri-podvadeni-s-ai-vetsina-si-vygenerovany-text-ani-neprecetla/sc-870-a-242476/default.aspx">Mazaný profesor nachytal studenty při podvádění s AI. Většina si vygenerovaný text ani nepřečetla</a></h3><p><strong>Skrytý text v zadání odhalil bezmyšlenkovité kopírování odpovědí z AI.</strong></p><ul><li>Profesor dějepisu odhalil podvádějící studenty jednoduchým trikem s vkládáním <strong>skrytého textu</strong> do zadání. Studenti zadání vložili do AI a vygenerovanou odpověď <strong>bezmyšlenkovitě zkopírovali</strong>.</li><li>Většina zkoušených si text před odevzdáním vůbec nepřečetla, čímž se sami prozradili. Tento fenomén nutí <strong>školy po celém světě</strong> k zásadní proměně způsobu <strong>prověřování znalostí</strong>.</li></ul><div class="why-box"><p>Tento příklad dokonale ilustruje riziko <strong>slepé důvěry</strong> v nástroje umělé inteligence. Ať už jste student, manažer nebo podnikatel, výstup z AI musíte vždy důkladně zkontrolovat. Pouhé kopírování textů bez porozumění vede ke <strong>ztrátě kredibility</strong> a fatálním chybám. Vzdělávací i pracovní trh bude stále více vyžadovat <strong>kritické myšlení</strong> a schopnost ověřovat fakta.</p></div><p>Zdroj: Živě CZ</p><hr>
+                </div>
+                
+                <a href="/digest" class="digest-back">
+                    ← Zpět do archivu
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER - Reuse from index.html -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">© 2026-07-30 <strong>simondusek.com</strong> · Šimon Dušek</div>
+                <div class="footer-links">
+                    <a href="/">Hlavní stránka</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlEl = document.documentElement;
+
+        function updateThemeIcon(theme) {
+            if (themeIcon) {
+                themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+
+        updateThemeIcon(htmlEl.getAttribute('data-theme') || 'dark');
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const current = htmlEl.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+                const next = current === 'dark' ? 'light' : 'dark';
+                htmlEl.setAttribute('data-theme', next);
+                try {
+                    localStorage.setItem('theme', next);
+                } catch (e) {}
+                updateThemeIcon(next);
+            });
+        }
+
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Nav scroll effect
+        const nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+        
+        // Floating CTA Widget
+        const ctaButton = document.getElementById('cta-button');
+        const ctaPanel = document.getElementById('cta-panel');
+        const ctaClose = document.getElementById('cta-close');
+        const ctaForm = document.getElementById('cta-form');
+        const ctaSuccess = document.getElementById('cta-success');
+        const ctaEmailInput = document.getElementById('cta-email');
+        
+        // Show CTA button after scrolling 150px
+        let ctaShown = false;
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 150 && !ctaShown) {
+                ctaButton.classList.add('visible');
+                ctaShown = true;
+            }
+        }, { passive: true });
+        
+        // Toggle CTA panel
+        function toggleCTA() {
+            ctaButton.classList.toggle('active');
+            ctaPanel.classList.toggle('visible');
+            if (ctaPanel.classList.contains('visible')) {
+                ctaEmailInput.focus();
+            }
+        }
+        
+        // Close CTA panel
+        function closeCTA() {
+            ctaButton.classList.remove('active');
+            ctaPanel.classList.remove('visible');
+        }
+        
+        // Form submission
+        function handleCTASubmit(e) {
+            e.preventDefault();
+            const email = ctaEmailInput.value.trim();
+            if (email) {
+                // Here you would typically send to Ecomail API
+                // For now, just show success message
+                ctaForm.style.display = 'none';
+                ctaSuccess.classList.add('visible');
+                
+                // Reset after 3 seconds
+                setTimeout(() => {
+                    ctaSuccess.classList.remove('visible');
+                    ctaForm.style.display = 'flex';
+                    ctaEmailInput.value = '';
+                    closeCTA();
+                    ctaShown = false;
+                }, 3000);
+            }
+        }
+        
+        // Event listeners
+        if (ctaButton) ctaButton.addEventListener('click', toggleCTA);
+        if (ctaClose) ctaClose.addEventListener('click', closeCTA);
+        if (ctaForm) ctaForm.addEventListener('submit', handleCTASubmit);
+        
+        // Close on outside click
+        document.addEventListener('click', (e) => {
+            if (ctaPanel && !ctaPanel.contains(e.target) && !ctaButton.contains(e.target)) {
+                closeCTA();
+            }
+        });
+    </script>
+
+    <!-- Floating CTA Widget -->
+    <div class="cta-widget">
+        <button id="cta-button" class="cta-button" type="button" aria-label="Odebírat Digest">
+            <span>⚡</span>
+            <span>Odebírat Digest</span>
+        </button>
+        <div id="cta-panel" class="cta-panel">
+            <button id="cta-close" class="cta-close" type="button" aria-label="Zavřít">✕</button>
+            <h4>Získejte 30+ hodin esence v 3 minutách</h4>
+            <p>Přihlaste se k odběru a dostávejte nejdůležitější novinky ze světa technologií přímo do své schránky.</p>
+            <form id="cta-form" class="cta-form">
+                <input 
+                    id="cta-email" 
+                    class="cta-input" 
+                    type="email" 
+                    placeholder="Váš e-mail" 
+                    required
+                    autocomplete="email"
+                >
+                <button type="submit" class="cta-submit">Chci odběr</button>
+            </form>
+            <div id="cta-success" class="cta-success">
+                <div class="cta-success-icon">✓</div>
+                <div class="cta-success-text">Děkujeme za příhlášení!</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

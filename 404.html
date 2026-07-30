@@ -96,22 +96,10 @@ permalink: /404.html
             left: -200px;
         }
         
-        /* Mobile performance: Reduce blur on orbs */
+        /* Mobile performance: Disable floating orbs completely on mobile */
         @media (max-width: 767px) {
             .floating-orb {
-                filter: blur(40px);
-            }
-            .floating-orb.orb-1 {
-                width: 400px;
-                height: 400px;
-                top: -100px;
-                right: -100px;
-            }
-            .floating-orb.orb-2 {
-                width: 350px;
-                height: 350px;
-                bottom: -50px;
-                left: -150px;
+                display: none;
             }
         }
 
@@ -148,11 +136,12 @@ permalink: /404.html
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
         
-        /* Mobile performance: Reduce backdrop blur on nav */
+        /* Mobile performance: Replace backdrop blur with solid background */
         @media (max-width: 767px) {
             .nav {
-                backdrop-filter: blur(12px) saturate(180%);
-                -webkit-backdrop-filter: blur(12px) saturate(180%);
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: rgba(248, 248, 249, 0.95);
             }
         }
         
@@ -302,8 +291,7 @@ permalink: /404.html
             right: 0;
             bottom: 0;
             background: rgba(248, 248, 249, 0.95);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
             z-index: 199;
             opacity: 0;
             visibility: hidden;
@@ -320,9 +308,7 @@ permalink: /404.html
             top: 70px;
             left: 0;
             right: 0;
-            background: var(--glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(248, 248, 249, 0.95);
             border: 1px solid var(--border);
             border-radius: var(--radius-card);
             margin: 0 clamp(1.5rem, 5vw, 3rem);
@@ -405,11 +391,13 @@ permalink: /404.html
             will-change: transform, opacity;
         }
         
-        /* Mobile performance: Reduce backdrop blur on cards */
+        /* Mobile performance: Replace backdrop blur with solid background */
         @media (max-width: 767px) {
             .error-card {
-                backdrop-filter: blur(12px) saturate(180%);
-                -webkit-backdrop-filter: blur(12px) saturate(180%);
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: rgba(248, 248, 249, 0.95);
+                border: 1px solid var(--border);
             }
         }
         
