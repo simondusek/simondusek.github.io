@@ -67,7 +67,9 @@
             --text-tertiary: #656575;
             --accent: #007AFF;
             --accent-hover: #0066cc;
+            --accent-glow: #0066f166;
             --neon: #10b981;
+            --neon-glow: rgba(16, 185, 129, 0.4);
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             --section-gap: clamp(6rem, 12vh, 10rem);
             --radius-pill: 100px;
@@ -118,6 +120,7 @@
             z-index: 0;
             opacity: var(--orb-opacity);
             transition: opacity 0.4s ease;
+            will-change: transform;
         }
         
         .floating-orb.orb-1 {
@@ -134,6 +137,13 @@
             background: radial-gradient(circle, rgba(16, 185, 129, 0.06), transparent 70%);
             bottom: -100px;
             left: -200px;
+        }
+
+        /* Mobile performance: Disable floating orbs completely on mobile */
+        @media (max-width: 767px) {
+            .floating-orb {
+                display: none;
+            }
         }
 
         .container {
@@ -186,6 +196,8 @@
             color: var(--text-primary);
             letter-spacing: -0.02em;
             text-decoration: none;
+            min-width: 0;
+            flex-shrink: 1;
         }
         
         .nav-brand-icon {
@@ -205,6 +217,9 @@
         .nav-brand-name {
             font-weight: 700;
             font-size: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .nav-right {
