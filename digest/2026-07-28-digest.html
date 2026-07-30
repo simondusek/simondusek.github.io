@@ -36,6 +36,15 @@
     <meta property="og:locale" content="cs_CZ">
     <meta property="article:published_time" content="2026-07-28T00:00:00+00:00">
     <meta property="article:author" content="Šimon Dušek">
+    <meta property="og:image" content="https://simondusek.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@DusekSimon">
+    <meta name="twitter:creator" content="@DusekSimon">
+    <meta name="twitter:image" content="https://simondusek.com/og-image.png">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png">
@@ -461,9 +470,52 @@
         }
         
         .reveal.visible {
-            opacity: 1 !important;
-            transform: none !important;
+            opacity: 1;
             transform: translateY(0);
+        }
+        
+        /* ==========================================================================
+           FLOATING CTA - Simple Link Button
+           ========================================================================== */
+        .floating-cta {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+            padding: 0.75rem 1.35rem;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.35);
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .floating-cta.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        
+        .floating-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 122, 255, 0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .floating-cta {
+                bottom: 16px;
+                right: 16px;
+                padding: 0.65rem 1.1rem;
+                font-size: 0.82rem;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            }
         }
     </style>
 
@@ -588,6 +640,25 @@
                 });
             }, 300);
         });
+    </script>
+    
+    <!-- Floating CTA tlačítko -->
+    <a href="/#hero-form" id="floating-cta" class="floating-cta" aria-label="Odebírat newsletter">
+        <span>⚡ Odebírat Digest</span>
+    </a>
+    
+    <!-- Floating CTA - show after scroll -->
+    <script>
+        window.addEventListener('scroll', function() {
+            var cta = document.getElementById('floating-cta');
+            if (cta) {
+                if (window.scrollY > 200) {
+                    cta.classList.add('visible');
+                } else {
+                    cta.classList.remove('visible');
+                }
+            }
+        }, { passive: true });
     </script>
 
 </body>
