@@ -536,9 +536,16 @@ permalink: /404.html
         }
 
         /* ==========================================================================
-           ANIMATIONS
+           ANIMATIONS - WKWebView Fallback
            ========================================================================== */
+        /* Fallback pro in-app prohlížeče a starší renderery (X.com WKWebView, atd.) */
         .reveal {
+            opacity: 1;
+            transform: none;
+        }
+        
+        /* Zpětně zapneme animaci POUZE v případě, že je JavaScript aktivní */
+        .js-enabled .reveal:not(.visible) {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
@@ -643,6 +650,9 @@ permalink: /404.html
     </footer>
 
     <script>
+        // Mark JavaScript as enabled for CSS fallback
+        document.documentElement.classList.add('js-enabled');
+        
         // Navbar scroll effect
         const nav = document.getElementById('main-nav');
         window.addEventListener('scroll', () => {

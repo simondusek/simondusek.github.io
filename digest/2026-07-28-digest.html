@@ -8,6 +8,8 @@
                 var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
                 document.documentElement.setAttribute('data-theme', theme);
             } catch (e) {}
+            // Mark JavaScript as enabled for CSS fallback
+            document.documentElement.classList.add('js-enabled');
        })();
     </script>
     <meta charset="UTF-8">
@@ -435,7 +437,14 @@
             }
         }
 
+        /* Fallback pro in-app prohlížeče a starší renderery (X.com WKWebView, atd.) */
         .reveal {
+            opacity: 1;
+            transform: none;
+        }
+        
+        /* Zpětně zapneme animaci POUZE v případě, že je JavaScript aktivní */
+        .js-enabled .reveal:not(.visible) {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),

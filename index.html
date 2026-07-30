@@ -8,6 +8,8 @@
                 var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
                 document.documentElement.setAttribute('data-theme', theme);
             } catch (e) {}
+            // Mark JavaScript as enabled for CSS fallback
+            document.documentElement.classList.add('js-enabled');
         })();
     </script>
     <meta charset="UTF-8">
@@ -971,23 +973,21 @@
         }
 
         /* ==========================================================================
-           ANIMATIONS
+           ANIMATIONS - WKWebView Fallback
            ========================================================================== */
+        /* Fallback pro in-app prohlížeče a starší renderery (X.com WKWebView, atd.) */
         .reveal {
+            opacity: 1;
+            transform: none;
+        }
+        
+        /* Zpětně zapneme animaci POUZE v případě, že je JavaScript aktivní */
+        .js-enabled .reveal:not(.visible) {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
                         transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: opacity, transform;
-        }
-        
-        /* Mobile performance: Shorter animation duration */
-        @media (max-width: 767px) {
-            .reveal {
-                opacity: 1 !important;
-                transform: none !important;
-                transition: none !important;
-            }
         }
         
         .reveal.visible {
@@ -997,6 +997,15 @@
         
         .reveal-stagger > .reveal {
             transition-delay: calc(var(--i, 0) * 0.1s);
+        }
+        
+        /* Mobile performance: Force visibility on mobile to avoid IntersectionObserver issues */
+        @media (max-width: 767px) {
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
         }
 
         /* ==========================================================================
