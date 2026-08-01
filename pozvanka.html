@@ -79,7 +79,7 @@
             background: var(--glass);
             border: 1px solid var(--border);
             border-radius: var(--radius-card);
-            padding: clamp(2rem, 5vw, 3rem);
+            padding: clamp(1.75rem, 4.5vw, 2.5rem);
             backdrop-filter: blur(24px) saturate(180%);
             -webkit-backdrop-filter: blur(24px) saturate(180%);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
@@ -92,25 +92,25 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.4rem 1rem;
+            padding: 0.35rem 0.9rem;
             border-radius: var(--radius-pill);
             background: rgba(0, 122, 255, 0.08);
             border: 1px solid rgba(0, 122, 255, 0.18);
             color: var(--accent-hover);
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 600;
             letter-spacing: 0.05em;
             text-transform: uppercase;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         h1 {
-            font-size: clamp(1.75rem, 3.5vw, 2.2rem);
+            font-size: clamp(1.65rem, 3.2vw, 2.1rem);
             font-weight: 800;
             letter-spacing: -0.03em;
-            line-height: 1.25;
+            line-height: 1.2;
             color: var(--text-primary);
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
         }
 
         h1 .text-gradient {
@@ -119,47 +119,16 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .invite-message {
-            font-size: 1.02rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            line-height: 1.7;
-            text-align: left;
+        /* Form section - Top Priority */
+        .hero-action {
+            margin-bottom: 1rem;
         }
 
-        .invite-message strong {
-            color: var(--text-primary);
-        }
-
-        .features {
-            display: grid;
-            gap: 0.75rem;
-            text-align: left;
-            margin-bottom: 2rem;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            padding: 0.9rem 1.1rem;
-            background: var(--glass-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            font-size: 0.92rem;
-            color: var(--text-secondary);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.01);
-        }
-
-        .feature-item .icon { font-size: 1.1rem; flex-shrink: 0; }
-        .feature-item strong { color: var(--text-primary); }
-
-        /* Form */
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
+            gap: 0.65rem;
+            margin-bottom: 0.6rem;
         }
 
         @media (min-width: 500px) {
@@ -170,7 +139,7 @@
 
         .input-email {
             flex: 1;
-            padding: 0.85rem 1.25rem;
+            padding: 0.8rem 1.25rem;
             font-family: var(--font-sans);
             font-size: 0.95rem;
             border: 1px solid var(--border);
@@ -188,7 +157,7 @@
         }
 
         .btn-submit {
-            padding: 0.85rem 1.75rem;
+            padding: 0.8rem 1.6rem;
             font-family: var(--font-sans);
             font-size: 0.95rem;
             font-weight: 600;
@@ -208,12 +177,53 @@
             box-shadow: 0 8px 20px var(--accent-glow);
         }
 
-        .footer-note {
+        .consent-note {
             font-size: 0.78rem;
             color: var(--text-tertiary);
+            line-height: 1.4;
         }
 
-        .footer-note a { color: var(--text-secondary); text-decoration: underline; }
+        .consent-note a { color: var(--text-secondary); text-decoration: underline; }
+
+        /* Divider between Form and Info */
+        .content-divider {
+            border-top: 1px solid var(--border);
+            margin: 1.5rem 0 1.25rem;
+        }
+
+        .invite-message {
+            font-size: 0.98rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            line-height: 1.65;
+            text-align: left;
+        }
+
+        .invite-message strong {
+            color: var(--text-primary);
+        }
+
+        .features {
+            display: grid;
+            gap: 0.65rem;
+            text-align: left;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.8rem 1rem;
+            background: var(--glass-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.01);
+        }
+
+        .feature-item .icon { font-size: 1.05rem; flex-shrink: 0; }
+        .feature-item strong { color: var(--text-primary); }
     </style>
 </head>
 <body>
@@ -226,14 +236,32 @@
         
         <h1>Šimon Dušek tě zve <br><span class="text-gradient">k odběru Digestu</span></h1>
 
+        <!-- Form Section -->
+        <div class="hero-action">
+            <form action="https://simondusek.ecomailapp.cz/public/subscribe/1/43c2cd496486bcc27217c3e790fb4088" method="post" id="invite-form">
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Vlož svůj e-mail..." required class="input-email">
+                    <button type="submit" class="btn-submit">Připoj se zdarma</button>
+                </div>
+            </form>
+
+            <p class="consent-note">
+                Zrušení odběru je možné kdykoliv jedním klikem. Podrobnosti v <a href="/gdpr" target="_blank">Ochraně údajů</a>.
+            </p>
+        </div>
+
+        <div class="content-divider"></div>
+
+        <!-- Info Section -->
         <p class="invite-message">
             <strong>Buď u toho s námi.</strong> Získejte přehled o nejdůležitějších novinkách z oblasti <strong>technologií, AI a financí</strong> bez šumu a zbytečných omáček. 
-            Každý den ti dorazí krátký <strong>10minutový Digest</strong> s tím nejpodstatnějším, a jednou měsíčně <strong>Deep Dive</strong> - hluboký rozbor jedné velké myšlenky.
+            Každý den ti dorazí krátký <strong>10minutový Digest</strong> s tím nejpodstatnějším, a jednou měsíčně <strong>Deep Dive</strong> – hluboký rozbor jedné velké myšlenky.
+        </p>
 
         <div class="features">
             <div class="feature-item">
                 <span class="icon">⚡</span>
-                <span><strong>10minutový Digest (1x denně):</strong> To nejdůležitější bez žargonu s jasným dopadem <em>Why It Matters</em>.</span>
+                <span><strong>10minutový Digest (1× denně):</strong> To nejdůležitější bez žargonu s jasným dopadem <em>Why It Matters</em>.</span>
             </div>
             <div class="feature-item">
                 <span class="icon">🧠</span>
@@ -245,16 +273,6 @@
             </div>
         </div>
 
-        <form action="https://simondusek.ecomailapp.cz/public/subscribe/1/43c2cd496486bcc27217c3e790fb4088" method="post" id="invite-form">
-            <div class="form-group">
-                <input type="email" name="email" placeholder="Vložte váš e-mail..." required class="input-email">
-                <button type="submit" class="btn-submit">Připoj se zdarma</button>
-            </div>
-        </form>
-
-        <p class="footer-note">
-            Zrušení odběru je možné kdykoliv jedním klikem. Podrobnosti v <a href="/gdpr" target="_blank">Ochraně údajů</a>.
-        </p>
     </div>
 
 </body>
