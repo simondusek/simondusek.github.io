@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="cs" data-theme="light">
+<head>
+    <script>
+        (function() {
+            document.documentElement.setAttribute('data-theme', 'light');
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osobní pozvánka — simondusek.com</title>
+    <meta name="description" content="Šimon Dušek tě zve k odběru technologického a AI Digestu.">
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Open Graph / Meta -->
+    <meta property="og:title" content="Šimon Dušek tě zve k odběru ⌘">
+    <meta property="og:description" content="Konec technologickému FOMO. Získejte přehled o AI a financích bez šumu.">
+    <meta property="og:image" content="https://simondusek.com/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-primary: #f6f6f9;
+            --glass: rgba(255, 255, 255, 0.75);
+            --glass-card: rgba(255, 255, 255, 0.6);
+            --border: rgba(10, 10, 20, 0.08);
+            --border-hover: rgba(10, 10, 20, 0.15);
+            --text-primary: #0a0a12;
+            --text-secondary: #4a4a5a;
+            --text-tertiary: #757585;
+            --accent: #007AFF;
+            --accent-hover: #0066cc;
+            --accent-glow: rgba(0, 122, 255, 0.15);
+            --neon: #059669;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --radius-card: 24px;
+            --radius-pill: 100px;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Light Orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+        .orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(0, 122, 255, 0.2), transparent 70%); top: -150px; right: -100px; }
+        .orb-2 { width: 450px; height: 450px; background: radial-gradient(circle, rgba(16, 185, 129, 0.15), transparent 70%); bottom: -150px; left: -100px; }
+
+        .invite-container {
+            width: 100%;
+            max-width: 580px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            padding: clamp(1.75rem, 4.5vw, 2.5rem);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.9rem;
+            border-radius: var(--radius-pill);
+            background: rgba(0, 122, 255, 0.08);
+            border: 1px solid rgba(0, 122, 255, 0.18);
+            color: var(--accent-hover);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: clamp(1.65rem, 3.2vw, 2.1rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin-bottom: 1.25rem;
+        }
+
+        h1 .text-gradient {
+            background: linear-gradient(135deg, var(--accent), #059669);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Form section - Top Priority */
+        .hero-action {
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+            margin-bottom: 0.6rem;
+        }
+
+        @media (min-width: 500px) {
+            .form-group {
+                flex-direction: row;
+            }
+        }
+
+        .input-email {
+            flex: 1;
+            padding: 0.8rem 1.25rem;
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-pill);
+            background: #ffffff;
+            color: var(--text-primary);
+            outline: none;
+            transition: all 0.25s ease;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+        }
+
+        .input-email:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        .btn-submit {
+            padding: 0.8rem 1.6rem;
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+            background: var(--accent);
+            border: none;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px var(--accent-glow);
+        }
+
+        .btn-submit:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px var(--accent-glow);
+        }
+
+        .consent-note {
+            font-size: 0.78rem;
+            color: var(--text-tertiary);
+            line-height: 1.4;
+        }
+
+        .consent-note a { color: var(--text-secondary); text-decoration: underline; }
+
+        /* Divider between Form and Info */
+        .content-divider {
+            border-top: 1px solid var(--border);
+            margin: 1.5rem 0 1.25rem;
+        }
+
+        .invite-message {
+            font-size: 0.98rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            line-height: 1.65;
+            text-align: left;
+        }
+
+        .invite-message strong {
+            color: var(--text-primary);
+        }
+
+        .features {
+            display: grid;
+            gap: 0.65rem;
+            text-align: left;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.8rem 1rem;
+            background: var(--glass-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.01);
+        }
+
+        .feature-item .icon { font-size: 1.05rem; flex-shrink: 0; }
+        .feature-item strong { color: var(--text-primary); }
+    </style>
+</head>
+<body>
+
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="invite-container">
+        <div class="badge">👋 Osobní Pozvánka</div>
+        
+        <h1>Šimon Dušek tě zve <br><span class="text-gradient">k beta testingu.</span></h1>
+
+        <!-- Form Section -->
+        <div class="hero-action">
+            <form action="https://simondusek.ecomailapp.cz/public/subscribe/1/43c2cd496486bcc27217c3e790fb4088" method="post" id="invite-form">
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Vlož svůj e-mail..." required class="input-email">
+                    <button type="submit" class="btn-submit">Připoj se zdarma</button>
+                </div>
+            </form>
+
+            <p class="consent-note">
+                Zrušení odběru je možné kdykoliv jedním klikem. Podrobnosti v <a href="/gdpr" target="_blank">Ochraně údajů</a>.
+            </p>
+        </div>
+
+        <div class="content-divider"></div>
+
+        <!-- Info Section - S nadsázkou a prosbou o support -->
+        <p class="invite-message">
+            <strong>Pojď mi trochu zvednout statistiky!</strong> 🚀 Web i automatizace už normálně běží a lidi sem občas zabloudí z Google. Ale jako u každého projektu jsou to <strong>přátelé a kolegové</strong>, na jejichž podpoře (a kritickém oku) se staví nejlíp. 
+            Zadej e-mail, hoď mi tam odběr a pomoz mi tenhle projekt rozjet.
+        </p>
+
+        <div class="features">
+            <div class="feature-item">
+                <span class="icon">⚡️</span>
+                <span><strong>Digest:</strong> Do mailu ti po přihlášení přistane můj ranní 10minutový Digest z AI, techu a financí, a pokud jej přečteš, možná se budeš cítit víc v obraze.</span>
+            </div>
+            <div class="feature-item">
+                <span class="icon">🎯</span>
+                <span><strong>Zero-Spam Garance:</strong> Nebudu ti posílat nesmysly. Jde o čistý filtr novinek bez balastu s dopadem <em>Why It Matters</em> na kterém aktuálně pracuji v rámci svého vzdělávání.</span>
+            </div>
+            <div class="feature-item">
+                <span class="icon">💬</span>
+                <span><strong>Napiš mi, co je blbě:</strong> Když se ti cokoliv něco nebude zdát, napiš mi to přímo do mailu. Zpětná vazba je pro mě nejdůležitější.</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
