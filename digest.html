@@ -1207,18 +1207,21 @@
             }
 
             // Funkce pro vytvoření karty příspěvku
-            function createPostCard(post, nextPost = null) {
+            function createPostCard(post) {
                 const icon = getTypeIcon(post.type);
                 const dateObj = formatDate(post.date);
-                const headline = extractHeadline(post.excerpt || '');
-                const excerpt = post.excerpt || '';
-                const url = post.url || '#';
                 
-                // Získat další hook z dalšího článku (pokud existuje)
-                let secondHook = '';
-                if (nextPost && nextPost.excerpt) {
-                    secondHook = extractHeadline(nextPost.excerpt);
-                }
+                // Čistý nadpis z main_hook (nebo fallback)
+                let headline = post.main_hook || post.title || 'Digest';
+                // Očistit případná zbylá emoji z nadpisu
+                headline = headline.replace(/^[\u{1F300}-\u{1F9FF}\u{2600}-\u{27BF}\u{1F600}-\u{1F64F}]+\s*/gu, '').trim();
+                
+                // Čistý perex z excerpt (bez duplicity nadpisu)
+                let excerpt = post.excerpt || '';
+                excerpt = excerpt.replace(/^[\u{1F300}-\u{1F9FF}\u{2600}-\u{27BF}\u{1F600}-\u{1F64F}]+\s*/gu, '').trim();
+                
+                const secondHook = post.second_hook || '';
+                const url = post.url || '#';
                 
                 const card = document.createElement('a');
                 card.href = url;
@@ -1234,7 +1237,7 @@
                         </div>
                         <h2>${headline}</h2>
                         <p>${excerpt}</p>
-                        ${secondHook ? `<h3>${secondHook}</h3><p>a další</p>` : ''}
+                        ${secondHook ? `<h3>${secondHook}</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>` : ''}
                     </div>
                     <div class="post-footer">
                         Číst vydání →
@@ -1315,9 +1318,8 @@
                         });
                         
                         // Vygenerujeme karty pro všechny příspěvky
-                        posts.forEach((post, index) => {
-                            const nextPost = index < posts.length - 1 ? posts[index + 1] : null;
-                            const card = createPostCard(post, nextPost);
+                        posts.forEach((post) => {
+                            const card = createPostCard(post);
                             container.appendChild(card);
                         });
                         

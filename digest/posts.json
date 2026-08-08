@@ -4,83 +4,107 @@
     "date": "08. 08. 2026",
     "type": "Digest",
     "url": "/digest/2026-08-08-digest.html",
-    "excerpt": "🛡️ OpenAI odkládá další velký AI model „Astra“ kvůli kritickým obavám z hackerů Nejnovější umělá inteligence od OpenAI je natolik schopná v kyberútocích, že ji firma raději zamkla OpenAI oficiálně pozastavuje veškeré aktivity kolem chystaného modelu Astra..."
+    "excerpt": "OpenAI oficiálně pozastavuje veškeré aktivity kolem chystaného modelu Astra. Důvodem jsou jeho kybernetické schopnosti, které interní testy vyhodnotily jako potenciálně příliš nebezpečné.",
+    "main_hook": "OpenAI odkládá další velký AI model „Astra“ kvůli kritickým obavám z hackerů",
+    "second_hook": "AMD kupuje Taalas, startup, který peče AI modely přímo do křemíku"
   },
   {
     "title": "Digest",
     "date": "07. 08. 2026",
     "type": "Digest",
     "url": "/digest/2026-08-07-digest.html",
-    "excerpt": "✂️ Softwarový gigant SAP zastavuje většinu cestování a náborů kvůli rostoucím nákladům na AI Závody ve zbrojení umělou inteligencí začínají tvrdě dopadat na běžné zaměstnance Vedení společnosti SAP oznámilo, že firma musí být maximálně disciplinovaná v tom, jak utrácí peníze..."
+    "excerpt": "Závody ve zbrojení umělou inteligencí začínají tvrdě dopadat na běžné zaměstnance.",
+    "main_hook": "Softwarový gigant SAP zastavuje většinu cestování a náborů kvůli rostoucím nákladům na AI",
+    "second_hook": "Cloudflare chce poskytovat operační systém pro podniky postavené na AI"
   },
   {
     "title": "Digest",
     "date": "06. 08. 2026",
     "type": "Digest",
     "url": "/digest/2026-08-06-digest.html",
-    "excerpt": "🍏 Nový AI agent od Mety pro Mac je až 20x levnější, pokud na vašich datech může trénovat Levná umělá inteligence má svou cenu – vaše vlastní zdrojové kódy Meta spustila beta verzi terminálového agenta Muse Code pro macOS a Linux, kterého pohání nový model Muse Spark 1..."
+    "excerpt": "Levná umělá inteligence má svou cenu – vaše vlastní zdrojové kódy.",
+    "main_hook": "Nový AI agent od Mety pro Mac je až 20x levnější, pokud na vašich datech může trénovat",
+    "second_hook": "Google cílí na technologie a talenty AI startupu Mechanize v navrhované dohodě za 1,5 miliardy dolarů"
   },
   {
     "title": "Digest",
     "date": "05. 08. 2026",
     "type": "Digest",
     "url": "/digest/2026-08-05-digest.html",
-    "excerpt": "🚀 Výdaje SpaceX na umělou inteligenci znervózňují Wall Street navzdory slibům o rychlé návratnosti Investoři se ptají, zda se masivní sázky Elona Muska na AI skutečně vyplatí Vedení společnosti SpaceX poprvé od svého vstupu na burzu (IPO) promluvilo k investorům na Wall Street..."
+    "excerpt": "Investoři se ptají, zda se masivní sázky Elona Muska na AI skutečně vyplatí.",
+    "main_hook": "Výdaje SpaceX na umělou inteligenci znervózňují Wall Street navzdory slibům o rychlé návratnosti",
+    "second_hook": "Bílý dům a AI firmy tají detaily jednání o bezpečnostních pravidlech"
   },
   {
     "title": "Digest",
     "date": "04. 08. 2026",
     "type": "Digest",
     "url": "/digest/2026-08-04-digest.html",
-    "excerpt": "🚁 Americká AI umožňuje levným ukrajinským kamikadze dronům samostatně sledovat cíle Autonomní zbraně už nejsou sci-fi, ale realita za 100 milionů dolarů Dohoda v hodnotě 100 milionů dolarů přináší na bojiště novou technologii..."
+    "excerpt": "Autonomní zbraně už nejsou sci-fi, ale realita za 100 milionů dolarů.",
+    "main_hook": "Americká AI umožňuje levným ukrajinským kamikadze dronům samostatně sledovat cíle",
+    "second_hook": "Po získání miliardy dolarů plánuje Valar Atomics masovou výrobu malých jaderných reaktorů pro AI průmysl"
   },
   {
     "title": "Digest",
     "date": "03. 08. 2026",
     "type": "Digest",
     "url": "/digest/2026-08-03-digest.html",
-    "excerpt": "🧠 Meta AI používá druhého AI agenta jako paměťového kouče pro udržení dlouhých úkolů Umělá inteligence dostává vlastního asistenta, aby přestala opakovat stejné hloupé chyby Meta AI chce zabránit tomu, aby AI agenti při složitých úkolech zapomínali na již odhalené chyby a opakovali selhávající kroky..."
+    "excerpt": "Umělá inteligence dostává vlastního asistenta, aby přestala opakovat stejné hloupé chyby.",
+    "main_hook": "Meta AI používá druhého AI agenta jako paměťového kouče pro udržení dlouhých úkolů",
+    "second_hook": "Claude Opus 5 posouvá tvorbu her pomocí AI od hrubých bloků k plným 3D prototypům"
   },
   {
     "title": "Digest",
     "date": "02. 08. 2026",
     "type": "Digest",
     "url": "/digest/2026-08-02-digest.html",
-    "excerpt": "⚖️ Po incidentu s Hugging Face žádá METR nezávislé vyšetřování nevhodného chování AI agentů Kdo ponese odpovědnost, když umělá inteligence začne jednat na vlastní pěst Výzkumná organizace METR požaduje systematické a nezávisle vedené vyšetřování v případech, kdy AI agenti jednají autonomně proti záměrům svých vývojářů..."
+    "excerpt": "Kdo ponese odpovědnost, když umělá inteligence začne jednat na vlastní pěst?",
+    "main_hook": "Po incidentu s Hugging Face žádá METR nezávislé vyšetřování nevhodného chování AI agentů",
+    "second_hook": "Exkluzivně: Upwind přidává skenování kontextu pro AI agenty a spouští AI DR pro veřejnost"
   },
   {
     "title": "Digest",
     "date": "01. 08. 2026",
     "type": "Digest",
     "url": "/digest/2026-08-01-digest.html",
-    "excerpt": "🤖 OpenAI údajně našla důkazy, že se další z jejich agentů vymkl kontrole Autonomní AI agenti se znova utrhli ze řetězu a OpenAI vyšetřuje další incident Společnost OpenAI podle dostupných zpráv odhalila důkazy o dalším nevhodném chování svých AI agentů (autonomních systémů plnících úkoly bez lidského zásahu)..."
+    "excerpt": "Autonomní AI agenti se znova utrhli ze řetězu a OpenAI vyšetřuje další incident.",
+    "main_hook": "OpenAI údajně našla důkazy, že se další z jejich agentů vymkl kontrole",
+    "second_hook": "Google Deepmind představuje Gemini Robotics 2 pro pohánění robotů všech tvarů od stolních ramen po humanoidy"
   },
   {
     "title": "Digest",
     "date": "31. 07. 2026",
     "type": "Digest",
     "url": "/digest/2026-07-31-digest.html",
-    "excerpt": "💸 OpenAI přechází na čínské ceny a zlevňuje svůj nejdostupnější model GPT-5 6 o 80 procent OpenAI drasticky sráží ceny AI modelů – zjistěte, jak na tom ušetříte i vy..."
+    "excerpt": "OpenAI drasticky sráží ceny AI modelů – zjistěte, jak na tom ušetříte i vy!",
+    "main_hook": "OpenAI přechází na čínské ceny a zlevňuje svůj nejdostupnější model GPT-5.6 o 80 procent",
+    "second_hook": "Lloyds Bank vsází na AI a plánuje do roku 2030 ušetřit 2 miliardy liber, zatímco jí rostou zisky"
   },
   {
     "title": "Digest",
     "date": "30. 07. 2026",
     "type": "Digest",
     "url": "/digest/2026-07-30-digest.html",
-    "excerpt": "💳 Revolut se spojil s OpenAI a nabízí ChatGPT Go v rámci svých předplatných Získejte bezplatný přístup k prémiové AI přímo v aplikaci Vašich financí Fintechový gigant Revolut uzavřel nové partnerství se společností OpenAI..."
+    "excerpt": "Získejte bezplatný přístup k prémiové AI přímo v aplikaci Vašich financí.",
+    "main_hook": "Revolut se spojil s OpenAI a nabízí ChatGPT Go v rámci svých předplatných",
+    "second_hook": "Microsoft potvrzuje, že Copilot superaplikace dorazí ještě letos"
   },
   {
     "title": "Digest",
     "date": "29. 07. 2026",
     "type": "Digest",
     "url": "/digest/2026-07-29-digest.html",
-    "excerpt": "🛡️ Anthropic tvrdí, že jeho model Mythos odhalil zranitelnosti v kryptografických algoritmech zabezpečujících internet AI našla kritické zranitelnosti v klíčovém zabezpečení internetu za pouhých 60 hodin Model Claude Mythos Preview od společnosti Anthropic odhalil slabiny v klíčových kryptografických algoritmech..."
+    "excerpt": "AI našla kritické zranitelnosti v klíčovém zabezpečení internetu za pouhých 60 hodin.",
+    "main_hook": "Anthropic tvrdí, že jeho model Mythos odhalil zranitelnosti v kryptografických algoritmech zabezpečujících internet",
+    "second_hook": "Studie uvádí, že spoléhání se na AI může proměnit pochybnosti ve falešnou sebejistotu"
   },
   {
     "title": "Digest",
     "date": "28. 07. 2026",
     "type": "Digest",
     "url": "/digest/2026-07-28-digest.html",
-    "excerpt": "💳 X Money dnes v USA zahajuje provoz Elon Musk spouští vlastní finanční platformu a chce změnit placení od základu Služba X Money představuje klíčový krok v plánu Elona Muska proměnit platformu X ve všestrannou aplikaci..."
+    "excerpt": "Elon Musk spouští vlastní finanční platformu a chce změnit placení od základu!",
+    "main_hook": "X Money dnes v USA zahajuje provoz",
+    "second_hook": "Plné váhy modelu Kimi K3 jsou venku, ale mají háček: Co by měly firmy vědět"
   }
 ]

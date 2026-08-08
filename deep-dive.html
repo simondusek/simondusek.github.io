@@ -1136,8 +1136,16 @@
             function createPostCard(post) {
                 const icon = getTypeIcon(post.type);
                 const date = formatDate(post.date);
-                const title = post.title || 'Bez názvu';
-                const excerpt = post.excerpt || '';
+                
+                // Čistý nadpis z main_hook (nebo fallback)
+                let title = post.main_hook || post.title || 'Bez názvu';
+                title = title.replace(/^[\u{1F300}-\u{1F9FF}\u{2600}-\u{27BF}\u{1F600}-\u{1F64F}]+\s*/gu, '').trim();
+                
+                // Čistý perex z excerpt
+                let excerpt = post.excerpt || '';
+                excerpt = excerpt.replace(/^[\u{1F300}-\u{1F9FF}\u{2600}-\u{27BF}\u{1F600}-\u{1F64F}]+\s*/gu, '').trim();
+                
+                const secondHook = post.second_hook || '';
                 const url = post.url || '#';
                 
                 const card = document.createElement('a');
@@ -1151,6 +1159,7 @@
                         </div>
                         <h2>${title}</h2>
                         <p>${excerpt}</p>
+                        ${secondHook ? `<h3>${secondHook}</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>` : ''}
                     </div>
                     <div class="post-footer">
                         Číst článek →
