@@ -572,11 +572,9 @@
 
         .post-meta {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: space-between;
-            font-size: 0.78rem;
-            color: var(--text-tertiary);
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
         }
 
         .post-issue {
@@ -584,22 +582,77 @@
             color: var(--accent-hover);
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            font-size: 0.78rem;
+        }
+
+        .post-date {
+            text-align: right;
+            font-size: 0.9rem;
+        }
+
+        .post-date .date-day-month {
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+            font-size: 1.1rem;
+            letter-spacing: -0.015em;
+        }
+
+        .post-date .date-year {
+            color: var(--text-tertiary);
+            display: block;
+            margin-top: 0.05rem;
+            font-size: 0.85rem;
         }
 
         .post-card h2 {
-            font-size: 1.35rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            line-height: 1.3;
+            line-height: 1.35;
             letter-spacing: -0.02em;
-            margin-bottom: 0.85rem;
+            margin-bottom: 0.75rem;
             color: var(--text-primary);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .post-card h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin: 1rem 0 0.5rem 0;
+            color: var(--text-primary);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .post-card p {
-            font-size: 0.92rem;
+            font-size: 0.9rem;
             color: var(--text-secondary);
             line-height: 1.6;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .post-card p + h3 {
+            margin-top: 1.25rem;
+        }
+
+        .post-card p:last-of-type {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--text-tertiary);
+            margin-bottom: 1rem;
         }
 
         .post-footer {
@@ -1099,43 +1152,73 @@
                 return typeMap[type] || '📰';
             }
 
+            // Pomocná funkce pro formátování dne a měsíce
+            function formatDayMonth(day, month) {
+                const months = ['ledna', 'února', 'března', 'dubna', 'května', 'června', 'července', 'srpna', 'září', 'října', 'listopadu', 'prosince'];
+                return `${day}. ${months[month - 1]}`;
+            }
+
             // Funkce pro formátování data
             function formatDate(dateStr) {
-                if (!dateStr) return '';
+                if (!dateStr) return { dayMonth: '', year: '' };
                 
                 // Pokud je již ve formátu "DD. MM. YYYY"
                 if (/^\d{1,2}\. \d{1,2}\. \d{4}$/.test(dateStr)) {
-                    return dateStr;
+                    const [day, month, year] = dateStr.split('. ').map(Number);
+                    return { dayMonth: formatDayMonth(day, month), year: year.toString() };
                 }
                 
                 // Pokud je ve formátu ISO (YYYY-MM-DD)
                 if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
-                    const [year, month, day] = dateStr.split('-');
-                    return `${parseInt(day)}. ${parseInt(month)}. ${year}`;
+                    const [year, month, day] = dateStr.split('-').map(Number);
+                    return { dayMonth: formatDayMonth(day, month), year: year.toString() };
                 }
                 
                 // Pokud je datum v jiném formátu
                 try {
                     const date = new Date(dateStr);
                     if (!isNaN(date.getTime())) {
-                        return date.toLocaleDateString('cs-CZ', {
-                            day: 'numeric',
-                            month: 'numeric',
-                            year: 'numeric'
-                        });
+                        const day = date.getDate();
+                        const month = date.getMonth() + 1;
+                        const year = date.getFullYear();
+                        return { dayMonth: formatDayMonth(day, month), year: year.toString() };
                     }
                 } catch (e) {}
                 
-                return dateStr;
+                return { dayMonth: dateStr, year: '' };
+            }
+            
+            // Funkce pro extrakci nadpisu z perexu
+            function extractHeadline(excerpt) {
+                if (!excerpt) return 'Bez názvu';
+                
+                // Odstraní emoji z počátku
+                const emojiPattern = /^[\u{1F300}-\u{1F6FF}\u{1F900}-\u{1F9FF}]/u;
+                let text = excerpt.replace(emojiPattern, '').trim();
+                
+                // Najde první větu
+                const firstSentenceMatch = text.match(/^[^.!?]*[.!?]/);
+                if (firstSentenceMatch) {
+                    return firstSentenceMatch[0].trim();
+                }
+                
+                // Pokud není tečka, vezme první 70 znaků
+                return text.substring(0, 70).trim() + (text.length > 70 ? '...' : '');
             }
 
             // Funkce pro vytvoření karty příspěvku
-            function createPostCard(post) {
+            function createPostCard(post, nextPost = null) {
                 const icon = getTypeIcon(post.type);
-                const date = formatDate(post.date);
-                const title = post.title || 'Bez názvu';
+                const dateObj = formatDate(post.date);
+                const headline = extractHeadline(post.excerpt || '');
                 const excerpt = post.excerpt || '';
                 const url = post.url || '#';
+                
+                // Získat další hook z dalšího článku (pokud existuje)
+                let secondHook = '';
+                if (nextPost && nextPost.excerpt) {
+                    secondHook = extractHeadline(nextPost.excerpt);
+                }
                 
                 const card = document.createElement('a');
                 card.href = url;
@@ -1144,10 +1227,14 @@
                     <div>
                         <div class="post-meta">
                             <span class="post-issue">${icon} ${post.type || 'Digest'}</span>
-                            <time>${date}</time>
+                            <div class="post-date">
+                                <span class="date-day-month">${dateObj.dayMonth}</span>
+                                <span class="date-year">${dateObj.year}</span>
+                            </div>
                         </div>
-                        <h2>${title}</h2>
+                        <h2>${headline}</h2>
                         <p>${excerpt}</p>
+                        ${secondHook ? `<h3>${secondHook}</h3><p>a další</p>` : ''}
                     </div>
                     <div class="post-footer">
                         Číst vydání →
@@ -1228,8 +1315,9 @@
                         });
                         
                         // Vygenerujeme karty pro všechny příspěvky
-                        posts.forEach(post => {
-                            const card = createPostCard(post);
+                        posts.forEach((post, index) => {
+                            const nextPost = index < posts.length - 1 ? posts[index + 1] : null;
+                            const card = createPostCard(post, nextPost);
                             container.appendChild(card);
                         });
                         
