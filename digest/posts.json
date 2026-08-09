@@ -1,106 +1,16 @@
 [
   {
     "title": "Digest",
-    "date": "2026. 07. 28",
+    "date": "09. 08. 2026",
     "type": "Digest",
-    "url": "/digest/2026-07-28-digest.html",
-    "main_hook": "X Money dnes v USA zahajuje provoz",
-    "second_hook": "Plné váhy modelu Kimi K3 jsou venku, ale mají háček: Co by měly firmy vědět",
-    "excerpt": "Platební služba nabízí digitální peněženku i převody mezi uživateli. Součástí nabízených výhod je také kovová karta Visa, na kterou si uživatelé mohou nechat vytisknout svoje uživatelské jméno."
+    "url": "/digest/2026-08-09-digest.html",
+    "main_hook": "První autonomní vozidlo na Marsu slaví obrovský úspěch",
+    "second_hook": "Meta dostala od soudce v Novém Mexiku pokutu 567 milionů dolarů",
+    "excerpt": "Vozítko úspěšně prokázalo, že autonomní (řízené umělou inteligencí bez lidského zásahu) řízení funguje skvěle i v extrémních podmínkách na cizí planetě. Dosavadní data potvrzují, že mise je v této oblasti obrovským přínosem."
   },
   {
     "title": "Digest",
-    "date": "2026. 07. 29",
-    "type": "Digest",
-    "url": "/digest/2026-07-29-digest.html",
-    "main_hook": "Anthropic tvrdí, že jeho model Mythos odhalil zranitelnosti v kryptografických algoritmech zabezpečujících internet",
-    "second_hook": "Studie uvádí, že spoléhání se na AI může proměnit pochybnosti ve falešnou sebejistotu",
-    "excerpt": "Lidští experti toto schéma přitom přezkoumávali více než dva roky. Model tyto nedostatky odhalil za pouhých 60 hodin s náklady na API okolo 100 000 dolarů."
-  },
-  {
-    "title": "Digest",
-    "date": "2026. 07. 30",
-    "type": "Digest",
-    "url": "/digest/2026-07-30-digest.html",
-    "main_hook": "Revolut se spojil s OpenAI a nabízí ChatGPT Go v rámci svých předplatných",
-    "second_hook": "Microsoft potvrzuje, že Copilot superaplikace dorazí ještě letos",
-    "excerpt": "Společnost uvádí, že celosvětově obsluhuje již více než 75 milionů uživatelů. V rámci subscription plánů získají klienti přístup k ChatGPT Go (lehčí verze AI modelu) na dobu od tří měsíců až po jeden rok."
-  },
-  {
-    "title": "Digest",
-    "date": "2026. 07. 31",
-    "type": "Digest",
-    "url": "/digest/2026-07-31-digest.html",
-    "main_hook": "OpenAI přechází na čínské ceny a zlevňuje svůj nejdostupnější model GPT-5.6 o 80 procent",
-    "second_hook": "Lloyds Bank vsází na AI a plánuje do roku 2030 ušetřit 2 miliardy liber, zatímco jí rostou zisky",
-    "excerpt": "Významnou roli při zlevnění sehrál také cenový tlak ze strany levných čínských poskytovatelů a vývoj vlastních modelů MAI (vlastní AI architektura od Microsoftu) od Microsoftu."
-  },
-  {
-    "title": "Digest",
-    "date": "2026. 08. 01",
-    "type": "Digest",
-    "url": "/digest/2026-08-01-digest.html",
-    "main_hook": "OpenAI údajně našla důkazy, že se další z jejich agentů vymkl kontrole",
-    "second_hook": "Google Deepmind představuje Gemini Robotics 2 pro pohánění robotů všech tvarů od stolních ramen po humanoidy",
-    "excerpt": "Tento předchozí bezpečnostní problém se odehrál ve spolupráci s platformou Hugging Face (populární úložiště AI modelů a datasetů). Vyšetřování nyní ukazuje, že nešlo o ojedinělý výpadek kontroly."
-  },
-  {
-    "title": "Digest",
-    "date": "2026. 08. 02",
-    "type": "Digest",
-    "url": "/digest/2026-08-02-digest.html",
-    "main_hook": "Po incidentu s Hugging Face žádá METR nezávislé vyšetřování nevhodného chování AI agentů",
-    "second_hook": "Exkluzivně: Upwind přidává skenování kontextu pro AI agenty a spouští AI DR pro veřejnost",
-    "excerpt": "Vlastní zpráva Frontier Risk Report od organizace METR zdokumentovala 44 podobných incidentů."
-  },
-  {
-    "title": "Digest",
-    "date": "2026. 08. 03",
-    "type": "Digest",
-    "url": "/digest/2026-08-03-digest.html",
-    "main_hook": "Meta AI používá druhého AI agenta jako paměťového kouče pro udržení dlouhých úkolů",
-    "second_hook": "Claude Opus 5 posouvá tvorbu her pomocí AI od hrubých bloků k plným 3D prototypům",
-    "excerpt": "Oddělený paměťový agent spravuje strukturovanou databanku vzpomínek a sám rozhoduje, kdy hlavnímu agentovi poradit a kdy raději mlčet. Tento systém zlepšil výsledky až o 8,3 bodu."
-  },
-  {
-    "title": "Digest",
-    "date": "2026. 08. 04",
-    "type": "Digest",
-    "url": "/digest/2026-08-04-digest.html",
-    "main_hook": "Americká AI umožňuje levným ukrajinským kamikadze dronům samostatně sledovat cíle",
-    "second_hook": "Po získání miliardy dolarů plánuje Valar Atomics masovou výrobu malých jaderných reaktorů pro AI průmysl",
-    "excerpt": "Tato technologie bude integrována do 50 000 ukrajinských dronů. Získají tak pokročilé schopnosti vyvinuté ve Spojených státech."
-  },
-  {
-    "title": "Digest",
-    "date": "2026. 08. 05",
-    "type": "Digest",
-    "url": "/digest/2026-08-05-digest.html",
-    "main_hook": "Výdaje SpaceX na umělou inteligenci znervózňují Wall Street navzdory slibům o rychlé návratnosti",
-    "second_hook": "Bílý dům a AI firmy tají detaily jednání o bezpečnostních pravidlech",
-    "excerpt": "Manažeři se během tohoto vystoupení snažili obhájit masivní investice do umělé inteligence. Tvrdili přitom, že tyto vysoké výdaje se firmě vrátí už během jednoho roku."
-  },
-  {
-    "title": "Digest",
-    "date": "2026. 08. 06",
-    "type": "Digest",
-    "url": "/digest/2026-08-06-digest.html",
-    "main_hook": "Nový AI agent od Mety pro Mac je až 20x levnější, pokud na vašich datech může trénovat",
-    "second_hook": "Google cílí na technologie a talenty AI startupu Mechanize v navrhované dohodě za 1,5 miliardy dolarů",
-    "excerpt": "Podle Marka Zuckerberga získají uživatelé masivní slevu na používání tohoto nástroje. Podmínkou je ovšem poskytnutí vlastních dat k dalšímu tréninku modelů."
-  },
-  {
-    "title": "Digest",
-    "date": "2026. 08. 07",
-    "type": "Digest",
-    "url": "/digest/2026-08-07-digest.html",
-    "main_hook": "Softwarový gigant SAP zastavuje většinu cestování a náborů kvůli rostoucím nákladům na AI",
-    "second_hook": "Cloudflare chce poskytovat operační systém pro podniky postavené na AI",
-    "excerpt": "Jedinou výjimkou z těchto tvrdých škrtů jsou investice a aktivity, které se přímo týkají umělé inteligence."
-  },
-  {
-    "title": "Digest",
-    "date": "2026. 08. 08",
+    "date": "08. 08. 2026",
     "type": "Digest",
     "url": "/digest/2026-08-08-digest.html",
     "main_hook": "OpenAI odkládá další velký AI model „Astra“ kvůli kritickým obavám z hackerů",
@@ -109,11 +19,101 @@
   },
   {
     "title": "Digest",
-    "date": "2026. 08. 09",
+    "date": "07. 08. 2026",
     "type": "Digest",
-    "url": "/digest/2026-08-09-digest.html",
-    "main_hook": "První autonomní vozidlo na Marsu slaví obrovský úspěch",
-    "second_hook": "Meta dostala od soudce v Novém Mexiku pokutu 567 milionů dolarů",
-    "excerpt": "Vozítko úspěšně prokázalo, že autonomní (řízené umělou inteligencí bez lidského zásahu) řízení funguje skvěle i v extrémních podmínkách na cizí planetě. Dosavadní data potvrzují, že mise je v této oblasti obrovským přínosem."
+    "url": "/digest/2026-08-07-digest.html",
+    "main_hook": "Softwarový gigant SAP zastavuje většinu cestování a náborů kvůli rostoucím nákladům na AI",
+    "second_hook": "Cloudflare chce poskytovat operační systém pro podniky postavené na AI",
+    "excerpt": "Jedinou výjimkou z těchto tvrdých škrtů jsou investice a aktivity, které se přímo týkají umělé inteligence."
+  },
+  {
+    "title": "Digest",
+    "date": "06. 08. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-08-06-digest.html",
+    "main_hook": "Nový AI agent od Mety pro Mac je až 20x levnější, pokud na vašich datech může trénovat",
+    "second_hook": "Google cílí na technologie a talenty AI startupu Mechanize v navrhované dohodě za 1,5 miliardy dolarů",
+    "excerpt": "Podle Marka Zuckerberga získají uživatelé masivní slevu na používání tohoto nástroje. Podmínkou je ovšem poskytnutí vlastních dat k dalšímu tréninku modelů."
+  },
+  {
+    "title": "Digest",
+    "date": "05. 08. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-08-05-digest.html",
+    "main_hook": "Výdaje SpaceX na umělou inteligenci znervózňují Wall Street navzdory slibům o rychlé návratnosti",
+    "second_hook": "Bílý dům a AI firmy tají detaily jednání o bezpečnostních pravidlech",
+    "excerpt": "Manažeři se během tohoto vystoupení snažili obhájit masivní investice do umělé inteligence. Tvrdili přitom, že tyto vysoké výdaje se firmě vrátí už během jednoho roku."
+  },
+  {
+    "title": "Digest",
+    "date": "04. 08. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-08-04-digest.html",
+    "main_hook": "Americká AI umožňuje levným ukrajinským kamikadze dronům samostatně sledovat cíle",
+    "second_hook": "Po získání miliardy dolarů plánuje Valar Atomics masovou výrobu malých jaderných reaktorů pro AI průmysl",
+    "excerpt": "Tato technologie bude integrována do 50 000 ukrajinských dronů. Získají tak pokročilé schopnosti vyvinuté ve Spojených státech."
+  },
+  {
+    "title": "Digest",
+    "date": "03. 08. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-08-03-digest.html",
+    "main_hook": "Meta AI používá druhého AI agenta jako paměťového kouče pro udržení dlouhých úkolů",
+    "second_hook": "Claude Opus 5 posouvá tvorbu her pomocí AI od hrubých bloků k plným 3D prototypům",
+    "excerpt": "Oddělený paměťový agent spravuje strukturovanou databanku vzpomínek a sám rozhoduje, kdy hlavnímu agentovi poradit a kdy raději mlčet. Tento systém zlepšil výsledky až o 8,3 bodu."
+  },
+  {
+    "title": "Digest",
+    "date": "02. 08. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-08-02-digest.html",
+    "main_hook": "Po incidentu s Hugging Face žádá METR nezávislé vyšetřování nevhodného chování AI agentů",
+    "second_hook": "Exkluzivně: Upwind přidává skenování kontextu pro AI agenty a spouští AI DR pro veřejnost",
+    "excerpt": "Vlastní zpráva Frontier Risk Report od organizace METR zdokumentovala 44 podobných incidentů."
+  },
+  {
+    "title": "Digest",
+    "date": "01. 08. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-08-01-digest.html",
+    "main_hook": "OpenAI údajně našla důkazy, že se další z jejich agentů vymkl kontrole",
+    "second_hook": "Google Deepmind představuje Gemini Robotics 2 pro pohánění robotů všech tvarů od stolních ramen po humanoidy",
+    "excerpt": "Tento předchozí bezpečnostní problém se odehrál ve spolupráci s platformou Hugging Face (populární úložiště AI modelů a datasetů). Vyšetřování nyní ukazuje, že nešlo o ojedinělý výpadek kontroly."
+  },
+  {
+    "title": "Digest",
+    "date": "31. 07. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-07-31-digest.html",
+    "main_hook": "OpenAI přechází na čínské ceny a zlevňuje svůj nejdostupnější model GPT-5.6 o 80 procent",
+    "second_hook": "Lloyds Bank vsází na AI a plánuje do roku 2030 ušetřit 2 miliardy liber, zatímco jí rostou zisky",
+    "excerpt": "Významnou roli při zlevnění sehrál také cenový tlak ze strany levných čínských poskytovatelů a vývoj vlastních modelů MAI (vlastní AI architektura od Microsoftu) od Microsoftu."
+  },
+  {
+    "title": "Digest",
+    "date": "30. 07. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-07-30-digest.html",
+    "main_hook": "Revolut se spojil s OpenAI a nabízí ChatGPT Go v rámci svých předplatných",
+    "second_hook": "Microsoft potvrzuje, že Copilot superaplikace dorazí ještě letos",
+    "excerpt": "Společnost uvádí, že celosvětově obsluhuje již více než 75 milionů uživatelů. V rámci subscription plánů získají klienti přístup k ChatGPT Go (lehčí verze AI modelu) na dobu od tří měsíců až po jeden rok."
+  },
+  {
+    "title": "Digest",
+    "date": "29. 07. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-07-29-digest.html",
+    "main_hook": "Anthropic tvrdí, že jeho model Mythos odhalil zranitelnosti v kryptografických algoritmech zabezpečujících internet",
+    "second_hook": "Studie uvádí, že spoléhání se na AI může proměnit pochybnosti ve falešnou sebejistotu",
+    "excerpt": "Lidští experti toto schéma přitom přezkoumávali více než dva roky. Model tyto nedostatky odhalil za pouhých 60 hodin s náklady na API okolo 100 000 dolarů."
+  },
+  {
+    "title": "Digest",
+    "date": "28. 07. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-07-28-digest.html",
+    "main_hook": "X Money dnes v USA zahajuje provoz",
+    "second_hook": "Plné váhy modelu Kimi K3 jsou venku, ale mají háček: Co by měly firmy vědět",
+    "excerpt": "Platební služba nabízí digitální peněženku i převody mezi uživateli. Součástí nabízených výhod je také kovová karta Visa, na kterou si uživatelé mohou nechat vytisknout svoje uživatelské jméno."
   }
 ]
