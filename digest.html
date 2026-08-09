@@ -766,207 +766,177 @@
         }
         
         /* ==========================================================================
-           FLOATING CTA WIDGET - Apple Glass Style
+           FLOATING CTA BUTTON - Modern Glassmorphism Style
            ========================================================================== */
-        .cta-widget {
+        #floating-cta {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            will-change: transform;
-        }
-        
-        .cta-button {
+            bottom: 28px;
+            right: 28px;
+            z-index: 9999;
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            font-size: 0.9rem;
+        }
+
+        #floating-cta .cta-button {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.85rem 1.6rem;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            border-radius: 50px;
+            font-size: 0.95rem;
             font-weight: 600;
-            color: white;
-            background: linear-gradient(135deg, var(--accent), var(--neon));
-            border: none;
-            border-radius: var(--radius-pill);
+            color: var(--text-primary);
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 122, 255, 0.3);
-            will-change: transform, box-shadow;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(0, 122, 255, 0.4);
-        }
-        
-        .cta-button.visible {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            will-change: transform, box-shadow, opacity;
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
-        
-        .cta-button.active {
-            display: none;
+
+        #floating-cta .cta-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
         }
-        
-        .cta-panel {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-card);
-            backdrop-filter: blur(24px) saturate(180%);
-            -webkit-backdrop-filter: blur(24px) saturate(180%);
-            padding: 1.5rem;
-            max-width: 320px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px) scale(0.95);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: transform, opacity;
+
+        #floating-cta .cta-button:active {
+            transform: translateY(-1px) scale(0.98);
         }
-        
-        .cta-panel.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0) scale(1);
+
+        #floating-cta .cta-icon {
+            font-size: 1.25rem;
+            opacity: 0.9;
         }
-        
-        .cta-panel h4 {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-            letter-spacing: -0.02em;
+
+        #floating-cta .cta-text {
+            letter-spacing: -0.01em;
         }
-        
-        .cta-panel p {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            line-height: 1.5;
-            margin-bottom: 1rem;
-        }
-        
-        .cta-form {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-        
-        .cta-input {
-            padding: 0.75rem 1rem;
-            font-size: 0.95rem;
-            font-family: var(--font-sans);
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            color: var(--text-primary);
-            outline: none;
-            transition: all 0.25s ease;
-            will-change: border-color, box-shadow;
-        }
-        
-        .cta-input::placeholder {
-            color: var(--text-tertiary);
-        }
-        
-        .cta-input:focus {
-            border-color: var(--accent-hover);
-            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.15);
-        }
-        
-        /* Mobile performance: Replace backdrop blur with solid background */
-        @media (max-width: 767px) {
-            .cta-panel {
-                backdrop-filter: none;
-                -webkit-backdrop-filter: none;
-                background: var(--bg-primary);
-            }
-            
-            .cta-widget {
-                bottom: 10px;
-                right: 10px;
-                left: 10px;
-                max-width: none;
-            }
-            
-            .cta-panel {
-                width: calc(100vw - 20px);
-                max-width: none;
-                margin: 0 auto;
-            }
-        }
-        
-        .cta-close {
-            position: absolute;
-            top: 0.75rem;
-            right: 0.75rem;
-            width: 28px;
-            height: 28px;
+
+        #floating-cta .cta-close {
+            width: 32px;
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: transparent;
-            border: none;
+            border: 1px solid rgba(255, 255, 255, 0.5);
             border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
             color: var(--text-secondary);
-            transition: all 0.2s ease;
-            padding: 0;
-            line-height: 1;
-        }
-        
-        .cta-close:hover {
-            color: var(--text-primary);
-            background: var(--glass-hover);
-        }
-        
-        .cta-submit {
-            padding: 0.75rem 1.25rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: white;
-            background: linear-gradient(135deg, var(--accent), var(--neon));
-            border: none;
-            border-radius: 12px;
+            font-size: 1.4rem;
+            font-weight: 300;
             cursor: pointer;
             transition: all 0.25s ease;
-            will-change: transform, box-shadow;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.8);
+            margin-left: -10px;
         }
-        
-        .cta-submit:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 8px 20px rgba(0, 122, 255, 0.3);
-        }
-        
-        .cta-success {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1rem;
-            text-align: center;
-        }
-        
-        .cta-success.visible {
-            display: flex;
-        }
-        
-        .cta-success-icon {
-            font-size: 2rem;
-            color: var(--neon);
-        }
-        
-        .cta-success-text {
-            font-size: 0.9rem;
+
+        #floating-cta .cta-close:hover {
             color: var(--text-primary);
-            font-weight: 500;
+            border-color: var(--border-hover);
+            background: rgba(255, 255, 255, 0.1);
         }
+
+        #floating-cta.closed {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        #floating-cta.closed .cta-close {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* Pulsing animation for attention */
+        @keyframes floatingCTAPulse {
+            0%, 100% {
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            }
+            50% {
+                box-shadow: 0 15px 50px rgba(0, 122, 255, 0.25);
+            }
+        }
+
+        #floating-cta:not(.closed) .cta-button {
+            animation: floatingCTAPulse 4s ease-in-out infinite;
+        }
+
+        #floating-cta:hover .cta-button {
+            animation: none;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            #floating-cta {
+                bottom: 16px;
+                right: 16px;
+            }
+
+            #floating-cta .cta-button {
+                padding: 0.75rem 1.3rem;
+                font-size: 0.85rem;
+            }
+
+            #floating-cta .cta-text {
+                display: none;
+            }
+
+            #floating-cta .cta-icon {
+                font-size: 1.4rem;
+            }
+
+            #floating-cta .cta-close {
+                width: 28px;
+                height: 28px;
+                font-size: 1.2rem;
+                margin-left: -5px;
+            }
+        }
+
+        /* Dark mode compatibility */
+        html[data-theme="light"] #floating-cta .cta-button {
+            background: rgba(255, 255, 255, 0.85);
+            border-color: rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        html[data-theme="light"] #floating-cta .cta-close {
+            border-color: rgba(0, 0, 0, 0.2);
+            color: var(--text-secondary);
+        }
+
+        html[data-theme="light"] #floating-cta .cta-close:hover {
+            border-color: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        html[data-theme="light"] #floating-cta:not(.closed) .cta-button {
+            animation: floatingCTAPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes floatingCTAPulseLight {
+            0%, 100% {
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            }
+            50% {
+                box-shadow: 0 15px 50px rgba(0, 122, 255, 0.18);
+            }
+        }
+
+        html[data-theme="light"] #floating-cta:not(.closed) .cta-button {
+            animation: floatingCTAPulseLight 4s ease-in-out infinite;
+        }
+
     </style>
 </head>
 <body>
@@ -1365,99 +1335,8 @@
                 nav.classList.remove('scrolled');
             }
         }, { passive: true });
-        
-        // Floating CTA Widget
-        const ctaButton = document.getElementById('cta-button');
-        const ctaPanel = document.getElementById('cta-panel');
-        const ctaClose = document.getElementById('cta-close');
-        const ctaForm = document.getElementById('cta-form');
-        const ctaSuccess = document.getElementById('cta-success');
-        const ctaEmailInput = document.getElementById('cta-email');
-        
-        // Show CTA button after scrolling 150px
-        let ctaShown = false;
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 150 && !ctaShown) {
-                if (ctaButton) ctaButton.classList.add('visible');
-                ctaShown = true;
-            }
-        }, { passive: true });
-        
-        // Toggle CTA panel
-        function toggleCTA() {
-            if (ctaButton) ctaButton.classList.toggle('active');
-            if (ctaPanel) ctaPanel.classList.toggle('visible');
-            if (ctaPanel && ctaPanel.classList.contains('visible') && ctaEmailInput) {
-                ctaEmailInput.focus();
-            }
-        }
-        
-        // Close CTA panel
-        function closeCTA() {
-            if (ctaButton) ctaButton.classList.remove('active');
-            if (ctaPanel) ctaPanel.classList.remove('visible');
-        }
-        
-        // Form submission
-        function handleCTASubmit(e) {
-            e.preventDefault();
-            const email = ctaEmailInput ? ctaEmailInput.value.trim() : '';
-            if (email) {
-                if (ctaForm) ctaForm.style.display = 'none';
-                if (ctaSuccess) ctaSuccess.classList.add('visible');
-                
-                // Reset after 3 seconds
-                setTimeout(() => {
-                    if (ctaSuccess) ctaSuccess.classList.remove('visible');
-                    if (ctaForm) ctaForm.style.display = 'flex';
-                    if (ctaEmailInput) ctaEmailInput.value = '';
-                    closeCTA();
-                    ctaShown = false;
-                }, 3000);
-            }
-        }
-        
-        // Event listeners
-        if (ctaButton) ctaButton.addEventListener('click', toggleCTA);
-        if (ctaClose) ctaClose.addEventListener('click', closeCTA);
-        if (ctaForm) ctaForm.addEventListener('submit', handleCTASubmit);
-        
-        // Close on outside click
-        document.addEventListener('click', (e) => {
-            if (ctaPanel && !ctaPanel.contains(e.target) && ctaButton && !ctaButton.contains(e.target)) {
-                closeCTA();
-            }
-        });
     </script>
 
-    <!-- Floating CTA Widget -->
-    <div class="cta-widget">
-        <button id="cta-button" class="cta-button" type="button" aria-label="Odebírat Digest">
-            <span>⚡</span>
-            <span>Odebírat Digest</span>
-        </button>
-        <div id="cta-panel" class="cta-panel">
-            <button id="cta-close" class="cta-close" type="button" aria-label="Zavřít">✕</button>
-            <h4>Získejte 30+ hodin esence v 3 minutách</h4>
-            <p>Přihlaste se k odběru a dostávejte nejdůležitější novinky ze světa technologií přímo do své schránky.</p>
-            <form id="cta-form" class="cta-form">
-                <input 
-                    id="cta-email" 
-                    class="cta-input" 
-                    type="email" 
-                    placeholder="Váš e-mail" 
-                    required
-                    autocomplete="email"
-                >
-                <button type="submit" class="cta-submit">Chci odběr</button>
-            </form>
-            <div id="cta-success" class="cta-success">
-                <div class="cta-success-icon">✓</div>
-                <div class="cta-success-text">Děkujeme za příhlášení!</div>
-            </div>
-        </div>
-    </div>
-    
     <!-- Záchranný skript pro X.com / LinkedIn In-App prohlížeče -->
     <script>
         // Záchranný skript pro In-App prohlížeče
@@ -1472,6 +1351,98 @@
                     el.classList.add('visible');
                 });
             }, 300);
+        });
+    </script>
+
+    <!-- Floating CTA for Digest Subscription -->
+    <div id="floating-cta" class="floating-cta">
+        <a href="/pozvanka-betatesting" class="cta-button">
+            <span class="cta-icon">✉️</span>
+            <span class="cta-text">Odebírat Digest</span>
+        </a>
+        <button class="cta-close" id="cta-close-btn" aria-label="Zavřít">&times;</button>
+    </div>
+
+    <!-- Floating CTA JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const floatingCTA = document.getElementById('floating-cta');
+            const closeBtn = document.getElementById('cta-close-btn');
+            
+            // Check if user has dismissed the CTA before
+            const storageKey = 'digest_cta_closed';
+            const expirationDays = 7;
+            
+            function shouldShowCTA() {
+                const stored = localStorage.getItem(storageKey);
+                if (!stored) return true;
+                
+                try {
+                    const { timestamp, dismissed } = JSON.parse(stored);
+                    if (!dismissed) return true;
+                    
+                    // Check if 7 days have passed
+                    const now = Date.now();
+                    const sevenDaysInMs = expirationDays * 24 * 60 * 60 * 1000;
+                    return now - timestamp > sevenDaysInMs;
+                } catch (e) {
+                    return true; // If parsing fails, show CTA
+                }
+            }
+            
+            function dismissCTA() {
+                if (floatingCTA) {
+                    floatingCTA.classList.add('closed');
+                    
+                    // Store dismissal in localStorage
+                    try {
+                        localStorage.setItem(storageKey, JSON.stringify({
+                            timestamp: Date.now(),
+                            dismissed: true
+                        }));
+                    } catch (e) {
+                        // localStorage might not be available (private mode)
+                        console.warn('Could not save CTA dismissal to localStorage');
+                    }
+                }
+            }
+            
+            // Initialize CTA visibility
+            if (shouldShowCTA()) {
+                // Show after a short delay to avoid layout shift
+                setTimeout(() => {
+                    if (floatingCTA) {
+                        floatingCTA.style.opacity = '1';
+                        floatingCTA.style.visibility = 'visible';
+                        floatingCTA.style.transform = 'translateY(0)';
+                    }
+                }, 500);
+            } else {
+                // Hide immediately if previously dismissed
+                if (floatingCTA) {
+                    floatingCTA.classList.add('closed');
+                }
+            }
+            
+            // Close button handler
+            if (closeBtn && floatingCTA) {
+                closeBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dismissCTA();
+                });
+            }
+            
+            // Also close on clicking the CTA itself (it's a link)
+            const ctaLink = floatingCTA && floatingCTA.querySelector('.cta-button');
+            if (ctaLink) {
+                ctaLink.addEventListener('click', function() {
+                    // Small delay to allow navigation, then hide
+                    setTimeout(() => {
+                        dismissCTA();
+                    }, 100);
+                });
+            }
         });
     </script>
 
