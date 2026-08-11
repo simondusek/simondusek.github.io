@@ -1,6 +1,15 @@
 [
   {
     "title": "Digest",
+    "date": "11. 08. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-08-11-digest.html",
+    "excerpt": "Některé z největších finančních firem na Wall Street se spojují se společností Nvidia Corp., aby nalily půl bilionu dolarů do masivní výstavby infrast...",
+    "main_hook": "🏦 Nvidia spojuje síly s Wall Street: Na globální infrastrukturu pro AI chce získat půl bilionu dolarů",
+    "second_hook": "🛡 OpenAI uvádí GPT-5.6-Cyber s méně odmítnutími a 95% úspěšností v pokročilých kyberbezpečnostních úlohách"
+  },
+  {
+    "title": "Digest",
     "date": "09. 08. 2026",
     "type": "Digest",
     "url": "/digest/2026-08-09-digest.html",
