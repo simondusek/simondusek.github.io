@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="cs" data-theme="dark">
+<head>
+    <script>
+        // Bezpečný přístup k localStorage
+        function getSafeStorage(key) {
+            try {
+                return localStorage.getItem(key);
+            } catch (e) {
+                return null;
+            }
+        }
+        
+        (function() {
+            try {
+                var saved = getSafeStorage('theme');
+                var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {}
+       })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digest — simondusek.com</title>
+    <meta name="description" content="Nelegální útoky (kybernetické útoky cílící na umělou inteligenci) na přední technologické společnosti jako OpenAI, Anthropic a Meta mají jednoho spole...">
+    <meta name="author" content="Šimon Dušek">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://simondusek.com/digest/2026-08-10-digest.html">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Digest — simondusek.com">
+    <meta property="og:description" content="Nelegální útoky (kybernetické útoky cílící na umělou inteligenci) na přední technologické společnosti jako OpenAI, Anthropic a Meta mají jednoho spole...">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://simondusek.com/digest/2026-08-10-digest.html">
+    <meta property="og:image" content="https://simondusek.com/og-image-2026-08-10-digest.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="simondusek.com">
+    <meta property="og:locale" content="cs_CZ">
+    <meta property="article:published_time" content="2026-08-10T00:00:00+00:00">
+    <meta property="article:author" content="Šimon Dušek">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@DusekSimon">
+    <meta name="twitter:creator" content="@DusekSimon">
+    <meta name="twitter:image" content="https://simondusek.com/og-image-2026-08-10-digest.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           DESIGN TOKENS - ULTRA-CLEAN
+           ========================================================================== */
+        :root {
+            --bg-primary: #0f0f0f;
+            --glass: rgba(255, 255, 255, 0.02);
+            --glass-hover: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.12);
+            --text-primary: #ffffff;
+            --text-secondary: #9595a5;
+            --text-tertiary: #656575;
+            --accent: #007AFF;
+            --accent-hover: #0066cc;
+            --accent-glow: #0066f166;
+            --neon: #10b981;
+            --neon-glow: rgba(16, 185, 129, 0.4);
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --section-gap: clamp(6rem, 12vh, 10rem);
+            --radius-pill: 100px;
+            --radius-card: 20px;
+            --orb-opacity: 1;
+            --nav-bg-scrolled: rgba(5, 5, 8, 0.85);
+        }
+
+        html[data-theme="light"] {
+            --bg-primary: #f0f0f0;
+            --glass: rgba(10, 10, 20, 0.03);
+            --glass-hover: rgba(10, 10, 20, 0.05);
+            --border: rgba(10, 10, 20, 0.09);
+            --border-hover: rgba(10, 10, 20, 0.14);
+            --text-primary: #0a0a12;
+            --text-secondary: #55555f;
+            --text-tertiary: #85858f;
+            --orb-opacity: 0.4;
+            --nav-bg-scrolled: rgba(246, 246, 249, 0.85);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.65;
+            overflow-x: hidden;
+            min-height: 100vh;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .floating-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: var(--orb-opacity);
+            transition: opacity 0.4s ease;
+            will-change: transform;
+        }
+        
+        .floating-orb.orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.08), transparent 70%);
+            top: -200px;
+            right: -200px;
+        }
+        
+        .floating-orb.orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.06), transparent 70%);
+            bottom: -100px;
+            left: -200px;
+        }
+        
+        /* Mobile performance: Disable floating orbs completely on mobile */
+        @media (max-width: 767px) {
+            .floating-orb {
+                display: none;
+            }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 clamp(1.25rem, 5vw, 4rem);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ==========================================================================
+           NAVIGATION - Minimal
+           ========================================================================== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid transparent;
+            transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease, padding 0.3s ease;
+        }
+        
+        .nav.scrolled {
+            background: var(--nav-bg-scrolled);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border-bottom-color: var(--border);
+        }
+        
+        /* Mobile performance: Replace backdrop blur with solid background */
+        @media (max-width: 767px) {
+            .nav.scrolled {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: var(--nav-bg-scrolled);
+            }
+        }
+        
+        .nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+        
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            min-width: 0;
+            flex-shrink: 1;
+        }
+
+        .nav-brand {
+            text-decoration: none;
+        }
+        
+        .nav-brand-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent), var(--neon));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 800;
+            color: white;
+        }
+        
+        .nav-brand-name {
+            font-weight: 700;
+            font-size: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        @media (max-width: 400px) {
+            .nav-brand-name {
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .nav-right {
+                gap: 0.4rem;
+            }
+        }
+        
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+        
+        /* Mobile Menu Button - Burger */
+        .mobile-menu-toggle {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 38px;
+            height: 38px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: all 0.25s ease;
+        }
+        
+        .mobile-menu-toggle:hover {
+            border-color: var(--border-hover);
+            background: var(--glass-hover);
+            transform: translateY(-1px);
+        }
+        
+        @media (max-width: 600px) {
+            .mobile-menu-toggle {
+                width: 34px;
+                height: 34px;
+            }
+            
+            .mobile-menu-toggle span {
+                width: 16.2px;
+                height: 1.8px;
+            }
+        }
+        
+        .mobile-menu-toggle span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+        
+        .mobile-menu-toggle span:nth-child(1) { margin-bottom: 4px; }
+        .mobile-menu-toggle span:nth-child(3) { margin-top: 4px; }
+        
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(4px, 4px);
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(4px, -4px);
+        }
+        
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            z-index: 199;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .mobile-menu-content {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            margin: 0 clamp(1.5rem, 5vw, 3rem);
+            padding: 1.5rem;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            z-index: 200;
+            will-change: transform, opacity;
+        }
+        
+        .mobile-menu-overlay.active .mobile-menu-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .mobile-menu-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.85rem 1.25rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+        
+        .mobile-menu-link:hover {
+            color: var(--text-primary);
+            background: var(--glass-hover);
+        }
+        
+        .mobile-menu-link .icon {
+            font-size: 1.1rem;
+            width: 24px;
+            text-align: center;
+        }
+        
+        /* Show mobile menu toggle on mobile */
+        @media (max-width: 767px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            .nav-links {
+                display: none !important;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .mobile-menu-toggle {
+                display: none;
+            }
+        }
+        
+        .nav-link {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .theme-toggle {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.25s ease;
+            flex-shrink: 0;
+        }
+        
+        .theme-toggle:hover {
+            border-color: var(--border-hover);
+            background: var(--glass-hover);
+            transform: translateY(-1px);
+        }
+        
+        .nav-back {
+            padding: 0.55rem 1.1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: var(--radius-pill);
+            background: var(--glass);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        
+        .nav-back:hover {
+            background: var(--glass-hover);
+            border-color: var(--border-hover);
+            color: var(--text-primary);
+            transform: translateX(-2px);
+        }
+
+        .nav-back-icon {
+            display: none;
+        }
+        
+        @media (max-width: 520px) {
+            .nav-back-text {
+                display: none;
+            }
+            .nav-back-icon {
+                display: inline;
+            }
+            .nav-back {
+                padding: 0.55rem 0.85rem;
+            }
+        }
+        
+        /* DIGEST CONTENT */
+        .digest-page {
+            padding-top: clamp(7.5rem, 16vh, 11rem);
+            padding-bottom: var(--section-gap);
+        }
+        
+        .digest-card {
+            max-width: 740px;
+            margin: 0 auto;
+            padding: clamp(2rem, 5vw, 3.5rem);
+            background: var(--glass);
+            border-radius: var(--radius-card);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            position: relative;
+            transition: all 0.3s ease;
+            will-change: transform;
+        }
+        
+        /* Mobile performance: Replace backdrop blur with solid background */
+        @media (max-width: 767px) {
+            .digest-card {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: var(--bg-primary);
+                border: 1px solid var(--border);
+            }
+        }
+        
+        .digest-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+        }
+        
+        .digest-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.9rem;
+            border-radius: 100px;
+            background: #007bff30;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--accent-hover);
+            margin-bottom: 1.5rem;
+        }
+        
+        .digest-card h1 {
+            font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+        
+        .digest-meta {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .digest-content {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+        
+        .digest-content h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+            margin: 2rem 0 1rem;
+            color: var(--text-primary);
+        }
+        
+        .digest-content h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+            margin: 1.75rem 0 0.75rem;
+            color: var(--text-primary);
+        }
+        
+        .digest-content p {
+            margin-bottom: 1.25rem;
+        }
+        
+        .digest-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .digest-content strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .digest-content a {
+            color: var(--accent-hover);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        
+        .digest-content a:hover {
+            color: var(--neon);
+        }
+        
+        .digest-content ul,
+        .digest-content ol {
+            margin: 1.25rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .digest-content li {
+            margin-bottom: 0.6rem;
+            line-height: 1.7;
+        }
+        
+        .digest-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.6rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-pill);
+            transition: all 0.25s ease;
+            text-decoration: none;
+            margin-top: 2.5rem;
+        }
+        
+        .digest-back:hover {
+            background: var(--glass-hover);
+            border-color: var(--border-hover);
+            transform: translateX(-2px);
+        }
+
+        /* FOOTER */
+        .site-footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .footer-left {
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+        }
+        
+        .footer-left strong {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        
+        .footer-links a {
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+            transition: color 0.2s ease;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Fallback pro in-app prohlížeče a starší renderery */
+        .reveal {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+        
+        /* Zpětně zapneme animaci POUZE v případě, že je prohlížeč plně podporuje a JS je aktivní */
+        @supports (opacity: 1) {
+            .js-enabled .reveal:not(.visible) {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                            transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* ==========================================================================
+           FLOATING CTA - Simple Link Button
+           ========================================================================== */
+        .floating-cta {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+            padding: 0.75rem 1.35rem;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.35);
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .floating-cta.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        
+        .floating-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 122, 255, 0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .floating-cta {
+                bottom: 16px;
+                right: 16px;
+                padding: 0.65rem 1.1rem;
+                font-size: 0.82rem;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            }
+        }            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+            padding: 0;
+            line-height: 1;
+        }
+        
+        .cta-close:hover {
+            color: var(--text-primary);
+            background: var(--glass-hover);
+        }
+        
+        .cta-submit {
+            padding: 0.75rem 1.25rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, var(--accent), var(--neon));
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            will-change: transform, box-shadow;
+        }
+        
+        .cta-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(0, 122, 255, 0.3);
+        }
+        
+        .cta-success {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .cta-success.visible {
+            display: flex;
+        }
+        
+        .cta-success-icon {
+            font-size: 2rem;
+            color: var(--neon);
+        }
+        
+        .cta-success-text {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="floating-orb orb-1" aria-hidden="true"></div>
+    <div class="floating-orb orb-2" aria-hidden="true"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="nav" id="main-nav" role="navigation" aria-label="Hlavní navigace">
+        <div class="container">
+            <a href="/" class="nav-brand">
+                <div class="nav-brand-icon" aria-hidden="true">⌘</div>
+                <span class="nav-brand-name">simondusek.com</span>
+            </a>
+            <div class="nav-links">
+                <a href="/digest" class="nav-link">Digest Archiv</a>
+                <a href="/deep-dive" class="nav-link">Deep Dive Blog</a>
+                <a href="/#about" class="nav-link">O mně</a>
+            </div>
+            <div class="nav-right">
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="mobile-menu-content">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Přepnout světlý/tmavý režim">
+                    <span class="theme-icon" id="theme-icon">🌙</span>
+                </button>
+                <a href="/" class="nav-back">
+                    <span class="nav-back-text">← Zpět na hlavní stránku</span>
+                    <span class="nav-back-icon">← Domů</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay" role="navigation" aria-label="Mobilní navigace">
+        <div class="mobile-menu-content" id="mobile-menu-content">
+            <div class="mobile-menu-links">
+                <a href="/digest" class="mobile-menu-link">
+                    <span class="icon">⚡</span>
+                    Digest Archiv
+                </a>
+                <a href="/deep-dive" class="mobile-menu-link">
+                    <span class="icon">🎯</span>
+                    Deep Dive Blog
+                </a>
+                <a href="/#about" class="mobile-menu-link">
+                    <span class="icon">👤</span>
+                    O mně
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    <main class="digest-page">
+        <div class="container">
+            <div class="digest-card reveal">
+                <div class="digest-badge">📰 Digest</div>
+                <h1>Digest</h1>
+                <p class="digest-meta">Vydáno: 10. 08. 2026</p>
+                
+                <div class="digest-content">
+                    <h2>🚀 Hlavní události v Techu &amp; AI</h2><h3>🕵️‍♂️ <a href="https://www.cnbc.com/2026/08/09/israeli-startup-irregular-linked-to-ai-hacks-openai-anthropic-meta.html">Jak byl malý izraelský start-up spojen s nelegálními útoky na OpenAI, Anthropic a Meta</a></h3><p><strong>Neviditelná hrozba: Malý izraelský start-up stojí za útoky na giganty jako OpenAI nebo Meta.</strong></p><ul><li>Nelegální útoky (kybernetické útoky cílící na umělou inteligenci) na přední technologické společnosti jako OpenAI, Anthropic a Meta mají jednoho společného jmenovatele. Všechny tyto incidenty vedou zpět k malé izraelské firmě.</li><li>Tento start-up nese název Irregular a jeho zapojení do těchto bezpečnostních incidentů překvapilo celý technologický svět.</li></ul><div class="why-box"><p>🎯 Představte si, že neznámý hráč pronikne do <strong>nejstřeženějších pevností</strong> světa umělé inteligence, aniž by si toho kdokoliv včas všiml. Pro každého z nás to znamená jediné: bezpečnostní trhliny nejsou jen abstraktním problémem velkých korporací, ale reálným rizikem, které může odkódovat i ty nejpokročilejší technologie na planetě. Když totiž selžou <strong>tvůrci AI gigantů</strong>, ukazuje to, že nikdo z nás nedokáže stoprocentně ochránit svá data před cíleným a sofistikovaným náporem.</p></div><p>Zdroj: CNBC Technology</p><hr><h3>🌍 <a href="https://www.nytimes.com/2026/08/05/technology/ai-china-africa.html">Jak čínská umělá inteligence dobývá Afriku</a></h3><p><strong>Čínská AI ovládá africké trhy. Proč vývojáři odmítají americkou konkurenci?</strong></p><ul><li>V afrických technologických centrech sahají vývojáři raději po čínských systémech. Tyto modely umělé inteligence (software pro zpracování dat a úkolů) jsou levné a volně dostupné.</li><li>Místo výkonnějších amerických alternativ volí tamní tvůrci čínská řešení. Finanční dostupnost a otevřená dostupnost hrají v afrických hubech hlavní roli.</li></ul><div class="why-box"><p>🎯 Když se podíváme na nákupní chování v technologickém světě, cena často porazí čistou sílu, stejně jako když si místo drahého sportovního auta pořídíte spolehlivý vůz na dojíždění do práce. <strong>Čínské modely umělé inteligence</strong> ukazují, že <strong>dostupnost a nízká cena</strong> dokážou kompletně změnit pravidla hry na rozvíjejících se trzích. Pro běžného člověka to znamená jediné: globální technologický závod se neodehrává jen v Silicon Valley, ale přímo na africkém kontinentu, kde se míchají karty pro budoucí digitální ekonomiku. Finanční dostupnost totiž často předurčí, které technologie budeme zítra běžně používat po celém světě.</p></div><p>Zdroj: New York Times</p><hr><h3>🛡️ <a href="https://siliconangle.com/2026/08/09/ai-resilience-strategy-blackhat/">Veeam tlačí na kybernetickou odolnost, protože AI zvyšuje rizika dat</a></h3><p><strong>Umelá inteligence rozšiřuje hrozby pro firmy, musíte vědět, jak rychle obnovit data.</strong></p><ul><li>Nástup autonomních systémů umělé inteligence rozšiřuje prostor pro útoky hackerů v podnikové sféře. Bezpečnostní týmy proto kladou větší důraz na strategii odolnosti vůči umělé inteligenci.</li><li>Tento obrat nutí organizace přehodnotit správu dat a nadměrné používání různých bezpečnostních nástrojů kvůli rozvoji umělé inteligence. Hlavním cílem je schopnost rychlé obnovy dat ve chvíli, kdy selže prevence.</li></ul><div class="why-box"><p>🎯 Když se vám do firmy nabourá hacker, spoléhat se jen na obranu už nestačí, protože systémy umělé inteligence útočí chytřeji a rychleji. <strong>Schopnost rychlé obnovy dat</strong> funguje úplně stejně jako <strong>záložní plán v autě</strong>, když vám uprostřed dálnice praskne pneumatika. Firmy teď musí uklidit svůj digitální nepořádek a zbavit se stovek zbytečných nástrojů, které jen matou správce. Pokud nemáte jasný plán, jak svá data okamžitě zachránit, riskujete <strong>totální ochromení celého byznysu</strong> během jediné vteřiny.</p></div><p>Zdroj: Silicon Angle</p><hr><h3>🌪️ <a href="https://the-decoder.com/google-deepminds-weathernext-predicts-cyclone-tracks-and-intensity-at-the-same-time/">WeatherNext od Google DeepMind předpovídá dráhu a intenzitu cyklonů současně</a></h3><p><strong>Nová předpověď počasí od Googlu zvládne varovat před cyklony o den dřív než konkurence.</strong></p><ul><li>Umělá inteligence od DeepMind (pokročilý počítačový systém napodobující lidské myšlení) dokáže předpovědět tropické cyklony přibližně o den dříve než vedoucí operační modely. Tento pokrok odpovídá deseti letům vývoje v tradičním předpovídání počasí.</li><li>Zdrojový kód a váhy modelu (interní nastavení umělé inteligence pro správné rozhodování) jsou veřejně dostupné jako open-source (volně přístupný software pro každého) na platformě GitHub.</li></ul><div class="why-box"><p>🎯 Když se blíží ničivá bouře, každá hodina navíc rozhoduje o záchraně lidských životů a majetku. <strong>Předpověď o celý den dřív</strong> funguje jako včasné varování před blížící se autonehodou, kdy dostanete šanci včas dupnout na brzdu. Zpřístupnění zdrojového kódu znamená, že tento <strong>špičkový nástroj</strong> může zdarma používat kdokoli na světě pro své vlastní varovné systémy. Získáváte tím přístup k technologiím, které dříve patřily pouze do rukou těch největších a nejbohatších meteorologických center na planetě.</p></div><p>Zdroj: The Decoder</p><hr><h2>📈 Burza &amp; Finance</h2><h3>🏦 <a href="https://www.cnbc.com/2026/08/09/abel-puts-a-big-chunk-of-berkshires-cash-to-work.html">Abel posílá do práce velkou část hotovosti Berkshire</a></h3><p><strong>Nové vedení Berkshire Hathaway utrácí miliardy dolarů. Podívejte se na obří investice.</strong></p><ul><li>Greg Abel má za sebou druhé čtvrtletí ve funkci nového šéfa (výkonného ředitele) společnosti Berkshire Hathaway. Během tohoto období uskutečnil opravdu velké výdaje.</li><li>Mezi jeho hlavní finanční kroky patřilo vložení celkem 4,5 miliardy dolarů (přibližně sto miliard korun) do zpětných odkupů akcií.</li></ul><div class="why-box"><p>🎯 Když šéf legendární investiční společnosti začne masivně utrácet, ukazuje to, že peníze by neměly jen tak ležet ladem. <strong>Utrácení miliard dolarů</strong> (konkrétně 4,5 miliardy na zpětné odkupy) znamená, že firma věří svým vlastním krokům a nenechává hotovost zbytečně ztrácet hodnotu inflací. Pro vás to funguje jako jasná připomínka, že i ty největší finanční instituce musí své peníze neustále aktivně točit. Když peníze nepracují, strácíte příležitosti vydělat na tom, co máte po ruce. <strong>Strategie Greg Abela</strong> tak ukazuje, že čas peněz na účtu vypršel a je potřeba je poslat do hry.</p></div><p>Zdroj: CNBC Top News</p><hr><h3>🏦 <a href="https://www.investing.com/news/economy-news/warsh-wants-a-fed-that-plays-a-smaller-role-in-markets-4847750">Warsh chce Fed, který bude mít na trzích menší vliv</a></h3><p><strong>Budoucnost peněz a úroků se možná radikálně změní, podívejte se na detaily.</strong></p><ul><li>Osoba jménem Warsh má konkrétní představu o budoucí roli centrální banky v ekonomice. Tato vize počítá s tím, že instituce omezí své dosavadní zásahy.</li><li>Změna přístupu se bezprostředně dotkne fungování celého finančního trhu. Návrh cílí na citlivou redukci dosavadních aktivit centrální banky.</li></ul><div class="why-box"><p>🎯 Když se mění pravidla hry v centrální bankéřské hře, je to jako když vám v autě někdo začne sahat na pedál brzdy a plynu bez vašeho varování. <strong>Menší vliv centrální banky</strong> znamená, že trhy si budou muset poradit samy a <strong>ceny peněz</strong> budou divočejší. Pro běžného člověka to může přinést větší výkyvy v úrocích u hypoték nebo půjček. Už se nebudete moci spoléhat na to, že velký hráč všechno zachrání, což vyžaduje větší opatrnost s vlastními financemi. Budete muset pečlivěji zvažovat každý finanční krok, protože bezpečnostní síť bude o poznání slabší.</p></div><p>Zdroj: Investing.com</p><hr><h3>💻 <a href="https://finance.yahoo.com/technology/ai/articles/xanadu-accelerates-chip-production-investors-164143794.html">Xanadu urychluje výrobu čipů, zatímco investoři vyhlížejí další impuls v oblasti kvantových počítačů</a></h3><p><strong>Zatímco čekáte na kvantovou revoluci, Xanadu šlape do výroby čipů.</strong></p><ul><li>Firma Xanadu zveřejnila čtvrtletní zprávu o svém pokroku ve výrobě čipů. Investoři netrpělivě vyhlížejí další impuls v celém odvětví.</li><li>Zpráva mapuje aktuální stav vývoje škálovatelných kvantových počítačů (zařízení využívající fyziku mikrosvěta pro extrémní výpočty). Cílem je dosáhnout komerčně použitelných výsledků.</li></ul><div class="why-box"><p>🎯 Představte si, že stavíte dům budoucnosti, ale nikdo ještě neviděl hotové základy. <strong>Kvantové počítače</strong> slibují vyřešit za vteřinu to, co dnešním superpočítačům trvá tisíce let, od nových léků až po dokonalé šifrování. Když firma jako <strong>Xanadu</strong> zrychluje výrobu čipů, znamená to, že se laboratoře mění v továrny a technologie se blíží k reálnému byznysu. Pro vás to znamená jediné: obor přechází od drahých vědeckých pokusů k hmatatelným produktům.</p></div><p>Zdroj: Yahoo Finance</p><hr><h3>📈 <a href="https://www.cnbc.com/2026/08/09/top-analysts-like-these-3-stocks-for-their-solid-growth-potential.html">Špičkoví analytici z Wall Street doporučují tyto 3 akcie kvůli jejich silnému růstovému potenciálu</a></h3><p><strong>Investoři sledují výsledky AI firem kvůli obavám z udržitelnosti vysokých výdajů.</strong></p><ul><li>Investoři bedlivě sledují finanční výsledky technologických firem zaměřených na umělou inteligenci (počítačové systémy napodobující lidské myšlení).</li><li>Pozornost vzbuzují zejména obavy ohledně toho, jak dlouho vydrží současné vysoké finanční výdaje a poptávka.</li></ul><div class="why-box"><p>🎯 Když velké korporace utrácí obrovské peníze za nové technologie, chová se to podobně, jako když si pořizujete drahé vybavení do firmy na úvěr – doufáte, že se vám investice brzy vrátí na tržbách. <strong>Sledování výsledků hospodaření</strong> vám pomůže pochopit, zda obří investice do umělé inteligence přinášejí skutečné zisky, nebo jde jen o nafouknutou bublinu. Pokud firmy neutratí peníze efektivně, může to rychle ovlivnit stabilitu celého trhu a vaše vlastní úspory.</p></div><p>Zdroj: CNBC Top News</p><hr><h2>🇨🇿 Z české kotliny</h2><h3>💊 <a href="https://cc.cz/prijal-obri-vyzvu-otocit-potapejici-se-pilulku-a-dostat-ji-do-zisku-pomaha-mu-v-tom-ai-od-tomase-cupra/">Přijal obří výzvu: otočit potápějící se Pilulku a dostat ji do zisku. Pomáhá mu v tom AI od Tomáše Čupra</a></h3><p><strong>Petr Toupal se snaží zachránit e-shop Pilulka a používá k tomu umělou inteligenci.</strong></p><ul><li>Petr Toupal vede e-commerce byznys (internetový obchod) od loňského podzimu. Hlavním cílem je dostat tuto firmu zpět do zisku.</li><li>Pilulka mění své zaměření v očích zákazníků a zásadní proměnou prochází i uvnitř. Při této obří záchranné akci mu pomáhá umělá inteligence od Tomáše Čupra.</li></ul><div class="why-box"><p>🎯 Když se mění směr fungování velké firmy, je to jako otáčet obří zaoceánský parník uprostřed bouře. <strong>Petr Toupal</strong> přebírá kormidlo v době, kdy e-shop potřebuje nejen přežít, ale hlavně začít vydělávat peníze. S pomocí <strong>umělé inteligence</strong> od Tomáše Čupra se pokouší o radikální řez uvnitř společnosti, který má zákazníkům ukázat úplně novou tvář firmy. Pro každého podnikatele je to jasný signál, že bez moderních technologií a rychlých zásahů do fungování se dnes potápějící byznys zachránit nedá.</p></div><p>Zdroj: CzechCrunch</p><hr><h3>🛡️ <a href="https://forbes.cz/personalni-zbrojeni-kdo-jsou-globalni-mozky-ktere-ridi-novou-eru-skupiny-csg/">Personální zbrojení. Kdo jsou globální mozky, které řídí novou éru skupiny CSG</a></h3><p><strong>Podívejte se, jak česká zbrojařská skupina CSG láká špičkové manažery z globálních gigantů.</strong></p><ul><li>Zatímco před pěti lety musela česká skupina CSG zahraničním expertům složitě vysvětlovat svůj význam ve střední Evropě, dnes je situace zcela odlišná. Skupině se sami hlásí manažeři, kteří dříve řídili miliardové programy v globálních korporacích.</li><li>Mezi tyto zkušené posily z řad světových hráčů patří lidé s praxí z takových gigantů, jako jsou společnosti Rheinmetall nebo Lockheed Martin. Díky tomu skupina posiluje své zázemí přímo v zákulisí.</li></ul><div class="why-box"><p>🎯 Když špičkový <strong>šéf miliardových programů</strong> z gigantů jako Lockheed Martin vymění globální korporaci za českou firmu, ukazuje to na obrovský posun v síle našich firem na světovém trhu. Představte si to, jako když malý regionální fotbalový klub najednou přitáhne trenéry z Realu Madrid. Pro vás to znamená, že české prostředí přestává být lokálním hřištěm a stává se <strong>plnohodnotným hráčem</strong> v první světové lize. Zahraniční experti sem přinášejí know-how, které dříve končilo jen v zámoří nebo v západní Evropě. Sledujeme tak moment, kdy se české firmy měří s těmi největšími bez jakýchkoliv komplexů.</p></div><p>Zdroj: Forbes CZ</p><hr>
+                </div>
+                
+                <a href="/digest" class="digest-back">
+                    ← Zpět do archivu
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER - Reuse from index.html -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">© 2026-08-10 <strong>simondusek.com</strong> · Šimon Dušek</div>
+                <div class="footer-links">
+                    <a href="/">Hlavní stránka</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+        const mobileMenuContent = document.getElementById('mobile-menu-content');
+
+        function toggleMobileMenu() {
+            const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+            mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+            mobileMenuOverlay.classList.toggle('active');
+            document.body.style.overflow = isExpanded ? '' : 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            mobileMenuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+        }
+
+        if (mobileMenuOverlay) {
+            mobileMenuOverlay.addEventListener('click', (e) => {
+                if (e.target === mobileMenuOverlay) {
+                    closeMobileMenu();
+                }
+            });
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-menu-link').forEach(link => {
+            link.addEventListener('click', () => {
+                closeMobileMenu();
+            });
+        });
+
+        // Close mobile menu on window resize (if screen becomes desktop size)
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                closeMobileMenu();
+            }
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlEl = document.documentElement;
+
+        function updateThemeIcon(theme) {
+            if (themeIcon) {
+                themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+
+        updateThemeIcon(htmlEl.getAttribute('data-theme') || 'dark');
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const current = htmlEl.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+                const next = current === 'dark' ? 'light' : 'dark';
+                htmlEl.setAttribute('data-theme', next);
+                try {
+                    localStorage.setItem('theme', next);
+                } catch (e) {}
+                updateThemeIcon(next);
+            });
+        }
+
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Nav scroll effect
+        const nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+        
+        // Floating CTA - show after scroll
+        window.addEventListener('scroll', function() {
+            var cta = document.getElementById('floating-cta');
+            if (cta) {
+                if (window.scrollY > 200) {
+                    cta.classList.add('visible');
+                } else {
+                    cta.classList.remove('visible');
+                }
+            }
+        }, { passive: true });
+    </script>
+
+    <!-- Floating CTA tlačítko -->
+    <a href="/#hero-form" id="floating-cta" class="floating-cta" aria-label="Odebírat newsletter">
+        <span>⚡ Odebírat Digest</span>
+    </a>
+    
+    <!-- Záchranný skript pro X.com / LinkedIn In-App prohlížeče -->
+    <script>
+        // Záchranný skript pro In-App prohlížeče
+        document.addEventListener('DOMContentLoaded', function() {
+            // Okamžitě přidáme třídu js-enabled
+            document.body.classList.add('js-enabled');
+            
+            // Pojistka: Za 300ms natvrdo zviditelníme všechny .reveal prvky, pokud se nespustil IntersectionObserver
+            setTimeout(function() {
+                var reveals = document.querySelectorAll('.reveal');
+                reveals.forEach(function(el) {
+                    el.classList.add('visible');
+                });
+            }, 300);
+        });
+    </script>
+
+</body>
+</html>
