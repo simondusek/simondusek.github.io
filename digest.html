@@ -827,7 +827,7 @@
             background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.5);
             border-radius: 50%;
-            color: var(--text-primary);
+            color: var(--text-secondary);
             font-size: 1.4rem;
             font-weight: 300;
             cursor: pointer;
@@ -905,14 +905,14 @@
 
         /* Dark mode compatibility */
         html[data-theme="light"] #floating-cta .cta-button {
-            background: #007AFF;
+            background: rgba(255, 255, 255, 0.85);
             border-color: rgba(0, 0, 0, 0.1);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
         }
 
         html[data-theme="light"] #floating-cta .cta-close {
             border-color: rgba(0, 0, 0, 0.2);
-            color: var(--text-primary);
+            color: var(--text-secondary);
         }
 
         html[data-theme="light"] #floating-cta .cta-close:hover {
@@ -1356,7 +1356,7 @@
 
     <!-- Floating CTA for Digest Subscription -->
     <div id="floating-cta" class="floating-cta">
-        <a href="/" class="cta-button">
+        <a href="/pozvanka-betatesting" class="cta-button">
             <span class="cta-icon">✉️</span>
             <span class="cta-text">Odebírat Digest</span>
         </a>
