@@ -1,6 +1,15 @@
 [
   {
     "title": "Digest",
+    "date": "13. 08. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-08-13-digest.html",
+    "excerpt": "Společnost SpaceXAI dnes vydala velký jazykový model (AI systém trénovaný na obrovském množství textu) Grok 4.6. Podle firmy dokáže tento systém v něk...",
+    "main_hook": "🚀 SpaceXAI vydává vlajkový model Grok 4.6 s pokročilým logickým uvažováním",
+    "second_hook": "📱 Apple jedná s vydavateli o placení za zpravodajský obsah pro svou AI v Siri"
+  },
+  {
+    "title": "Digest",
     "date": "12. 08. 2026",
     "type": "Digest",
     "url": "/digest/2026-08-12-digest.html",
