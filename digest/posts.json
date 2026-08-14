@@ -1,6 +1,15 @@
 [
   {
     "title": "Digest",
+    "date": "14. 08. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-08-14-digest.html",
+    "excerpt": "Do textu dokumentu někdo vložil skrytou instrukci s jasným cílem",
+    "main_hook": "🕵 Někdo ukryl instrukce pro AI přímo do soudního spisu, aby model rozhodl v jeho prospěch",
+    "second_hook": "⚔ Tři agenti Claude dostali protichůdné příkazy a navzájem se sabotovali na sdíleném serveru"
+  },
+  {
+    "title": "Digest",
     "date": "13. 08. 2026",
     "type": "Digest",
     "url": "/digest/2026-08-13-digest.html",
