@@ -1,6 +1,15 @@
 [
   {
     "title": "Digest",
+    "date": "15. 08. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-08-15-digest.html",
+    "excerpt": "Závažná chyba ve sdílení obrazovky umožňuje vzdáleným hackerům přihlásit se do systému. Útočníci k tomuto průniku nepotřebují znát vaše heslo",
+    "main_hook": "🚀 Nvidia odhalila podíl ve SpaceX v hodnotě 21 miliard dolarů",
+    "second_hook": "🎓 Google zapíná umělou inteligenci Gemini pro studenty v aplikaci Classroom"
+  },
+  {
+    "title": "Digest",
     "date": "14. 08. 2026",
     "type": "Digest",
     "url": "/digest/2026-08-14-digest.html",
