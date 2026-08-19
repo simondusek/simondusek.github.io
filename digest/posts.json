@@ -1,6 +1,15 @@
 [
   {
     "title": "Digest",
+    "date": "19. 08. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-08-19-digest.html",
+    "excerpt": "Společnosti vyvíjející umělou inteligenci vnímají slova pouze jako vzájemně zaměnitelné jednotky",
+    "main_hook": "Vodoznaky v textech od Anthropicu dokazují, že AI firmám vůbec nezáleží na psaní",
+    "second_hook": "Cursor těží z frustrace uživatelů GitHubu a spouští konkurenční hostingovou platformu"
+  },
+  {
+    "title": "Digest",
     "date": "17. 08. 2026",
     "type": "Digest",
     "url": "/digest/2026-08-17-digest.html",

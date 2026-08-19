@@ -5,14 +5,21 @@
     <link>https://simondusek.com</link>
     <description>Technologický a B2B newsletter od Šimona Duška - kompletní archiv vydání.</description>
     <language>cs</language>
-    <pubDate>Mon, 17 Aug 2026 00:00:00 +0000</pubDate>
-    <lastBuildDate>Mon, 17 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <pubDate>Wed, 19 Aug 2026 00:00:00 +0000</pubDate>
+    <lastBuildDate>Wed, 19 Aug 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://simondusek.com/feed.xml" rel="self" type="application/rss+xml" />
     <ttl>60</ttl>
         <item>
       <title>Digest</title>
+      <link>https://simondusek.com/digest/2026-08-19-digest.html</link>
+      <description>✍ Vodoznaky v textech od Anthropicu dokazují, že AI firmám vůbec nezáleží na psaní | 💻 Cursor těží z frustrace uživatelů GitHubu a spouští konkurenční hostingovou platformu | Společnosti vyvíjející umělou inteligenci vnímají slova pouze jako vzájemně zaměnitelné jednotky</description>
+      <pubDate>Wed, 19 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://simondusek.com/digest/2026-08-19-digest.html</guid>
+    </item>
+    <item>
+      <title>Digest</title>
       <link>https://simondusek.com/digest/2026-08-17-digest.html</link>
-      <description>🧮 Jak model Claude dosáhl matematického průlomu během neúspěšného 54hodinového pokusu o vyřešení Riemannovy hypotézy | 🇨🇳 Alibaba překonává Google a Metu se 3 miliardami stažení AI modelů | Šéf společnosti Anthropic (tvůrce modelu Claude) Dario Amodei ostře odmítá tvrzení, že má přehnaně pesimistický pohled na dopad umělé inteligence. Rea...</description>
+      <description>Jak model Claude dosáhl matematického průlomu během neúspěšného 54hodinového pokusu o vyřešení Riemannovy hypotézy | Alibaba překonává Google a Metu se 3 miliardami stažení AI modelů | Šéf společnosti Anthropic (tvůrce modelu Claude) Dario Amodei ostře odmítá tvrzení, že má přehnaně pesimistický pohled na dopad umělé inteligence. Rea...</description>
       <pubDate>Mon, 17 Aug 2026 00:00:00 +0000</pubDate>
       <guid>https://simondusek.com/digest/2026-08-17-digest.html</guid>
     </item>
