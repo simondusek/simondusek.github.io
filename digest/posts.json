@@ -10,6 +10,15 @@
   },
   {
     "title": "Digest",
+    "date": "18. 08. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-08-18-digest.html",
+    "excerpt": "Dobrou zprávou je, že náklady na tokeny u velkých jazykových modelů (LLM) klesají. Celkové náklady na pracovní zátěž umělé inteligence ale naopak rost...",
+    "main_hook": "Inference AI zlevňuje, ale vaši agenti se prodraží",
+    "second_hook": "Qwen3.8-27B spouští špičkové kódovací agenty lokálně a bez cloudu"
+  },
+  {
+    "title": "Digest",
     "date": "17. 08. 2026",
     "type": "Digest",
     "url": "/digest/2026-08-17-digest.html",
