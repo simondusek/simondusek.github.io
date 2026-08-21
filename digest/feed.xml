@@ -5,11 +5,25 @@
     <link>https://simondusek.com</link>
     <description>Technologický a B2B newsletter od Šimona Duška - kompletní archiv vydání.</description>
     <language>cs</language>
-    <pubDate>Wed, 19 Aug 2026 00:00:00 +0000</pubDate>
-    <lastBuildDate>Wed, 19 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <pubDate>Fri, 21 Aug 2026 00:00:00 +0000</pubDate>
+    <lastBuildDate>Fri, 21 Aug 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://simondusek.com/feed.xml" rel="self" type="application/rss+xml" />
     <ttl>60</ttl>
         <item>
+      <title>Digest</title>
+      <link>https://simondusek.com/digest/2026-08-21-digest.html</link>
+      <description>🎵 Adobe chce, aby Firefly zpracoval kompletní zvukovou stopu pro vaše videa | 🚕 Nevada povoluje společnostem Uber, Tesla a Waymo spustit placenou službu robotaxi | Zákaz americké Federální komise pro komunikaci (FCC) týkající se robotů zahraniční výroby tvrdě dopadl na trh. Toto rozhodnutí okamžitě ovlivnilo fung...</description>
+      <pubDate>Fri, 21 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://simondusek.com/digest/2026-08-21-digest.html</guid>
+    </item>
+    <item>
+      <title>Digest</title>
+      <link>https://simondusek.com/digest/2026-08-20-digest.html</link>
+      <description>🍏 EU vítá změny v App Storu, Epic kritizuje odpadní poplatky | 🛡 OpenAI dočasně zpomaluje škálování a slibuje nulové uchovávání dat | Amazon podle zpráv kupuje a následně ničí vzácné knihy, aby na nich mohl trénovat své modely umělé inteligence (AI). Kromě toho se objevuje řada divok...</description>
+      <pubDate>Thu, 20 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://simondusek.com/digest/2026-08-20-digest.html</guid>
+    </item>
+    <item>
       <title>Digest</title>
       <link>https://simondusek.com/digest/2026-08-19-digest.html</link>
       <description>Vodoznaky v textech od Anthropicu dokazují, že AI firmám vůbec nezáleží na psaní | Cursor těží z frustrace uživatelů GitHubu a spouští konkurenční hostingovou platformu | Společnosti vyvíjející umělou inteligenci vnímají slova pouze jako vzájemně zaměnitelné jednotky</description>

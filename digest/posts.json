@@ -1,6 +1,24 @@
 [
   {
     "title": "Digest",
+    "date": "21. 08. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-08-21-digest.html",
+    "excerpt": "Zákaz americké Federální komise pro komunikaci (FCC) týkající se robotů zahraniční výroby tvrdě dopadl na trh. Toto rozhodnutí okamžitě ovlivnilo fung...",
+    "main_hook": "🎵 Adobe chce, aby Firefly zpracoval kompletní zvukovou stopu pro vaše videa",
+    "second_hook": "🚕 Nevada povoluje společnostem Uber, Tesla a Waymo spustit placenou službu robotaxi"
+  },
+  {
+    "title": "Digest",
+    "date": "20. 08. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-08-20-digest.html",
+    "excerpt": "Amazon podle zpráv kupuje a následně ničí vzácné knihy, aby na nich mohl trénovat své modely umělé inteligence (AI). Kromě toho se objevuje řada divok...",
+    "main_hook": "🍏 EU vítá změny v App Storu, Epic kritizuje odpadní poplatky",
+    "second_hook": "🛡 OpenAI dočasně zpomaluje škálování a slibuje nulové uchovávání dat"
+  },
+  {
+    "title": "Digest",
     "date": "19. 08. 2026",
     "type": "Digest",
     "url": "/digest/2026-08-19-digest.html",

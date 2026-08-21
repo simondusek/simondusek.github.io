@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="cs" data-theme="dark">
+<head>
+    <script>
+        // Bezpečný přístup k localStorage
+        function getSafeStorage(key) {
+            try {
+                return localStorage.getItem(key);
+            } catch (e) {
+                return null;
+            }
+        }
+        
+        (function() {
+            try {
+                var saved = getSafeStorage('theme');
+                var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {}
+       })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digest — simondusek.com</title>
+    <meta name="description" content="Amazon podle zpráv kupuje a následně ničí vzácné knihy, aby na nich mohl trénovat své modely umělé inteligence (AI). Kromě toho se objevuje řada divok...">
+    <meta name="author" content="Šimon Dušek">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://simondusek.com/digest/2026-08-20-digest.html">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Digest — simondusek.com">
+    <meta property="og:description" content="Amazon podle zpráv kupuje a následně ničí vzácné knihy, aby na nich mohl trénovat své modely umělé inteligence (AI). Kromě toho se objevuje řada divok...">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://simondusek.com/digest/2026-08-20-digest.html">
+    <meta property="og:image" content="https://simondusek.com/og-image-2026-08-20-digest.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="simondusek.com">
+    <meta property="og:locale" content="cs_CZ">
+    <meta property="article:published_time" content="2026-08-20T00:00:00+00:00">
+    <meta property="article:author" content="Šimon Dušek">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@DusekSimon">
+    <meta name="twitter:creator" content="@DusekSimon">
+    <meta name="twitter:image" content="https://simondusek.com/og-image-2026-08-20-digest.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           DESIGN TOKENS - ULTRA-CLEAN
+           ========================================================================== */
+        :root {
+            --bg-primary: #0f0f0f;
+            --glass: rgba(255, 255, 255, 0.02);
+            --glass-hover: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.12);
+            --text-primary: #ffffff;
+            --text-secondary: #9595a5;
+            --text-tertiary: #656575;
+            --accent: #007AFF;
+            --accent-hover: #0066cc;
+            --accent-glow: #0066f166;
+            --neon: #10b981;
+            --neon-glow: rgba(16, 185, 129, 0.4);
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --section-gap: clamp(6rem, 12vh, 10rem);
+            --radius-pill: 100px;
+            --radius-card: 20px;
+            --orb-opacity: 1;
+            --nav-bg-scrolled: rgba(5, 5, 8, 0.85);
+        }
+
+        html[data-theme="light"] {
+            --bg-primary: #f0f0f0;
+            --glass: rgba(10, 10, 20, 0.03);
+            --glass-hover: rgba(10, 10, 20, 0.05);
+            --border: rgba(10, 10, 20, 0.09);
+            --border-hover: rgba(10, 10, 20, 0.14);
+            --text-primary: #0a0a12;
+            --text-secondary: #55555f;
+            --text-tertiary: #85858f;
+            --orb-opacity: 0.4;
+            --nav-bg-scrolled: rgba(246, 246, 249, 0.85);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.65;
+            overflow-x: hidden;
+            min-height: 100vh;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .floating-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: var(--orb-opacity);
+            transition: opacity 0.4s ease;
+            will-change: transform;
+        }
+        
+        .floating-orb.orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.08), transparent 70%);
+            top: -200px;
+            right: -200px;
+        }
+        
+        .floating-orb.orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.06), transparent 70%);
+            bottom: -100px;
+            left: -200px;
+        }
+        
+        /* Mobile performance: Disable floating orbs completely on mobile */
+        @media (max-width: 767px) {
+            .floating-orb {
+                display: none;
+            }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 clamp(1.25rem, 5vw, 4rem);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ==========================================================================
+           NAVIGATION - Minimal
+           ========================================================================== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid transparent;
+            transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease, padding 0.3s ease;
+        }
+        
+        .nav.scrolled {
+            background: var(--nav-bg-scrolled);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border-bottom-color: var(--border);
+        }
+        
+        /* Mobile performance: Replace backdrop blur with solid background */
+        @media (max-width: 767px) {
+            .nav.scrolled {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: var(--nav-bg-scrolled);
+            }
+        }
+        
+        .nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+        
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            min-width: 0;
+            flex-shrink: 1;
+        }
+
+        .nav-brand {
+            text-decoration: none;
+        }
+        
+        .nav-brand-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent), var(--neon));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 800;
+            color: white;
+        }
+        
+        .nav-brand-name {
+            font-weight: 700;
+            font-size: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        @media (max-width: 400px) {
+            .nav-brand-name {
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .nav-right {
+                gap: 0.4rem;
+            }
+        }
+        
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+        
+        /* Mobile Menu Button - Burger */
+        .mobile-menu-toggle {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 38px;
+            height: 38px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: all 0.25s ease;
+        }
+        
+        .mobile-menu-toggle:hover {
+            border-color: var(--border-hover);
+            background: var(--glass-hover);
+            transform: translateY(-1px);
+        }
+        
+        @media (max-width: 600px) {
+            .mobile-menu-toggle {
+                width: 34px;
+                height: 34px;
+            }
+            
+            .mobile-menu-toggle span {
+                width: 16.2px;
+                height: 1.8px;
+            }
+        }
+        
+        .mobile-menu-toggle span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+        
+        .mobile-menu-toggle span:nth-child(1) { margin-bottom: 4px; }
+        .mobile-menu-toggle span:nth-child(3) { margin-top: 4px; }
+        
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(4px, 4px);
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(4px, -4px);
+        }
+        
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            z-index: 199;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .mobile-menu-content {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            margin: 0 clamp(1.5rem, 5vw, 3rem);
+            padding: 1.5rem;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            z-index: 200;
+            will-change: transform, opacity;
+        }
+        
+        .mobile-menu-overlay.active .mobile-menu-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .mobile-menu-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.85rem 1.25rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+        
+        .mobile-menu-link:hover {
+            color: var(--text-primary);
+            background: var(--glass-hover);
+        }
+        
+        .mobile-menu-link .icon {
+            font-size: 1.1rem;
+            width: 24px;
+            text-align: center;
+        }
+        
+        /* Show mobile menu toggle on mobile */
+        @media (max-width: 767px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            .nav-links {
+                display: none !important;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .mobile-menu-toggle {
+                display: none;
+            }
+        }
+        
+        .nav-link {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .theme-toggle {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.25s ease;
+            flex-shrink: 0;
+        }
+        
+        .theme-toggle:hover {
+            border-color: var(--border-hover);
+            background: var(--glass-hover);
+            transform: translateY(-1px);
+        }
+        
+        .nav-back {
+            padding: 0.55rem 1.1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: var(--radius-pill);
+            background: var(--glass);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        
+        .nav-back:hover {
+            background: var(--glass-hover);
+            border-color: var(--border-hover);
+            color: var(--text-primary);
+            transform: translateX(-2px);
+        }
+
+        .nav-back-icon {
+            display: none;
+        }
+        
+        @media (max-width: 520px) {
+            .nav-back-text {
+                display: none;
+            }
+            .nav-back-icon {
+                display: inline;
+            }
+            .nav-back {
+                padding: 0.55rem 0.85rem;
+            }
+        }
+        
+        /* DIGEST CONTENT */
+        .digest-page {
+            padding-top: clamp(7.5rem, 16vh, 11rem);
+            padding-bottom: var(--section-gap);
+        }
+        
+        .digest-card {
+            max-width: 740px;
+            margin: 0 auto;
+            padding: clamp(2rem, 5vw, 3.5rem);
+            background: var(--glass);
+            border-radius: var(--radius-card);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            position: relative;
+            transition: all 0.3s ease;
+            will-change: transform;
+        }
+        
+        /* Mobile performance: Replace backdrop blur with solid background */
+        @media (max-width: 767px) {
+            .digest-card {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: var(--bg-primary);
+                border: 1px solid var(--border);
+            }
+        }
+        
+        .digest-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+        }
+        
+        .digest-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.9rem;
+            border-radius: 100px;
+            background: #007bff30;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--accent-hover);
+            margin-bottom: 1.5rem;
+        }
+        
+        .digest-card h1 {
+            font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+        
+        .digest-meta {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .digest-content {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+        
+        .digest-content h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+            margin: 2rem 0 1rem;
+            color: var(--text-primary);
+        }
+        
+        .digest-content h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+            margin: 1.75rem 0 0.75rem;
+            color: var(--text-primary);
+        }
+        
+        .digest-content p {
+            margin-bottom: 1.25rem;
+        }
+        
+        .digest-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .digest-content strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .digest-content a {
+            color: var(--accent-hover);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        
+        .digest-content a:hover {
+            color: var(--neon);
+        }
+        
+        .digest-content ul,
+        .digest-content ol {
+            margin: 1.25rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .digest-content li {
+            margin-bottom: 0.6rem;
+            line-height: 1.7;
+        }
+        
+        .digest-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.6rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-pill);
+            transition: all 0.25s ease;
+            text-decoration: none;
+            margin-top: 2.5rem;
+        }
+        
+        .digest-back:hover {
+            background: var(--glass-hover);
+            border-color: var(--border-hover);
+            transform: translateX(-2px);
+        }
+
+        /* FOOTER */
+        .site-footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .footer-left {
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+        }
+        
+        .footer-left strong {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        
+        .footer-links a {
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+            transition: color 0.2s ease;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Fallback pro in-app prohlížeče a starší renderery */
+        .reveal {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+        
+        /* Zpětně zapneme animaci POUZE v případě, že je prohlížeč plně podporuje a JS je aktivní */
+        @supports (opacity: 1) {
+            .js-enabled .reveal:not(.visible) {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                            transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* ==========================================================================
+           FLOATING CTA - Simple Link Button
+           ========================================================================== */
+        .floating-cta {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+            padding: 0.75rem 1.35rem;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.35);
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .floating-cta.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        
+        .floating-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 122, 255, 0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .floating-cta {
+                bottom: 16px;
+                right: 16px;
+                padding: 0.65rem 1.1rem;
+                font-size: 0.82rem;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            }
+        }            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+            padding: 0;
+            line-height: 1;
+        }
+        
+        .cta-close:hover {
+            color: var(--text-primary);
+            background: var(--glass-hover);
+        }
+        
+        .cta-submit {
+            padding: 0.75rem 1.25rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, var(--accent), var(--neon));
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            will-change: transform, box-shadow;
+        }
+        
+        .cta-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(0, 122, 255, 0.3);
+        }
+        
+        .cta-success {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .cta-success.visible {
+            display: flex;
+        }
+        
+        .cta-success-icon {
+            font-size: 2rem;
+            color: var(--neon);
+        }
+        
+        .cta-success-text {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="floating-orb orb-1" aria-hidden="true"></div>
+    <div class="floating-orb orb-2" aria-hidden="true"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="nav" id="main-nav" role="navigation" aria-label="Hlavní navigace">
+        <div class="container">
+            <a href="/" class="nav-brand">
+                <div class="nav-brand-icon" aria-hidden="true">⌘</div>
+                <span class="nav-brand-name">simondusek.com</span>
+            </a>
+            <div class="nav-links">
+                <a href="/digest" class="nav-link">Digest Archiv</a>
+                <a href="/deep-dive" class="nav-link">Deep Dive Blog</a>
+                <a href="/#about" class="nav-link">O mně</a>
+            </div>
+            <div class="nav-right">
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="mobile-menu-content">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Přepnout světlý/tmavý režim">
+                    <span class="theme-icon" id="theme-icon">🌙</span>
+                </button>
+                <a href="/" class="nav-back">
+                    <span class="nav-back-text">← Zpět na hlavní stránku</span>
+                    <span class="nav-back-icon">← Domů</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay" role="navigation" aria-label="Mobilní navigace">
+        <div class="mobile-menu-content" id="mobile-menu-content">
+            <div class="mobile-menu-links">
+                <a href="/digest" class="mobile-menu-link">
+                    <span class="icon">⚡</span>
+                    Digest Archiv
+                </a>
+                <a href="/deep-dive" class="mobile-menu-link">
+                    <span class="icon">🎯</span>
+                    Deep Dive Blog
+                </a>
+                <a href="/#about" class="mobile-menu-link">
+                    <span class="icon">👤</span>
+                    O mně
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    <main class="digest-page">
+        <div class="container">
+            <div class="digest-card reveal">
+                <div class="digest-badge">📰 Digest</div>
+                <h1>Digest</h1>
+                <p class="digest-meta">Vydáno: 20. 08. 2026</p>
+                
+                <div class="digest-content">
+                    <h2>🚀 Hlavní události v Techu &amp; AI</h2><h3>🍏 <a href="https://www.macrumors.com/2026/08/19/ec-epic-apple-app-store-changes/">EU vítá změny v App Storu, Epic kritizuje odpadní poplatky</a></h3><p><strong>Apple ustupuje Evropské unii, ale vývojáři stále nejsou spokojeni.</strong></p><ul><li>Apple včera aktualizoval poplatky ve svém App Storu pro Evropskou unii. Udělal to proto, aby vyhověl Aktu o digitálních trzích (DMA - evropský zákon regulující velké technologické firmy) a ukončil konflikt s Evropskou komisí.</li><li>Firma snížila takzvaný Core Technology Fee (poplatek za základní technologii) a zjednodušila cenovou strukturu pro aplikace distribuované přes alternativní obchody.</li></ul><div class="why-box"><p>🎯 Tlak evropských úředníků konečně donutil nejhodnotnější firmu světa překopat svůj hlavní zdroj příjmů. Zlevnění poplatků za distribuci aplikací mimo oficiální obchod Applu zlevní vývojářům provoz jejich byznysu. Ušetřené peníze mohou firmy investovat do lepšího vývoje nebo snížení cen předplatného pro koncové uživatele. Zároveň to ale dokazuje, že Apple si svůj <strong>uzavřený ekosystém</strong> nenechá vzít bez boje a každou úlevu vyvažuje novými, byť menšími poplatky.</p></div><p>Zdroj: MacRumors</p><hr><h3>🛡️ <a href="https://www.computerworld.com/article/4211661/openai-temporarily-slows-scaling-efforts-also-promises-zero-data-retention-for-select-frontier-model-customers.html">OpenAI dočasně zpomaluje škálování a slibuje nulové uchovávání dat</a></h3><p><strong>Tvůrci ChatGPT brzdí vývoj a mění pravidla hry ohledně soukromí.</strong></p><ul><li>OpenAI tento týden oznámila několik kroků, kterými chce bojovat proti negativnímu vnímání své bezpečnosti a ochrany soukromí. Firma uvedla, že zpomalila tempo škálování (zvětšování a vylepšování modelů) a zavedla dvoutýdenní pauzu v takzvaném zpětnovazebním učení.</li><li>Zároveň začne vybraným zákazníkům využívajícím API (rozhraní pro programátory) nabízet nulové uchovávání jejich dat.</li></ul><div class="why-box"><p>🎯 Nejrychleji rostoucí technologická firma současnosti šlápla na brzdu, aby uklidnila firemní zákazníky. Strach z úniku citlivých firemních dat do trénovacích sad ChatGPT dosud bránil mnoha korporacím v plném nasazení umělé inteligence. Garance <strong>nulového uchovávání dat</strong> funguje jako neprůstřelný trezor – co do modelu pošlete, to se po zpracování okamžitě vypaří. Pro firmy to znamená konec výmluv, proč nemohou automatizovat práci s interními dokumenty nebo klientskými smlouvami.</p></div><p>Zdroj: Computer World</p><hr><h3>🔍 <a href="https://www.digitaltrends.com/computing/google-adds-deep-research-to-your-phones-arsenal-with-gemini-live-update/">Google dává Gemini Live vlastní vylepšení Deep Research</a></h3><p><strong>Hlasový asistent od Googlu se mění v neúnavného výzkumníka.</strong></p><ul><li>Hlasový asistent Gemini Live nyní dokáže spouštět hloubkové výzkumné zprávy (Deep Research). Vše funguje pouze pomocí jednoduchých hlasových příkazů.</li><li>Nástroj na nich následně pracuje na pozadí a jakmile jsou výsledky připravené, můžete si o zjištěných informacích s umělou inteligencí přirozeně popovídat.</li></ul><div class="why-box"><p>🎯 Představte si, že máte v kapse analytika, kterému cestou v autě zadáte úkol a on vám za hodinu odprezentuje hotovou rešerši. Propojení hlasového ovládání s hloubkovým vyhledáváním naprosto mění způsob, jakým konzumujeme informace. Už nemusíte sedět u počítače a procházet desítky záložek v prohlížeči. Stačí zadat téma a AI za vás <strong>přečte stovky stránek</strong>, vyhodnotí je a naservíruje vám jen ty nejdůležitější závěry formou běžného rozhovoru.</p></div><p>Zdroj: Digital Trends</p><hr><h3>🤖 <a href="https://venturebeat.com/data/85-of-companies-burned-by-an-ai-mistake-are-racing-to-cut-the-humans-who-might-catch-the-next-one">85 % firem spálených chybou AI spěchá s propouštěním lidí, kteří by mohli odhalit tu další</a></h3><p><strong>Firmy raději vyhodí lidské kontrolory, než aby zpomalily nasazování chybující AI.</strong></p><ul><li>Podniky, které se již spálily tím, že jejich AI agent prošel testy a následně selhal v ostrém provozu, paradoxně zrychlují odstraňování lidí z rozhodovacích procesů.</li><li>Nový průzkum VB Pulse ukazuje, že důvěra v automatizované hodnocení plošně roste. V červenci se to týkalo 13 % ze 108 zkoumaných společností.</li></ul><div class="why-box"><p>🎯 Manažeři se chovají jako řidiči, kteří po bouračce se zapnutým autopilotem raději úplně odmontují volant. Místo aby firmy po selhání umělé inteligence posílily lidský dohled, volí cestu slepé důvěry v další algoritmy. Tento přístup nevyhnutelně povede k <strong>řetězovým chybám</strong> v zákaznické podpoře nebo interních procesech, které nikdo včas nezastaví. Pokud vaše firma nahrazuje zkušené zaměstnance automatickými testy, připravte se na velmi drahé omyly v ostrém provozu.</p></div><p>Zdroj: Venture Beat</p><hr><h2>📈 Burza &amp; Finance</h2><h3>⚖️ <a href="https://www.cnbc.com/2026/08/19/us-iran-war-trump-hormuz-economic-warfare.html">Trump oznamuje ekonomickou válku Íránu, hrozí obrovskými následky pro jeho podporovatele</a></h3><p><strong>Geopolitické napětí roste a trhy se připravují na tvrdé sankce.</strong></p><ul><li>Donald Trump oznámil ekonomickou válku proti Íránu. Zároveň pohrozil obrovskými následky všem, kteří tuto zemi podporují.</li><li>Toto oznámení rozšiřuje nátlakovou kampaň, kterou Trumpova administrativa vede od dubna pod hlavičkou operace Economic Fury (Ekonomická zuřivost).</li></ul><div class="why-box"><p>🎯 Tvrdá rétorika a hrozba sankcí okamžitě rozkolísají globální trhy s ropou a energiemi. Jakýkoliv zásah do dodavatelských řetězců na Blízkém východě se bleskově propíše do cen pohonných hmot na čerpacích stanicích po celém světě. Pro investory to znamená nutnost přehodnotit svá portfolia a připravit se na <strong>zvýšenou volatilitu</strong> v energetickém sektoru. Zvýšené geopolitické riziko navíc tradičně žene kapitál do bezpečných přístavů, jako je zlato nebo americký dolar.</p></div><p>Zdroj: CNBC Top News</p><hr><h3>💻 <a href="https://www.marketwatch.com/story/servicenows-stock-leads-a-software-rally-heres-whats-energizing-investors-0ad74dd1?mod=mw_rss_topstories">Akcie ServiceNow vedou softwarovou rally. Zde je to, co dodává investorům energii.</a></h3><p><strong>Tradiční softwarové firmy chytají druhý dech a investoři jim znovu věří.</strong></p><ul><li>Na trhu roste důvěra v tradiční softwarové společnosti. Investoři věří myšlence, že tyto firmy dokážou odolat narušení ze strany umělé inteligence.</li><li>Tento optimismus se projevuje růstem akcií, který aktuálně vede společnost ServiceNow.</li></ul><div class="why-box"><p>🎯 Dlouho panovala obava, že generativní AI zcela zničí zavedené softwarové giganty a nahradí je novými, agilnějšími startupy. Nyní se ale ukazuje, že velké firmy dokážou nové technologie úspěšně integrovat do svých stávajících produktů. Místo zániku tak tradiční software získává nové funkce, za které si může účtovat vyšší předplatné. Pro investory to znamená <strong>návrat k osvědčeným jménům</strong>, která mají obrovskou klientskou základnu a dostatek kapitálu na to, aby si AI revoluci koupila nebo vyvinula sama.</p></div><p>Zdroj: MarketWatch</p><hr><h3>📈 <a href="https://www.marketwatch.com/bulletins/redirect/go?g=60b9c856-d291-4d9c-a409-39168ba8c68b&amp;mod=mw_rss_bulletins">Americké akcie uzavřely výše poté, co plán odkupu dluhopisů vyvolal širokou tržní rally</a></h3><p><strong>Vládní zásah na dluhopisovém trhu vystřelil akcie strmě vzhůru.</strong></p><ul><li>Americké akciové trhy uzavřely obchodování v zelených číslech. Zaznamenaly tak poměrně výrazný růst.</li><li>Tuto širokou tržní rally odstartoval plán ministerstva financí na zpětný odkup státních dluhopisů.</li></ul><div class="why-box"><p>🎯 Akciový trh funguje jako spojené nádoby s trhem dluhopisů. Jakmile vláda oznámila, že začne vykupovat dluhopisy, výnosy klesly a akcie se okamžitě staly pro investory mnohem atraktivnější volbou. Levnější financování znamená pro firmy vyšší zisky a větší prostor pro expanzi. Tento krok dokazuje, jak silně jsou <strong>akciové indexy závislé</strong> na krocích státní pokladny a centrálních bank, které dokážou jediným prohlášením otočit náladu na celém Wall Street.</p></div><p>Zdroj: MarketWatch Bulletins</p><hr><h3>⚖️ <a href="https://www.investing.com/news/economy-news/japans-exports-jump-23-to-monthly-record-in-july-4868483">Japonský export roste díky poptávce po čipech, import láme rekordy kvůli cenám ropy</a></h3><p><strong>Japonská ekonomika balancuje mezi technologickým boomem a drahými energiemi.</strong></p><ul><li>Japonský vývoz v současnosti prudce roste. Děje se tak především díky obrovské globální poptávce po polovodičích a čipech.</li><li>Na druhou stranu ale dovoz do země dosáhl historických rekordů kvůli vysokým nákladům na ropu.</li></ul><div class="why-box"><p>🎯 Tento kontrast dokonale ilustruje zranitelnost moderních ekonomik. Na jedné straně Japonsko masivně vydělává na technologické revoluci a dodává světu klíčové komponenty pro umělou inteligenci. Na straně druhé veškeré tyto zisky okamžitě pálí za drahé fosilní paliva potřebná k chodu továren. Dokazuje to, že sebelepší technologický náskok vás neochrání před <strong>závislostí na základních surovinách</strong>. Pro globální trhy to znamená, že cena čipů bude i nadále silně provázaná s cenou ropy.</p></div><p>Zdroj: Investing.com</p><hr><h2>🇨🇿 Z české kotliny</h2><h3>📱 <a href="https://cc.cz/kvuli-aplikaci-na-neznama-cisla-vstaval-v-pet-rano-pak-dal-v-praci-vypoved-a-stavi-z-ni-velky-byznys/">Kvůli aplikaci na neznámá čísla vstával v pět ráno. Pak dal v práci výpověď a staví z ní velký byznys</a></h3><p><strong>Český vývojář proměnil boj s otravnými hovory v úspěšný startup.</strong></p><ul><li>Jan Čislinský je zakladatelem aplikace Zvednout to?. Nyní popisuje svou cestu od vedlejšího projektu k byznysu na plný úvazek.</li><li>Do rozvoje aplikace, která chrání uživatele před nevyžádanými hovory, se pustil naplno i díky využití nástrojů umělé inteligence.</li></ul><div class="why-box"><p>🎯 Tento příběh dokazuje, jak umělá inteligence radikálně snižuje bariéry pro vstup do podnikání. Nástroje jako ChatGPT nebo Copilot fungují jako virtuální tým, který jednomu člověku umožňuje zvládnout práci za tři programátory a markeťáky. Vedlejší projekty, které by dříve vyžadovaly roky víkendové práce, lze dnes díky AI urychlit natolik, že se z nich rychle stane <strong>hlavní zdroj příjmů</strong>. Je to jasný důkaz, že pro úspěšný startup už nepotřebujete obří investici, ale spíše chytré využití dostupných technologií.</p></div><p>Zdroj: CzechCrunch</p><hr><h3>☁️ <a href="https://www.lupa.cz/clanky/na-americke-smirovaci-zakony-a-cenove-agresivni-vmware-reaguje-i-o2-v-cesku-spousti-novy-cloud/?utm_source=rss&amp;utm_medium=text&amp;utm_campaign=rss">Na americké šmírovací zákony a cenově agresivní VMware reaguje i O2. V Česku spouští nový cloud</a></h3><p><strong>Český operátor buduje nezávislé cloudové řešení pro lokální firmy.</strong></p><ul><li>Společnost O2 rozjíždí zcela nový cloud. Plánuje na něj postupně převést všechny své stávající zákazníky.</li><li>Zároveň jde o první velký obchod pro společnost HPE, která dodává alternativu k drahým řešením od firmy VMware.</li></ul><div class="why-box"><p>🎯 Firmy si začínají uvědomovat rizika spojená s ukládáním citlivých dat na amerických serverech, kde podléhají tamním zákonům. Lokální cloud od O2 nabízí českým podnikům digitální suverenitu – data zůstávají fyzicky v Česku a podléhají výhradně evropské legislativě. Odklon od dominantního VMwaru navíc dokazuje, že firmy už odmítají platit <strong>agresivně se zvyšující licenční poplatky</strong> a raději investují do přechodu na alternativní technologie. Pro český trh to znamená větší konkurenci a lepší kontrolu nad firemními daty.</p></div><p>Zdroj: Lupa CZ</p><hr>
+                </div>
+                
+                <a href="/digest" class="digest-back">
+                    ← Zpět do archivu
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER - Reuse from index.html -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">© 2026-08-20 <strong>simondusek.com</strong> · Šimon Dušek</div>
+                <div class="footer-links">
+                    <a href="/">Hlavní stránka</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+        const mobileMenuContent = document.getElementById('mobile-menu-content');
+
+        function toggleMobileMenu() {
+            const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+            mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+            mobileMenuOverlay.classList.toggle('active');
+            document.body.style.overflow = isExpanded ? '' : 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            mobileMenuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+        }
+
+        if (mobileMenuOverlay) {
+            mobileMenuOverlay.addEventListener('click', (e) => {
+                if (e.target === mobileMenuOverlay) {
+                    closeMobileMenu();
+                }
+            });
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-menu-link').forEach(link => {
+            link.addEventListener('click', () => {
+                closeMobileMenu();
+            });
+        });
+
+        // Close mobile menu on window resize (if screen becomes desktop size)
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                closeMobileMenu();
+            }
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlEl = document.documentElement;
+
+        function updateThemeIcon(theme) {
+            if (themeIcon) {
+                themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+
+        updateThemeIcon(htmlEl.getAttribute('data-theme') || 'dark');
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const current = htmlEl.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+                const next = current === 'dark' ? 'light' : 'dark';
+                htmlEl.setAttribute('data-theme', next);
+                try {
+                    localStorage.setItem('theme', next);
+                } catch (e) {}
+                updateThemeIcon(next);
+            });
+        }
+
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Nav scroll effect
+        const nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+        
+        // Floating CTA - show after scroll
+        window.addEventListener('scroll', function() {
+            var cta = document.getElementById('floating-cta');
+            if (cta) {
+                if (window.scrollY > 200) {
+                    cta.classList.add('visible');
+                } else {
+                    cta.classList.remove('visible');
+                }
+            }
+        }, { passive: true });
+    </script>
+
+    <!-- Floating CTA tlačítko -->
+    <a href="/#hero-form" id="floating-cta" class="floating-cta" aria-label="Odebírat newsletter">
+        <span>⚡ Odebírat Digest</span>
+    </a>
+    
+    <!-- Záchranný skript pro X.com / LinkedIn In-App prohlížeče -->
+    <script>
+        // Záchranný skript pro In-App prohlížeče
+        document.addEventListener('DOMContentLoaded', function() {
+            // Okamžitě přidáme třídu js-enabled
+            document.body.classList.add('js-enabled');
+            
+            // Pojistka: Za 300ms natvrdo zviditelníme všechny .reveal prvky, pokud se nespustil IntersectionObserver
+            setTimeout(function() {
+                var reveals = document.querySelectorAll('.reveal');
+                reveals.forEach(function(el) {
+                    el.classList.add('visible');
+                });
+            }, 300);
+        });
+    </script>
+
+</body>
+</html>
