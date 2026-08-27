@@ -1,13 +1,23 @@
 [
   {
     "title": "Digest",
+    "date": "23. 08. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-08-23-digest.html",
+    "excerpt": "Malovaná keramika Qurayyah (starověká oblast v Arábii) z doby bronzové měla jasnou vizuální identitu a materiálovou konzistenci. Vědci tvrdí, že si ud...",
+    "issue_id": "digest:2026-08-23",
+    "main_hook": "Hype kolem značek existuje už od doby bronzové, zjistili vědci",
+    "second_hook": "Uspání myší k zimnímu spánku způsobuje masivní ztrátu synapsí"
+  },
+  {
+    "title": "Digest",
     "date": "22. 08. 2026",
     "type": "Digest",
     "url": "/digest/2026-08-22-digest.html",
     "excerpt": "Anthropic se chystá vstoupit na akciový trh v době, kdy je veřejnost stále více znepokojena datovými centry",
     "issue_id": "digest:2026-08-22",
-    "main_hook": "⚖ Žádost o IPO společnosti Anthropic ukáže odpor vůči AI jako rizikový faktor, tvrdí zdroje",
-    "second_hook": "👓 Apple údajně zrušil více než 200 pracovních míst v softwarových týmech Vision Pro a Siri"
+    "main_hook": "Žádost o IPO společnosti Anthropic ukáže odpor vůči AI jako rizikový faktor, tvrdí zdroje",
+    "second_hook": "Apple údajně zrušil více než 200 pracovních míst v softwarových týmech Vision Pro a Siri"
   },
   {
     "title": "Digest",

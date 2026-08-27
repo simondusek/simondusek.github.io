@@ -210,4 +210,11 @@
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://simondusek.com/digest/2026-08-23-digest.html</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>

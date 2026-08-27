@@ -5,14 +5,21 @@
     <link>https://simondusek.com</link>
     <description>Technologický a B2B newsletter od Šimona Duška - kompletní archiv vydání.</description>
     <language>cs</language>
-    <pubDate>Sat, 22 Aug 2026 00:00:00 +0000</pubDate>
-    <lastBuildDate>Sat, 22 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <pubDate>Sun, 23 Aug 2026 00:00:00 +0000</pubDate>
+    <lastBuildDate>Sun, 23 Aug 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://simondusek.com/feed.xml" rel="self" type="application/rss+xml" />
     <ttl>60</ttl>
         <item>
       <title>Digest</title>
+      <link>https://simondusek.com/digest/2026-08-23-digest.html</link>
+      <description>Hype kolem značek existuje už od doby bronzové, zjistili vědci | Uspání myší k zimnímu spánku způsobuje masivní ztrátu synapsí | Malovaná keramika Qurayyah (starověká oblast v Arábii) z doby bronzové měla jasnou vizuální identitu a materiálovou konzistenci. Vědci tvrdí, že si ud...</description>
+      <pubDate>Sun, 23 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://simondusek.com/digest/2026-08-23-digest.html</guid>
+    </item>
+    <item>
+      <title>Digest</title>
       <link>https://simondusek.com/digest/2026-08-22-digest.html</link>
-      <description>⚖ Žádost o IPO společnosti Anthropic ukáže odpor vůči AI jako rizikový faktor, tvrdí zdroje | 👓 Apple údajně zrušil více než 200 pracovních míst v softwarových týmech Vision Pro a Siri | Anthropic se chystá vstoupit na akciový trh v době, kdy je veřejnost stále více znepokojena datovými centry</description>
+      <description>Žádost o IPO společnosti Anthropic ukáže odpor vůči AI jako rizikový faktor, tvrdí zdroje | Apple údajně zrušil více než 200 pracovních míst v softwarových týmech Vision Pro a Siri | Anthropic se chystá vstoupit na akciový trh v době, kdy je veřejnost stále více znepokojena datovými centry</description>
       <pubDate>Sat, 22 Aug 2026 00:00:00 +0000</pubDate>
       <guid>https://simondusek.com/digest/2026-08-22-digest.html</guid>
     </item>

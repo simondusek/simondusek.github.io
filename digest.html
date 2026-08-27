@@ -879,6 +879,25 @@
         <div class="container">
             <div class="posts-grid" id="posts-container">
                 <!-- POSTS:START -->
+                <a href="/digest/2026-08-23-digest.html" class="post-card reveal" data-issue-id="digest:2026-08-23">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="23. 08. 2026">
+                                <span class="date-day-month">23. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Hype kolem značek existuje už od doby bronzové, zjistili vědci</h2>
+                        <p>Malovaná keramika Qurayyah (starověká oblast v Arábii) z doby bronzové měla jasnou vizuální identitu a materiálovou konzistenci. Vědci tvrdí, že si ud...</p>
+                        <h3>Uspání myší k zimnímu spánku způsobuje masivní ztrátu synapsí</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
                 <a href="/digest/2026-08-22-digest.html" class="post-card reveal" data-issue-id="digest:2026-08-22">
                     <div>
                         <div class="post-meta">
@@ -888,9 +907,9 @@
                                 <span class="date-year">2026</span>
                             </time>
                         </div>
-                        <h2>⚖ Žádost o IPO společnosti Anthropic ukáže odpor vůči AI jako rizikový faktor, tvrdí zdroje</h2>
+                        <h2>Žádost o IPO společnosti Anthropic ukáže odpor vůči AI jako rizikový faktor, tvrdí zdroje</h2>
                         <p>Anthropic se chystá vstoupit na akciový trh v době, kdy je veřejnost stále více znepokojena datovými centry</p>
-                        <h3>👓 Apple údajně zrušil více než 200 pracovních míst v softwarových týmech Vision Pro a Siri</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                        <h3>Apple údajně zrušil více než 200 pracovních míst v softwarových týmech Vision Pro a Siri</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
                     </div>
                     <div class="post-footer">
                         Číst vydání →
@@ -1522,6 +1541,11 @@
                 
                 return { dayMonth: dateStr, year: '' };
             }
+
+            // Archivní popisky jsou čistý text; emoji zůstávají uvnitř vydání.
+            function cleanArchiveText(value) {
+                return String(value || '').replace(/^[^\p{L}\p{N}_]+/u, '').trim();
+            }
             
             // Funkce pro extrakci nadpisu z perexu
             function extractHeadline(excerpt) {
@@ -1547,15 +1571,12 @@
                 const dateObj = formatDate(post.date);
                 
                 // Čistý nadpis z main_hook (nebo fallback)
-                let headline = post.main_hook || post.title || 'Digest';
-                // Očistit případná zbylá emoji z nadpisu
-                headline = headline.replace(/^[\u{1F300}-\u{1F9FF}\u{2600}-\u{27BF}\u{1F600}-\u{1F64F}]+\s*/gu, '').trim();
+                let headline = cleanArchiveText(post.main_hook || post.title || 'Digest');
                 
                 // Čistý perex z excerpt (bez duplicity nadpisu)
-                let excerpt = post.excerpt || '';
-                excerpt = excerpt.replace(/^[\u{1F300}-\u{1F9FF}\u{2600}-\u{27BF}\u{1F600}-\u{1F64F}]+\s*/gu, '').trim();
+                let excerpt = cleanArchiveText(post.excerpt || '');
                 
-                const secondHook = post.second_hook || '';
+                const secondHook = cleanArchiveText(post.second_hook || '');
                 const url = post.url || '#';
                 
                 const card = document.createElement('a');
