@@ -5,11 +5,32 @@
     <link>https://simondusek.com</link>
     <description>Technologický a B2B newsletter od Šimona Duška - kompletní archiv vydání.</description>
     <language>cs</language>
-    <pubDate>Mon, 24 Aug 2026 00:00:00 +0000</pubDate>
-    <lastBuildDate>Mon, 24 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <pubDate>Thu, 27 Aug 2026 00:00:00 +0000</pubDate>
+    <lastBuildDate>Thu, 27 Aug 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://simondusek.com/feed.xml" rel="self" type="application/rss+xml" />
     <ttl>60</ttl>
         <item>
+      <title>Digest</title>
+      <link>https://simondusek.com/digest/2026-08-27-digest.html</link>
+      <description>Amazon právě ztrojnásobil objednávku čipů od Nvidie kvůli „rostoucí poptávce“ | Indický IT gigant TCS kupuje konzultační byznys Porsche za 320 milionů eur | Amazon plánuje během následujících dvou let přidat do svých datových center další 2 miliony grafických procesorů (GPU čipy pro výpočty umělé inteligen...</description>
+      <pubDate>Thu, 27 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://simondusek.com/digest/2026-08-27-digest.html</guid>
+    </item>
+    <item>
+      <title>Digest</title>
+      <link>https://simondusek.com/digest/2026-08-26-digest.html</link>
+      <description>Šéf Instagramu u soudu tvrdí, že pro bezpečnost dospívajících neexistuje žádné zázračné řešení | První vlastní čip OpenAI "Jalapeño" údajně poráží Nvidii v testech odvozování | Šéf Instagramu Adam Mosseri vypovídal u soudu v ostře sledovaném případu</description>
+      <pubDate>Wed, 26 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://simondusek.com/digest/2026-08-26-digest.html</guid>
+    </item>
+    <item>
+      <title>Digest</title>
+      <link>https://simondusek.com/digest/2026-08-25-digest.html</link>
+      <description>Studie ze Stanfordu zjistila, že AI nejvíce zasahuje nástupní pozice | Američané chtějí vědět, kdy jejich poskytovatelé zdravotní péče používají AI | Zaměstnanost mladých lidí v oborech zasažených umělou inteligencí klesla o 19 procent</description>
+      <pubDate>Tue, 25 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://simondusek.com/digest/2026-08-25-digest.html</guid>
+    </item>
+    <item>
       <title>Digest</title>
       <link>https://simondusek.com/digest/2026-08-24-digest.html</link>
       <description>Úniky z GTA 6 nutí Take-Two žádat o data od Microsoftu a Discordu | Sam Altman se obává, že kontrola nad AI skončí v rukou příliš mála lidí | Žádosti o vydání dat cílí na konkrétní účty na platformě Discord (komunikační aplikace pro hráče)</description>

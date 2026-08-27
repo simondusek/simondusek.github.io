@@ -1,6 +1,36 @@
 [
   {
     "title": "Digest",
+    "date": "27. 08. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-08-27-digest.html",
+    "excerpt": "Amazon plánuje během následujících dvou let přidat do svých datových center další 2 miliony grafických procesorů (GPU čipy pro výpočty umělé inteligen...",
+    "issue_id": "digest:2026-08-27",
+    "main_hook": "Amazon právě ztrojnásobil objednávku čipů od Nvidie kvůli „rostoucí poptávce“",
+    "second_hook": "Indický IT gigant TCS kupuje konzultační byznys Porsche za 320 milionů eur"
+  },
+  {
+    "title": "Digest",
+    "date": "26. 08. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-08-26-digest.html",
+    "excerpt": "Šéf Instagramu Adam Mosseri vypovídal u soudu v ostře sledovaném případu",
+    "issue_id": "digest:2026-08-26",
+    "main_hook": "Šéf Instagramu u soudu tvrdí, že pro bezpečnost dospívajících neexistuje žádné zázračné řešení",
+    "second_hook": "První vlastní čip OpenAI \"Jalapeño\" údajně poráží Nvidii v testech odvozování"
+  },
+  {
+    "title": "Digest",
+    "date": "25. 08. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-08-25-digest.html",
+    "excerpt": "Zaměstnanost mladých lidí v oborech zasažených umělou inteligencí klesla o 19 procent",
+    "issue_id": "digest:2026-08-25",
+    "main_hook": "Studie ze Stanfordu zjistila, že AI nejvíce zasahuje nástupní pozice",
+    "second_hook": "Američané chtějí vědět, kdy jejich poskytovatelé zdravotní péče používají AI"
+  },
+  {
+    "title": "Digest",
     "date": "24. 08. 2026",
     "type": "Digest",
     "url": "/digest/2026-08-24-digest.html",

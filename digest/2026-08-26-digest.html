@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="cs" data-theme="dark">
+<head>
+    <script>
+        // Bezpečný přístup k localStorage
+        function getSafeStorage(key) {
+            try {
+                return localStorage.getItem(key);
+            } catch (e) {
+                return null;
+            }
+        }
+        
+        (function() {
+            try {
+                var saved = getSafeStorage('theme');
+                var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {}
+       })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digest — simondusek.com</title>
+    <meta name="description" content="Šéf Instagramu Adam Mosseri vypovídal u soudu v ostře sledovaném případu">
+    <meta name="author" content="Šimon Dušek">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://simondusek.com/digest/2026-08-26-digest.html">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Digest — simondusek.com">
+    <meta property="og:description" content="Šéf Instagramu Adam Mosseri vypovídal u soudu v ostře sledovaném případu">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://simondusek.com/digest/2026-08-26-digest.html">
+    <meta property="og:image" content="https://simondusek.com/og-image-2026-08-26-digest.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="simondusek.com">
+    <meta property="og:locale" content="cs_CZ">
+    <meta property="article:published_time" content="2026-08-26T00:00:00+00:00">
+    <meta property="article:author" content="Šimon Dušek">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@DusekSimon">
+    <meta name="twitter:creator" content="@DusekSimon">
+    <meta name="twitter:image" content="https://simondusek.com/og-image-2026-08-26-digest.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           DESIGN TOKENS - ULTRA-CLEAN
+           ========================================================================== */
+        :root {
+            --bg-primary: #0f0f0f;
+            --glass: rgba(255, 255, 255, 0.02);
+            --glass-hover: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.12);
+            --text-primary: #ffffff;
+            --text-secondary: #9595a5;
+            --text-tertiary: #656575;
+            --accent: #007AFF;
+            --accent-hover: #0066cc;
+            --accent-glow: #0066f166;
+            --neon: #10b981;
+            --neon-glow: rgba(16, 185, 129, 0.4);
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --section-gap: clamp(6rem, 12vh, 10rem);
+            --radius-pill: 100px;
+            --radius-card: 20px;
+            --orb-opacity: 1;
+            --nav-bg-scrolled: rgba(5, 5, 8, 0.85);
+        }
+
+        html[data-theme="light"] {
+            --bg-primary: #f0f0f0;
+            --glass: rgba(10, 10, 20, 0.03);
+            --glass-hover: rgba(10, 10, 20, 0.05);
+            --border: rgba(10, 10, 20, 0.09);
+            --border-hover: rgba(10, 10, 20, 0.14);
+            --text-primary: #0a0a12;
+            --text-secondary: #55555f;
+            --text-tertiary: #85858f;
+            --orb-opacity: 0.4;
+            --nav-bg-scrolled: rgba(246, 246, 249, 0.85);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.65;
+            overflow-x: hidden;
+            min-height: 100vh;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .floating-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: var(--orb-opacity);
+            transition: opacity 0.4s ease;
+            will-change: transform;
+        }
+        
+        .floating-orb.orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.08), transparent 70%);
+            top: -200px;
+            right: -200px;
+        }
+        
+        .floating-orb.orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.06), transparent 70%);
+            bottom: -100px;
+            left: -200px;
+        }
+        
+        /* Mobile performance: Disable floating orbs completely on mobile */
+        @media (max-width: 767px) {
+            .floating-orb {
+                display: none;
+            }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 clamp(1.25rem, 5vw, 4rem);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ==========================================================================
+           NAVIGATION - Minimal
+           ========================================================================== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid transparent;
+            transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease, padding 0.3s ease;
+        }
+        
+        .nav.scrolled {
+            background: var(--nav-bg-scrolled);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border-bottom-color: var(--border);
+        }
+        
+        /* Mobile performance: Replace backdrop blur with solid background */
+        @media (max-width: 767px) {
+            .nav.scrolled {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: var(--nav-bg-scrolled);
+            }
+        }
+        
+        .nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+        
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            min-width: 0;
+            flex-shrink: 1;
+        }
+
+        .nav-brand {
+            text-decoration: none;
+        }
+        
+        .nav-brand-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent), var(--neon));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 800;
+            color: white;
+        }
+        
+        .nav-brand-name {
+            font-weight: 700;
+            font-size: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        @media (max-width: 400px) {
+            .nav-brand-name {
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .nav-right {
+                gap: 0.4rem;
+            }
+        }
+        
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+        
+        /* Mobile Menu Button - Burger */
+        .mobile-menu-toggle {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 38px;
+            height: 38px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: all 0.25s ease;
+        }
+        
+        .mobile-menu-toggle:hover {
+            border-color: var(--border-hover);
+            background: var(--glass-hover);
+            transform: translateY(-1px);
+        }
+        
+        @media (max-width: 600px) {
+            .mobile-menu-toggle {
+                width: 34px;
+                height: 34px;
+            }
+            
+            .mobile-menu-toggle span {
+                width: 16.2px;
+                height: 1.8px;
+            }
+        }
+        
+        .mobile-menu-toggle span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+        
+        .mobile-menu-toggle span:nth-child(1) { margin-bottom: 4px; }
+        .mobile-menu-toggle span:nth-child(3) { margin-top: 4px; }
+        
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(4px, 4px);
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(4px, -4px);
+        }
+        
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            z-index: 199;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .mobile-menu-content {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            margin: 0 clamp(1.5rem, 5vw, 3rem);
+            padding: 1.5rem;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            z-index: 200;
+            will-change: transform, opacity;
+        }
+        
+        .mobile-menu-overlay.active .mobile-menu-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .mobile-menu-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.85rem 1.25rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+        
+        .mobile-menu-link:hover {
+            color: var(--text-primary);
+            background: var(--glass-hover);
+        }
+        
+        .mobile-menu-link .icon {
+            font-size: 1.1rem;
+            width: 24px;
+            text-align: center;
+        }
+        
+        /* Show mobile menu toggle on mobile */
+        @media (max-width: 767px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            .nav-links {
+                display: none !important;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .mobile-menu-toggle {
+                display: none;
+            }
+        }
+        
+        .nav-link {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .theme-toggle {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.25s ease;
+            flex-shrink: 0;
+        }
+        
+        .theme-toggle:hover {
+            border-color: var(--border-hover);
+            background: var(--glass-hover);
+            transform: translateY(-1px);
+        }
+        
+        .nav-back {
+            padding: 0.55rem 1.1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: var(--radius-pill);
+            background: var(--glass);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        
+        .nav-back:hover {
+            background: var(--glass-hover);
+            border-color: var(--border-hover);
+            color: var(--text-primary);
+            transform: translateX(-2px);
+        }
+
+        .nav-back-icon {
+            display: none;
+        }
+        
+        @media (max-width: 520px) {
+            .nav-back-text {
+                display: none;
+            }
+            .nav-back-icon {
+                display: inline;
+            }
+            .nav-back {
+                padding: 0.55rem 0.85rem;
+            }
+        }
+        
+        /* DIGEST CONTENT */
+        .digest-page {
+            padding-top: clamp(7.5rem, 16vh, 11rem);
+            padding-bottom: var(--section-gap);
+        }
+        
+        .digest-card {
+            max-width: 740px;
+            margin: 0 auto;
+            padding: clamp(2rem, 5vw, 3.5rem);
+            background: var(--glass);
+            border-radius: var(--radius-card);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            position: relative;
+            transition: all 0.3s ease;
+            will-change: transform;
+        }
+        
+        /* Mobile performance: Replace backdrop blur with solid background */
+        @media (max-width: 767px) {
+            .digest-card {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: var(--bg-primary);
+                border: 1px solid var(--border);
+            }
+        }
+        
+        .digest-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+        }
+        
+        .digest-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.9rem;
+            border-radius: 100px;
+            background: #007bff30;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--accent-hover);
+            margin-bottom: 1.5rem;
+        }
+        
+        .digest-card h1 {
+            font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+        
+        .digest-meta {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .digest-content {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+        
+        .digest-content h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+            margin: 2rem 0 1rem;
+            color: var(--text-primary);
+        }
+        
+        .digest-content h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+            margin: 1.75rem 0 0.75rem;
+            color: var(--text-primary);
+        }
+        
+        .digest-content p {
+            margin-bottom: 1.25rem;
+        }
+        
+        .digest-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .digest-content strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .digest-content a {
+            color: var(--accent-hover);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        
+        .digest-content a:hover {
+            color: var(--neon);
+        }
+        
+        .digest-content ul,
+        .digest-content ol {
+            margin: 1.25rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .digest-content li {
+            margin-bottom: 0.6rem;
+            line-height: 1.7;
+        }
+        
+        .digest-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.6rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-pill);
+            transition: all 0.25s ease;
+            text-decoration: none;
+            margin-top: 2.5rem;
+        }
+        
+        .digest-back:hover {
+            background: var(--glass-hover);
+            border-color: var(--border-hover);
+            transform: translateX(-2px);
+        }
+
+        /* FOOTER */
+        .site-footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .footer-left {
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+        }
+        
+        .footer-left strong {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        
+        .footer-links a {
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+            transition: color 0.2s ease;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Fallback pro in-app prohlížeče a starší renderery */
+        .reveal {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+        
+        /* Zpětně zapneme animaci POUZE v případě, že je prohlížeč plně podporuje a JS je aktivní */
+        @supports (opacity: 1) {
+            .js-enabled .reveal:not(.visible) {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                            transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* ==========================================================================
+           FLOATING CTA - Simple Link Button
+           ========================================================================== */
+        .floating-cta {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+            padding: 0.75rem 1.35rem;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.35);
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .floating-cta.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        
+        .floating-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 122, 255, 0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .floating-cta {
+                bottom: 16px;
+                right: 16px;
+                padding: 0.65rem 1.1rem;
+                font-size: 0.82rem;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            }
+        }            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+            padding: 0;
+            line-height: 1;
+        }
+        
+        .cta-close:hover {
+            color: var(--text-primary);
+            background: var(--glass-hover);
+        }
+        
+        .cta-submit {
+            padding: 0.75rem 1.25rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, var(--accent), var(--neon));
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            will-change: transform, box-shadow;
+        }
+        
+        .cta-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(0, 122, 255, 0.3);
+        }
+        
+        .cta-success {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .cta-success.visible {
+            display: flex;
+        }
+        
+        .cta-success-icon {
+            font-size: 2rem;
+            color: var(--neon);
+        }
+        
+        .cta-success-text {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="floating-orb orb-1" aria-hidden="true"></div>
+    <div class="floating-orb orb-2" aria-hidden="true"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="nav" id="main-nav" role="navigation" aria-label="Hlavní navigace">
+        <div class="container">
+            <a href="/" class="nav-brand">
+                <div class="nav-brand-icon" aria-hidden="true">⌘</div>
+                <span class="nav-brand-name">simondusek.com</span>
+            </a>
+            <div class="nav-links">
+                <a href="/digest" class="nav-link">Digest Archiv</a>
+                <a href="/deep-dive" class="nav-link">Deep Dive Blog</a>
+                <a href="/#about" class="nav-link">O mně</a>
+            </div>
+            <div class="nav-right">
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="mobile-menu-content">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Přepnout světlý/tmavý režim">
+                    <span class="theme-icon" id="theme-icon">🌙</span>
+                </button>
+                <a href="/" class="nav-back">
+                    <span class="nav-back-text">← Zpět na hlavní stránku</span>
+                    <span class="nav-back-icon">← Domů</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay" role="navigation" aria-label="Mobilní navigace">
+        <div class="mobile-menu-content" id="mobile-menu-content">
+            <div class="mobile-menu-links">
+                <a href="/digest" class="mobile-menu-link">
+                    <span class="icon">⚡</span>
+                    Digest Archiv
+                </a>
+                <a href="/deep-dive" class="mobile-menu-link">
+                    <span class="icon">🎯</span>
+                    Deep Dive Blog
+                </a>
+                <a href="/#about" class="mobile-menu-link">
+                    <span class="icon">👤</span>
+                    O mně
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    <main class="digest-page">
+        <div class="container">
+            <div class="digest-card reveal">
+                <div class="digest-badge">📰 Digest</div>
+                <h1>Digest</h1>
+                <p class="digest-meta">Vydáno: 26. 08. 2026</p>
+                
+                <div class="digest-content">
+                    <h2>🚀 Hlavní události v Techu &amp; AI</h2><h3>⚖️ <a href="https://www.nytimes.com/2026/08/25/technology/instagram-adam-mosseri-trial.html">Šéf Instagramu u soudu tvrdí, že pro bezpečnost dospívajících neexistuje žádné zázračné řešení</a></h3><p><strong>Meta čelí žalobám států kvůli záměrnému vytváření závislosti u dětí.</strong></p><ul><li>Šéf Instagramu Adam Mosseri vypovídal u soudu v ostře sledovaném případu.</li><li>Žalobu podaly americké státy, které tvrdí, že aplikace vlastněná společností Meta záměrně vytvořila návykové funkce. Tyto prvky měly podle nich za cíl zaháčkovat mladé uživatele a udržet je u obrazovek.</li></ul><div class="why-box"><p>🎯 Právní bitva odhaluje, jak těžké je regulovat algoritmy sociálních sítí. Když šéf platformy veřejně přizná, že nemá jednoduchý lék na ochranu dětí, přenáší tím část zodpovědnosti zpět na rodiče a zákonodárce. Soudní spor může skončit nařízením, které donutí technologické giganty radikálně změnit způsob, jakým servírují obsah nezletilým. Pokud Meta prohraje, pravděpodobně uvidíme <strong>konec nekonečného scrollování</strong> a agresivních notifikací pro uživatele mladší osmnácti let.</p></div><p>Zdroj: New York Times</p><h3>🌶️ <a href="https://the-decoder.com/openais-first-custom-chip-jalapeno-reportedly-beats-nvidias-blackwell-and-rubin-in-inference-benchmarks/">První vlastní čip OpenAI "Jalapeño" údajně poráží Nvidii v testech odvozování</a></h3><p><strong>Tvůrci ChatGPT si vyrobili vlastní čip a hned napoprvé překonali krále trhu.</strong></p><ul><li>Společnost OpenAI představila na konferenci Hot Chips svůj první vlastní čip pro inferenci (proces, kdy AI model generuje odpovědi) s názvem Jalapeño.</li><li>Podle testů analytiků ze SemiAnalysis tento čip překonává modely Blackwell i Rubin od Nvidie, a to jak v propustnosti dat, tak v energetické účinnosti. Odborníci dodávají, že první generace čipů obvykle nebývá takto konkurenceschopná.</li></ul><div class="why-box"><p>🎯 Monopol Nvidie na poli umělé inteligence dostává první vážnou trhlinu. OpenAI už nechce platit astronomické marže za cizí hardware a bere vývoj do vlastních rukou, podobně jako to udělal Apple se svými procesory. Vyšší energetická účinnost znamená, že provoz ChatGPT bude stát zlomek současných nákladů. <strong>Vlastní čip Jalapeño</strong> tak dává firmě obrovskou finanční svobodu a možnost zlevnit své služby natolik, že menší konkurenti nebudou schopni držet krok.</p></div><p>Zdroj: The Decoder</p><h3>💻 <a href="https://venturebeat.com/infrastructure/perplexity-partners-with-nvidia-to-launch-portable-computer-a-fully-local-ai-agent-with-zero-token-costs">Perplexity se spojuje s Nvidií a spouští Portable Computer, lokálního AI agenta s nulovými náklady na tokeny</a></h3><p><strong>Umělá inteligence se stěhuje z cloudu přímo do vašeho počítače, a to zcela zdarma.</strong></p><ul><li>Společnost Perplexity dnes spouští Portable Computer, verzi své platformy pro autonomní agenty.</li><li>Tento systém běží výhradně na hardwaru, který uživatelé již vlastní, a nevyžaduje platby za vygenerovaná slova. Zpočátku podporuje stolní superpočítače Nvidia DGX Spark a stroje se systémem Linux vybavené grafickými kartami Nvidia RTX.</li></ul><div class="why-box"><p>🎯 Přesun umělé inteligence z obřích datových center přímo na stůl uživatele řeší dva největší problémy současnosti: soukromí a cenu. Firmy už nemusí posílat svá citlivá data přes internet na cizí servery, vše se zpracuje lokálně za zavřenými dveřmi. Nulové poplatky za vygenerovaný text navíc bourají bariéry pro masivní automatizaci rutinních úkolů. <strong>Spojenectví s Nvidií</strong> ukazuje, že budoucnost nepatří jen cloudovým gigantům, ale i výkonným pracovním stanicím přímo v kancelářích.</p></div><p>Zdroj: Venture Beat</p><h3>🚚 <a href="https://siliconangle.com/2026/08/25/gatik-raises-200m-to-grow-driverless-fleet-past-100-trucks-this-year/">Gatik získává 200 milionů dolarů na rozšíření flotily autonomních kamionů na více než 100 vozů</a></h3><p><strong>Kamiony bez řidičů už nejsou sci-fi, na silnice jich letos vyrazí přes stovku.</strong></p><ul><li>Společnost Gatik AI, která se zabývá autonomní nákladní dopravou, oznámila zisk 200 milionů dolarů v investičním kole Series D (pokročilá fáze financování zavedené firmy).</li><li>Peníze poslouží k rozšíření flotily z aktuálních desítek vozů na více než 100 kamionů bez řidiče do konce letošního roku. Firma založená v roce 2017 se specializuje na krátké regionální trasy.</li></ul><div class="why-box"><p>🎯 Logistika zažívá tichou revoluci, která vyřeší chronický nedostatek řidičů nákladních aut. Gatik chytře necílí na složitou městskou dopravu, ale na nudné, opakující se trasy mezi sklady a obchody, kde stroje dělají méně chyb než unavení lidé. Investice <strong>200 milionů dolarů</strong> potvrzuje, že technologie je konečně zralá pro masové nasazení v reálném byznysu. Pro velké obchodní řetězce to znamená drastické snížení nákladů na přepravu a možnost zásobovat prodejny nonstop, 24 hodin denně.</p></div><p>Zdroj: Silicon Angle</p><hr><h2>📈 Burza &amp; Finance</h2><h3>☢️ <a href="https://www.cnbc.com/2026/08/26/trump-saudi-nuclear-agreement-congress-iran-deal-.html">Trumpova jaderná dohoda se Saúdskou Arábií míří do Kongresu, experti varují před rizikem šíření zbraní</a></h3><p><strong>Kontroverzní jaderný pakt vyvolává obavy z dalších závodů ve zbrojení na Blízkém východě.</strong></p><ul><li>Část demokratických zákonodárců a zastánců nešíření jaderných zbraní ostře kritizuje novou dohodu.</li><li>Vadí jim především to, že pakt neobsahuje trvalý zákaz obohacování uranu nebo přepracování vyhořelého paliva. To vyvolává obavy z možného zneužití technologie.</li></ul><div class="why-box"><p>🎯 Absence přísných mantinelů pro nakládání s jaderným materiálem vytváří nebezpečný precedens v jednom z nejnestabilnějších regionů světa. Pokud Saúdská Arábie získá volnou ruku k obohacování uranu, může to vyprovokovat sousední státy k podobným krokům. Pro globální trhy to znamená zvýšené geopolitické napětí, které se historicky vždy okamžitě propisuje do <strong>ceny ropy a zlata</strong>. Investoři proto musí bedlivě sledovat, zda Kongres dohodu zablokuje, nebo nechá Blízký východ vstoupit do nové jaderné éry.</p></div><p>Zdroj: CNBC Top News</p><h3>🍁 <a href="https://www.cnbc.com/2026/08/25/canada-trump-tariffs-trade-carney-leblanc.html">Kanada představuje odvetná cla na americké zboží v hodnotě zhruba 20 miliard dolarů</a></h3><p><strong>Obchodní válka mezi sousedy eskaluje, Kanada vrací úder tvrdými cly.</strong></p><ul><li>Kanadští obchodní vyjednavači minulý týden opustili Spojené státy bez dosažení dohody.</li><li>Nepodařilo se jim tak zabránit tomu, aby vstoupila v platnost nová cla zavedená prezidentem Donaldem Trumpem. Kanada proto reaguje vlastními cly na americké zboží.</li></ul><div class="why-box"><p>🎯 Eskalace celní války mezi nejbližšími spojenci zdraží každodenní život milionům lidí na obou stranách hranice. Když se zablokuje volný pohyb zboží v hodnotě <strong>20 miliard dolarů</strong>, firmy musí okamžitě hledat nové dodavatele nebo přenést zvýšené náklady přímo na zákazníky. Pro běžného spotřebitele to znamená dražší potraviny, auta i stavební materiály. Tento krok navíc narušuje dlouhodobě budované dodavatelské řetězce, jejichž oprava zabere roky i po případném urovnání politických sporů.</p></div><p>Zdroj: CNBC Top News</p><h3>🏦 <a href="https://www.investing.com/news/economy-news/boj-to-speed-up-its-tightening-campaign-raise-key-rate-to-125-in-september-reuters-poll-4876009">Japonská centrální banka zrychlí zpřísňování, v září zvýší klíčovou sazbu na 1,25 %</a></h3><p><strong>Éra levných peněz v Japonsku definitivně končí, banka šlape na brzdu.</strong></p><ul><li>Podle průzkumu agentury Reuters plánuje japonská centrální banka zrychlit svou kampaň zpřísňování měnové politiky.</li><li>Očekává se, že instituce již v září přistoupí ke zvýšení své klíčové úrokové sazby na úroveň 1,25 procenta.</li></ul><div class="why-box"><p>🎯 Japonsko dlouhé roky fungovalo jako globální bankomat, kde si investoři půjčovali peníze s nulovým úrokem a investovali je jinde. Zvýšení sazeb tento mechanismus drasticky prodraží a donutí velké fondy stahovat biliony dolarů zpět do Asie. Tento masivní přesun kapitálu může způsobit silné otřesy na amerických i evropských akciových trzích. <strong>Sazba 1,25 procenta</strong> se sice zdá nízká, ale pro japonskou ekonomiku zvyklou na záporná čísla jde o historický šok, který změní globální toky peněz.</p></div><p>Zdroj: Investing.com</p><h3>🚀 <a href="https://www.cnbc.com/2026/08/25/bitcoin-price-near-80000-cryptocurrency-ether-us-treasuries.html">Bitcoin překonal hranici 80 000 dolarů, kryptoměnová rally nabírá na tempu</a></h3><p><strong>Nejznámější kryptoměna proráží historické stropy a táhne s sebou celý trh.</strong></p><ul><li>Bitcoin překonal hranici 80 000 dolarů a prodloužil tak svou nedávnou rally.</li><li>Tento prudký nárůst byl způsoben obnoveným přílivem peněz do spotových bitcoinových ETF (burzovně obchodovaných fondů). Roli sehrál také zlepšující se apetit investorů riskovat.</li></ul><div class="why-box"><p>🎯 Schválení burzovních fondů definitivně legitimizovalo Bitcoin v očích tradičních finančních institucí. Peníze z Wall Street nyní tečou do kryptoměn v bezprecedentním objemu, což vytváří obrovský tlak na cenu. Pro drobné investory to znamená, že divoký západ kryptoměn se mění na standardní investiční nástroj. <strong>Překonání 80 000 dolarů</strong> není jen psychologická hranice, ale důkaz strukturální změny na trhu.</p></div><p>Zdroj: CNBC Top News</p><hr><h2>🇨🇿 Z české kotliny</h2><h3>🛰️ <a href="https://www.lupa.cz/aktuality/cesi-investuji-do-technologie-ktera-ma-opravovat-druzice-rovnou-ve-vesmiru/?utm_source=rss&amp;utm_medium=text&amp;utm_campaign=rss">Češi investují do technologie, která má opravovat družice rovnou ve vesmíru</a></h3><p><strong>Český kapitál míří do startupu, který chce řezat a svařovat satelity přímo na oběžné dráze.</strong></p><ul><li>Česká investiční skupina Depo Ventures se stala jedním z hlavních investorů do francouzského startupu ArcSpace.</li><li>Tato firma vyvíjí kompaktní zařízení využívající vysokoenergetický elektronový paprsek, které dokáže i ve vakuu řezat a opravovat družice přímo na oběžné dráze.</li></ul><div class="why-box"><p>🎯 Vesmírný odpad a rozbité satelity představují tikající bombu pro celou globální komunikaci. Možnost opravovat družice přímo ve vesmíru místo jejich drahého nahrazování ušetří operátorům miliardy dolarů. Technologie elektronového paprsku funguje jako vesmírný autoservis, který prodlouží životnost drahých zařízení o desítky let. <strong>Česká investice do ArcSpace</strong> dokazuje, že tuzemský kapitál umí včas naskočit do rodícího se trhu vesmírné logistiky, který bude v příštím desetiletí extrémně lukrativní.</p></div><p>Zdroj: Lupa CZ</p><h3>🏢 <a href="https://www.zive.cz/clanky/cesi-postavi-datacentra-pro-ai-za-90-miliard-zaradi-se-mezi-nejvetsi-hrace-v-evrope/sc-3-a-242931/default.aspx">Češi postaví datacentra pro AI za 90 miliard. Zařadí se mezi největší hráče v Evropě</a></h3><p><strong>Pražský podnikatel chystá obří investici do AI infrastruktury, která změní mapu Evropy.</strong></p><ul><li>Pražský podnikatel plánuje vybudovat napříč Evropou až osm nových datových center specializovaných na umělou inteligenci.</li><li>Tyto objekty nabídnou celkový výpočetní výkon 800 megawattů, přičemž celková investice dosáhne 3,6 miliardy eur, tedy téměř 90 miliard korun.</li></ul><div class="why-box"><p>🎯 Evropa zoufale zaostává za USA v budování infrastruktury pro umělou inteligenci a tento projekt to může částečně změnit. Výkon 800 megawattů představuje obrovskou kapacitu, která umožní lokálním firmám trénovat složité modely bez nutnosti posílat data na americké servery. To je naprosto zásadní pro dodržení přísných evropských pravidel o ochraně soukromí. <strong>Investice 90 miliard korun</strong> katapultuje český byznys do první ligy technologických hráčů a vytvoří zázemí pro vznik nových evropských AI startupů.</p></div><p>Zdroj: Živě CZ</p><hr>
+                </div>
+                
+                <a href="/digest" class="digest-back">
+                    ← Zpět do archivu
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER - Reuse from index.html -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">© 2026-08-26 <strong>simondusek.com</strong> · Šimon Dušek</div>
+                <div class="footer-links">
+                    <a href="/">Hlavní stránka</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+        const mobileMenuContent = document.getElementById('mobile-menu-content');
+
+        function toggleMobileMenu() {
+            const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+            mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+            mobileMenuOverlay.classList.toggle('active');
+            document.body.style.overflow = isExpanded ? '' : 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            mobileMenuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+        }
+
+        if (mobileMenuOverlay) {
+            mobileMenuOverlay.addEventListener('click', (e) => {
+                if (e.target === mobileMenuOverlay) {
+                    closeMobileMenu();
+                }
+            });
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-menu-link').forEach(link => {
+            link.addEventListener('click', () => {
+                closeMobileMenu();
+            });
+        });
+
+        // Close mobile menu on window resize (if screen becomes desktop size)
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                closeMobileMenu();
+            }
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlEl = document.documentElement;
+
+        function updateThemeIcon(theme) {
+            if (themeIcon) {
+                themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+
+        updateThemeIcon(htmlEl.getAttribute('data-theme') || 'dark');
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const current = htmlEl.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+                const next = current === 'dark' ? 'light' : 'dark';
+                htmlEl.setAttribute('data-theme', next);
+                try {
+                    localStorage.setItem('theme', next);
+                } catch (e) {}
+                updateThemeIcon(next);
+            });
+        }
+
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Nav scroll effect
+        const nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+        
+        // Floating CTA - show after scroll
+        window.addEventListener('scroll', function() {
+            var cta = document.getElementById('floating-cta');
+            if (cta) {
+                if (window.scrollY > 200) {
+                    cta.classList.add('visible');
+                } else {
+                    cta.classList.remove('visible');
+                }
+            }
+        }, { passive: true });
+    </script>
+
+    <!-- Floating CTA tlačítko -->
+    <a href="/#hero-form" id="floating-cta" class="floating-cta" aria-label="Odebírat newsletter">
+        <span>⚡ Odebírat Digest</span>
+    </a>
+    
+    <!-- Záchranný skript pro X.com / LinkedIn In-App prohlížeče -->
+    <script>
+        // Záchranný skript pro In-App prohlížeče
+        document.addEventListener('DOMContentLoaded', function() {
+            // Okamžitě přidáme třídu js-enabled
+            document.body.classList.add('js-enabled');
+            
+            // Pojistka: Za 300ms natvrdo zviditelníme všechny .reveal prvky, pokud se nespustil IntersectionObserver
+            setTimeout(function() {
+                var reveals = document.querySelectorAll('.reveal');
+                reveals.forEach(function(el) {
+                    el.classList.add('visible');
+                });
+            }, 300);
+        });
+    </script>
+
+</body>
+</html>
