@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="cs" data-theme="dark">
+<head>
+    <script>
+        // Bezpečný přístup k localStorage
+        function getSafeStorage(key) {
+            try {
+                return localStorage.getItem(key);
+            } catch (e) {
+                return null;
+            }
+        }
+        
+        (function() {
+            try {
+                var saved = getSafeStorage('theme');
+                var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {}
+       })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digest — simondusek.com</title>
+    <meta name="description" content="Žádosti o vydání dat cílí na konkrétní účty na platformě Discord (komunikační aplikace pro hráče)">
+    <meta name="author" content="Šimon Dušek">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://simondusek.com/digest/2026-08-24-digest.html">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Digest — simondusek.com">
+    <meta property="og:description" content="Žádosti o vydání dat cílí na konkrétní účty na platformě Discord (komunikační aplikace pro hráče)">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://simondusek.com/digest/2026-08-24-digest.html">
+    <meta property="og:image" content="https://simondusek.com/og-image-2026-08-24-digest.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="simondusek.com">
+    <meta property="og:locale" content="cs_CZ">
+    <meta property="article:published_time" content="2026-08-24T00:00:00+00:00">
+    <meta property="article:author" content="Šimon Dušek">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@DusekSimon">
+    <meta name="twitter:creator" content="@DusekSimon">
+    <meta name="twitter:image" content="https://simondusek.com/og-image-2026-08-24-digest.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           DESIGN TOKENS - ULTRA-CLEAN
+           ========================================================================== */
+        :root {
+            --bg-primary: #0f0f0f;
+            --glass: rgba(255, 255, 255, 0.02);
+            --glass-hover: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.12);
+            --text-primary: #ffffff;
+            --text-secondary: #9595a5;
+            --text-tertiary: #656575;
+            --accent: #007AFF;
+            --accent-hover: #0066cc;
+            --accent-glow: #0066f166;
+            --neon: #10b981;
+            --neon-glow: rgba(16, 185, 129, 0.4);
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --section-gap: clamp(6rem, 12vh, 10rem);
+            --radius-pill: 100px;
+            --radius-card: 20px;
+            --orb-opacity: 1;
+            --nav-bg-scrolled: rgba(5, 5, 8, 0.85);
+        }
+
+        html[data-theme="light"] {
+            --bg-primary: #f0f0f0;
+            --glass: rgba(10, 10, 20, 0.03);
+            --glass-hover: rgba(10, 10, 20, 0.05);
+            --border: rgba(10, 10, 20, 0.09);
+            --border-hover: rgba(10, 10, 20, 0.14);
+            --text-primary: #0a0a12;
+            --text-secondary: #55555f;
+            --text-tertiary: #85858f;
+            --orb-opacity: 0.4;
+            --nav-bg-scrolled: rgba(246, 246, 249, 0.85);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.65;
+            overflow-x: hidden;
+            min-height: 100vh;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .floating-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: var(--orb-opacity);
+            transition: opacity 0.4s ease;
+            will-change: transform;
+        }
+        
+        .floating-orb.orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.08), transparent 70%);
+            top: -200px;
+            right: -200px;
+        }
+        
+        .floating-orb.orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.06), transparent 70%);
+            bottom: -100px;
+            left: -200px;
+        }
+        
+        /* Mobile performance: Disable floating orbs completely on mobile */
+        @media (max-width: 767px) {
+            .floating-orb {
+                display: none;
+            }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 clamp(1.25rem, 5vw, 4rem);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ==========================================================================
+           NAVIGATION - Minimal
+           ========================================================================== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid transparent;
+            transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease, padding 0.3s ease;
+        }
+        
+        .nav.scrolled {
+            background: var(--nav-bg-scrolled);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border-bottom-color: var(--border);
+        }
+        
+        /* Mobile performance: Replace backdrop blur with solid background */
+        @media (max-width: 767px) {
+            .nav.scrolled {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: var(--nav-bg-scrolled);
+            }
+        }
+        
+        .nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+        
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            min-width: 0;
+            flex-shrink: 1;
+        }
+
+        .nav-brand {
+            text-decoration: none;
+        }
+        
+        .nav-brand-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent), var(--neon));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 800;
+            color: white;
+        }
+        
+        .nav-brand-name {
+            font-weight: 700;
+            font-size: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        @media (max-width: 400px) {
+            .nav-brand-name {
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .nav-right {
+                gap: 0.4rem;
+            }
+        }
+        
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+        
+        /* Mobile Menu Button - Burger */
+        .mobile-menu-toggle {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 38px;
+            height: 38px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: all 0.25s ease;
+        }
+        
+        .mobile-menu-toggle:hover {
+            border-color: var(--border-hover);
+            background: var(--glass-hover);
+            transform: translateY(-1px);
+        }
+        
+        @media (max-width: 600px) {
+            .mobile-menu-toggle {
+                width: 34px;
+                height: 34px;
+            }
+            
+            .mobile-menu-toggle span {
+                width: 16.2px;
+                height: 1.8px;
+            }
+        }
+        
+        .mobile-menu-toggle span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+        
+        .mobile-menu-toggle span:nth-child(1) { margin-bottom: 4px; }
+        .mobile-menu-toggle span:nth-child(3) { margin-top: 4px; }
+        
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(4px, 4px);
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(4px, -4px);
+        }
+        
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            z-index: 199;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .mobile-menu-content {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            margin: 0 clamp(1.5rem, 5vw, 3rem);
+            padding: 1.5rem;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            z-index: 200;
+            will-change: transform, opacity;
+        }
+        
+        .mobile-menu-overlay.active .mobile-menu-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .mobile-menu-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.85rem 1.25rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+        
+        .mobile-menu-link:hover {
+            color: var(--text-primary);
+            background: var(--glass-hover);
+        }
+        
+        .mobile-menu-link .icon {
+            font-size: 1.1rem;
+            width: 24px;
+            text-align: center;
+        }
+        
+        /* Show mobile menu toggle on mobile */
+        @media (max-width: 767px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            .nav-links {
+                display: none !important;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .mobile-menu-toggle {
+                display: none;
+            }
+        }
+        
+        .nav-link {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .theme-toggle {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.25s ease;
+            flex-shrink: 0;
+        }
+        
+        .theme-toggle:hover {
+            border-color: var(--border-hover);
+            background: var(--glass-hover);
+            transform: translateY(-1px);
+        }
+        
+        .nav-back {
+            padding: 0.55rem 1.1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: var(--radius-pill);
+            background: var(--glass);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        
+        .nav-back:hover {
+            background: var(--glass-hover);
+            border-color: var(--border-hover);
+            color: var(--text-primary);
+            transform: translateX(-2px);
+        }
+
+        .nav-back-icon {
+            display: none;
+        }
+        
+        @media (max-width: 520px) {
+            .nav-back-text {
+                display: none;
+            }
+            .nav-back-icon {
+                display: inline;
+            }
+            .nav-back {
+                padding: 0.55rem 0.85rem;
+            }
+        }
+        
+        /* DIGEST CONTENT */
+        .digest-page {
+            padding-top: clamp(7.5rem, 16vh, 11rem);
+            padding-bottom: var(--section-gap);
+        }
+        
+        .digest-card {
+            max-width: 740px;
+            margin: 0 auto;
+            padding: clamp(2rem, 5vw, 3.5rem);
+            background: var(--glass);
+            border-radius: var(--radius-card);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            position: relative;
+            transition: all 0.3s ease;
+            will-change: transform;
+        }
+        
+        /* Mobile performance: Replace backdrop blur with solid background */
+        @media (max-width: 767px) {
+            .digest-card {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: var(--bg-primary);
+                border: 1px solid var(--border);
+            }
+        }
+        
+        .digest-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+        }
+        
+        .digest-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.9rem;
+            border-radius: 100px;
+            background: #007bff30;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--accent-hover);
+            margin-bottom: 1.5rem;
+        }
+        
+        .digest-card h1 {
+            font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+        
+        .digest-meta {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .digest-content {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+        
+        .digest-content h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+            margin: 2rem 0 1rem;
+            color: var(--text-primary);
+        }
+        
+        .digest-content h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+            margin: 1.75rem 0 0.75rem;
+            color: var(--text-primary);
+        }
+        
+        .digest-content p {
+            margin-bottom: 1.25rem;
+        }
+        
+        .digest-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .digest-content strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .digest-content a {
+            color: var(--accent-hover);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        
+        .digest-content a:hover {
+            color: var(--neon);
+        }
+        
+        .digest-content ul,
+        .digest-content ol {
+            margin: 1.25rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .digest-content li {
+            margin-bottom: 0.6rem;
+            line-height: 1.7;
+        }
+        
+        .digest-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.6rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-pill);
+            transition: all 0.25s ease;
+            text-decoration: none;
+            margin-top: 2.5rem;
+        }
+        
+        .digest-back:hover {
+            background: var(--glass-hover);
+            border-color: var(--border-hover);
+            transform: translateX(-2px);
+        }
+
+        /* FOOTER */
+        .site-footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .footer-left {
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+        }
+        
+        .footer-left strong {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        
+        .footer-links a {
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+            transition: color 0.2s ease;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Fallback pro in-app prohlížeče a starší renderery */
+        .reveal {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+        
+        /* Zpětně zapneme animaci POUZE v případě, že je prohlížeč plně podporuje a JS je aktivní */
+        @supports (opacity: 1) {
+            .js-enabled .reveal:not(.visible) {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                            transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* ==========================================================================
+           FLOATING CTA - Simple Link Button
+           ========================================================================== */
+        .floating-cta {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+            padding: 0.75rem 1.35rem;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.35);
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .floating-cta.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        
+        .floating-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 122, 255, 0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .floating-cta {
+                bottom: 16px;
+                right: 16px;
+                padding: 0.65rem 1.1rem;
+                font-size: 0.82rem;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            }
+        }            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+            padding: 0;
+            line-height: 1;
+        }
+        
+        .cta-close:hover {
+            color: var(--text-primary);
+            background: var(--glass-hover);
+        }
+        
+        .cta-submit {
+            padding: 0.75rem 1.25rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, var(--accent), var(--neon));
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            will-change: transform, box-shadow;
+        }
+        
+        .cta-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(0, 122, 255, 0.3);
+        }
+        
+        .cta-success {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .cta-success.visible {
+            display: flex;
+        }
+        
+        .cta-success-icon {
+            font-size: 2rem;
+            color: var(--neon);
+        }
+        
+        .cta-success-text {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="floating-orb orb-1" aria-hidden="true"></div>
+    <div class="floating-orb orb-2" aria-hidden="true"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="nav" id="main-nav" role="navigation" aria-label="Hlavní navigace">
+        <div class="container">
+            <a href="/" class="nav-brand">
+                <div class="nav-brand-icon" aria-hidden="true">⌘</div>
+                <span class="nav-brand-name">simondusek.com</span>
+            </a>
+            <div class="nav-links">
+                <a href="/digest" class="nav-link">Digest Archiv</a>
+                <a href="/deep-dive" class="nav-link">Deep Dive Blog</a>
+                <a href="/#about" class="nav-link">O mně</a>
+            </div>
+            <div class="nav-right">
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="mobile-menu-content">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Přepnout světlý/tmavý režim">
+                    <span class="theme-icon" id="theme-icon">🌙</span>
+                </button>
+                <a href="/" class="nav-back">
+                    <span class="nav-back-text">← Zpět na hlavní stránku</span>
+                    <span class="nav-back-icon">← Domů</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay" role="navigation" aria-label="Mobilní navigace">
+        <div class="mobile-menu-content" id="mobile-menu-content">
+            <div class="mobile-menu-links">
+                <a href="/digest" class="mobile-menu-link">
+                    <span class="icon">⚡</span>
+                    Digest Archiv
+                </a>
+                <a href="/deep-dive" class="mobile-menu-link">
+                    <span class="icon">🎯</span>
+                    Deep Dive Blog
+                </a>
+                <a href="/#about" class="mobile-menu-link">
+                    <span class="icon">👤</span>
+                    O mně
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    <main class="digest-page">
+        <div class="container">
+            <div class="digest-card reveal">
+                <div class="digest-badge">📰 Digest</div>
+                <h1>Digest</h1>
+                <p class="digest-meta">Vydáno: 24. 08. 2026</p>
+                
+                <div class="digest-content">
+                    <h2>🚀 Hlavní události v Techu &amp; AI</h2><h3>🎮 <a href="https://www.cnet.com/tech/gta-6-leaks-prompt-take-two-to-seek-subpoenas-for-microsoft-discord-data/">Úniky z GTA 6 nutí Take-Two žádat o data od Microsoftu a Discordu</a></h3><p><strong>Vydavatel nejočekávanější hry dekády vytahuje těžké právní kalibry na lovce úniků.</strong></p><ul><li>Žádosti o vydání dat cílí na konkrétní účty na platformě Discord (komunikační aplikace pro hráče).</li><li>Vyšetřování probíhajícího úniku dat z GTA 6 se zaměřuje také na propojený repozitář na GitHubu (úložiště pro programátory).</li></ul><div class="why-box"><p>🎯 Herní giganti přestávají tolerovat amatérské detektivy a hackery, kteří jim narušují marketingové plány. <strong>Take-Two</strong> tímto krokem vysílá jasný vzkaz celé komunitě, že sdílení kradeného obsahu má reálné právní důsledky. Místo pouhého mazání příspěvků teď právníci jdou přímo po identitě uživatelů přes soudní obsílky. Pro běžného fanouška to znamená jediné – sdílení neoficiálních záběrů z očekávaných her se stává zbytečným rizikem. Vydavatelé si svůj duševní majetek hlídají agresivněji než kdy dřív.</p></div><p>Zdroj: CNet</p><h3>🤖 <a href="https://siliconangle.com/2026/08/23/sam-altman-voices-fears-that-control-of-ai-could-be-centered-in-too-few-hands/">Sam Altman se obává, že kontrola nad AI skončí v rukou příliš mála lidí</a></h3><p><strong>Šéf OpenAI varuje před monopolizací umělé inteligence, kterou sám pomáhá budovat.</strong></p><ul><li>Výkonný ředitel OpenAI Sam Altman vyjádřil obavy, že technologii umělé inteligence bude v budoucnu ovládat jen hrstka firem nebo jednotlivců.</li><li>Podle něj tento scénář povede k situaci, kdy nikdo jiný nebude mít možnost ovlivnit dopady AI na společnost.</li></ul><div class="why-box"><p>🎯 Když před centralizací moci varuje člověk, který řídí nejvlivnější AI firmu na světě, stojí za to zpozornět. Vývoj špičkových modelů dnes vyžaduje <strong>miliardy dolarů</strong> na výpočetní výkon, což přirozeně vyřazuje ze hry menší hráče a akademickou sféru. Trh se tak smršťuje na několik technologických gigantů, kteří budou určovat pravidla pro celou globální ekonomiku. Podobně jako u vyhledávačů nebo sociálních sítí hrozí, že o etice a mantinelech rozhodne úzká skupina manažerů v Silicon Valley. Běžný uživatel i firma se pak budou muset přizpůsobit diktátu hrstky vyvolených platforem.</p></div><p>Zdroj: Silicon Angle</p><h3>📱 <a href="https://www.techmeme.com/260824/p2#a260824p2">Nový Zéland plánuje zakázat sociální sítě dětem do 16 let pod hrozbou obřích pokut</a></h3><p><strong>Další stát tvrdě zasahuje proti sociálním sítím a hrozí jim likvidačními sankcemi.</strong></p><ul><li>Nový Zéland připravuje zákon, který zakáže používání sociálních sítí dětem mladším 16 let.</li><li>Vysoce rizikové platformy budou muset ověřovat věk uživatelů, jinak jim hrozí pokuta až do výše 10 % jejich celosvětových tržeb.</li></ul><div class="why-box"><p>🎯 Vlády po celém světě ztrácejí trpělivost s technologickými giganty a přecházejí od doporučení k tvrdým zákazům. Hrozba pokuty ve výši <strong>10 % globálních tržeb</strong> představuje pro firmy jako Meta nebo ByteDance absolutní noční můru, která je donutí radikálně změnit fungování. Zavedení plošného ověřování věku technicky promění způsob, jakým se na internetu pohybujeme všichni, nejen děti. Anonymní brouzdání po sítích postupně skončí, protože platformy budou muset plošně sbírat občanské průkazy nebo biometrická data. Tento legislativní tlak brzy dorazí i do Evropy a navždy změní podobu digitálního soukromí.</p></div><p>Zdroj: Techmeme</p><h3>⚖️ <a href="https://the-decoder.com/an-ai-boss-fired-its-first-employee-but-only-after-humans-reminded-it-of-its-own-rules/">AI šéf vyhodil prvního zaměstnance, ale až po lidském popostrčení</a></h3><p><strong>Umělá inteligence poprvé v historii rozhodla o propuštění člověka z práce.</strong></p><ul><li>AI agent Luna od společnosti Andon Labs poprvé propustil lidského zaměstnance v obchodě v San Franciscu, ale potřeboval k tomu jasný impuls od operátorů.</li><li>Při opakování scénáře se sedmi různými modely doporučovaly schopnější umělé inteligence výpověď konzistentněji, zatímco ty slabší váhaly.</li></ul><div class="why-box"><p>🎯 Delegování personálních rozhodnutí na algoritmy překročilo teoretickou hranici a stává se realitou. Schopnější modely dokážou chladnokrevně vyhodnotit porušení pravidel a navrhnout <strong>okamžitou výpověď</strong> bez lidských emocí nebo váhání. Pro firmy to znamená extrémní zefektivnění řízení výkonnosti, ale zároveň obrovské právní a etické riziko. Zaměstnanci se budou muset naučit fungovat pod dohledem neúnavného digitálního manažera, který neodpouští chyby a striktně dodržuje firemní manuály. Vztah mezi podřízeným a nadřízeným tak ztrácí veškerou lidskou empatii a mění se v čistě datovou transakci.</p></div><p>Zdroj: The Decoder</p><hr><h2>📈 Burza &amp; Finance</h2><h3>📉 <a href="https://www.cnbc.com/2026/08/24/alibaba-share-placement-drop-ai-hong-kong.html">Akcie Alibaby se propadly po oznámení emise akcií za 10,2 miliardy dolarů na rozvoj AI</a></h3><p><strong>Čínský e-commerce gigant ředí podíly investorů, aby udržel krok v globálních AI závodech.</strong></p><ul><li>Akcie společnosti Alibaba se propadly o 10 % poté, co technologický gigant ocenil emisi nových akcií na 10,2 miliardy dolarů.</li><li>Získané finanční prostředky plánuje firma využít k financování svých rostoucích investic do umělé inteligence.</li></ul><div class="why-box"><p>🎯 Závody ve zbrojení na poli umělé inteligence začínají být pro technologické obry extrémně drahé. Alibaba musí obětovat hodnotu pro stávající akcionáře a naředit jejich podíly, jen aby dokázala ufinancovat nákup drahých čipů a vývoj vlastních modelů. Trh tento krok potrestal okamžitým <strong>desetiprocentním propadem</strong>, protože investoři ztrácejí trpělivost s obřími výdaji bez jasné návratnosti. Pro celý sektor to znamená tvrdou realitu – kdo chce v AI lize hrát, musí pálit hotovost tempem, které děsí i ty největší optimisty na burze. Menší hráči bez přístupu k takto masivnímu kapitálu nemají šanci přežít.</p></div><p>Zdroj: CNBC Technology</p><h3>🚢 <a href="https://www.cnbc.com/2026/08/24/us-iran-war-trump-hormuz-bessent-economic-sanctions-.html">USA chystají „největší finanční ofenzívu“ proti Íránu, Teherán hrozí zabavováním lodí</a></h3><p><strong>Geopolitické napětí na Blízkém východě eskaluje a ohrožuje globální námořní obchod.</strong></p><ul><li>Eskalace přichází v momentě, kdy obě strany propásly šedesátidenní okno pro příměří a dosažení dohody.</li><li>Tím se uzavřel formální mechanismus příměří, který měl ukončit šest měsíců trvající válku.</li></ul><div class="why-box"><p>🎯 Zablokování diplomatických kanálů a nástup tvrdých finančních sankcí nevyhnutelně zdraží globální logistiku. Íránské hrozby zabavování obchodních lodí znamenají, že přepravci budou muset volit delší a dražší trasy mimo rizikové oblasti. To se okamžitě propíše do <strong>cen pojištění</strong> námořní dopravy a následně do koncových cen zboží pro spotřebitele po celém světě. Pro investory to představuje jasný signál k přesunu kapitálu do bezpečných přístavů, jako je zlato nebo americký dolar. Zvýšené riziko v Hormuzském průlivu navíc tradičně funguje jako rozbuška pro skokový růst cen ropy.</p></div><p>Zdroj: CNBC Top News</p><h3>📉 <a href="https://www.investing.com/news/economy-news/samsung-electronics-shares-fall-after-shareholder-return-announcement-4872511">Akcie Samsung Electronics klesají, rekordní výnosy pro akcionáře zklamaly</a></h3><p><strong>Ani historicky nejvyšší odměny pro investory nedokázaly zastavit propad akcií technologického giganta.</strong></p><ul><li>Akcie společnosti Samsung Electronics zaznamenaly výrazný pokles.</li><li>Důvodem je zklamání investorů z oznámených rekordních výnosů pro akcionáře, které nenaplnily vysoká očekávání trhu.</li></ul><div class="why-box"><p>🎯 Trh vysílá jasný vzkaz, že samotné rozdávání hotovosti už k udržení důvěry investorů nestačí. Samsung čelí brutální konkurenci v oblasti paměťových čipů pro umělou inteligenci, kde momentálně zaostává za svými rivaly. Investoři by raději viděli, kdyby firma tyto <strong>miliardy dolarů</strong> investovala do výzkumu a vývoje, než aby je vyplácela na dividendách. Tento propad ukazuje, jak moc se změnila mentalita na burze – růst a technologická dominance mají absolutní přednost před krátkodobým ziskem. Pro management Samsungu to znamená nutnost radikálně přehodnotit svou strategii, jinak ztratí pozici lídra.</p></div><p>Zdroj: Investing.com</p><h3>🦾 <a href="https://www.economist.com/business/2026/08/23/china-will-struggle-to-make-money-from-humanoid-robots">Čína bude mít problém vydělat na humanoidních robotech</a></h3><p><strong>Asijská velmoc sice chrlí tisíce robotů, ale cesta k ziskovosti zůstává v nedohlednu.</strong></p><ul><li>Čína má aktuálně náskok před svými konkurenty a trénuje tisíce humanoidních robotů.</li><li>Navzdory tomuto technologickému pokroku je dosažení reálných zisků z tohoto odvětví stále velmi daleko.</li></ul><div class="why-box"><p>🎯 Masivní státní dotace dokážou vyrobit hardware, ale nedokážou zaručit funkční byznys model. Čínské továrny sice chrlí humanoidní roboty ohromným tempem, chybí jim však software a reálné uplatnění, za které by zákazníci byli ochotni platit. Vývoj a údržba těchto strojů stojí <strong>obrovské peníze</strong>, zatímco jejich současná produktivita v továrnách nebo domácnostech je stále mizerná. Pro západní konkurenci to znamená, že se nemusí bát okamžitého zaplavení trhu levnými čínskými terminátory. Skutečný průlom nepřijde z levné masové výroby, ale od firmy, která jako první vyřeší umělou inteligenci pro plynulý pohyb a interakci.</p></div><p>Zdroj: The Economist</p><hr><h2>🇨🇿 Z české kotliny</h2><h3>💻 <a href="https://www.lupa.cz/clanky/mame-hotovych-90-procent-dodelejte-nam-zbytek-zadaji-klienti-vyvojare-jak-to-vypada-kdyz-vibecoding-meni-byznysmodel/?utm_source=rss&amp;utm_medium=text&amp;utm_campaign=rss">„Máme hotových 90 procent. Dodělejte nám zbytek“, žádají klienti vývojáře. Jak to vypadá, když vibecoding mění byznysmodel?</a></h3><p><strong>Zákazníci si generují kód sami přes AI a po programátorech chtějí jen levné opravy chyb.</strong></p><ul><li>Umělá inteligence dramaticky zlevnila a zrychlila samotné psaní programovacího kódu.</li><li>Tento trend ale zcela rozbil dosavadní způsob, jakým se software poptává, naceňuje a následně předává klientům.</li></ul><div class="why-box"><p>🎯 IT agentury čelí existenční krizi, protože jejich tradiční byznys model založený na prodeji odpracovaných hodin přestal fungovat. Klienti si pomocí AI nástrojů vygenerují hrubou kostru aplikace sami a odmítají platit plnou cenu za vývoj od nuly. Programátoři se tak mění z tvůrců na <strong>opraváře cizího kódu</strong>, což je frustrující a těžko nacenitelná práce. Vývojářské firmy musí urychleně přejít na fixní projektové ceny nebo začít prodávat konzultace a architekturu, nikoliv samotné psaní řádků. Kdo se nenaučí prodávat svou expertizu místo času, toho trh nekompromisně vymaže.</p></div><p>Zdroj: Lupa CZ</p><h3>📦 <a href="https://cc.cz/rocne-investujeme-miliardu-10x-vic-nez-pred-prodejem-rika-sef-zasilkovny-v-rychlosti-se-blizi-alze/">Ročně investujeme miliardu, 10x víc než před prodejem, říká šéf Zásilkovny. V rychlosti se blíží Alze</a></h3><p><strong>Nový majitel Zásilkovny šlape na plyn a pumpuje do logistiky astronomické částky.</strong></p><ul><li>Erich Čomor má do pěti let od svého nástupu za úkol zdvojnásobit celkový byznys Zásilkovny a aktuálně se nachází v polovině této cesty.</li><li>V rozhovoru potvrdil, že stanovený cíl stále platí a firma ho splní díky masivním investicím.</li></ul><div class="why-box"><p>🎯 Změna majitele přinesla do Zásilkovny kapitál, který zcela mění pravidla hry na českém logistickém trhu. Investice ve výši <strong>jedné miliardy korun</strong> ročně jdou primárně do automatizace a zrychlení doručování, čímž firma přímo útočí na logistický standard nastavený Alzou. Pro e-shopy to znamená přístup k prémiové rychlosti doručení bez nutnosti budovat vlastní sklady. Konkurenční dopravci se dostávají pod obrovský tlak, protože bez podobně masivních investic do technologií nedokážou udržet krok. Zákazník z této války vyjde jako absolutní vítěz, protože doručení v den objednání se stane běžným standardem.</p></div><p>Zdroj: CzechCrunch</p><hr>
+                </div>
+                
+                <a href="/digest" class="digest-back">
+                    ← Zpět do archivu
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER - Reuse from index.html -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">© 2026-08-24 <strong>simondusek.com</strong> · Šimon Dušek</div>
+                <div class="footer-links">
+                    <a href="/">Hlavní stránka</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+        const mobileMenuContent = document.getElementById('mobile-menu-content');
+
+        function toggleMobileMenu() {
+            const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+            mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+            mobileMenuOverlay.classList.toggle('active');
+            document.body.style.overflow = isExpanded ? '' : 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            mobileMenuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+        }
+
+        if (mobileMenuOverlay) {
+            mobileMenuOverlay.addEventListener('click', (e) => {
+                if (e.target === mobileMenuOverlay) {
+                    closeMobileMenu();
+                }
+            });
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-menu-link').forEach(link => {
+            link.addEventListener('click', () => {
+                closeMobileMenu();
+            });
+        });
+
+        // Close mobile menu on window resize (if screen becomes desktop size)
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                closeMobileMenu();
+            }
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlEl = document.documentElement;
+
+        function updateThemeIcon(theme) {
+            if (themeIcon) {
+                themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+
+        updateThemeIcon(htmlEl.getAttribute('data-theme') || 'dark');
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const current = htmlEl.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+                const next = current === 'dark' ? 'light' : 'dark';
+                htmlEl.setAttribute('data-theme', next);
+                try {
+                    localStorage.setItem('theme', next);
+                } catch (e) {}
+                updateThemeIcon(next);
+            });
+        }
+
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Nav scroll effect
+        const nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+        
+        // Floating CTA - show after scroll
+        window.addEventListener('scroll', function() {
+            var cta = document.getElementById('floating-cta');
+            if (cta) {
+                if (window.scrollY > 200) {
+                    cta.classList.add('visible');
+                } else {
+                    cta.classList.remove('visible');
+                }
+            }
+        }, { passive: true });
+    </script>
+
+    <!-- Floating CTA tlačítko -->
+    <a href="/#hero-form" id="floating-cta" class="floating-cta" aria-label="Odebírat newsletter">
+        <span>⚡ Odebírat Digest</span>
+    </a>
+    
+    <!-- Záchranný skript pro X.com / LinkedIn In-App prohlížeče -->
+    <script>
+        // Záchranný skript pro In-App prohlížeče
+        document.addEventListener('DOMContentLoaded', function() {
+            // Okamžitě přidáme třídu js-enabled
+            document.body.classList.add('js-enabled');
+            
+            // Pojistka: Za 300ms natvrdo zviditelníme všechny .reveal prvky, pokud se nespustil IntersectionObserver
+            setTimeout(function() {
+                var reveals = document.querySelectorAll('.reveal');
+                reveals.forEach(function(el) {
+                    el.classList.add('visible');
+                });
+            }, 300);
+        });
+    </script>
+
+</body>
+</html>

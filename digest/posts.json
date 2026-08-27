@@ -1,6 +1,16 @@
 [
   {
     "title": "Digest",
+    "date": "24. 08. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-08-24-digest.html",
+    "excerpt": "Žádosti o vydání dat cílí na konkrétní účty na platformě Discord (komunikační aplikace pro hráče)",
+    "issue_id": "digest:2026-08-24",
+    "main_hook": "Úniky z GTA 6 nutí Take-Two žádat o data od Microsoftu a Discordu",
+    "second_hook": "Sam Altman se obává, že kontrola nad AI skončí v rukou příliš mála lidí"
+  },
+  {
+    "title": "Digest",
     "date": "23. 08. 2026",
     "type": "Digest",
     "url": "/digest/2026-08-23-digest.html",
