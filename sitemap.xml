@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://simondusek.com</loc>
-    <lastmod>2026-08-21</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://simondusek.com/deep-dive</loc>
-    <lastmod>2026-08-21</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -23,7 +23,7 @@
 
   <url>
     <loc>https://simondusek.com/digest</loc>
-    <lastmod>2026-08-21</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -183,13 +183,6 @@
   </url>
 
   <url>
-    <loc>https://simondusek.com/digest/2026-08-19-digest-archiv.html</loc>
-    <lastmod>2026-08-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
     <loc>https://simondusek.com/digest/2026-08-19-digest.html</loc>
     <lastmod>2026-08-19</lastmod>
     <changefreq>daily</changefreq>
@@ -206,6 +199,13 @@
   <url>
     <loc>https://simondusek.com/digest/2026-08-21-digest.html</loc>
     <lastmod>2026-08-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://simondusek.com/digest/2026-08-22-digest.html</loc>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>

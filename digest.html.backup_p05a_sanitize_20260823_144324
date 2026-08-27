@@ -1,0 +1,3154 @@
+<!DOCTYPE html>
+<html lang="cs" data-theme="dark">
+<head>
+    <script>
+        // Bezpečný přístup k localStorage
+        function getSafeStorage(key) {
+            try {
+                return localStorage.getItem(key);
+            } catch (e) {
+                return null;
+            }
+        }
+        
+        (function() {
+            try {
+                var saved = getSafeStorage('theme');
+                var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {}
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digest Archiv | simondusek.com</title>
+    <meta name="description" content="Kompletní archiv odeslaných vydání technologického a B2B newsletteru Digest od Šimona Duška.">
+    <meta name="author" content="Ing. Šimon Dušek">
+    <link rel="canonical" href="https://simondusek.com/digest">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Digest Archiv | simondusek.com">
+    <meta property="og:description" content="Kompletní archiv odeslaných vydání technologického a B2B newsletteru Digest od Šimona Duška.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://simondusek.com/digest">
+    <meta property="og:image" content="https://simondusek.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@DusekSimon">
+    <meta name="twitter:creator" content="@DusekSimon">
+    <meta name="twitter:image" content="https://simondusek.com/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           DESIGN TOKENS - ULTRA-CLEAN
+           ========================================================================== */
+        :root {
+            --bg-primary: #0f0f0f;
+            --glass: rgba(255, 255, 255, 0.02);
+            --glass-hover: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.12);
+            --text-primary: #ffffff;
+            --text-secondary: #9595a5;
+            --text-tertiary: #656575;
+            --accent: #007AFF;
+            --accent-hover: #0066cc;
+            --accent-glow: #0066f166;
+            --neon: #10b981;
+            --neon-glow: rgba(16, 185, 129, 0.4);
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --section-gap: clamp(4rem, 8vh, 8rem);
+            --radius-pill: 100px;
+            --radius-card: 20px;
+            --orb-opacity: 1;
+            --nav-bg-scrolled: rgba(5, 5, 8, 0.85);
+        }
+
+        html[data-theme="light"] {
+            --bg-primary: #f0f0f0;
+            --glass: rgba(10, 10, 20, 0.03);
+            --glass-hover: rgba(10, 10, 20, 0.05);
+            --border: rgba(10, 10, 20, 0.09);
+            --border-hover: rgba(10, 10, 20, 0.14);
+            --text-primary: #0a0a12;
+            --text-secondary: #55555f;
+            --text-tertiary: #85858f;
+            --orb-opacity: 0.4;
+            --nav-bg-scrolled: rgba(246, 246, 249, 0.85);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.65;
+            overflow-x: hidden;
+            min-height: 100vh;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .floating-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 0;
+            will-change: transform;
+            transform: translateZ(0);
+            opacity: var(--orb-opacity);
+            transition: opacity 0.4s ease;
+        }
+        
+        .floating-orb.orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.08), transparent 70%);
+            top: -200px;
+            right: -200px;
+        }
+        
+        .floating-orb.orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.06), transparent 70%);
+            bottom: -100px;
+            left: -200px;
+        }
+        
+        /* Mobile performance: Disable floating orbs completely on mobile */
+        @media (max-width: 767px) {
+            .floating-orb {
+                display: none;
+            }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 clamp(1.25rem, 5vw, 4rem);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ==========================================================================
+           NAVIGATION - Minimal
+           ========================================================================== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid transparent;
+            transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease, padding 0.3s ease;
+        }
+        
+        .nav.scrolled {
+            background: var(--nav-bg-scrolled);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border-bottom-color: var(--border);
+        }
+        
+        /* Mobile performance: Replace backdrop blur with solid background */
+        @media (max-width: 767px) {
+            .nav.scrolled {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: var(--nav-bg-scrolled);
+            }
+        }
+        
+        .nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+        
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            min-width: 0;
+            flex-shrink: 1;
+            letter-decoration: none;
+        }
+        
+        .nav-brand-icon {
+            letter-decoration: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent), var(--neon));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 800;
+            color: white;
+        }
+        
+        .nav-brand-name {
+            font-weight: 700;
+            font-size: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        @media (max-width: 400px) {
+            .nav-brand-name {
+                font-size: 0.95rem;
+            }
+        }
+        
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .nav-link {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        @media (max-width: 600px) {
+            .nav-right {
+                gap: 0.4rem;
+            }
+        }
+        
+        .nav-back {
+            padding: 0.55rem 1.1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: var(--radius-pill);
+            background: var(--glass);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        
+        .nav-back:hover {
+            background: var(--glass-hover);
+            border-color: var(--border-hover);
+            color: var(--text-primary);
+            transform: translateX(-2px);
+        }
+
+        .nav-back-icon {
+            display: none;
+        }
+
+        @media (max-width: 520px) {
+            .nav-back-text {
+                display: none;
+            }
+            .nav-back-icon {
+                display: inline;
+            }
+            .nav-back {
+                padding: 0.55rem 0.85rem;
+            }
+        }
+
+        .theme-toggle {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.25s ease;
+            flex-shrink: 0;
+        }
+        
+        @media (max-width: 600px) {
+            .theme-toggle {
+                width: 34px;
+                height: 34px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        .theme-toggle:hover {
+            border-color: var(--border-hover);
+            background: var(--glass-hover);
+            transform: translateY(-1px);
+        }
+        
+        /* Mobile Menu Button - Burger */
+        .mobile-menu-toggle {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 38px;
+            height: 38px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: all 0.25s ease;
+        }
+        
+        .mobile-menu-toggle:hover {
+            border-color: var(--border-hover);
+            background: var(--glass-hover);
+            transform: translateY(-1px);
+        }
+        
+        @media (max-width: 600px) {
+            .mobile-menu-toggle {
+                width: 34px;
+                height: 34px;
+            }
+            
+            .mobile-menu-toggle span {
+                width: 16.2px;
+                height: 1.8px;
+            }
+        }
+        
+        .mobile-menu-toggle span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+        
+        .mobile-menu-toggle span:nth-child(1) { margin-bottom: 4px; }
+        .mobile-menu-toggle span:nth-child(3) { margin-top: 4px; }
+        
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(4px, 4px);
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(4px, -4px);
+        }
+        
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            z-index: 199;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .mobile-menu-content {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            margin: 0 clamp(1.5rem, 5vw, 3rem);
+            padding: 1.5rem;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            z-index: 200;
+            will-change: transform, opacity;
+        }
+        
+        .mobile-menu-overlay.active .mobile-menu-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .mobile-menu-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.85rem 1.25rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+        
+        .mobile-menu-link:hover {
+            color: var(--text-primary);
+            background: var(--glass-hover);
+        }
+        
+        .mobile-menu-link .icon {
+            font-size: 1.1rem;
+            width: 24px;
+            text-align: center;
+        }
+        
+        /* Show mobile menu toggle on mobile */
+        @media (max-width: 767px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            .nav-links {
+                display: none !important;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .mobile-menu-toggle {
+                display: none;
+            }
+        }
+
+        /* HEADER SECTION */
+        .archive-header {
+            padding-top: clamp(7.5rem, 16vh, 11rem);
+            padding-bottom: 3rem;
+            text-align: center;
+        }
+
+        .archive-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.9rem;
+            border-radius: 100px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--accent-hover);
+            margin-bottom: 1.25rem;
+        }
+
+        .archive-header h1 {
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .archive-header p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--text-secondary);
+            max-width: 580px;
+            margin: 0 auto;
+        }
+
+        /* POSTS GRID */
+        .posts-section {
+            padding-bottom: var(--section-gap);
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.75rem;
+        }
+
+        @media (min-width: 768px) {
+            .posts-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .post-card {
+            padding: 2rem;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            will-change: transform, opacity;
+        }
+        
+        /* Mobile performance: Replace backdrop blur with solid background */
+        @media (max-width: 767px) {
+            .post-card {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: var(--bg-primary);
+            }
+        }
+
+        .post-card:hover {
+            border-color: var(--border-hover);
+            background: var(--glass-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .post-meta {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 1.25rem;
+        }
+
+        .post-issue {
+            font-weight: 700;
+            color: var(--accent-hover);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.78rem;
+        }
+
+        .post-date {
+            text-align: right;
+        }
+
+        .post-date .date-day-month {
+            font-weight: 600;
+            color: var(--text-primary);
+            display: block;
+            font-size: 1.35rem;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .post-date .date-year {
+            color: var(--text-tertiary);
+            display: block;
+            margin-top: 0.05rem;
+            font-size: 0.8rem;
+        }
+
+        .post-card h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1.35;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .post-card h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin: 1rem 0 0.5rem 0;
+            color: var(--text-primary);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .post-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .post-card p + h3 {
+            margin-top: 1.25rem;
+        }
+
+        .post-card p:last-of-type {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--text-tertiary);
+            margin-bottom: 1rem;
+        }
+
+        .post-footer {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-hover);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.6;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .empty-state p {
+            font-size: 1rem;
+            line-height: 1.6;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* FOOTER */
+        .site-footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .footer-left {
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+        }
+        
+        .footer-left strong {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        
+        .footer-links a {
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+            transition: color 0.2s ease;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Fallback pro in-app prohlížeče a starší renderery */
+        .reveal {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+        
+        /* Zpětně zapneme animaci POUZE v případě, že je prohlížeč plně podporuje a JS je aktivní */
+        @supports (opacity: 1) {
+            .js-enabled .reveal:not(.visible) {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                            transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+                will-change: opacity, transform;
+            }
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Mobile performance: Force visibility on mobile to avoid IntersectionObserver issues */
+        @media (max-width: 767px) {
+            .digest-card.reveal,
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+        }
+        
+        /* ==========================================================================
+           FLOATING CTA - Simple Link Button
+           ========================================================================== */
+        .floating-cta {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+            padding: 0.75rem 1.35rem;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.35);
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .floating-cta.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        
+        .floating-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 122, 255, 0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .floating-cta {
+                bottom: 16px;
+                right: 16px;
+                padding: 0.65rem 1.1rem;
+                font-size: 0.82rem;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            }
+        }
+
+    </style>
+    <link rel="alternate" type="application/rss+xml" title="Digest RSS Feed" href="/feed.xml" />
+</head>
+<body>
+
+    <div class="floating-orb orb-1" aria-hidden="true"></div>
+    <div class="floating-orb orb-2" aria-hidden="true"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="nav" id="main-nav" role="navigation" aria-label="Hlavní navigace">
+        <div class="container">
+            <a href="/" class="nav-brand">
+                <div class="nav-brand-icon" aria-hidden="true">⌘</div>
+                <span class="nav-brand-name">simondusek.com</span>
+            </a>
+            <div class="nav-links">
+                <a href="/digest" class="nav-link">Digest Archiv</a>
+                <a href="/deep-dive" class="nav-link">Deep Dive Blog</a>
+                <a href="/#about" class="nav-link">O mně</a>
+            </div>
+            <div class="nav-right">
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="mobile-menu-content">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Přepnout světlý/tmavý režim">
+                    <span class="theme-icon" id="theme-icon">🌙</span>
+                </button>
+                <a href="/" class="nav-back">
+                    <span class="nav-back-text">← Zpět na hlavní stránku</span>
+                    <span class="nav-back-icon">← Domů</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay" role="navigation" aria-label="Mobilní navigace">
+        <div class="mobile-menu-content" id="mobile-menu-content">
+            <div class="mobile-menu-links">
+                <a href="/digest" class="mobile-menu-link">
+                    <span class="icon">⚡</span>
+                    Digest Archiv
+                </a>
+                <a href="/deep-dive" class="mobile-menu-link">
+                    <span class="icon">🎯</span>
+                    Deep Dive Blog
+                </a>
+                <a href="/#about" class="mobile-menu-link">
+                    <span class="icon">👤</span>
+                    O mně
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="archive-header">
+        <div class="container">
+            <h1>Digest Archiv</h1>
+            <p>Každé vydání newsletteru Digest, přehledně archivované a dostupné ke čtení.</p>
+        </div>
+    </header>
+
+    <!-- POSTS SECTION -->
+    <main class="posts-section">
+        <div class="container">
+            <div class="posts-grid" id="posts-container">
+                <!-- POSTS:START -->
+                <a href="/digest/2026-08-21-digest.html" class="post-card reveal" data-issue-id="digest:2026-08-21">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="21. 08. 2026">
+                                <span class="date-day-month">21. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Adobe chce, aby Firefly zpracoval kompletní zvukovou stopu pro vaše videa</h2>
+                        <p>Zákaz americké Federální komise pro komunikaci (FCC) týkající se robotů zahraniční výroby tvrdě dopadl na trh. Toto rozhodnutí okamžitě ovlivnilo fung...</p>
+                        <h3>Nevada povoluje společnostem Uber, Tesla a Waymo spustit placenou službu robotaxi</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-08-20-digest.html" class="post-card reveal" data-issue-id="digest:2026-08-20">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="20. 08. 2026">
+                                <span class="date-day-month">20. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>EU vítá změny v App Storu, Epic kritizuje odpadní poplatky</h2>
+                        <p>Amazon podle zpráv kupuje a následně ničí vzácné knihy, aby na nich mohl trénovat své modely umělé inteligence (AI). Kromě toho se objevuje řada divok...</p>
+                        <h3>OpenAI dočasně zpomaluje škálování a slibuje nulové uchovávání dat</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-08-19-digest.html" class="post-card reveal" data-issue-id="digest:2026-08-19">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="19. 08. 2026">
+                                <span class="date-day-month">19. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Vodoznaky v textech od Anthropicu dokazují, že AI firmám vůbec nezáleží na psaní</h2>
+                        <p>Společnosti vyvíjející umělou inteligenci vnímají slova pouze jako vzájemně zaměnitelné jednotky</p>
+                        <h3>Cursor těží z frustrace uživatelů GitHubu a spouští konkurenční hostingovou platformu</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-08-18-digest.html" class="post-card reveal" data-issue-id="digest:2026-08-18">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="18. 08. 2026">
+                                <span class="date-day-month">18. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Inference AI zlevňuje, ale vaši agenti se prodraží</h2>
+                        <p>Dobrou zprávou je, že náklady na tokeny u velkých jazykových modelů (LLM) klesají. Celkové náklady na pracovní zátěž umělé inteligence ale naopak rost...</p>
+                        <h3>Qwen3.8-27B spouští špičkové kódovací agenty lokálně a bez cloudu</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-08-17-digest.html" class="post-card reveal" data-issue-id="digest:2026-08-17">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="17. 08. 2026">
+                                <span class="date-day-month">17. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Jak model Claude dosáhl matematického průlomu během neúspěšného 54hodinového pokusu o vyřešení Riemannovy hypotézy</h2>
+                        <p>Šéf společnosti Anthropic (tvůrce modelu Claude) Dario Amodei ostře odmítá tvrzení, že má přehnaně pesimistický pohled na dopad umělé inteligence. Rea...</p>
+                        <h3>Alibaba překonává Google a Metu se 3 miliardami stažení AI modelů</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-08-16-digest.html" class="post-card reveal" data-issue-id="digest:2026-08-16">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="16. 08. 2026">
+                                <span class="date-day-month">16. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Vzpomínky záhadně přežívají i po vypnutí mozku a vědci netuší proč</h2>
+                        <p>Týdenní newsletter The Stepback rozebírá jeden zásadní příběh z technologického světa, tentokrát zaměřený na bezpečnost umělé inteligence. Vše začalo ...</p>
+                        <h3>Apple údajně plánuje rozšířit svou nabídku pro chytrou domácnost o displeje, kamery a nové HomePody</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-08-15-digest.html" class="post-card reveal" data-issue-id="digest:2026-08-15">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="15. 08. 2026">
+                                <span class="date-day-month">15. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Nvidia odhalila podíl ve SpaceX v hodnotě 21 miliard dolarů na konci druhého čtvrtletí</h2>
+                        <p>Chyba ve sdílení obrazovky umožňuje vzdáleným hackerům přihlásit se do systému</p>
+                        <h3>Čínská společnost Z.ai odhaluje model GLM-5.3 a hlásí rekordní výsledky</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-08-14-digest.html" class="post-card reveal" data-issue-id="digest:2026-08-14">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="14. 08. 2026">
+                                <span class="date-day-month">14. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Někdo ukryl instrukce pro AI přímo do soudního spisu, aby model rozhodl v jeho prospěch</h2>
+                        <p>Do textu dokumentu někdo vložil skrytou instrukci s jasným cílem</p>
+                        <h3>Tři agenti Claude dostali protichůdné příkazy a navzájem se sabotovali na sdíleném serveru</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-08-13-digest.html" class="post-card reveal" data-issue-id="digest:2026-08-13">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="13. 08. 2026">
+                                <span class="date-day-month">13. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>SpaceXAI vydává vlajkový model Grok 4.6 s pokročilým logickým uvažováním</h2>
+                        <p>Společnost SpaceXAI dnes vydala velký jazykový model (AI systém trénovaný na obrovském množství textu) Grok 4.6. Podle firmy dokáže tento systém v něk...</p>
+                        <h3>Apple jedná s vydavateli o placení za zpravodajský obsah pro svou AI v Siri</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-08-12-digest.html" class="post-card reveal" data-issue-id="digest:2026-08-12">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="12. 08. 2026">
+                                <span class="date-day-month">12. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Mistral AI chce do roku 2030 vybudovat 1 gigawatt evropského výpočetního výkonu a už teď si váže zákazníky</h2>
+                        <p>Společnost Anthropic začne označovat obsah vytvořený modely Claude, nástrojem Claude Code a přes firemní API. Značení se bude týkat i modelů Claude vy...</p>
+                        <h3>Startup River AI pro personalizovanou umělou inteligenci získal 1,1 miliardy dolarů od konsorcia s podporou Nvidie a AMD</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-08-11-digest.html" class="post-card reveal" data-issue-id="digest:2026-08-11">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="11. 08. 2026">
+                                <span class="date-day-month">11. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Nvidia spojuje síly s Wall Street: Na globální infrastrukturu pro AI chce získat půl bilionu dolarů</h2>
+                        <p>Některé z největších finančních firem na Wall Street se spojují se společností Nvidia Corp., aby nalily půl bilionu dolarů do masivní výstavby infrast...</p>
+                        <h3>OpenAI uvádí GPT-5.6-Cyber s méně odmítnutími a 95% úspěšností v pokročilých kyberbezpečnostních úlohách</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-08-10-digest.html" class="post-card reveal" data-issue-id="digest:2026-08-10">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="10. 08. 2026">
+                                <span class="date-day-month">10. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Jak byl malý izraelský start-up spojen s nelegálními útoky na OpenAI, Anthropic a Meta</h2>
+                        <p>Nelegální útoky (kybernetické útoky cílící na umělou inteligenci) na přední technologické společnosti jako OpenAI, Anthropic a Meta mají jednoho spole...</p>
+                        <h3>Jak čínská umělá inteligence dobývá Afriku</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-08-09-digest.html" class="post-card reveal" data-issue-id="digest:2026-08-09">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="09. 08. 2026">
+                                <span class="date-day-month">9. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>První autonomní vozidlo na Marsu slaví obrovský úspěch</h2>
+                        <p>Vozítko úspěšně prokázalo, že autonomní (řízené umělou inteligencí bez lidského zásahu) řízení funguje skvěle i v extrémních podmínkách na cizí planetě. Dosavadní data potvrzují, že mise je v této oblasti obrovským přínosem.</p>
+                        <h3>Meta dostala od soudce v Novém Mexiku pokutu 567 milionů dolarů</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-08-08-digest.html" class="post-card reveal" data-issue-id="digest:2026-08-08">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="08. 08. 2026">
+                                <span class="date-day-month">8. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>OpenAI odkládá další velký AI model „Astra“ kvůli kritickým obavám z hackerů</h2>
+                        <p>Nejnovější hodnocení ukázala významný pokrok v takzvaném agentním kódování (schopnosti AI samostatně psát a spouštět kód) a kybernetické bezpečnosti. Firma proto nedokáže vyloučit kritická kybernetická rizika.</p>
+                        <h3>Amazon, Cursor, Microsoft, OpenAI a Vercel se spojily na sdíleném standardu pro pluginy AI agentů</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-08-07-digest.html" class="post-card reveal" data-issue-id="digest:2026-08-07">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="07. 08. 2026">
+                                <span class="date-day-month">7. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Softwarový gigant SAP zastavuje většinu cestování a náborů kvůli rostoucím nákladům na AI</h2>
+                        <p>Jedinou výjimkou z těchto tvrdých škrtů jsou investice a aktivity, které se přímo týkají umělé inteligence.</p>
+                        <h3>Cloudflare chce poskytovat operační systém pro podniky postavené na AI</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-08-06-digest.html" class="post-card reveal" data-issue-id="digest:2026-08-06">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="06. 08. 2026">
+                                <span class="date-day-month">6. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Nový AI agent od Mety pro Mac je až 20x levnější, pokud na vašich datech může trénovat</h2>
+                        <p>Podle Marka Zuckerberga získají uživatelé masivní slevu na používání tohoto nástroje. Podmínkou je ovšem poskytnutí vlastních dat k dalšímu tréninku modelů.</p>
+                        <h3>Google cílí na technologie a talenty AI startupu Mechanize v navrhované dohodě za 1,5 miliardy dolarů</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-08-05-digest.html" class="post-card reveal" data-issue-id="digest:2026-08-05">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="05. 08. 2026">
+                                <span class="date-day-month">5. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Výdaje SpaceX na umělou inteligenci znervózňují Wall Street navzdory slibům o rychlé návratnosti</h2>
+                        <p>Manažeři se během tohoto vystoupení snažili obhájit masivní investice do umělé inteligence. Tvrdili přitom, že tyto vysoké výdaje se firmě vrátí už během jednoho roku.</p>
+                        <h3>Bílý dům a AI firmy tají detaily jednání o bezpečnostních pravidlech</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-08-04-digest.html" class="post-card reveal" data-issue-id="digest:2026-08-04">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="04. 08. 2026">
+                                <span class="date-day-month">4. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Americká AI umožňuje levným ukrajinským kamikadze dronům samostatně sledovat cíle</h2>
+                        <p>Tato technologie bude integrována do 50 000 ukrajinských dronů. Získají tak pokročilé schopnosti vyvinuté ve Spojených státech.</p>
+                        <h3>Po získání miliardy dolarů plánuje Valar Atomics masovou výrobu malých jaderných reaktorů pro AI průmysl</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-08-03-digest.html" class="post-card reveal" data-issue-id="digest:2026-08-03">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="03. 08. 2026">
+                                <span class="date-day-month">3. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Meta AI používá druhého AI agenta jako paměťového kouče pro udržení dlouhých úkolů</h2>
+                        <p>Oddělený paměťový agent spravuje strukturovanou databanku vzpomínek a sám rozhoduje, kdy hlavnímu agentovi poradit a kdy raději mlčet. Tento systém zlepšil výsledky až o 8,3 bodu.</p>
+                        <h3>Claude Opus 5 posouvá tvorbu her pomocí AI od hrubých bloků k plným 3D prototypům</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-08-02-digest.html" class="post-card reveal" data-issue-id="digest:2026-08-02">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="02. 08. 2026">
+                                <span class="date-day-month">2. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Po incidentu s Hugging Face žádá METR nezávislé vyšetřování nevhodného chování AI agentů</h2>
+                        <p>Vlastní zpráva Frontier Risk Report od organizace METR zdokumentovala 44 podobných incidentů.</p>
+                        <h3>Exkluzivně: Upwind přidává skenování kontextu pro AI agenty a spouští AI DR pro veřejnost</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-08-01-digest.html" class="post-card reveal" data-issue-id="digest:2026-08-01">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="01. 08. 2026">
+                                <span class="date-day-month">1. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>OpenAI údajně našla důkazy, že se další z jejich agentů vymkl kontrole</h2>
+                        <p>Tento předchozí bezpečnostní problém se odehrál ve spolupráci s platformou Hugging Face (populární úložiště AI modelů a datasetů). Vyšetřování nyní ukazuje, že nešlo o ojedinělý výpadek kontroly.</p>
+                        <h3>Google Deepmind představuje Gemini Robotics 2 pro pohánění robotů všech tvarů od stolních ramen po humanoidy</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-07-31-digest.html" class="post-card reveal" data-issue-id="digest:2026-07-31">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="31. 07. 2026">
+                                <span class="date-day-month">31. července</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>OpenAI přechází na čínské ceny a zlevňuje svůj nejdostupnější model GPT-5.6 o 80 procent</h2>
+                        <p>Významnou roli při zlevnění sehrál také cenový tlak ze strany levných čínských poskytovatelů a vývoj vlastních modelů MAI (vlastní AI architektura od Microsoftu) od Microsoftu.</p>
+                        <h3>Lloyds Bank vsází na AI a plánuje do roku 2030 ušetřit 2 miliardy liber, zatímco jí rostou zisky</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-07-30-digest.html" class="post-card reveal" data-issue-id="digest:2026-07-30">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="30. 07. 2026">
+                                <span class="date-day-month">30. července</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Revolut se spojil s OpenAI a nabízí ChatGPT Go v rámci svých předplatných</h2>
+                        <p>Společnost uvádí, že celosvětově obsluhuje již více než 75 milionů uživatelů. V rámci subscription plánů získají klienti přístup k ChatGPT Go (lehčí verze AI modelu) na dobu od tří měsíců až po jeden rok.</p>
+                        <h3>Microsoft potvrzuje, že Copilot superaplikace dorazí ještě letos</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-07-29-digest.html" class="post-card reveal" data-issue-id="digest:2026-07-29">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="29. 07. 2026">
+                                <span class="date-day-month">29. července</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Anthropic tvrdí, že jeho model Mythos odhalil zranitelnosti v kryptografických algoritmech zabezpečujících internet</h2>
+                        <p>Lidští experti toto schéma přitom přezkoumávali více než dva roky. Model tyto nedostatky odhalil za pouhých 60 hodin s náklady na API okolo 100 000 dolarů.</p>
+                        <h3>Studie uvádí, že spoléhání se na AI může proměnit pochybnosti ve falešnou sebejistotu</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+
+                <a href="/digest/2026-07-28-digest.html" class="post-card reveal" data-issue-id="digest:2026-07-28">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="28. 07. 2026">
+                                <span class="date-day-month">28. července</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>X Money dnes v USA zahajuje provoz</h2>
+                        <p>Platební služba nabízí digitální peněženku i převody mezi uživateli. Součástí nabízených výhod je také kovová karta Visa, na kterou si uživatelé mohou nechat vytisknout svoje uživatelské jméno.</p>
+                        <h3>Plné váhy modelu Kimi K3 jsou venku, ale mají háček: Co by měly firmy vědět</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+                <!-- POSTS:END -->
+            </div>
+                        <h2>🍏 EU vítá změny v App Storu, Epic kritizuje odpadní poplatky</h2>
+                        <p>Amazon podle zpráv kupuje a následně ničí vzácné knihy, aby na nich mohl trénovat své modely umělé inteligence (AI). Kromě toho se objevuje řada divok...</p>
+                        <h3>🛡 OpenAI dočasně zpomaluje škálování a slibuje nulové uchovávání dat</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-19-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="19. 08. 2026">
+                                <span class="date-day-month">19. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Vodoznaky v textech od Anthropicu dokazují, že AI firmám vůbec nezáleží na psaní</h2>
+                        <p>Společnosti vyvíjející umělou inteligenci vnímají slova pouze jako vzájemně zaměnitelné jednotky</p>
+                        <h3>Cursor těží z frustrace uživatelů GitHubu a spouští konkurenční hostingovou platformu</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-18-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="18. 08. 2026">
+                                <span class="date-day-month">18. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Inference AI zlevňuje, ale vaši agenti se prodraží</h2>
+                        <p>Dobrou zprávou je, že náklady na tokeny u velkých jazykových modelů (LLM) klesají. Celkové náklady na pracovní zátěž umělé inteligence ale naopak rost...</p>
+                        <h3>Qwen3.8-27B spouští špičkové kódovací agenty lokálně a bez cloudu</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-17-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="17. 08. 2026">
+                                <span class="date-day-month">17. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Jak model Claude dosáhl matematického průlomu během neúspěšného 54hodinového pokusu o vyřešení Riemannovy hypotézy</h2>
+                        <p>Šéf společnosti Anthropic (tvůrce modelu Claude) Dario Amodei ostře odmítá tvrzení, že má přehnaně pesimistický pohled na dopad umělé inteligence. Rea...</p>
+                        <h3>Alibaba překonává Google a Metu se 3 miliardami stažení AI modelů</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-16-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="16. 08. 2026">
+                                <span class="date-day-month">16. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Vzpomínky záhadně přežívají i po vypnutí mozku a vědci netuší proč</h2>
+                        <p>Týdenní newsletter The Stepback rozebírá jeden zásadní příběh z technologického světa, tentokrát zaměřený na bezpečnost umělé inteligence. Vše začalo ...</p>
+                        <h3>Apple údajně plánuje rozšířit svou nabídku pro chytrou domácnost o displeje, kamery a nové HomePody</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-15-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="15. 08. 2026">
+                                <span class="date-day-month">15. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Nvidia odhalila podíl ve SpaceX v hodnotě 21 miliard dolarů na konci druhého čtvrtletí</h2>
+                        <p>Chyba ve sdílení obrazovky umožňuje vzdáleným hackerům přihlásit se do systému</p>
+                        <h3>Čínská společnost Z.ai odhaluje model GLM-5.3 a hlásí rekordní výsledky</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-14-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="14. 08. 2026">
+                                <span class="date-day-month">14. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Někdo ukryl instrukce pro AI přímo do soudního spisu, aby model rozhodl v jeho prospěch</h2>
+                        <p>Do textu dokumentu někdo vložil skrytou instrukci s jasným cílem</p>
+                        <h3>Tři agenti Claude dostali protichůdné příkazy a navzájem se sabotovali na sdíleném serveru</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-13-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="13. 08. 2026">
+                                <span class="date-day-month">13. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>SpaceXAI vydává vlajkový model Grok 4.6 s pokročilým logickým uvažováním</h2>
+                        <p>Společnost SpaceXAI dnes vydala velký jazykový model (AI systém trénovaný na obrovském množství textu) Grok 4.6. Podle firmy dokáže tento systém v něk...</p>
+                        <h3>Apple jedná s vydavateli o placení za zpravodajský obsah pro svou AI v Siri</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-12-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="12. 08. 2026">
+                                <span class="date-day-month">12. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Mistral AI chce do roku 2030 vybudovat 1 gigawatt evropského výpočetního výkonu a už teď si váže zákazníky</h2>
+                        <p>Společnost Anthropic začne označovat obsah vytvořený modely Claude, nástrojem Claude Code a přes firemní API. Značení se bude týkat i modelů Claude vy...</p>
+                        <h3>Startup River AI pro personalizovanou umělou inteligenci získal 1,1 miliardy dolarů od konsorcia s podporou Nvidie a AMD</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-11-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="11. 08. 2026">
+                                <span class="date-day-month">11. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Nvidia spojuje síly s Wall Street: Na globální infrastrukturu pro AI chce získat půl bilionu dolarů</h2>
+                        <p>Některé z největších finančních firem na Wall Street se spojují se společností Nvidia Corp., aby nalily půl bilionu dolarů do masivní výstavby infrast...</p>
+                        <h3>OpenAI uvádí GPT-5.6-Cyber s méně odmítnutími a 95% úspěšností v pokročilých kyberbezpečnostních úlohách</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-10-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="10. 08. 2026">
+                                <span class="date-day-month">10. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Jak byl malý izraelský start-up spojen s nelegálními útoky na OpenAI, Anthropic a Meta</h2>
+                        <p>Nelegální útoky (kybernetické útoky cílící na umělou inteligenci) na přední technologické společnosti jako OpenAI, Anthropic a Meta mají jednoho spole...</p>
+                        <h3>Jak čínská umělá inteligence dobývá Afriku</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-09-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="09. 08. 2026">
+                                <span class="date-day-month">9. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>První autonomní vozidlo na Marsu slaví obrovský úspěch</h2>
+                        <p>Vozítko úspěšně prokázalo, že autonomní (řízené umělou inteligencí bez lidského zásahu) řízení funguje skvěle i v extrémních podmínkách na cizí planetě. Dosavadní data potvrzují, že mise je v této oblasti obrovským přínosem.</p>
+                        <h3>Meta dostala od soudce v Novém Mexiku pokutu 567 milionů dolarů</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-08-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="08. 08. 2026">
+                                <span class="date-day-month">8. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>OpenAI odkládá další velký AI model „Astra“ kvůli kritickým obavám z hackerů</h2>
+                        <p>Nejnovější hodnocení ukázala významný pokrok v takzvaném agentním kódování (schopnosti AI samostatně psát a spouštět kód) a kybernetické bezpečnosti. Firma proto nedokáže vyloučit kritická kybernetická rizika.</p>
+                        <h3>Amazon, Cursor, Microsoft, OpenAI a Vercel se spojily na sdíleném standardu pro pluginy AI agentů</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-07-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="07. 08. 2026">
+                                <span class="date-day-month">7. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Softwarový gigant SAP zastavuje většinu cestování a náborů kvůli rostoucím nákladům na AI</h2>
+                        <p>Jedinou výjimkou z těchto tvrdých škrtů jsou investice a aktivity, které se přímo týkají umělé inteligence.</p>
+                        <h3>Cloudflare chce poskytovat operační systém pro podniky postavené na AI</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-06-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="06. 08. 2026">
+                                <span class="date-day-month">6. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Nový AI agent od Mety pro Mac je až 20x levnější, pokud na vašich datech může trénovat</h2>
+                        <p>Podle Marka Zuckerberga získají uživatelé masivní slevu na používání tohoto nástroje. Podmínkou je ovšem poskytnutí vlastních dat k dalšímu tréninku modelů.</p>
+                        <h3>Google cílí na technologie a talenty AI startupu Mechanize v navrhované dohodě za 1,5 miliardy dolarů</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-05-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="05. 08. 2026">
+                                <span class="date-day-month">5. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Výdaje SpaceX na umělou inteligenci znervózňují Wall Street navzdory slibům o rychlé návratnosti</h2>
+                        <p>Manažeři se během tohoto vystoupení snažili obhájit masivní investice do umělé inteligence. Tvrdili přitom, že tyto vysoké výdaje se firmě vrátí už během jednoho roku.</p>
+                        <h3>Bílý dům a AI firmy tají detaily jednání o bezpečnostních pravidlech</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-04-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="04. 08. 2026">
+                                <span class="date-day-month">4. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Americká AI umožňuje levným ukrajinským kamikadze dronům samostatně sledovat cíle</h2>
+                        <p>Tato technologie bude integrována do 50 000 ukrajinských dronů. Získají tak pokročilé schopnosti vyvinuté ve Spojených státech.</p>
+                        <h3>Po získání miliardy dolarů plánuje Valar Atomics masovou výrobu malých jaderných reaktorů pro AI průmysl</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-03-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="03. 08. 2026">
+                                <span class="date-day-month">3. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Meta AI používá druhého AI agenta jako paměťového kouče pro udržení dlouhých úkolů</h2>
+                        <p>Oddělený paměťový agent spravuje strukturovanou databanku vzpomínek a sám rozhoduje, kdy hlavnímu agentovi poradit a kdy raději mlčet. Tento systém zlepšil výsledky až o 8,3 bodu.</p>
+                        <h3>Claude Opus 5 posouvá tvorbu her pomocí AI od hrubých bloků k plným 3D prototypům</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-02-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="02. 08. 2026">
+                                <span class="date-day-month">2. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Po incidentu s Hugging Face žádá METR nezávislé vyšetřování nevhodného chování AI agentů</h2>
+                        <p>Vlastní zpráva Frontier Risk Report od organizace METR zdokumentovala 44 podobných incidentů.</p>
+                        <h3>Exkluzivně: Upwind přidává skenování kontextu pro AI agenty a spouští AI DR pro veřejnost</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-01-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="01. 08. 2026">
+                                <span class="date-day-month">1. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>OpenAI údajně našla důkazy, že se další z jejich agentů vymkl kontrole</h2>
+                        <p>Tento předchozí bezpečnostní problém se odehrál ve spolupráci s platformou Hugging Face (populární úložiště AI modelů a datasetů). Vyšetřování nyní ukazuje, že nešlo o ojedinělý výpadek kontroly.</p>
+                        <h3>Google Deepmind představuje Gemini Robotics 2 pro pohánění robotů všech tvarů od stolních ramen po humanoidy</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+</div>
+                        <h2>Vodoznaky v textech od Anthropicu dokazují, že AI firmám vůbec nezáleží na psaní</h2>
+                        <p>Společnosti vyvíjející umělou inteligenci vnímají slova pouze jako vzájemně zaměnitelné jednotky</p>
+                        <h3>Cursor těží z frustrace uživatelů GitHubu a spouští konkurenční hostingovou platformu</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-18-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="18. 08. 2026">
+                                <span class="date-day-month">18. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Inference AI zlevňuje, ale vaši agenti se prodraží</h2>
+                        <p>Dobrou zprávou je, že náklady na tokeny u velkých jazykových modelů (LLM) klesají. Celkové náklady na pracovní zátěž umělé inteligence ale naopak rost...</p>
+                        <h3>Qwen3.8-27B spouští špičkové kódovací agenty lokálně a bez cloudu</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-17-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="17. 08. 2026">
+                                <span class="date-day-month">17. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Jak model Claude dosáhl matematického průlomu během neúspěšného 54hodinového pokusu o vyřešení Riemannovy hypotézy</h2>
+                        <p>Šéf společnosti Anthropic (tvůrce modelu Claude) Dario Amodei ostře odmítá tvrzení, že má přehnaně pesimistický pohled na dopad umělé inteligence. Rea...</p>
+                        <h3>Alibaba překonává Google a Metu se 3 miliardami stažení AI modelů</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-16-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="16. 08. 2026">
+                                <span class="date-day-month">16. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Vzpomínky záhadně přežívají i po vypnutí mozku a vědci netuší proč</h2>
+                        <p>Týdenní newsletter The Stepback rozebírá jeden zásadní příběh z technologického světa, tentokrát zaměřený na bezpečnost umělé inteligence. Vše začalo ...</p>
+                        <h3>Apple údajně plánuje rozšířit svou nabídku pro chytrou domácnost o displeje, kamery a nové HomePody</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-15-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="15. 08. 2026">
+                                <span class="date-day-month">15. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Nvidia odhalila podíl ve SpaceX v hodnotě 21 miliard dolarů na konci druhého čtvrtletí</h2>
+                        <p>Chyba ve sdílení obrazovky umožňuje vzdáleným hackerům přihlásit se do systému</p>
+                        <h3>Čínská společnost Z.ai odhaluje model GLM-5.3 a hlásí rekordní výsledky</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-14-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="14. 08. 2026">
+                                <span class="date-day-month">14. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Někdo ukryl instrukce pro AI přímo do soudního spisu, aby model rozhodl v jeho prospěch</h2>
+                        <p>Do textu dokumentu někdo vložil skrytou instrukci s jasným cílem</p>
+                        <h3>Tři agenti Claude dostali protichůdné příkazy a navzájem se sabotovali na sdíleném serveru</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-13-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="13. 08. 2026">
+                                <span class="date-day-month">13. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>SpaceXAI vydává vlajkový model Grok 4.6 s pokročilým logickým uvažováním</h2>
+                        <p>Společnost SpaceXAI dnes vydala velký jazykový model (AI systém trénovaný na obrovském množství textu) Grok 4.6. Podle firmy dokáže tento systém v něk...</p>
+                        <h3>Apple jedná s vydavateli o placení za zpravodajský obsah pro svou AI v Siri</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-12-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="12. 08. 2026">
+                                <span class="date-day-month">12. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Mistral AI chce do roku 2030 vybudovat 1 gigawatt evropského výpočetního výkonu a už teď si váže zákazníky</h2>
+                        <p>Společnost Anthropic začne označovat obsah vytvořený modely Claude, nástrojem Claude Code a přes firemní API. Značení se bude týkat i modelů Claude vy...</p>
+                        <h3>Startup River AI pro personalizovanou umělou inteligenci získal 1,1 miliardy dolarů od konsorcia s podporou Nvidie a AMD</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-11-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="11. 08. 2026">
+                                <span class="date-day-month">11. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Nvidia spojuje síly s Wall Street: Na globální infrastrukturu pro AI chce získat půl bilionu dolarů</h2>
+                        <p>Některé z největších finančních firem na Wall Street se spojují se společností Nvidia Corp., aby nalily půl bilionu dolarů do masivní výstavby infrast...</p>
+                        <h3>OpenAI uvádí GPT-5.6-Cyber s méně odmítnutími a 95% úspěšností v pokročilých kyberbezpečnostních úlohách</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-10-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="10. 08. 2026">
+                                <span class="date-day-month">10. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Jak byl malý izraelský start-up spojen s nelegálními útoky na OpenAI, Anthropic a Meta</h2>
+                        <p>Nelegální útoky (kybernetické útoky cílící na umělou inteligenci) na přední technologické společnosti jako OpenAI, Anthropic a Meta mají jednoho spole...</p>
+                        <h3>Jak čínská umělá inteligence dobývá Afriku</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-09-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="09. 08. 2026">
+                                <span class="date-day-month">9. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>První autonomní vozidlo na Marsu slaví obrovský úspěch</h2>
+                        <p>Vozítko úspěšně prokázalo, že autonomní (řízené umělou inteligencí bez lidského zásahu) řízení funguje skvěle i v extrémních podmínkách na cizí planetě. Dosavadní data potvrzují, že mise je v této oblasti obrovským přínosem.</p>
+                        <h3>Meta dostala od soudce v Novém Mexiku pokutu 567 milionů dolarů</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-08-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="08. 08. 2026">
+                                <span class="date-day-month">8. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>OpenAI odkládá další velký AI model „Astra“ kvůli kritickým obavám z hackerů</h2>
+                        <p>Nejnovější hodnocení ukázala významný pokrok v takzvaném agentním kódování (schopnosti AI samostatně psát a spouštět kód) a kybernetické bezpečnosti. Firma proto nedokáže vyloučit kritická kybernetická rizika.</p>
+                        <h3>Amazon, Cursor, Microsoft, OpenAI a Vercel se spojily na sdíleném standardu pro pluginy AI agentů</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-07-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="07. 08. 2026">
+                                <span class="date-day-month">7. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Softwarový gigant SAP zastavuje většinu cestování a náborů kvůli rostoucím nákladům na AI</h2>
+                        <p>Jedinou výjimkou z těchto tvrdých škrtů jsou investice a aktivity, které se přímo týkají umělé inteligence.</p>
+                        <h3>Cloudflare chce poskytovat operační systém pro podniky postavené na AI</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-06-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="06. 08. 2026">
+                                <span class="date-day-month">6. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Nový AI agent od Mety pro Mac je až 20x levnější, pokud na vašich datech může trénovat</h2>
+                        <p>Podle Marka Zuckerberga získají uživatelé masivní slevu na používání tohoto nástroje. Podmínkou je ovšem poskytnutí vlastních dat k dalšímu tréninku modelů.</p>
+                        <h3>Google cílí na technologie a talenty AI startupu Mechanize v navrhované dohodě za 1,5 miliardy dolarů</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-05-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="05. 08. 2026">
+                                <span class="date-day-month">5. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Výdaje SpaceX na umělou inteligenci znervózňují Wall Street navzdory slibům o rychlé návratnosti</h2>
+                        <p>Manažeři se během tohoto vystoupení snažili obhájit masivní investice do umělé inteligence. Tvrdili přitom, že tyto vysoké výdaje se firmě vrátí už během jednoho roku.</p>
+                        <h3>Bílý dům a AI firmy tají detaily jednání o bezpečnostních pravidlech</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-04-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="04. 08. 2026">
+                                <span class="date-day-month">4. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Americká AI umožňuje levným ukrajinským kamikadze dronům samostatně sledovat cíle</h2>
+                        <p>Tato technologie bude integrována do 50 000 ukrajinských dronů. Získají tak pokročilé schopnosti vyvinuté ve Spojených státech.</p>
+                        <h3>Po získání miliardy dolarů plánuje Valar Atomics masovou výrobu malých jaderných reaktorů pro AI průmysl</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-03-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="03. 08. 2026">
+                                <span class="date-day-month">3. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Meta AI používá druhého AI agenta jako paměťového kouče pro udržení dlouhých úkolů</h2>
+                        <p>Oddělený paměťový agent spravuje strukturovanou databanku vzpomínek a sám rozhoduje, kdy hlavnímu agentovi poradit a kdy raději mlčet. Tento systém zlepšil výsledky až o 8,3 bodu.</p>
+                        <h3>Claude Opus 5 posouvá tvorbu her pomocí AI od hrubých bloků k plným 3D prototypům</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-02-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="02. 08. 2026">
+                                <span class="date-day-month">2. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Po incidentu s Hugging Face žádá METR nezávislé vyšetřování nevhodného chování AI agentů</h2>
+                        <p>Vlastní zpráva Frontier Risk Report od organizace METR zdokumentovala 44 podobných incidentů.</p>
+                        <h3>Exkluzivně: Upwind přidává skenování kontextu pro AI agenty a spouští AI DR pro veřejnost</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-01-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="01. 08. 2026">
+                                <span class="date-day-month">1. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>OpenAI údajně našla důkazy, že se další z jejich agentů vymkl kontrole</h2>
+                        <p>Tento předchozí bezpečnostní problém se odehrál ve spolupráci s platformou Hugging Face (populární úložiště AI modelů a datasetů). Vyšetřování nyní ukazuje, že nešlo o ojedinělý výpadek kontroly.</p>
+                        <h3>Google Deepmind představuje Gemini Robotics 2 pro pohánění robotů všech tvarů od stolních ramen po humanoidy</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-07-31-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="31. 07. 2026">
+                                <span class="date-day-month">31. července</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>OpenAI přechází na čínské ceny a zlevňuje svůj nejdostupnější model GPT-5.6 o 80 procent</h2>
+                        <p>Významnou roli při zlevnění sehrál také cenový tlak ze strany levných čínských poskytovatelů a vývoj vlastních modelů MAI (vlastní AI architektura od Microsoftu) od Microsoftu.</p>
+                        <h3>Lloyds Bank vsází na AI a plánuje do roku 2030 ušetřit 2 miliardy liber, zatímco jí rostou zisky</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+</div>
+                        <h2>✍ Vodoznaky v textech od Anthropicu dokazují, že AI firmám vůbec nezáleží na psaní</h2>
+                        <p>Společnosti vyvíjející umělou inteligenci vnímají slova pouze jako vzájemně zaměnitelné jednotky</p>
+                        <h3>💻 Cursor těží z frustrace uživatelů GitHubu a spouští konkurenční hostingovou platformu</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-17-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="17. 08. 2026">
+                                <span class="date-day-month">17. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Jak model Claude dosáhl matematického průlomu během neúspěšného 54hodinového pokusu o vyřešení Riemannovy hypotézy</h2>
+                        <p>Šéf společnosti Anthropic (tvůrce modelu Claude) Dario Amodei ostře odmítá tvrzení, že má přehnaně pesimistický pohled na dopad umělé inteligence. Rea...</p>
+                        <h3>Alibaba překonává Google a Metu se 3 miliardami stažení AI modelů</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-16-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="16. 08. 2026">
+                                <span class="date-day-month">16. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Vzpomínky záhadně přežívají i po vypnutí mozku a vědci netuší proč</h2>
+                        <p>Týdenní newsletter The Stepback rozebírá jeden zásadní příběh z technologického světa, tentokrát zaměřený na bezpečnost umělé inteligence. Vše začalo ...</p>
+                        <h3>Apple údajně plánuje rozšířit svou nabídku pro chytrou domácnost o displeje, kamery a nové HomePody</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-15-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="15. 08. 2026">
+                                <span class="date-day-month">15. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Nvidia odhalila podíl ve SpaceX v hodnotě 21 miliard dolarů na konci druhého čtvrtletí</h2>
+                        <p>Chyba ve sdílení obrazovky umožňuje vzdáleným hackerům přihlásit se do systému</p>
+                        <h3>Čínská společnost Z.ai odhaluje model GLM-5.3 a hlásí rekordní výsledky</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-14-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="14. 08. 2026">
+                                <span class="date-day-month">14. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Někdo ukryl instrukce pro AI přímo do soudního spisu, aby model rozhodl v jeho prospěch</h2>
+                        <p>Do textu dokumentu někdo vložil skrytou instrukci s jasným cílem</p>
+                        <h3>Tři agenti Claude dostali protichůdné příkazy a navzájem se sabotovali na sdíleném serveru</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-13-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="13. 08. 2026">
+                                <span class="date-day-month">13. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>SpaceXAI vydává vlajkový model Grok 4.6 s pokročilým logickým uvažováním</h2>
+                        <p>Společnost SpaceXAI dnes vydala velký jazykový model (AI systém trénovaný na obrovském množství textu) Grok 4.6. Podle firmy dokáže tento systém v něk...</p>
+                        <h3>Apple jedná s vydavateli o placení za zpravodajský obsah pro svou AI v Siri</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-12-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="12. 08. 2026">
+                                <span class="date-day-month">12. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Mistral AI chce do roku 2030 vybudovat 1 gigawatt evropského výpočetního výkonu a už teď si váže zákazníky</h2>
+                        <p>Společnost Anthropic začne označovat obsah vytvořený modely Claude, nástrojem Claude Code a přes firemní API. Značení se bude týkat i modelů Claude vy...</p>
+                        <h3>Startup River AI pro personalizovanou umělou inteligenci získal 1,1 miliardy dolarů od konsorcia s podporou Nvidie a AMD</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-11-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="11. 08. 2026">
+                                <span class="date-day-month">11. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Nvidia spojuje síly s Wall Street: Na globální infrastrukturu pro AI chce získat půl bilionu dolarů</h2>
+                        <p>Některé z největších finančních firem na Wall Street se spojují se společností Nvidia Corp., aby nalily půl bilionu dolarů do masivní výstavby infrast...</p>
+                        <h3>OpenAI uvádí GPT-5.6-Cyber s méně odmítnutími a 95% úspěšností v pokročilých kyberbezpečnostních úlohách</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-10-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="10. 08. 2026">
+                                <span class="date-day-month">10. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Jak byl malý izraelský start-up spojen s nelegálními útoky na OpenAI, Anthropic a Meta</h2>
+                        <p>Nelegální útoky (kybernetické útoky cílící na umělou inteligenci) na přední technologické společnosti jako OpenAI, Anthropic a Meta mají jednoho spole...</p>
+                        <h3>Jak čínská umělá inteligence dobývá Afriku</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-09-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="09. 08. 2026">
+                                <span class="date-day-month">9. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>První autonomní vozidlo na Marsu slaví obrovský úspěch</h2>
+                        <p>Vozítko úspěšně prokázalo, že autonomní (řízené umělou inteligencí bez lidského zásahu) řízení funguje skvěle i v extrémních podmínkách na cizí planetě. Dosavadní data potvrzují, že mise je v této oblasti obrovským přínosem.</p>
+                        <h3>Meta dostala od soudce v Novém Mexiku pokutu 567 milionů dolarů</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-08-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="08. 08. 2026">
+                                <span class="date-day-month">8. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>OpenAI odkládá další velký AI model „Astra“ kvůli kritickým obavám z hackerů</h2>
+                        <p>Nejnovější hodnocení ukázala významný pokrok v takzvaném agentním kódování (schopnosti AI samostatně psát a spouštět kód) a kybernetické bezpečnosti. Firma proto nedokáže vyloučit kritická kybernetická rizika.</p>
+                        <h3>Amazon, Cursor, Microsoft, OpenAI a Vercel se spojily na sdíleném standardu pro pluginy AI agentů</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-07-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="07. 08. 2026">
+                                <span class="date-day-month">7. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Softwarový gigant SAP zastavuje většinu cestování a náborů kvůli rostoucím nákladům na AI</h2>
+                        <p>Jedinou výjimkou z těchto tvrdých škrtů jsou investice a aktivity, které se přímo týkají umělé inteligence.</p>
+                        <h3>Cloudflare chce poskytovat operační systém pro podniky postavené na AI</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-06-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="06. 08. 2026">
+                                <span class="date-day-month">6. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Nový AI agent od Mety pro Mac je až 20x levnější, pokud na vašich datech může trénovat</h2>
+                        <p>Podle Marka Zuckerberga získají uživatelé masivní slevu na používání tohoto nástroje. Podmínkou je ovšem poskytnutí vlastních dat k dalšímu tréninku modelů.</p>
+                        <h3>Google cílí na technologie a talenty AI startupu Mechanize v navrhované dohodě za 1,5 miliardy dolarů</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-05-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="05. 08. 2026">
+                                <span class="date-day-month">5. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Výdaje SpaceX na umělou inteligenci znervózňují Wall Street navzdory slibům o rychlé návratnosti</h2>
+                        <p>Manažeři se během tohoto vystoupení snažili obhájit masivní investice do umělé inteligence. Tvrdili přitom, že tyto vysoké výdaje se firmě vrátí už během jednoho roku.</p>
+                        <h3>Bílý dům a AI firmy tají detaily jednání o bezpečnostních pravidlech</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-04-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="04. 08. 2026">
+                                <span class="date-day-month">4. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Americká AI umožňuje levným ukrajinským kamikadze dronům samostatně sledovat cíle</h2>
+                        <p>Tato technologie bude integrována do 50 000 ukrajinských dronů. Získají tak pokročilé schopnosti vyvinuté ve Spojených státech.</p>
+                        <h3>Po získání miliardy dolarů plánuje Valar Atomics masovou výrobu malých jaderných reaktorů pro AI průmysl</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-03-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="03. 08. 2026">
+                                <span class="date-day-month">3. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Meta AI používá druhého AI agenta jako paměťového kouče pro udržení dlouhých úkolů</h2>
+                        <p>Oddělený paměťový agent spravuje strukturovanou databanku vzpomínek a sám rozhoduje, kdy hlavnímu agentovi poradit a kdy raději mlčet. Tento systém zlepšil výsledky až o 8,3 bodu.</p>
+                        <h3>Claude Opus 5 posouvá tvorbu her pomocí AI od hrubých bloků k plným 3D prototypům</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-02-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="02. 08. 2026">
+                                <span class="date-day-month">2. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Po incidentu s Hugging Face žádá METR nezávislé vyšetřování nevhodného chování AI agentů</h2>
+                        <p>Vlastní zpráva Frontier Risk Report od organizace METR zdokumentovala 44 podobných incidentů.</p>
+                        <h3>Exkluzivně: Upwind přidává skenování kontextu pro AI agenty a spouští AI DR pro veřejnost</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-01-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="01. 08. 2026">
+                                <span class="date-day-month">1. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>OpenAI údajně našla důkazy, že se další z jejich agentů vymkl kontrole</h2>
+                        <p>Tento předchozí bezpečnostní problém se odehrál ve spolupráci s platformou Hugging Face (populární úložiště AI modelů a datasetů). Vyšetřování nyní ukazuje, že nešlo o ojedinělý výpadek kontroly.</p>
+                        <h3>Google Deepmind představuje Gemini Robotics 2 pro pohánění robotů všech tvarů od stolních ramen po humanoidy</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-07-31-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="31. 07. 2026">
+                                <span class="date-day-month">31. července</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>OpenAI přechází na čínské ceny a zlevňuje svůj nejdostupnější model GPT-5.6 o 80 procent</h2>
+                        <p>Významnou roli při zlevnění sehrál také cenový tlak ze strany levných čínských poskytovatelů a vývoj vlastních modelů MAI (vlastní AI architektura od Microsoftu) od Microsoftu.</p>
+                        <h3>Lloyds Bank vsází na AI a plánuje do roku 2030 ušetřit 2 miliardy liber, zatímco jí rostou zisky</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-07-30-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="30. 07. 2026">
+                                <span class="date-day-month">30. července</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Revolut se spojil s OpenAI a nabízí ChatGPT Go v rámci svých předplatných</h2>
+                        <p>Společnost uvádí, že celosvětově obsluhuje již více než 75 milionů uživatelů. V rámci subscription plánů získají klienti přístup k ChatGPT Go (lehčí verze AI modelu) na dobu od tří měsíců až po jeden rok.</p>
+                        <h3>Microsoft potvrzuje, že Copilot superaplikace dorazí ještě letos</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+</div>
+                        <h2>🧮 Jak model Claude dosáhl matematického průlomu během neúspěšného 54hodinového pokusu o vyřešení Riemannovy hypotézy</h2>
+                        <p>Šéf společnosti Anthropic (tvůrce modelu Claude) Dario Amodei ostře odmítá tvrzení, že má přehnaně pesimistický pohled na dopad umělé inteligence. Rea...</p>
+                        <h3>🇨🇳 Alibaba překonává Google a Metu se 3 miliardami stažení AI modelů</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-16-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="16. 08. 2026">
+                                <span class="date-day-month">16. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Vzpomínky záhadně přežívají i po vypnutí mozku a vědci netuší proč</h2>
+                        <p>Týdenní newsletter The Stepback rozebírá jeden zásadní příběh z technologického světa, tentokrát zaměřený na bezpečnost umělé inteligence. Vše začalo ...</p>
+                        <h3>Apple údajně plánuje rozšířit svou nabídku pro chytrou domácnost o displeje, kamery a nové HomePody</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-15-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="15. 08. 2026">
+                                <span class="date-day-month">15. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Nvidia odhalila podíl ve SpaceX v hodnotě 21 miliard dolarů na konci druhého čtvrtletí</h2>
+                        <p>Chyba ve sdílení obrazovky umožňuje vzdáleným hackerům přihlásit se do systému</p>
+                        <h3>Čínská společnost Z.ai odhaluje model GLM-5.3 a hlásí rekordní výsledky</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-14-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="14. 08. 2026">
+                                <span class="date-day-month">14. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Někdo ukryl instrukce pro AI přímo do soudního spisu, aby model rozhodl v jeho prospěch</h2>
+                        <p>Do textu dokumentu někdo vložil skrytou instrukci s jasným cílem</p>
+                        <h3>Tři agenti Claude dostali protichůdné příkazy a navzájem se sabotovali na sdíleném serveru</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-13-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="13. 08. 2026">
+                                <span class="date-day-month">13. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>SpaceXAI vydává vlajkový model Grok 4.6 s pokročilým logickým uvažováním</h2>
+                        <p>Společnost SpaceXAI dnes vydala velký jazykový model (AI systém trénovaný na obrovském množství textu) Grok 4.6. Podle firmy dokáže tento systém v něk...</p>
+                        <h3>Apple jedná s vydavateli o placení za zpravodajský obsah pro svou AI v Siri</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-12-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="12. 08. 2026">
+                                <span class="date-day-month">12. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Mistral AI chce do roku 2030 vybudovat 1 gigawatt evropského výpočetního výkonu a už teď si váže zákazníky</h2>
+                        <p>Společnost Anthropic začne označovat obsah vytvořený modely Claude, nástrojem Claude Code a přes firemní API. Značení se bude týkat i modelů Claude vy...</p>
+                        <h3>Startup River AI pro personalizovanou umělou inteligenci získal 1,1 miliardy dolarů od konsorcia s podporou Nvidie a AMD</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-11-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="11. 08. 2026">
+                                <span class="date-day-month">11. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Nvidia spojuje síly s Wall Street: Na globální infrastrukturu pro AI chce získat půl bilionu dolarů</h2>
+                        <p>Některé z největších finančních firem na Wall Street se spojují se společností Nvidia Corp., aby nalily půl bilionu dolarů do masivní výstavby infrast...</p>
+                        <h3>OpenAI uvádí GPT-5.6-Cyber s méně odmítnutími a 95% úspěšností v pokročilých kyberbezpečnostních úlohách</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-10-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="10. 08. 2026">
+                                <span class="date-day-month">10. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Jak byl malý izraelský start-up spojen s nelegálními útoky na OpenAI, Anthropic a Meta</h2>
+                        <p>Nelegální útoky (kybernetické útoky cílící na umělou inteligenci) na přední technologické společnosti jako OpenAI, Anthropic a Meta mají jednoho spole...</p>
+                        <h3>Jak čínská umělá inteligence dobývá Afriku</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-09-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="09. 08. 2026">
+                                <span class="date-day-month">9. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>První autonomní vozidlo na Marsu slaví obrovský úspěch</h2>
+                        <p>Vozítko úspěšně prokázalo, že autonomní (řízené umělou inteligencí bez lidského zásahu) řízení funguje skvěle i v extrémních podmínkách na cizí planetě. Dosavadní data potvrzují, že mise je v této oblasti obrovským přínosem.</p>
+                        <h3>Meta dostala od soudce v Novém Mexiku pokutu 567 milionů dolarů</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-08-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="08. 08. 2026">
+                                <span class="date-day-month">8. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>OpenAI odkládá další velký AI model „Astra“ kvůli kritickým obavám z hackerů</h2>
+                        <p>Nejnovější hodnocení ukázala významný pokrok v takzvaném agentním kódování (schopnosti AI samostatně psát a spouštět kód) a kybernetické bezpečnosti. Firma proto nedokáže vyloučit kritická kybernetická rizika.</p>
+                        <h3>Amazon, Cursor, Microsoft, OpenAI a Vercel se spojily na sdíleném standardu pro pluginy AI agentů</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-07-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="07. 08. 2026">
+                                <span class="date-day-month">7. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Softwarový gigant SAP zastavuje většinu cestování a náborů kvůli rostoucím nákladům na AI</h2>
+                        <p>Jedinou výjimkou z těchto tvrdých škrtů jsou investice a aktivity, které se přímo týkají umělé inteligence.</p>
+                        <h3>Cloudflare chce poskytovat operační systém pro podniky postavené na AI</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-06-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="06. 08. 2026">
+                                <span class="date-day-month">6. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Nový AI agent od Mety pro Mac je až 20x levnější, pokud na vašich datech může trénovat</h2>
+                        <p>Podle Marka Zuckerberga získají uživatelé masivní slevu na používání tohoto nástroje. Podmínkou je ovšem poskytnutí vlastních dat k dalšímu tréninku modelů.</p>
+                        <h3>Google cílí na technologie a talenty AI startupu Mechanize v navrhované dohodě za 1,5 miliardy dolarů</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-05-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="05. 08. 2026">
+                                <span class="date-day-month">5. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Výdaje SpaceX na umělou inteligenci znervózňují Wall Street navzdory slibům o rychlé návratnosti</h2>
+                        <p>Manažeři se během tohoto vystoupení snažili obhájit masivní investice do umělé inteligence. Tvrdili přitom, že tyto vysoké výdaje se firmě vrátí už během jednoho roku.</p>
+                        <h3>Bílý dům a AI firmy tají detaily jednání o bezpečnostních pravidlech</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-04-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="04. 08. 2026">
+                                <span class="date-day-month">4. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Americká AI umožňuje levným ukrajinským kamikadze dronům samostatně sledovat cíle</h2>
+                        <p>Tato technologie bude integrována do 50 000 ukrajinských dronů. Získají tak pokročilé schopnosti vyvinuté ve Spojených státech.</p>
+                        <h3>Po získání miliardy dolarů plánuje Valar Atomics masovou výrobu malých jaderných reaktorů pro AI průmysl</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-03-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="03. 08. 2026">
+                                <span class="date-day-month">3. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Meta AI používá druhého AI agenta jako paměťového kouče pro udržení dlouhých úkolů</h2>
+                        <p>Oddělený paměťový agent spravuje strukturovanou databanku vzpomínek a sám rozhoduje, kdy hlavnímu agentovi poradit a kdy raději mlčet. Tento systém zlepšil výsledky až o 8,3 bodu.</p>
+                        <h3>Claude Opus 5 posouvá tvorbu her pomocí AI od hrubých bloků k plným 3D prototypům</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-02-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="02. 08. 2026">
+                                <span class="date-day-month">2. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Po incidentu s Hugging Face žádá METR nezávislé vyšetřování nevhodného chování AI agentů</h2>
+                        <p>Vlastní zpráva Frontier Risk Report od organizace METR zdokumentovala 44 podobných incidentů.</p>
+                        <h3>Exkluzivně: Upwind přidává skenování kontextu pro AI agenty a spouští AI DR pro veřejnost</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-08-01-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="01. 08. 2026">
+                                <span class="date-day-month">1. srpna</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>OpenAI údajně našla důkazy, že se další z jejich agentů vymkl kontrole</h2>
+                        <p>Tento předchozí bezpečnostní problém se odehrál ve spolupráci s platformou Hugging Face (populární úložiště AI modelů a datasetů). Vyšetřování nyní ukazuje, že nešlo o ojedinělý výpadek kontroly.</p>
+                        <h3>Google Deepmind představuje Gemini Robotics 2 pro pohánění robotů všech tvarů od stolních ramen po humanoidy</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-07-31-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="31. 07. 2026">
+                                <span class="date-day-month">31. července</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>OpenAI přechází na čínské ceny a zlevňuje svůj nejdostupnější model GPT-5.6 o 80 procent</h2>
+                        <p>Významnou roli při zlevnění sehrál také cenový tlak ze strany levných čínských poskytovatelů a vývoj vlastních modelů MAI (vlastní AI architektura od Microsoftu) od Microsoftu.</p>
+                        <h3>Lloyds Bank vsází na AI a plánuje do roku 2030 ušetřit 2 miliardy liber, zatímco jí rostou zisky</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-07-30-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="30. 07. 2026">
+                                <span class="date-day-month">30. července</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Revolut se spojil s OpenAI a nabízí ChatGPT Go v rámci svých předplatných</h2>
+                        <p>Společnost uvádí, že celosvětově obsluhuje již více než 75 milionů uživatelů. V rámci subscription plánů získají klienti přístup k ChatGPT Go (lehčí verze AI modelu) na dobu od tří měsíců až po jeden rok.</p>
+                        <h3>Microsoft potvrzuje, že Copilot superaplikace dorazí ještě letos</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+                <a href="/digest/2026-07-29-digest.html" class="post-card reveal">
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">⚡ Digest</span>
+                            <time datetime="29. 07. 2026">
+                                <span class="date-day-month">29. července</span>
+                                <span class="date-year">2026</span>
+                            </time>
+                        </div>
+                        <h2>Anthropic tvrdí, že jeho model Mythos odhalil zranitelnosti v kryptografických algoritmech zabezpečujících internet</h2>
+                        <p>Lidští experti toto schéma přitom přezkoumávali více než dva roky. Model tyto nedostatky odhalil za pouhých 60 hodin s náklady na API okolo 100 000 dolarů.</p>
+                        <h3>Studie uvádí, že spoléhání se na AI může proměnit pochybnosti ve falešnou sebejistotu</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                </a>
+
+</div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">© 2026 <strong>simondusek.com</strong> · Šimon Dušek</div>
+                <div class="footer-links">
+                    <a href="/">Hlavní stránka</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlEl = document.documentElement;
+
+        function updateThemeIcon(theme) {
+            if (themeIcon) {
+                themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+
+        updateThemeIcon(htmlEl.getAttribute('data-theme') || 'dark');
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const current = htmlEl.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+                const next = current === 'dark' ? 'light' : 'dark';
+                htmlEl.setAttribute('data-theme', next);
+                try {
+                    localStorage.setItem('theme', next);
+                } catch (e) {}
+                updateThemeIcon(next);
+            });
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
+        function toggleMobileMenu() {
+            if (!mobileMenuToggle) return;
+            const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+            mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+            if (mobileMenuOverlay) {
+                mobileMenuOverlay.classList.toggle('active');
+            }
+            document.body.style.overflow = isExpanded ? '' : 'hidden';
+        }
+
+        function closeMobileMenu() {
+            if (mobileMenuToggle) {
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            }
+            if (mobileMenuOverlay) {
+                mobileMenuOverlay.classList.remove('active');
+            }
+            document.body.style.overflow = '';
+        }
+
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+        }
+
+        if (mobileMenuOverlay) {
+            mobileMenuOverlay.addEventListener('click', (e) => {
+                if (e.target === mobileMenuOverlay) {
+                    closeMobileMenu();
+                }
+            });
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-menu-link').forEach(link => {
+            link.addEventListener('click', () => {
+                closeMobileMenu();
+            });
+        });
+
+        // Close mobile menu on window resize (if screen becomes desktop size)
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                closeMobileMenu();
+            }
+        });
+
+        // Scroll reveal
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Načtení a zobrazování příspěvků
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('posts-container');
+            
+            // Funkce pro generování ikony typu
+            function getTypeIcon(type) {
+                const typeMap = {
+                    'Digest': '⚡',
+                    'Deep Dive': '🎯'
+                };
+                return typeMap[type] || '📰';
+            }
+
+            // Pomocná funkce pro formátování dne a měsíce
+            function formatDayMonth(day, month) {
+                const months = ['ledna', 'února', 'března', 'dubna', 'května', 'června', 'července', 'srpna', 'září', 'října', 'listopadu', 'prosince'];
+                return `${day}. ${months[month - 1]}`;
+            }
+
+            // Funkce pro formátování data
+            function formatDate(dateStr) {
+                if (!dateStr) return { dayMonth: '', year: '' };
+                
+                // Pokud je již ve formátu "DD. MM. YYYY"
+                if (/^\d{1,2}\. \d{1,2}\. \d{4}$/.test(dateStr)) {
+                    const [day, month, year] = dateStr.split('. ').map(Number);
+                    return { dayMonth: formatDayMonth(day, month), year: year.toString() };
+                }
+                
+                // Pokud je ve formátu ISO (YYYY-MM-DD)
+                if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+                    const [year, month, day] = dateStr.split('-').map(Number);
+                    return { dayMonth: formatDayMonth(day, month), year: year.toString() };
+                }
+                
+                // Pokud je datum v jiném formátu
+                try {
+                    const date = new Date(dateStr);
+                    if (!isNaN(date.getTime())) {
+                        const day = date.getDate();
+                        const month = date.getMonth() + 1;
+                        const year = date.getFullYear();
+                        return { dayMonth: formatDayMonth(day, month), year: year.toString() };
+                    }
+                } catch (e) {}
+                
+                return { dayMonth: dateStr, year: '' };
+            }
+            
+            // Funkce pro extrakci nadpisu z perexu
+            function extractHeadline(excerpt) {
+                if (!excerpt) return 'Bez názvu';
+                
+                // Odstraní emoji z počátku
+                const emojiPattern = /^[\u{1F300}-\u{1F6FF}\u{1F900}-\u{1F9FF}]/u;
+                let text = excerpt.replace(emojiPattern, '').trim();
+                
+                // Najde první větu
+                const firstSentenceMatch = text.match(/^[^.!?]*[.!?]/);
+                if (firstSentenceMatch) {
+                    return firstSentenceMatch[0].trim();
+                }
+                
+                // Pokud není tečka, vezme první 70 znaků
+                return text.substring(0, 70).trim() + (text.length > 70 ? '...' : '');
+            }
+
+            // Funkce pro vytvoření karty příspěvku
+            function createPostCard(post) {
+                const icon = getTypeIcon(post.type);
+                const dateObj = formatDate(post.date);
+                
+                // Čistý nadpis z main_hook (nebo fallback)
+                let headline = post.main_hook || post.title || 'Digest';
+                // Očistit případná zbylá emoji z nadpisu
+                headline = headline.replace(/^[\u{1F300}-\u{1F9FF}\u{2600}-\u{27BF}\u{1F600}-\u{1F64F}]+\s*/gu, '').trim();
+                
+                // Čistý perex z excerpt (bez duplicity nadpisu)
+                let excerpt = post.excerpt || '';
+                excerpt = excerpt.replace(/^[\u{1F300}-\u{1F9FF}\u{2600}-\u{27BF}\u{1F600}-\u{1F64F}]+\s*/gu, '').trim();
+                
+                const secondHook = post.second_hook || '';
+                const url = post.url || '#';
+                
+                const card = document.createElement('a');
+                card.href = url;
+                card.className = 'post-card reveal';
+                card.dataset.issueId = getIssueId(post);
+                card.innerHTML = `
+                    <div>
+                        <div class="post-meta">
+                            <span class="post-issue">${icon} ${post.type || 'Digest'}</span>
+                            <div class="post-date">
+                                <span class="date-day-month">${dateObj.dayMonth}</span>
+                                <span class="date-year">${dateObj.year}</span>
+                            </div>
+                        </div>
+                        <h2>${headline}</h2>
+                        <p>${excerpt}</p>
+                        ${secondHook ? `<h3>${secondHook}</h3><p style="font-size:0.85rem; font-style:italic; color:var(--text-tertiary); margin-bottom:1rem;">a další zprávy z tohoto dne</p>` : ''}
+                    </div>
+                    <div class="post-footer">
+                        Číst vydání →
+                    </div>
+                `;
+                return card;
+            }
+
+            // Funkce pro vytvoření empty state
+            function createEmptyState() {
+                const emptyState = document.createElement('div');
+                emptyState.className = 'empty-state';
+                emptyState.innerHTML = `
+                    <div class="empty-state-icon">📭</div>
+                    <h3>Zatím žádná vydání</h3>
+                    <p>Zatím nebyly publikovány žádné archivní příspěvky. První vydání je na cestě!</p>
+                `;
+                return emptyState;
+            }
+
+            // Zkusí načíst posts.json z více možných cest
+            const postsJsonPaths = [
+                '/digest/posts.json',
+                '/web/digest/posts.json',
+                'digest/posts.json',
+                '../digest/posts.json'
+            ];
+
+            // Funkce pro převedení data na Date objekt pro třídění
+            function parseDate(dateStr) {
+                if (!dateStr) return new Date(0);
+                
+                // Pokud je ve formátu "DD. MM. YYYY"
+                if (/^\d{1,2}\. \d{1,2}\. \d{4}$/.test(dateStr)) {
+                    const [day, month, year] = dateStr.split('. ').map(Number);
+                    return new Date(year, month - 1, day);
+                }
+                
+                // Pokud je ve formátu ISO (YYYY-MM-DD)
+                if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+                    return new Date(dateStr);
+                }
+                
+                // Pokus o generické parsování
+                try {
+                    return new Date(dateStr);
+                } catch (e) {
+                    return new Date(0);
+                }
+            }
+
+            // Stabilní identita denního Digestu; legacy registry ji odvodí z data.
+            function getIssueId(post) {
+                if (post.issue_id) return post.issue_id;
+                const dateStr = post.date || '';
+                if (/^\d{1,2}\. \d{1,2}\. \d{4}$/.test(dateStr)) {
+                    const [day, month, year] = dateStr.split('. ').map(Number);
+                    return `digest:${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                }
+                if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+                    return `digest:${dateStr}`;
+                }
+                return `legacy:${post.url || dateStr}`;
+            }
+
+            // Funkce pro načtení dat
+            async function loadPosts() {
+                for (const path of postsJsonPaths) {
+                    try {
+                        const response = await fetch(path);
+                        if (response.ok) {
+                            return await response.json();
+                        }
+                    } catch (e) {
+                        // Zkusíme další cestu
+                    }
+                }
+                return null;
+            }
+
+            // Hlavní logika načítání
+            async function initializePosts() {
+                try {
+                    let posts = await loadPosts();
+                    
+                    if (posts && Array.isArray(posts) && posts.length > 0) {
+                        // posts.json is canonical. Remove any duplicate issue defensively,
+                        // then replace the static no-JS fallback instead of appending to it.
+                        const seenIssueIds = new Set();
+                        posts = posts.filter((post) => {
+                            const issueId = getIssueId(post);
+                            if (seenIssueIds.has(issueId)) return false;
+                            seenIssueIds.add(issueId);
+                            return true;
+                        });
+
+                        // Seřadíme příspěvky podle data (nejnovější první)
+                        posts.sort((a, b) => {
+                            const dateA = parseDate(a.date);
+                            const dateB = parseDate(b.date);
+                            return dateB - dateA; // Sestupně: nejnovější první
+                        });
+
+                        container.replaceChildren();
+                        
+                        // Vygenerujeme karty pro všechny příspěvky
+                        posts.forEach((post) => {
+                            const card = createPostCard(post);
+                            container.appendChild(card);
+                        });
+                        
+                        // Nastavíme IntersectionObserver pro nové elementy
+                        setTimeout(() => {
+                            const revealElements = document.querySelectorAll('.reveal');
+                            revealElements.forEach(el => revealObserver.observe(el));
+                        }, 100);
+                    } else if (Array.isArray(posts)) {
+                        // Platný prázdný registr nahradí fallback explicitním empty state.
+                        const emptyState = createEmptyState();
+                        container.replaceChildren(emptyState);
+                        
+                        // Nastavíme IntersectionObserver pro empty state
+                        setTimeout(() => {
+                            const revealElements = document.querySelectorAll('.reveal');
+                            revealElements.forEach(el => revealObserver.observe(el));
+                        }, 100);
+                    } else {
+                        // Načtení selhalo: ponecháme statický fallback beze změny.
+                        console.warn('posts.json se nepodařilo načíst; ponechávám statický archiv.');
+                    }
+                } catch (error) {
+                    console.error('Chyba při načítání příspěvků:', error);
+                    // Při runtime chybě ponecháme statický fallback beze změny.
+                }
+            }
+
+            // Spustíme načítání
+            initializePosts();
+        });
+
+        // Nav scroll effect
+        const nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 40) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        }, { passive: true });
+    </script>
+
+    <!-- Záchranný skript pro X.com / LinkedIn In-App prohlížeče -->
+    <script>
+        // Záchranný skript pro In-App prohlížeče
+        document.addEventListener('DOMContentLoaded', function() {
+            // Okamžitě přidáme třídu js-enabled
+            document.body.classList.add('js-enabled');
+            
+            // Pojistka: Za 300ms natvrdo zviditelníme všechny .reveal prvky, pokud se nespustil IntersectionObserver
+            setTimeout(function() {
+                var reveals = document.querySelectorAll('.reveal');
+                reveals.forEach(function(el) {
+                    el.classList.add('visible');
+                });
+            }, 300);
+        });
+    </script>
+
+    <!-- Floating CTA tlačítko -->
+    <a href="/#hero-form" id="floating-cta" class="floating-cta" aria-label="Odebírat newsletter">
+        <span>⚡ Odebírat Digest</span>
+    </a>
+    
+    <script>
+        // Floating CTA - show after scroll
+        window.addEventListener('scroll', function() {
+            var cta = document.getElementById('floating-cta');
+            if (cta) {
+                if (window.scrollY > 200) {
+                    cta.classList.add('visible');
+                } else {
+                    cta.classList.remove('visible');
+                }
+            }
+        }, { passive: true });
+    </script>
+
+</body>
+</html>
