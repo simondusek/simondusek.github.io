@@ -5,11 +5,18 @@
     <link>https://simondusek.com</link>
     <description>Technologický a B2B newsletter od Šimona Duška - kompletní archiv vydání.</description>
     <language>cs</language>
-    <pubDate>Thu, 27 Aug 2026 00:00:00 +0000</pubDate>
-    <lastBuildDate>Thu, 27 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <pubDate>Fri, 28 Aug 2026 00:00:00 +0000</pubDate>
+    <lastBuildDate>Fri, 28 Aug 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://simondusek.com/feed.xml" rel="self" type="application/rss+xml" />
     <ttl>60</ttl>
         <item>
+      <title>Digest</title>
+      <link>https://simondusek.com/digest/2026-08-28-digest.html</link>
+      <description>OpenAI a 100 firem varují před vlnou kyberútoků poháněných AI | Tim Cook končí jako CEO Apple: Odevzdává štafetu po 15 letech vedení | OpenAI a více než 100 organizací varují, že AI-poháněné kyberútoky mohou být v rámci několika měsíců výrazně schopnější</description>
+      <pubDate>Fri, 28 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://simondusek.com/digest/2026-08-28-digest.html</guid>
+    </item>
+    <item>
       <title>Digest</title>
       <link>https://simondusek.com/digest/2026-08-27-digest.html</link>
       <description>Amazon právě ztrojnásobil objednávku čipů od Nvidie kvůli „rostoucí poptávce“ | Indický IT gigant TCS kupuje konzultační byznys Porsche za 320 milionů eur | Amazon plánuje během následujících dvou let přidat do svých datových center další 2 miliony grafických procesorů (GPU čipy pro výpočty umělé inteligen...</description>

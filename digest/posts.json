@@ -1,6 +1,16 @@
 [
   {
     "title": "Digest",
+    "date": "28. 08. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-08-28-digest.html",
+    "excerpt": "OpenAI a více než 100 organizací varují, že AI-poháněné kyberútoky mohou být v rámci několika měsíců výrazně schopnější",
+    "issue_id": "digest:2026-08-28",
+    "main_hook": "OpenAI a 100 firem varují před vlnou kyberútoků poháněných AI",
+    "second_hook": "Tim Cook končí jako CEO Apple: Odevzdává štafetu po 15 letech vedení"
+  },
+  {
+    "title": "Digest",
     "date": "27. 08. 2026",
     "type": "Digest",
     "url": "/digest/2026-08-27-digest.html",
