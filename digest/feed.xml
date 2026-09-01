@@ -5,11 +5,18 @@
     <link>https://simondusek.com</link>
     <description>Technologický a B2B newsletter od Šimona Duška - kompletní archiv vydání.</description>
     <language>cs</language>
-    <pubDate>Fri, 28 Aug 2026 00:00:00 +0000</pubDate>
-    <lastBuildDate>Fri, 28 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <pubDate>Sat, 29 Aug 2026 00:00:00 +0000</pubDate>
+    <lastBuildDate>Sat, 29 Aug 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://simondusek.com/feed.xml" rel="self" type="application/rss+xml" />
     <ttl>60</ttl>
         <item>
+      <title>Digest</title>
+      <link>https://simondusek.com/digest/2026-08-29-digest.html</link>
+      <description>Hackněte jednoho robota a ovládněte další: Zranitelnosti v Unitree G1 | OpenAI odřízne Cursor po akvizici SpaceX: Musk má historii porušování smluv | Výzkumník Olivier Laflamme našel způsob, jak získat root přístup k robotu Unitree G1 na dálku</description>
+      <pubDate>Sat, 29 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://simondusek.com/digest/2026-08-29-digest.html</guid>
+    </item>
+    <item>
       <title>Digest</title>
       <link>https://simondusek.com/digest/2026-08-28-digest.html</link>
       <description>OpenAI a 100 firem varují před vlnou kyberútoků poháněných AI | Tim Cook končí jako CEO Apple: Odevzdává štafetu po 15 letech vedení | OpenAI a více než 100 organizací varují, že AI-poháněné kyberútoky mohou být v rámci několika měsíců výrazně schopnější</description>

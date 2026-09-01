@@ -1,6 +1,16 @@
 [
   {
     "title": "Digest",
+    "date": "29. 08. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-08-29-digest.html",
+    "excerpt": "Výzkumník Olivier Laflamme našel způsob, jak získat root přístup k robotu Unitree G1 na dálku",
+    "issue_id": "digest:2026-08-29",
+    "main_hook": "Hackněte jednoho robota a ovládněte další: Zranitelnosti v Unitree G1",
+    "second_hook": "OpenAI odřízne Cursor po akvizici SpaceX: Musk má historii porušování smluv"
+  },
+  {
+    "title": "Digest",
     "date": "28. 08. 2026",
     "type": "Digest",
     "url": "/digest/2026-08-28-digest.html",
