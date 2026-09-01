@@ -5,11 +5,18 @@
     <link>https://simondusek.com</link>
     <description>Technologický a B2B newsletter od Šimona Duška - kompletní archiv vydání.</description>
     <language>cs</language>
-    <pubDate>Mon, 31 Aug 2026 00:00:00 +0000</pubDate>
-    <lastBuildDate>Mon, 31 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <pubDate>Tue, 01 Sep 2026 00:00:00 +0000</pubDate>
+    <lastBuildDate>Tue, 01 Sep 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://simondusek.com/feed.xml" rel="self" type="application/rss+xml" />
     <ttl>60</ttl>
         <item>
+      <title>Digest</title>
+      <link>https://simondusek.com/digest/2026-09-01-digest.html</link>
+      <description>Éra Johna Ternuse v Applu začíná: Umělá inteligence a drahé paměti útočí | Meta přidává do standardních brýlí Ray-Ban hlasovou navigaci | John Ternus nastupuje do funkce generálního ředitele společnosti Apple v kritickém okamžiku</description>
+      <pubDate>Tue, 01 Sep 2026 00:00:00 +0000</pubDate>
+      <guid>https://simondusek.com/digest/2026-09-01-digest.html</guid>
+    </item>
+    <item>
       <title>Digest</title>
       <link>https://simondusek.com/digest/2026-08-31-digest.html</link>
       <description>Apple překvapila poptávka po AI hardwaru pro firmy | Hackeři útočí na tiskárny, polovina systémů stále nemá záplatu | Apple nečekaně předčasil vydání nových modelů Mac mini a Mac Studio, které obvykle přicházejí až na podzim v říjnu nebo listopadu</description>
