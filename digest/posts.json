@@ -1,6 +1,16 @@
 [
   {
     "title": "Digest",
+    "date": "31. 08. 2026",
+    "type": "Digest",
+    "url": "/digest/2026-08-31-digest.html",
+    "excerpt": "Apple nečekaně předčasil vydání nových modelů Mac mini a Mac Studio, které obvykle přicházejí až na podzim v říjnu nebo listopadu",
+    "issue_id": "digest:2026-08-31",
+    "main_hook": "Apple překvapila poptávka po AI hardwaru pro firmy",
+    "second_hook": "Hackeři útočí na tiskárny, polovina systémů stále nemá záplatu"
+  },
+  {
+    "title": "Digest",
     "date": "30. 08. 2026",
     "type": "Digest",
     "url": "/digest/2026-08-30-digest.html",

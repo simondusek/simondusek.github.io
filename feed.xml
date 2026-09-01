@@ -5,11 +5,18 @@
     <link>https://simondusek.com</link>
     <description>Technologický a B2B newsletter od Šimona Duška - kompletní archiv vydání.</description>
     <language>cs</language>
-    <pubDate>Sun, 30 Aug 2026 00:00:00 +0000</pubDate>
-    <lastBuildDate>Sun, 30 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <pubDate>Mon, 31 Aug 2026 00:00:00 +0000</pubDate>
+    <lastBuildDate>Mon, 31 Aug 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://simondusek.com/feed.xml" rel="self" type="application/rss+xml" />
     <ttl>60</ttl>
         <item>
+      <title>Digest</title>
+      <link>https://simondusek.com/digest/2026-08-31-digest.html</link>
+      <description>Apple překvapila poptávka po AI hardwaru pro firmy | Hackeři útočí na tiskárny, polovina systémů stále nemá záplatu | Apple nečekaně předčasil vydání nových modelů Mac mini a Mac Studio, které obvykle přicházejí až na podzim v říjnu nebo listopadu</description>
+      <pubDate>Mon, 31 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://simondusek.com/digest/2026-08-31-digest.html</guid>
+    </item>
+    <item>
       <title>Digest</title>
       <link>https://simondusek.com/digest/2026-08-30-digest.html</link>
       <description>Sony a Warner Music žalují Anthropic za údajnou krádež duševního vlastnictví | 116 firem se přidalo k velkému AI obrannému projektu | Sony a Warner Music podaly žalobu proti společnosti Anthropic</description>
